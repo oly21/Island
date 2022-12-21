@@ -1,0 +1,144 @@
+package com.project.island;
+
+public   class BoxCharacteristicsObject {
+
+    public static final int WEIGHT_WOLF = 50;
+    public static final int WEIGHT_BOA = 15;
+    public static final int WEIGHT_FOX = 8;
+    public static final int WEIGHT_BEAR = 500;
+    public static final int WEIGHT_EAGLE = 6;
+    public static final int WEIGHT_HORSE = 400;
+    public static final int WEIGHT_DEER = 300;
+    public static final int WEIGHT_RABBIT = 2;
+    public static final int WEIGHT_MOUSE = 1;
+    public static final int WEIGHT_GOAT = 60;
+    public static final int WEIGHT_SHEEP = 70;
+    public static final int WEIGHT_BOAR = 400;
+    public static final int WEIGHT_BUFFALO = 700;
+    public static final int WEIGHT_DUCK = 1;
+    public static final int WEIGHT_CATERPILLAR = 1;
+    public static final int WEIGHT_PLANT = 1;
+
+
+    public static final String TYPE_STRING_WOLF =   "Wolf";;
+    public static final String TYPE_STRING_BOA = "Boa";
+    public static final String TYPE_STRING_FOX = "Fox";
+    public static final String TYPE_STRING_BEAR = "Bear";
+    public static final String TYPE_STRING_EAGLE = "Eagle";
+    public static final String TYPE_STRING_HORSE = "Horse";
+    public static final String TYPE_STRING_DEER = "Deer";
+    public static final String TYPE_STRING_RABBIT = "Rabbit";
+    public static final String TYPE_STRING_MOUSE = "Mouse";
+    public static final String TYPE_STRING_GOAT = "Goat";
+    public static final String TYPE_STRING_SHEEP = "Sheep";
+    public static final String TYPE_STRING_BOAR = "Boar";
+    public static final String TYPE_STRING_BUFFALO = "Buffalo";
+    public static final String TYPE_STRING_DUCK = "Duck";
+    public static final String TYPE_STRING_CATERPILLAR = "Caterpillar";
+    public static final String TYPE_STRING_BERRIES =  "Berries";
+    public static final String TYPE_STRING_FRUIT =  "Fruit";
+    public static final String TYPE_STRING_GRASS=  "Grass";
+    public static final String TYPE_STRING_PLANT_LEAVES =  "PlantLeaves";
+    public static final String TYPE_STRING_VEGETABLES =  "Vegetables";
+
+    public static final String STRING_TYPE_PICTURE_WOLF = "🐺" ;
+    public static final String STRING_TYPE_PICTURE_BOA = "🐍";
+    public static final String STRING_TYPE_PICTURE_FOX = "🦊";
+    public static final String STRING_TYPE_PICTURE_BEAR = "🐻";
+    public static final String STRING_TYPE_PICTURE_EAGLE = "🦅";
+    public static final String STRING_TYPE_PICTURE_HORSE = "🐎";
+    public static final String STRING_TYPE_PICTURE_DEER = "🦌";
+    public static final String STRING_TYPE_PICTURE_RABBIT = "🐇";
+    public static final String STRING_TYPE_PICTURE_MOUSE = "🐁";
+    public static final String STRING_TYPE_PICTURE_GOAT = "🐐";
+    public static final String STRING_TYPE_PICTURE_SHEEP = "🐑";
+    public static final String STRING_TYPE_PICTURE_BOAR = "🐗";
+    public static final String STRING_TYPE_PICTURE_BUFFALO = "🐃";
+    public static final String STRING_TYPE_PICTURE_DUCK = "🦆";
+    public static final String STRING_TYPE_PICTURE_CATERPILLAR = "🐛";
+    public static final String STRING_TYPE_PICTURE_BERRIES =  "🫐";
+    public static final String STRING_TYPE_PICTURE_FRUIT =  "🍏";
+    public static final String STRING_TYPE_PICTURE_Grass=  "🌱";
+    public static final String STRING_TYPE_PICTURE_LEAVES =  "🥬";
+
+    public static final String STRING_TYPE_PICTURE_VEGETABLES =  "🥕";
+
+
+
+
+    public static final int SPEED_WOLF = 3;
+    public static final int SPEED_BOA = 1;
+    public static final int SPEED_FOX = 2;
+    public static final int SPEED_BEAR = 2;
+    public static final int SPEED_EAGLE = 3;
+    public static final int SPEED_HORSE = 4;
+    public static final int SPEED_DEER = 4;
+    public static final int SPEED_RABBIT = 2;
+    public static final int SPEED_MOUSE = 1;
+    public static final int SPEED_GOAT = 3;
+    public static final int SPEED_SHEEP = 3;
+    public static final int SPEED_BOAR = 2;
+    public static final int SPEED_BUFFALO = 3;
+    public static final int SPEED_DUCK = 4;
+    public static final int SPEED_CATERPILLAR = 0;
+
+
+
+    public static final int MEAL_REQUIRED_KG_WOLF = 8;
+    public static final int MEAL_REQUIRED_KG_BOA = 3;
+    public static final int MEAL_REQUIRED_KG_FOX = 2;
+    public static final int MEAL_REQUIRED_KG_BEAR = 80;
+    public static final int MEAL_REQUIRED_KG_EAGLE = 1;
+    public static final int MEAL_REQUIRED_KG_HORSE = 60;
+    public static final int MEAL_REQUIRED_KG_DEER = 50;
+    public static final int MEAL_REQUIRED_KG_RABBIT = 1;
+    public static final int MEAL_REQUIRED_KG_MOUSE = 1;
+    public static final int MEAL_REQUIRED_KG_GOAT = 10;
+    public static final int MEAL_REQUIRED_KG_SHEEP = 15;
+    public static final int MEAL_REQUIRED_KG_BOAR = 50;
+    public static final int MEAL_REQUIRED_KG_BUFFALO = 100;
+    public static final int MEAL_REQUIRED_KG_DUCK = 1;
+    public static final int MEAL_REQUIRED_KG_CATERPILLAR = 0;
+
+
+
+
+    public static final int PROBABILITY_WOLF_EAT_HORSE = 10;
+    public static final int PROBABILITY_WOLF_EAT_DEER = 15;
+    public static final int PROBABILITY_WOLF_EAT_RABBIT = 60;
+    public static final int PROBABILITY_WOLF_EAT_MOUSE = 80;
+    public static final int PROBABILITY_WOLF_EAT_GOAT = 60;
+    public static final int PROBABILITY_WOLF_EAT_SHEEP = 70;
+    public static final int PROBABILITY_WOLF_EAT_DUCK = 70;
+
+
+    public static final int PROBABILITY_BOA_EAT_FOX = 15;
+    public static final int PROBABILITY_BOA_EAT_RABBIT = 20;
+    public static final int PROBABILITY_BOA_EAT_MOUSE = 40;
+
+
+
+    public static final int PROBABILITY_FOX_EAT_HORSE = 10;
+    public static final int PROBABILITY_FOX_EAT_DEER = 15;
+    public static final int PROBABILITY_FOX_EAT_RABBIT = 70;
+    public static final int PROBABILITY_FOX_EAT_MOUSE = 90;
+
+
+    public static final int PROBABILITY_BEAR_EAT_BOA = 80;
+    public static final int PROBABILITY_BEAR_EAT_DEER = 80;
+    public static final int PROBABILITY_BEAR_EAT_RABBIT = 80;
+    public static final int PROBABILITY_BEAR_EAT_MOUSE = 90;
+    public static final int PROBABILITY_BEAR_EAT_GOAT = 70;
+    public static final int PROBABILITY_BEAR_EAT_SHEEP = 70;
+
+    public static final int PROBABILITY_EAGLE__EAT_FOX = 10;
+    public static final int PROBABILITY_EAGLE_EAT_RABBIT = 90;
+    public static final int PROBABILITY_EAGLE_EAT_MOUSE = 90;
+
+    public static final int PROBABILITY_BOAR_EAT_MOUSE = 50;
+
+
+
+
+
+}
