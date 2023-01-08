@@ -21,14 +21,13 @@ public class JavaFXDisplay   extends Application implements  Runnable {
         public static CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = Island.islandSimulationObjects;
 
         public static volatile CopyOnWriteArrayList<Animal> animals = Island.getAnimalList();
-        public static volatile IslandSimulationObject[][] islandArray = Island.getIslandArray();
+        public static volatile IslandSimulationObject[][] islandArray;
 
+        static {
 
+                        islandArray = Island.getIslandArray();
 
-
-
-
-
+        }
 
 
         @Override

@@ -11,7 +11,61 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Horse extends Herbivores {
    public String typePicture  = BoxCharacteristicsObject.STRING_TYPE_PICTURE_HORSE;
 //    public Label label = new Label(typePicture);
-   private final List<String> initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES,
+
+    public boolean isHunger;
+
+    @Override
+    public  boolean getIsHunger(){
+        return  isHunger;
+    }
+
+
+
+
+
+
+    @Override
+    public  void  setIsHunger(boolean isHunger){
+        this.isHunger = isHunger;
+    }
+
+    private boolean eat = false;
+    @Override
+    public  boolean getEat(){
+        return  eat;
+    }
+
+
+    @Override
+    public  void  setEat(boolean eat ){
+        this.eat = eat;
+    }
+    private int progeny = 0;
+
+    @Override
+    public  int getProgeny(){
+        return progeny;
+    }
+    @Override
+    public  void  setProgeny(int progeny ){
+        this.progeny = progeny;
+    }
+    private int eatenKg = 0;
+
+    @Override
+    public int getEatenKg (){
+        return eatenKg;
+    }
+
+
+
+    @Override
+    public  void  setEatenKg (int eatenKg ){
+        this.eatenKg = eatenKg;
+    }
+
+
+    private final List<String> initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES,
             BoxCharacteristicsObject.TYPE_STRING_GRASS,BoxCharacteristicsObject.TYPE_STRING_FRUIT,
             BoxCharacteristicsObject.TYPE_STRING_BERRIES,BoxCharacteristicsObject.TYPE_STRING_VEGETABLES);
     public CopyOnWriteArrayList<String> foodStuffs = new CopyOnWriteArrayList<>(initialList);
@@ -19,7 +73,17 @@ public class Horse extends Herbivores {
     public   String typeString  =  BoxCharacteristicsObject.TYPE_STRING_HORSE;
     public int progenyLimit = 10;
     private int step = BoxCharacteristicsObject.SPEED_HORSE;
+    private volatile boolean stop = false;
 
+    @Override
+    public boolean getStop() {
+        return stop;
+    }
+
+    @Override
+    public void setStop(boolean stop) {
+        this.stop = stop;
+    }
 
     private int weight = BoxCharacteristicsObject.WEIGHT_HORSE;
     private int age;

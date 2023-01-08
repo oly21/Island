@@ -19,6 +19,67 @@ public class Rabbit extends Herbivores {
             BoxCharacteristicsObject.TYPE_STRING_GRASS,BoxCharacteristicsObject.TYPE_STRING_FRUIT,
             BoxCharacteristicsObject.TYPE_STRING_BERRIES,BoxCharacteristicsObject.TYPE_STRING_VEGETABLES);
     public CopyOnWriteArrayList<String> foodStuffs = new CopyOnWriteArrayList<>(initialList);
+    public boolean isHunger;
+
+    @Override
+    public  boolean getIsHunger(){
+        return  isHunger;
+    }
+
+
+
+
+
+
+    @Override
+    public  void  setIsHunger(boolean isHunger){
+        this.isHunger = isHunger;
+    }
+
+    private boolean eat = false;
+    @Override
+    public  boolean getEat(){
+        return  eat;
+    }
+
+
+    @Override
+    public  void  setEat(boolean eat ){
+        this.eat = eat;
+    }
+    private int progeny = 0;
+
+    @Override
+    public  int getProgeny(){
+        return progeny;
+    }
+    @Override
+    public  void  setProgeny(int progeny ){
+        this.progeny = progeny;
+    }
+    private int eatenKg = 0;
+
+    @Override
+    public int getEatenKg (){
+        return eatenKg;
+    }
+
+
+    private volatile boolean stop = false;
+
+    @Override
+    public boolean getStop() {
+        return stop;
+    }
+
+    @Override
+    public void setStop(boolean stop) {
+        this.stop = stop;
+    }
+    @Override
+    public  void  setEatenKg (int eatenKg ){
+        this.eatenKg = eatenKg;
+    }
 
     private final int step = BoxCharacteristicsObject.SPEED_RABBIT;
 
@@ -114,9 +175,9 @@ public class Rabbit extends Herbivores {
     }
 
     @Override
-    public void reproduct(Animal animal) throws InstantiationException, IllegalAccessException {
+    public void reproduct()  {
         for (int i = 0; i <= 7; i++) {
-            super.reproduct(animal);
+            super.reproduct();
         }
     }
     /* public void reproduct(Rabbit animal) throws InstantiationException, IllegalAccessException {

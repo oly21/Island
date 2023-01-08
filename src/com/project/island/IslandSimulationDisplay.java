@@ -9,7 +9,14 @@ import java.util.concurrent.ThreadLocalRandom;
 
 
 public class IslandSimulationDisplay implements Runnable {
-    private static volatile IslandSimulationObject[][] islandArray = Island.getIslandArray();
+    private static volatile IslandSimulationObject[][] islandArray;
+
+    static {
+
+            islandArray = Island.getIslandArray();
+
+    }
+
     private static IslandSimulationDisplay instance;
     public Island island = Island.getIsland();
 
@@ -60,7 +67,7 @@ public class IslandSimulationDisplay implements Runnable {
                 }
 
             }
-           // System.out.print('\r');
+       System.out.println();
 
 
        // }

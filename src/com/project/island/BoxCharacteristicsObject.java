@@ -103,39 +103,39 @@ public   class BoxCharacteristicsObject {
 
 
 
-    public static final int PROBABILITY_WOLF_EAT_HORSE = 10;
-    public static final int PROBABILITY_WOLF_EAT_DEER = 15;
-    public static final int PROBABILITY_WOLF_EAT_RABBIT = 60;
-    public static final int PROBABILITY_WOLF_EAT_MOUSE = 80;
-    public static final int PROBABILITY_WOLF_EAT_GOAT = 60;
-    public static final int PROBABILITY_WOLF_EAT_SHEEP = 70;
-    public static final int PROBABILITY_WOLF_EAT_DUCK = 70;
+    public static final double PROBABILITY_WOLF_EAT_HORSE = 0.1;
+    public static final double PROBABILITY_WOLF_EAT_DEER = 0.15;
+    public static final double PROBABILITY_WOLF_EAT_RABBIT = 1;
+    public static final double PROBABILITY_WOLF_EAT_MOUSE = 1;
+    public static final double PROBABILITY_WOLF_EAT_GOAT = 0.6;
+    public static final double PROBABILITY_WOLF_EAT_SHEEP = 0.7;
+    public static final double PROBABILITY_WOLF_EAT_DUCK = 0.7;
 
 
-    public static final int PROBABILITY_BOA_EAT_FOX = 15;
-    public static final int PROBABILITY_BOA_EAT_RABBIT = 20;
-    public static final int PROBABILITY_BOA_EAT_MOUSE = 40;
+    public static final double PROBABILITY_BOA_EAT_FOX = 0.15;
+    public static final double PROBABILITY_BOA_EAT_RABBIT = 0.2;
+    public static final double PROBABILITY_BOA_EAT_MOUSE = 0.4;
 
 
 
-    public static final int PROBABILITY_FOX_EAT_HORSE = 10;
-    public static final int PROBABILITY_FOX_EAT_DEER = 15;
-    public static final int PROBABILITY_FOX_EAT_RABBIT = 70;
-    public static final int PROBABILITY_FOX_EAT_MOUSE = 90;
+    public static final double PROBABILITY_FOX_EAT_HORSE = 0.1;
+    public static final double PROBABILITY_FOX_EAT_DEER = 0.15;
+    public static final double PROBABILITY_FOX_EAT_RABBIT = 1;
+    public static final double PROBABILITY_FOX_EAT_MOUSE = 1;
 
 
-    public static final int PROBABILITY_BEAR_EAT_BOA = 80;
-    public static final int PROBABILITY_BEAR_EAT_DEER = 80;
-    public static final int PROBABILITY_BEAR_EAT_RABBIT = 80;
-    public static final int PROBABILITY_BEAR_EAT_MOUSE = 90;
-    public static final int PROBABILITY_BEAR_EAT_GOAT = 70;
-    public static final int PROBABILITY_BEAR_EAT_SHEEP = 70;
+    public static final double PROBABILITY_BEAR_EAT_BOA = 0.8;
+    public static final double PROBABILITY_BEAR_EAT_DEER = 0.8;
+    public static final double PROBABILITY_BEAR_EAT_RABBIT = 0.8;
+    public static final double PROBABILITY_BEAR_EAT_MOUSE = 0.9;
+    public static final double PROBABILITY_BEAR_EAT_GOAT = 0.7;
+    public static final double PROBABILITY_BEAR_EAT_SHEEP = 0.7;
 
-    public static final int PROBABILITY_EAGLE__EAT_FOX = 10;
-    public static final int PROBABILITY_EAGLE_EAT_RABBIT = 90;
-    public static final int PROBABILITY_EAGLE_EAT_MOUSE = 90;
+    public static final double PROBABILITY_EAGLE__EAT_FOX = 0.1;
+    public static final double PROBABILITY_EAGLE_EAT_RABBIT = 0.9;
+    public static final double PROBABILITY_EAGLE_EAT_MOUSE = 0.9;
 
-    public static final int PROBABILITY_BOAR_EAT_MOUSE = 50;
+    public static final double PROBABILITY_BOAR_EAT_MOUSE = 0.5;
 
 
 

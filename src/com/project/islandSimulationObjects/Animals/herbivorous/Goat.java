@@ -44,7 +44,70 @@ public class Goat extends Herbivores {
         super();
         this.age = age;
     }
+    public boolean isHunger;
 
+
+
+
+
+    private  volatile boolean stop = false;
+
+    @Override
+    public boolean getStop() {
+        return stop;
+    }
+
+    @Override
+    public void setStop(boolean stop) {
+        this.stop = stop;
+    }
+
+
+    @Override
+    public  void  setIsHunger(boolean isHunger){
+        this.isHunger = isHunger;
+    }
+
+    private boolean eat = false;
+    @Override
+    public  boolean getEat(){
+        return  eat;
+    }
+
+
+    @Override
+    public  void  setEat(boolean eat ){
+        this.eat = eat;
+    }
+    private int progeny = 0;
+
+    @Override
+    public  int getProgeny(){
+        return progeny;
+    }
+    @Override
+    public  void  setProgeny(int progeny ){
+        this.progeny = progeny;
+    }
+    private int eatenKg = 0;
+
+    @Override
+    public int getEatenKg (){
+        return eatenKg;
+    }
+
+
+
+    @Override
+    public  void  setEatenKg (int eatenKg ){
+        this.eatenKg = eatenKg;
+    }
+
+
+
+    public boolean getIsHunger() {
+        return false;
+    }
 
     @Override
     public int getX() {
@@ -115,9 +178,9 @@ public class Goat extends Herbivores {
 
 
     @Override
-    public void reproduct(Animal animal) throws InstantiationException, IllegalAccessException {
+    public void reproduct()  {
        for (int i = 0; i<=2; i++){
-           super.reproduct(animal);
+           super.reproduct();
        }
 
 

@@ -19,21 +19,82 @@ public class Eagle  extends Predators {
 
    private final List<String> initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_MOUSE,BoxCharacteristicsObject.TYPE_STRING_RABBIT);
     public CopyOnWriteArrayList<String> foodStuffs = new CopyOnWriteArrayList<>(initialList);
-    public ConcurrentHashMap<String, Integer> chanceToEat = new ConcurrentHashMap<>();
+    public ConcurrentHashMap<String, Double> chanceToEat = new ConcurrentHashMap<>();
     private void initializationMapChanceToEat(){
-        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_FOX, 10);
-        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_RABBIT, 90);
-        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_MOUSE, 90);
+        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_FOX, BoxCharacteristicsObject.PROBABILITY_EAGLE__EAT_FOX);
+        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_RABBIT, BoxCharacteristicsObject.PROBABILITY_EAGLE_EAT_RABBIT);
+        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_MOUSE,BoxCharacteristicsObject.PROBABILITY_EAGLE_EAT_MOUSE );
 
 
     }
-    public ConcurrentHashMap<String, Integer> getMapChanceToEat(){
+    public ConcurrentHashMap<String, Double> getMapChanceToEat(){
         return chanceToEat;
     }
 
     public int progenyLimit = 10;
     private final int step = BoxCharacteristicsObject.SPEED_EAGLE;
 //    public Label label = new Label(typePicture);
+public boolean isHunger;
+
+    @Override
+    public  boolean getIsHunger(){
+        return  isHunger;
+    }
+
+
+
+
+
+
+    @Override
+    public  void  setIsHunger(boolean isHunger){
+        this.isHunger = isHunger;
+    }
+
+    private boolean eat = false;
+    @Override
+    public  boolean getEat(){
+        return  eat;
+    }
+
+
+    @Override
+    public  void  setEat(boolean eat ){
+        this.eat = eat;
+    }
+    private int progeny = 0;
+
+    @Override
+    public  int getProgeny(){
+        return progeny;
+    }
+    @Override
+    public  void  setProgeny(int progeny ){
+        this.progeny = progeny;
+    }
+    private int eatenKg = 0;
+
+    @Override
+    public int getEatenKg (){
+        return eatenKg;
+    }
+
+
+    private volatile   boolean stop = false;
+
+    @Override
+    public boolean getStop() {
+        return stop;
+    }
+
+    @Override
+    public void setStop(boolean stop) {
+        this.stop = stop;
+    }
+    @Override
+    public  void  setEatenKg (int eatenKg ){
+        this.eatenKg = eatenKg;
+    }
 
     private int weight = BoxCharacteristicsObject.WEIGHT_EAGLE;
     private int age;

@@ -2,6 +2,7 @@ package com.project.island;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import com.project.Solution;
 import com.project.islandSimulationObjects.Animals.Animal;
 import com.project.islandSimulationObjects.Animals.herbivorous.*;
 import com.project.islandSimulationObjects.Animals.predators.*;
@@ -11,29 +12,36 @@ import com.project.islandSimulationObjects.Plants.*;
 public class Island {
 
 
-    private static Island instance;
-    public static int x = 20;
-    public static int y = 20;
+    public  static  Island instance = null;
+    public static volatile int x;
+    public static  volatile int y;
 
-    int numberAnimal = 50;
-
-    private Island(int x, int y) {
+   public static int predatorsNumber;
+    public static int herbivoresNumber;
+     public  static int conditionNumberStopSimulation ;
+    private  static volatile IslandSimulationObject[][] islandArray;
+    private Island(int x, int y, int predatorsNumber, int herbivoresNumber, int conditionNumberStopSimulation) {
 
         Island.x = x;
         Island.y = y;
-      //  this.numberAnimal = numberAnimal;
+       this.predatorsNumber = predatorsNumber;
+       this.herbivoresNumber = herbivoresNumber;
+       this.conditionNumberStopSimulation =  conditionNumberStopSimulation;
+        islandArray =   new IslandSimulationObject[Island.x][Island.y];
     }
 
 
     public static Island getIsland() {
+        if(instance == null&&Island.x>0){
 
-        if (instance == null) {
-            instance = new Island(20, 20);
+        instance = new Island( x,  y,  predatorsNumber,  herbivoresNumber,  conditionNumberStopSimulation);
         }
         return instance;
     }
+    public   void setInstance(Island instance){
+        this.instance = instance;
+    }
 
-    private static volatile IslandSimulationObject[][] islandArray = new IslandSimulationObject[x][y];
 
 
     public volatile static CopyOnWriteArrayList<Animal> animals = new CopyOnWriteArrayList<>();
@@ -68,50 +76,57 @@ public class Island {
         Plant plant4;
 
 
-        for (int i = 0; i <= 10; i++) {
+        for (int i = 0; i <= predatorsNumber; i++) {
             animal = new Fox(1, 1);
             animal1 = new Wolf(1, 1);
-            animal2 = new Caterpillar(1, 1);
             animal3 = new Deer(1, 1);
-            animal4 = new Duck(1, 1);
-            animal5 = new Goat(1, 1);
             animal6 = new Horse(1, 1);
-            animal7 = new Mouse(1, 1);
-            animal8 = new Rabbit(1, 1);
-            animal9 = new Sheep(1, 1);
+
             animal10 = new Bear(1, 1);
-            animal11 = new Boa(1, 1);
             animal12 = new Boar(1, 1);
             animal13 = new Eagle(1, 1);
             animal14 = new Buffalo(1, 1);
+
+
+            animals.add(animal);
+            animals.add(animal1);
+            animals.add(animal3);
+            animals.add(animal6);
+
+            animals.add(animal10);
+            animals.add(animal12);
+            animals.add(animal13);
+            animals.add(animal14);
+
+
+        }
+        for (int i = 0; i <= herbivoresNumber; i++) {
+            animal2 = new Caterpillar(1, 1);
+            animal7 = new Mouse(1, 1);
+            animal8 = new Rabbit(1, 1);
+            animal9 = new Sheep(1, 1);
+            animal11 = new Boa(1, 1);
+            animal4 = new Duck(1, 1);
+            animal5 = new Goat(1, 1);
             plant = new Berries(1, 1);
             plant1 = new Fruit(1, 1);
             plant2 = new Grass(1, 1);
             plant3 = new PlantLeaves(1, 1);
             plant4 = new Vegetables(1, 1);
-
-            animals.add(animal);
-            animals.add(animal1);
-            animals.add(animal2);
-            animals.add(animal3);
-            animals.add(animal4);
-            animals.add(animal5);
-            animals.add(animal6);
             animals.add(animal7);
             animals.add(animal8);
             animals.add(animal9);
-            animals.add(animal10);
             animals.add(animal11);
-            animals.add(animal12);
-            animals.add(animal13);
-            animals.add(animal14);
+            animals.add(animal4);
+            animals.add(animal5);
+            animals.add(animal2);
             plants.add(plant1);
             plants.add(plant2);
             plants.add(plant3);
             plants.add(plant4);
             plants.add(plant);
         }
-            islandSimulationObjects.addAll(animals);
+        islandSimulationObjects.addAll(animals);
             islandSimulationObjects.addAll(plants);
             Animal.numberAnimals.addAndGet(150);
             Animal.numberPlants.addAndGet(50);
@@ -122,10 +137,24 @@ public class Island {
 
 
     }
+    public void  initializeIslandVariables(int x, int y, int predatorsNumber, int herbivoresNumber, int conditionNumberStopSimulation){
+        Island.x = x;
+        Island.y = y;
+        Island.predatorsNumber = predatorsNumber;
+        Island.herbivoresNumber = herbivoresNumber;
+        this.conditionNumberStopSimulation =  conditionNumberStopSimulation;
+    }
 
-    public synchronized static  IslandSimulationObject[][] getIslandArray() {
 
-        return islandArray;
+
+
+    public static  synchronized   IslandSimulationObject[][] getIslandArray() {
+
+
+           return islandArray;
+
+
+
 
 
     }

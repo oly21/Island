@@ -16,15 +16,26 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class PlantGrowth implements Runnable {
     public volatile static CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = Island.getIslandSimulationObjectList();
+     Island island = Island.getIsland();
+    public  IslandSimulationObject[][] islandArray =  island.getIslandArray();
 
-    public static IslandSimulationObject[][] islandArray = Island.getIslandArray();
+
+
+
+
+
+
     public static CopyOnWriteArrayList<Coordinate> freeCells = IslandSimulation.getListFreeCells();
 
-    public Island island = Island.getIsland();
+
     public List<Plant> plants = Island.getPlantList();
     private int weight = BoxCharacteristicsObject.WEIGHT_PLANT;
     private int age;
     public static volatile AtomicInteger numbersPlantsGrew = new AtomicInteger(100);
+
+    public PlantGrowth() throws InterruptedException {
+    }
+
     @Override
     public void run() {
 

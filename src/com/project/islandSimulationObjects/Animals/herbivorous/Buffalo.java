@@ -2,13 +2,67 @@ package com.project.islandSimulationObjects.Animals.herbivorous;
 
 import com.project.island.BoxCharacteristicsObject;
 import com.project.islandSimulationObjects.Coordinate;
-import javafx.scene.control.Label;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Buffalo extends Herbivores {
+
+    public boolean isHunger;
+
+    @Override
+    public  boolean getIsHunger(){
+        return  isHunger;
+    }
+
+
+
+
+
+
+    @Override
+    public  void  setIsHunger(boolean isHunger){
+        this.isHunger = isHunger;
+    }
+
+    private boolean eat = false;
+    @Override
+    public  boolean getEat(){
+        return  eat;
+    }
+
+
+    @Override
+    public  void  setEat(boolean eat ){
+        this.eat = eat;
+    }
+    private int progeny = 0;
+
+    @Override
+    public  int getProgeny(){
+        return progeny;
+    }
+    @Override
+    public  void  setProgeny(int progeny ){
+this.progeny = progeny;
+    }
+    private int eatenKg = 0;
+
+    @Override
+    public int getEatenKg (){
+      return eatenKg;
+    }
+
+
+
+    @Override
+    public  void  setEatenKg (int eatenKg ){
+     this.eatenKg = eatenKg;
+    }
+
+
+
     private  final int   step =  BoxCharacteristicsObject.SPEED_BUFFALO;
 
 
@@ -80,7 +134,17 @@ public class Buffalo extends Herbivores {
         return new Coordinate(x,y);
     }
 
+    private  volatile boolean  stop = false;
 
+    @Override
+    public boolean getStop() {
+        return stop;
+    }
+
+    @Override
+    public void setStop(boolean stop) {
+        this.stop = stop;
+    }
 
     @Override
     public String getTypePicture() {

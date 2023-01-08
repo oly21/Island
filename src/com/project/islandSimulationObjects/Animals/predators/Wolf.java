@@ -18,15 +18,72 @@ public class Wolf  extends Predators {
             BoxCharacteristicsObject.TYPE_STRING_SHEEP, BoxCharacteristicsObject.TYPE_STRING_GOAT,
             BoxCharacteristicsObject.TYPE_STRING_DUCK);
     public CopyOnWriteArrayList<String> foodStuffs = new CopyOnWriteArrayList<>(initialList);
-    public ConcurrentHashMap<String, Integer> chanceToEat = new ConcurrentHashMap<>();
+    public ConcurrentHashMap<String, Double> chanceToEat = new ConcurrentHashMap<>();
     private void initializationMapChanceToEat(){
 
-        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_GOAT, 60);
-        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_RABBIT, 60);
-        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_MOUSE, 80);
-        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_DEER, 15);
-        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_SHEEP, 70);
-        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_DUCK, 70);
+        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_GOAT, BoxCharacteristicsObject.PROBABILITY_WOLF_EAT_GOAT);
+        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_RABBIT, BoxCharacteristicsObject.PROBABILITY_WOLF_EAT_RABBIT);
+        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_MOUSE, BoxCharacteristicsObject.PROBABILITY_WOLF_EAT_MOUSE);
+        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_DEER, BoxCharacteristicsObject.PROBABILITY_WOLF_EAT_DEER);
+        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_SHEEP, BoxCharacteristicsObject.PROBABILITY_WOLF_EAT_SHEEP);
+        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_DUCK, BoxCharacteristicsObject.PROBABILITY_WOLF_EAT_DUCK);
+    }
+
+    public ConcurrentHashMap<String, Double> getMapChanceToEat(){
+        return chanceToEat;
+    }
+
+
+    public boolean isHunger;
+
+    @Override
+    public  boolean getIsHunger(){
+        return  isHunger;
+    }
+
+
+
+
+
+
+    @Override
+    public  void  setIsHunger(boolean isHunger){
+        this.isHunger = isHunger;
+    }
+
+    private boolean eat = false;
+    @Override
+    public  boolean getEat(){
+        return  eat;
+    }
+
+
+    @Override
+    public  void  setEat(boolean eat ){
+        this.eat = eat;
+    }
+    private int progeny = 0;
+
+    @Override
+    public  int getProgeny(){
+        return progeny;
+    }
+    @Override
+    public  void  setProgeny(int progeny ){
+        this.progeny = progeny;
+    }
+    private int eatenKg = 0;
+
+    @Override
+    public int getEatenKg (){
+        return eatenKg;
+    }
+
+
+
+    @Override
+    public  void  setEatenKg (int eatenKg ){
+        this.eatenKg = eatenKg;
     }
 
 
@@ -38,9 +95,7 @@ public class Wolf  extends Predators {
 
 
 
-    public ConcurrentHashMap<String, Integer> getMapChanceToEat(){
-        return chanceToEat;
-    }
+
 
     public int progenyLimit = 10;
     private final int step = BoxCharacteristicsObject.SPEED_WOLF;
@@ -115,7 +170,17 @@ public class Wolf  extends Predators {
     public CopyOnWriteArrayList<String> getFoodStuffs() {
         return foodStuffs;
     }
+    private volatile boolean stop = false;
 
+    @Override
+    public boolean getStop() {
+        return stop;
+    }
+
+    @Override
+    public void setStop(boolean stop) {
+        this.stop = stop;
+    }
     @Override
     public int getNeededFoodKg() {
         return neededFoodKg;

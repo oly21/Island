@@ -23,15 +23,15 @@ public class Boa extends Predators {
             BoxCharacteristicsObject.TYPE_STRING_SHEEP, BoxCharacteristicsObject.TYPE_STRING_RABBIT);
    public CopyOnWriteArrayList<String> foodStuffs = new CopyOnWriteArrayList<>(initialList);
 
-    public ConcurrentHashMap<String, Integer> chanceToEat = new ConcurrentHashMap<>();
+    public ConcurrentHashMap<String, Double> chanceToEat = new ConcurrentHashMap<>();
     private void initializationMapChanceToEat(){
-        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_FOX, 15);
-        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_RABBIT, 20);
-        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_MOUSE, 40);
+        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_FOX, BoxCharacteristicsObject.PROBABILITY_BOA_EAT_FOX);
+        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_RABBIT, BoxCharacteristicsObject.PROBABILITY_BOA_EAT_RABBIT);
+        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_MOUSE, BoxCharacteristicsObject.PROBABILITY_BOA_EAT_MOUSE);
 
 
     }
-    public ConcurrentHashMap<String, Integer> getMapChanceToEat(){
+    public ConcurrentHashMap<String, Double> getMapChanceToEat(){
         return chanceToEat;
     }
 
@@ -42,6 +42,70 @@ public class Boa extends Predators {
 
 //    public Label label = new Label(typePicture);
     private int weight = BoxCharacteristicsObject.WEIGHT_BOA;
+
+    public boolean isHunger;
+
+    @Override
+    public  boolean getIsHunger(){
+        return  isHunger;
+    }
+
+
+
+
+
+
+    @Override
+    public  void  setIsHunger(boolean isHunger){
+        this.isHunger = isHunger;
+    }
+
+    private boolean eat = false;
+    @Override
+    public  boolean getEat(){
+        return  eat;
+    }
+
+
+    @Override
+    public  void  setEat(boolean eat ){
+        this.eat = eat;
+    }
+    private int progeny = 0;
+
+    @Override
+    public  int getProgeny(){
+        return progeny;
+    }
+    @Override
+    public  void  setProgeny(int progeny ){
+        this.progeny = progeny;
+    }
+    private int eatenKg = 0;
+
+    @Override
+    public int getEatenKg (){
+        return eatenKg;
+    }
+
+
+    private  volatile boolean stop = false;
+
+    @Override
+    public boolean getStop() {
+        return stop;
+    }
+
+    @Override
+    public void setStop(boolean stop) {
+        this.stop = stop;
+    }
+    @Override
+    public  void  setEatenKg (int eatenKg ){
+        this.eatenKg = eatenKg;
+    }
+
+
     private int age;
     private final int neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_BOA;
     private volatile int x;
@@ -132,9 +196,9 @@ public class Boa extends Predators {
     }
 
     @Override
-    public void reproduct(Animal animal) throws InstantiationException, IllegalAccessException {
+    public void reproduct() {
         for (int i = 0; i <= 4; i++) {
-            super.reproduct(animal);
+            super.reproduct();
         }
     }
 

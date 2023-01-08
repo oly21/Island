@@ -14,6 +14,67 @@ public class Duck extends Animal {
     public String typeString = BoxCharacteristicsObject.TYPE_STRING_DUCK;
     public int progenyLimit = 10;
     private int step = BoxCharacteristicsObject.SPEED_DUCK;
+    public boolean isHunger;
+
+    @Override
+    public  boolean getIsHunger(){
+        return  isHunger;
+    }
+
+
+
+
+
+
+    @Override
+    public  void  setIsHunger(boolean isHunger){
+        this.isHunger = isHunger;
+    }
+
+    private boolean eat = false;
+    @Override
+    public  boolean getEat(){
+        return  eat;
+    }
+
+
+    @Override
+    public  void  setEat(boolean eat ){
+        this.eat = eat;
+    }
+    private int progeny = 0;
+
+    @Override
+    public  int getProgeny(){
+        return progeny;
+    }
+    @Override
+    public  void  setProgeny(int progeny ){
+        this.progeny = progeny;
+    }
+    private int eatenKg = 0;
+
+    @Override
+    public int getEatenKg (){
+        return eatenKg;
+    }
+
+    private  volatile boolean stop = false;
+
+    @Override
+    public boolean getStop() {
+        return stop;
+    }
+
+    @Override
+    public void setStop(boolean stop) {
+        this.stop = stop;
+    }
+
+    @Override
+    public  void  setEatenKg (int eatenKg ){
+        this.eatenKg = eatenKg;
+    }
 
 
     private int weight = BoxCharacteristicsObject.WEIGHT_DUCK;
@@ -118,9 +179,9 @@ public class Duck extends Animal {
     }
 
     @Override
-    public void reproduct(Animal animal) throws InstantiationException, IllegalAccessException {
+    public void reproduct()  {
         for (int i = 0; i <= 2; i++) {
-            super.reproduct(animal);
+            super.reproduct();
         }
     }
 }

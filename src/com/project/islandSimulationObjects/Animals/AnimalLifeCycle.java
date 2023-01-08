@@ -31,10 +31,10 @@ public class AnimalLifeCycle implements Runnable {
 
     public void run() {
 
-
+        animalsCopy.clear();
         //executorService.shutdown();
         animalsCopy.addAll(animals);
-        ExecutorService executorService  = Executors.newFixedThreadPool(animals.size()-1);
+        ExecutorService executorService  = Executors.newFixedThreadPool(animals.size());
         System.out.println("Start AnimalLiveCycle");
         for (Animal animal : animals) {
             age = animal.getAge()+1;
@@ -50,11 +50,11 @@ public class AnimalLifeCycle implements Runnable {
 
         for (Runnable task : animalsCopy) {
 
-            int IndexAnimalTask = ThreadLocalRandom.current().nextInt(animalsCopy.size()) % animalsCopy.size();
+           // int IndexAnimalTask = ThreadLocalRandom.current().nextInt(animalsCopy.size()) % animalsCopy.size();
 
-            Runnable animalTask = animalsCopy.get(IndexAnimalTask);
-            executorService.submit(animalTask);
-            animalsCopy.remove(IndexAnimalTask);
+           // Runnable animalTask = animalsCopy.get(IndexAnimalTask);
+            executorService.submit(task);
+           // animalsCopy.remove(IndexAnimalTask);
 
 
             // try {
@@ -67,5 +67,7 @@ public class AnimalLifeCycle implements Runnable {
             // executorService.shutdown();
 
         }
+       executorService.shutdown();
+
     }
 }

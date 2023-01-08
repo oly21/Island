@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class Mouse extends Animal {
+public class Mouse extends Herbivores {
     public static String   typePicture  = BoxCharacteristicsObject.STRING_TYPE_PICTURE_MOUSE;
 
     public static String typeString =  BoxCharacteristicsObject.TYPE_STRING_MOUSE;
@@ -40,7 +40,17 @@ public class Mouse extends Animal {
         this.age = age;
     }
 
+    private  volatile boolean stop = false;
 
+    @Override
+    public boolean getStop() {
+        return stop;
+    }
+
+    @Override
+    public void setStop(boolean stop) {
+        this.stop = stop;
+    }
     @Override
     public int getX() {
         return x;
@@ -76,6 +86,57 @@ public class Mouse extends Animal {
 
         return new Coordinate(x, y);
     }
+    public boolean isHunger;
+
+    @Override
+    public  boolean getIsHunger(){
+        return  isHunger;
+    }
+
+
+
+
+
+
+    @Override
+    public  void  setIsHunger(boolean isHunger){
+        this.isHunger = isHunger;
+    }
+
+    private boolean eat = false;
+    @Override
+    public  boolean getEat(){
+        return  eat;
+    }
+
+
+    @Override
+    public  void  setEat(boolean eat ){
+        this.eat = eat;
+    }
+    private int progeny = 0;
+
+    @Override
+    public  int getProgeny(){
+        return progeny;
+    }
+    @Override
+    public  void  setProgeny(int progeny ){
+        this.progeny = progeny;
+    }
+    private int eatenKg = 0;
+
+    @Override
+    public int getEatenKg (){
+        return eatenKg;
+    }
+
+
+
+    @Override
+    public  void  setEatenKg (int eatenKg ){
+        this.eatenKg = eatenKg;
+    }
 
 
     @Override
@@ -109,9 +170,9 @@ public class Mouse extends Animal {
     }
 
     @Override
-    public void reproduct(Animal animal) throws InstantiationException, IllegalAccessException {
+    public void reproduct()  {
         for (int i = 0; i <= 7; i++) {
-            super.reproduct(animal);
+            super.reproduct();
         }
     }
 
