@@ -11,6 +11,8 @@ import com.project.islandSimulationObjects.*;
 import com.project.islandSimulationObjects.Animals.predators.*;
 import com.project.islandSimulationObjects.Animals.herbivorous.*;
 import com.project.islandSimulationObjects.Plants.Plant;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -20,18 +22,21 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
     public static volatile CopyOnWriteArrayList<Animal> animals = IslandSimulation.animals;
     public static volatile CopyOnWriteArrayList<Plant> plants = Island.getPlantList();
     // public static PrintingIslandSimulationStatistics printingIslandSimulationStatistics = PrintingIslandSimulationStatistics.getPrintingIslandSimulationStatistics();
-
+    public static volatile Pane root = JavaFXDisplay.getRoot();
     public static Island island = Island.getIsland();
     public static volatile IslandSimulationObject[][] islandArray;
 
     static {
 
-            islandArray = Island.getIslandArray();
+        islandArray = Island.getIslandArray();
 
     }
 
     public static CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = Island.islandSimulationObjects;
-    private ArrayList<Coordinate> neighboringCells = new ArrayList<>();
+    public static CopyOnWriteArrayList<Label> label = JavaFXDisplay.getLabelArray();
+    public static volatile Label[][] labelArray = JavaFXDisplay.getLabelArray1();
+
+    private CopyOnWriteArrayList<Coordinate> neighboringCells = new CopyOnWriteArrayList<>();
     public boolean isHunger = true;
 
     public abstract boolean getIsHunger();
@@ -41,6 +46,7 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
     private boolean eat = false;
 
     public abstract boolean getEat();
+
     public ConcurrentHashMap<String, Double> chanceToEatMap = new ConcurrentHashMap<>();
 
     public abstract CopyOnWriteArrayList<String> getFoodStuffs();
@@ -147,11 +153,9 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
     }
 
 
-
-
     public void eat() {
         startEat.incrementAndGet();
-        Double  chanceToEat = 1.0;
+        Double chanceToEat = 1.0;
         //synchronized (islandArray) {
 
         neighboringCells = getListNeighboringCells();
@@ -160,19 +164,19 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
 
             int x = coordinate1.getX();
             int y = coordinate1.getY();
-            if (this.getStop() == false && islandArray[x][y] != null  ) {
+            if (this.getStop() == false && islandArray[x][y] != null) {
 
 
                 if (this.getFoodStuffs().contains(islandArray[x][y].getTypeString())) {
 
                     if (this instanceof Predators) {
-                         // if  (( (Animal) islandArray[x][y]).getStop() == false){
-                         // }
+                        // if  (( (Animal) islandArray[x][y]).getStop() == false){
+                        // }
                         chanceToEatMap = (((Predators) this).getMapChanceToEat());
                         chanceToEat = chanceToEatMap.get(islandArray[x][y].getTypeString());
 
                     }
-                    if (ThreadLocalRandom.current().nextDouble(0, 1) < chanceToEat) {
+                  //  if (ThreadLocalRandom.current().nextDouble(0, 1) < chanceToEat) {
 
 
                         this.setEatenKg(this.getEatenKg() + islandArray[x][y].getWeight());
@@ -187,6 +191,8 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
 
                         this.setEat(true);
                         islandSimulationObjects.remove(islandArray[x][y]);
+
+
                         islandArray[x][y].setXY(-1, -1);
 
                         if (islandArray[x][y] instanceof Animal) {
@@ -201,10 +207,68 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
                             numberEatenPlants.incrementAndGet();
                             plants.remove(islandArray[x][y]);
                         }
+                        int count = 0;
+
 
                         startMove.incrementAndGet();
 
-                        this.move(coordinate1, this);
+
+
+
+
+                      /*  for (int i = 0; i < label.size(); i++) {
+                            if ((int) root.getChildren().get(i).getLayoutX() / 20 == this.getX() && (int) root.getChildren().get(i).getLayoutY() / 20 == this.getY()) {
+                                if (this.getX() != coordinate1.getX())
+                                    if (this.getX() > coordinate1.getX()) {
+                                        count = this.getX() - coordinate1.getX();
+                                    } else if (this.getX() < coordinate1.getX()) {
+                                        count = coordinate1.getX() - this.getX();
+                                    }
+
+                                if (this.getY() != coordinate1.getY()) {
+                                    if (this.getY() > coordinate1.getY()) {
+                                        count = this.getY() - coordinate1.getY();
+                                    } else if (this.getY() < coordinate1.getY()) {
+                                        count = coordinate1.getY() - this.getY();
+                                    }
+                                }
+                                for (int j = 1; j <= count; j++) {
+                                    if (this.getX() != coordinate1.getX()) {
+                                        if (this.getX() > coordinate1.getX()) {
+                                            root.getChildren().get(i).setLayoutX(this.getX() - j);
+                                        } else if (this.getX() < coordinate1.getX()) {
+                                            root.getChildren().get(i).setLayoutX(this.getX() + j);
+                                        }
+                                        if (this.getY() != coordinate1.getY()) {
+                                            if (this.getY() > coordinate1.getY()) {
+                                                root.getChildren().get(i).setLayoutY(this.getY() - j);
+                                            }
+                                            } else if (this.getY() < coordinate1.getY()) {
+                                            root.getChildren().get(i).setLayoutY(this.getY() + j);
+                                        }
+                                            }
+
+
+
+                                    }
+                                    //root.getChildren().get(i).setAccessibleText(islandArray[x][y].getTypeString());
+                                break;
+                                }
+                            }
+                      */ // }
+
+                    labelArray[coordinate1.getX()][coordinate1.getY()]=labelArray[this.getX()][this.getY()];
+                    labelArray[this.getX()][this.getY()]=null;
+
+                    this.move(coordinate1, this);
+                        //for (int i = 0; i < label.size(); i++) {
+                          //  if ((int) root.getChildren().get(i).getLayoutX() / 20 == this.getX() && (int) root.getChildren().get(i).getLayoutY() / 20 == this.getY()) {
+                              //  root.getChildren().get(i).setAccessibleText(islandArray[x][y].getTypeString());
+                          // break;
+                           // }
+
+                      //  }
+
                         finishMove.incrementAndGet();
 
                         break;
@@ -217,7 +281,7 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
                     // }
                 }
 
-            } else {
+             else {
                 break;
             }
 
@@ -288,6 +352,20 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
                             } else {
                                 break;
                             }
+                            Label label1 = new Label(this.getTypeString());
+
+
+
+                            for (Coordinate freeCell : IslandSimulation.getListFreeCells()) {
+                                setPositionForNewbornAnimal(freeCell, animalCopy);
+                                label1.setLayoutX(freeCell.getX() * 20);
+                                label1.setLayoutY(freeCell.getY() * 20);
+                                root.getChildren().add(label1);
+                                label.add(label1);
+                                labelArray[freeCell.getX()][freeCell.getY()]=label1 ;
+                                freeCells.remove(freeCell);
+                                break;
+                            }
                             numberAnimals.incrementAndGet();
 
                             animals.add(animalCopy);
@@ -295,13 +373,6 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
 
 
                             islandSimulationObjects.add(animalCopy);
-
-                            for (Coordinate freeCell : IslandSimulation.getListFreeCells()) {
-                                setPositionForNewbornAnimal(freeCell, animalCopy);
-
-                                freeCells.remove(freeCell);
-                                break;
-                            }
                         } else {
                             break;
                         }
@@ -330,6 +401,18 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
                 if (freeCells.contains(coordinate)) {
 
                     move(coordinate, this);
+                    for (int i = 0; i < label.size(); i++) {
+
+                        labelArray[coordinate.getX()][coordinate.getY()]=  labelArray[this.getX()][this.getY()]  ;
+                        labelArray[this.getX()][this.getY()]=null;
+                       // if ((int) root.getChildren().get(i).getLayoutX() / 20 == this.getX() && (int) root.getChildren().get(i).getLayoutY() / 20 == this.getY()) {
+
+
+                         //   root.getChildren().get(i).setLayoutX(coordinate.getX() * 20);
+                           // root.getChildren().get(i).setLayoutX(coordinate.getY() * 20);
+                      //  }
+
+                    }
                     freeCells.remove(coordinate);
                     break;
                 }
@@ -384,7 +467,7 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
     // }
 
 
-    public ArrayList<Coordinate> getListNeighboringCells() {
+    public CopyOnWriteArrayList<Coordinate> getListNeighboringCells() {
         neighboringCells.clear();
         startGet.incrementAndGet();
         int xUp = this.getX();
@@ -498,10 +581,11 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
             int x = this.getX();
 
             int y = this.getY();
+            freeCells.add(new Coordinate(x, y));
             this.setXY(coordinate.getX(), coordinate.getY());
             islandArray[coordinate.getX()][coordinate.getY()] = animal;
             islandArray[x][y] = null;
-            freeCells.add(new Coordinate(x, y));
+
             //neighboringCells=getListNeighboringCells();
 
         }

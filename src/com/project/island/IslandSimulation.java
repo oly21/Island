@@ -49,7 +49,8 @@ public class IslandSimulation {
    public static ScheduledExecutorService executorScheduledServicePrintingIslandSimulationStatistics = Executors.newScheduledThreadPool(0);
     public static ScheduledExecutorService executorScheduledCheckStopConditionOfIslandSimulation = Executors.newScheduledThreadPool(0);
    public  static CheckingStopConditionOfIslandSimulation checkingStopConditionOfIslandSimulation = CheckingStopConditionOfIslandSimulation.getCheckingStopConditionOfIslandSimulation();
-
+    public static ScheduledExecutorService executorScheduledFX = Executors.newScheduledThreadPool(0);
+    JavaFXDisplay javaFXDisplay  = new  JavaFXDisplay();
     private IslandSimulation() {
 
     }
@@ -69,16 +70,21 @@ public class IslandSimulation {
 
 
         // while (freeCells.size() != islandArray.length) {
+       // JavaFXDisplay.counter = 0;
+     //  executorScheduledFX.submit(javaFXDisplay);
+       // executorScheduledFX.scheduleAtFixedRate(javaFXDisplay, 0, 20, TimeUnit.SECONDS);
 
-
-        executorScheduledServiceAnimalLifeCycle.scheduleAtFixedRate(animalLifeCycle, 0, 20, TimeUnit.SECONDS);
+        executorScheduledServiceAnimalLifeCycle.scheduleAtFixedRate(animalLifeCycle, 10, 10, TimeUnit.SECONDS);
 
 
         executorScheduledServicePrintingIslandSimulationStatistics.scheduleAtFixedRate(printingIslandSimulationStatistics, 0, 10, TimeUnit.SECONDS);
         executorScheduledServiceDisplay.scheduleAtFixedRate(islandSimulationDisplay, 1, 10, TimeUnit.SECONDS);
         executorScheduledServicePlantGrowth.scheduleAtFixedRate(plantGrowth, 0, 10, TimeUnit.SECONDS);
-        executorScheduledCheckStopConditionOfIslandSimulation.scheduleAtFixedRate(checkingStopConditionOfIslandSimulation, 10, 50, TimeUnit.SECONDS);
-        //  }
+        executorScheduledCheckStopConditionOfIslandSimulation.scheduleAtFixedRate(checkingStopConditionOfIslandSimulation, 40, 15, TimeUnit.SECONDS);
+       // JavaFXDisplay.counter = 1;
+
+
+                //  }
 
 
         //ExecutorService executorService  = Executors.newFixedThreadPool(1);
