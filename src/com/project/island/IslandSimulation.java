@@ -18,7 +18,7 @@ public class IslandSimulation {
     public static volatile IslandSimulationObject[][] islandArray = Island.getIslandArray();
 
 
-    public volatile static CopyOnWriteArrayList<Animal> animals = new CopyOnWriteArrayList<>();
+    public volatile static CopyOnWriteArrayList<Animal> animals = Island.getAnimalList();
 
     public volatile static CopyOnWriteArrayList<Plant> plants = new CopyOnWriteArrayList<>();
     public volatile static CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = Island.getIslandSimulationObjectList();
@@ -50,7 +50,7 @@ public class IslandSimulation {
     public static ScheduledExecutorService executorScheduledCheckStopConditionOfIslandSimulation = Executors.newScheduledThreadPool(0);
    public  static CheckingStopConditionOfIslandSimulation checkingStopConditionOfIslandSimulation = CheckingStopConditionOfIslandSimulation.getCheckingStopConditionOfIslandSimulation();
     public static ScheduledExecutorService executorScheduledFX = Executors.newScheduledThreadPool(0);
-    JavaFXDisplay javaFXDisplay  = new  JavaFXDisplay();
+    //JavaFXDisplay javaFXDisplay  = new  JavaFXDisplay();
     private IslandSimulation() {
 
     }
@@ -77,10 +77,10 @@ public class IslandSimulation {
         executorScheduledServiceAnimalLifeCycle.scheduleAtFixedRate(animalLifeCycle, 10, 10, TimeUnit.SECONDS);
 
 
-        executorScheduledServicePrintingIslandSimulationStatistics.scheduleAtFixedRate(printingIslandSimulationStatistics, 0, 10, TimeUnit.SECONDS);
+        executorScheduledServicePrintingIslandSimulationStatistics.scheduleAtFixedRate(printingIslandSimulationStatistics, 2, 10, TimeUnit.SECONDS);
         executorScheduledServiceDisplay.scheduleAtFixedRate(islandSimulationDisplay, 1, 10, TimeUnit.SECONDS);
-        executorScheduledServicePlantGrowth.scheduleAtFixedRate(plantGrowth, 0, 10, TimeUnit.SECONDS);
-        executorScheduledCheckStopConditionOfIslandSimulation.scheduleAtFixedRate(checkingStopConditionOfIslandSimulation, 40, 15, TimeUnit.SECONDS);
+        executorScheduledServicePlantGrowth.scheduleAtFixedRate(plantGrowth, 0, 30, TimeUnit.SECONDS);
+        executorScheduledCheckStopConditionOfIslandSimulation.scheduleAtFixedRate(checkingStopConditionOfIslandSimulation, 40, 30, TimeUnit.SECONDS);
        // JavaFXDisplay.counter = 1;
 
 

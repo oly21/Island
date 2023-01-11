@@ -16,13 +16,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class PlantGrowth implements Runnable {
     public volatile static CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = Island.getIslandSimulationObjectList();
-     Island island = Island.getIsland();
-    public  IslandSimulationObject[][] islandArray =  island.getIslandArray();
-
-
-
-
-
+    Island island = Island.getIsland();
+    public IslandSimulationObject[][] islandArray = island.getIslandArray();
 
 
     public static CopyOnWriteArrayList<Coordinate> freeCells = IslandSimulation.getListFreeCells();
@@ -40,60 +35,72 @@ public class PlantGrowth implements Runnable {
     public void run() {
 
 
-
-
-        for (Plant plant :plants) {
+        for (Plant plant : plants) {
             weight = plant.getWeight();
             weight++;
-            plant.setWeight( weight);
+            plant.setWeight(weight);
             age = plant.getAge();
             age++;
             plant.setAge(age);
         }
 
         for (int i = 0; i <= 2; i++) {
-                plants.add(new Vegetables(2));
-                plants.add(new Berries(2));
-                plants.add(new Fruit(2));
-                plants.add(new Grass(2));
-                plants.add(new PlantLeaves(2));
+            if (freeCells.size() > 0) {
+                synchronized (islandArray) {
+                    plants.add(new Vegetables(2));
+                    plants.add(new Berries(2));
+                    plants.add(new Fruit(2));
+                    plants.add(new Grass(2));
+                    plants.add(new PlantLeaves(2));
 
-                islandSimulationObjects.add(new Vegetables(1));
-                islandSimulationObjects.add(new Berries(1));
-                islandSimulationObjects.add(new Fruit(1));
-                islandSimulationObjects.add(new Grass(1));
-                islandSimulationObjects.add(new PlantLeaves(1));
+                    islandSimulationObjects.add(new Vegetables(1));
+                    islandSimulationObjects.add(new Berries(1));
+                    islandSimulationObjects.add(new Fruit(1));
+                    islandSimulationObjects.add(new Grass(1));
+                    islandSimulationObjects.add(new PlantLeaves(1));
 
 
+                }
+                numbersPlantsGrew.addAndGet(10);
 
+                setInitialPositionsGrowPlants();
+            }
         }
-        numbersPlantsGrew.addAndGet(10);
-        Animal.numberPlants.addAndGet(10);
-        setInitialPositionsGrowPlants();
-
     }
 
-    public  void setInitialPositionsGrowPlants() {
+    public void setInitialPositionsGrowPlants() {
+
+            if (freeCells.size() > 0) {
+               int count = 0;
+                for ( int i = 0; i<10; i++) {
+                 if( count < 10){
+                   for(int j = 0; j<10-count; i++){
+                       plants.remove(i);
+                   }
+
+                 }
+
+                    if (freeCells.size() != 0) {
+                    count++;
+                        int coordinate = ThreadLocalRandom.current().nextInt(freeCells.size()) % freeCells.size();
+
+                        Coordinate coordinate1 = freeCells.get(coordinate);
+                        int x = coordinate1.getX();
+                        int y = coordinate1.getY();
 
 
-        for (IslandSimulationObject islandSimulationObject : plants) {
-            int coordinate = ThreadLocalRandom.current().nextInt(freeCells.size()) % freeCells.size();
+                        plants.get(i).setXY(x, y);
+                        islandArray[x][y] =  plants.get(i);
+                        Animal.numberPlants.addAndGet(1);
+                        freeCells.remove(coordinate1);
+                    } else {
+                        break;//tasksCopy.remove(islandSimulationObject);
+                    }
 
-            Coordinate coordinate1 = freeCells.get(coordinate);
-            int x = coordinate1.getX();
-            int  y = coordinate1.getY();
-
-
-            // synchronized (islandArray) {
-            islandSimulationObject.setXY(x,y);
-            islandArray[x][y] = islandSimulationObject;
-            //  }
-            freeCells.remove(coordinate1);
-            //tasksCopy.remove(islandSimulationObject);
+                }
 
 
-
-        }
+            }
 
     }
 }

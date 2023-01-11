@@ -3,11 +3,11 @@ package com.project.islandSimulationObjects.Plants;
 import com.project.island.BoxCharacteristicsObject;
 import com.project.islandSimulationObjects.Coordinate;
 import com.project.islandSimulationObjects.IslandSimulationObject;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.scene.image.ImageView;
-import javafx.util.Duration;
+//import javafx.animation.Animation;
+//import javafx.animation.KeyFrame;
+//import javafx.animation.Timeline;
+//import javafx.scene.image.ImageView;
+//import javafx.util.Duration;
 
 
 public abstract class Plant implements IslandSimulationObject {
@@ -81,20 +81,20 @@ public abstract class Plant implements IslandSimulationObject {
         // Метод, который запускает анимацию перемещения животного
 
         // Создаем таймлайн (анимацию) с частотой 60 кадров в секунду
-        ImageView imageView = new ImageView(this.getTypePicture());
+        //ImageView imageView = new ImageView(this.getTypePicture());
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000.0 / 60.0), event -> {
+        //Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000.0 / 60.0), event -> {
             int x;
             int y;
             x = this.getX();
             y = this.getY();
-            imageView.setX(x);
-            imageView.setY(y);
-        }));
+            //imageView.setX(x);
+          //  imageView.setY(y);
+       // }));
 
 
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
+       // timeline.setCycleCount(Animation.INDEFINITE);
+       // timeline.play();
     }
 
 }

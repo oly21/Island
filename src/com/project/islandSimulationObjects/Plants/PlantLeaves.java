@@ -2,7 +2,7 @@ package com.project.islandSimulationObjects.Plants;
 
 import com.project.island.BoxCharacteristicsObject;
 import com.project.islandSimulationObjects.Coordinate;
-import javafx.scene.control.Label;
+//import javafx.scene.control.Label;
 
 
 

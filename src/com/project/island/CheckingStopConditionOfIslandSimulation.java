@@ -2,12 +2,14 @@ package com.project.island;
 
 import com.project.islandSimulationObjects.Animals.Animal;
 import com.project.islandSimulationObjects.Animals.herbivorous.Herbivores;
+import com.project.islandSimulationObjects.Animals.herbivorous.Horse;
+import com.project.islandSimulationObjects.Animals.predators.Predators;
 import com.project.islandSimulationObjects.Plants.Plant;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CheckingStopConditionOfIslandSimulation implements  Runnable{
-    public volatile static CopyOnWriteArrayList<Animal> animals = IslandSimulation.animals;
+    public volatile static CopyOnWriteArrayList<Animal> animals =  Island.getAnimalList();;
     public volatile static CopyOnWriteArrayList<Plant> plants = Island.getPlantList();
   // IslandSimulation islandSimulation = IslandSimulation.getIslandSimulation();
    Island  island = Island.getIsland();
@@ -33,10 +35,12 @@ public class CheckingStopConditionOfIslandSimulation implements  Runnable{
 
    @Override
     public void run() {
+       System.out.println("checkStart ");
         int countHerbivores = 0;
         for (Animal animal : animals) {
             if (animal instanceof Herbivores) {
-                countHerbivores++;
+                   countHerbivores++;
+
             }
 
         }
@@ -51,9 +55,10 @@ public class CheckingStopConditionOfIslandSimulation implements  Runnable{
            ConditionOfIslandSimulation = (countHerbivores == 0);
        }
        else{
-           ConditionOfIslandSimulation = ( plants.size()==0);
+
+           ConditionOfIslandSimulation = ( Animal.numberPlants.get()==0);
        }
-        if( ConditionOfIslandSimulation ){
+        if( ConditionOfIslandSimulation  ){
 
             IslandSimulation.executorScheduledServiceDisplay.shutdown();
             IslandSimulation.executorScheduledServiceAnimalLifeCycle.shutdown();

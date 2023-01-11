@@ -3,7 +3,7 @@ package com.project.islandSimulationObjects.Animals.predators;
 import com.project.island.BoxCharacteristicsObject;
 import com.project.islandSimulationObjects.Coordinate;
 import com.project.islandSimulationObjects.IslandSimulationObject;
-import javafx.scene.control.Label;
+//import javafx.scene.control.Label;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +21,8 @@ public class Bear extends Predators {
             BoxCharacteristicsObject.TYPE_STRING_DEER, BoxCharacteristicsObject.TYPE_STRING_DUCK,
             BoxCharacteristicsObject.TYPE_STRING_GOAT,BoxCharacteristicsObject.TYPE_STRING_RABBIT,
             BoxCharacteristicsObject.TYPE_STRING_SHEEP,BoxCharacteristicsObject.TYPE_STRING_MOUSE,
-            BoxCharacteristicsObject.TYPE_STRING_DEER,BoxCharacteristicsObject.TYPE_STRING_BOA);
+            BoxCharacteristicsObject.TYPE_STRING_DEER,BoxCharacteristicsObject.TYPE_STRING_BOA,
+            BoxCharacteristicsObject.TYPE_STRING_CATERPILLAR);
 
     public CopyOnWriteArrayList<String> foodStuffs = new CopyOnWriteArrayList<>(initialList);
     public ConcurrentHashMap<String, Double> chanceToEat = new ConcurrentHashMap<>();

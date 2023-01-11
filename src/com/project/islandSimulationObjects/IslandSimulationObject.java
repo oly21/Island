@@ -1,15 +1,15 @@
 package com.project.islandSimulationObjects;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
-import javafx.util.Duration;
-import javafx.scene.control.Label;
-import java.awt.*;
+//import javafx.animation.Animation;
+//import javafx.animation.KeyFrame;
+//import javafx.animation.Timeline;
+//import javafx.scene.Scene;
+//import javafx.scene.image.ImageView;
+//import javafx.scene.layout.StackPane;
+//import javafx.stage.Stage;
+//import javafx.util.Duration;
+//import javafx.scene.control.Label;
+//import java.awt.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 

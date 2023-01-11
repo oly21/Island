@@ -2,7 +2,7 @@ package com.project.islandSimulationObjects.Animals.herbivorous;
 
 import com.project.island.BoxCharacteristicsObject;
 import com.project.islandSimulationObjects.Coordinate;
-import javafx.scene.control.Label;
+//import javafx.scene.control.Label;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;

@@ -3,9 +3,9 @@ package com.project.islandSimulationObjects.Animals.predators;
 import com.project.island.BoxCharacteristicsObject;
 import com.project.islandSimulationObjects.Animals.Animal;
 import com.project.islandSimulationObjects.Coordinate;
-import com.sun.marlin.Dasher;
-import javafx.animation.Animation;
-import javafx.scene.control.Label;
+//import com.sun.marlin.Dasher;
+//import javafx.animation.Animation;
+//import javafx.scene.control.Label;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -18,7 +18,9 @@ public class Fox extends Predators {
    // public Label label = new Label(typePicture);
     private final List<String> initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_MOUSE,
             BoxCharacteristicsObject.TYPE_STRING_RABBIT,BoxCharacteristicsObject.TYPE_STRING_DEER,
-            BoxCharacteristicsObject.TYPE_STRING_SHEEP);
+            BoxCharacteristicsObject.TYPE_STRING_SHEEP,BoxCharacteristicsObject.TYPE_STRING_CATERPILLAR,
+           BoxCharacteristicsObject.TYPE_STRING_GOAT, BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES,
+           BoxCharacteristicsObject.TYPE_STRING_GRASS, BoxCharacteristicsObject.TYPE_STRING_VEGETABLES);
 
     public CopyOnWriteArrayList<String> foodStuffs = new CopyOnWriteArrayList<>(initialList);
     public ConcurrentHashMap<String, Double> chanceToEat = new ConcurrentHashMap<>();

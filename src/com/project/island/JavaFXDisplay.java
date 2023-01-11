@@ -3,22 +3,22 @@ package com.project.island;
 import com.project.Solution;
 import com.project.islandSimulationObjects.Animals.Animal;
 import com.project.islandSimulationObjects.IslandSimulationObject;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import javafx.util.Duration;
+//import javafx.animation.Animation;
+//import javafx.animation.KeyFrame;
+//import javafx.animation.Timeline;
+//import javafx.application.Application;
+//import javafx.scene.Scene;
+//import javafx.scene.control.Label;
+//import javafx.scene.image.ImageView;
+//import javafx.scene.layout.Pane;
+//import javafx.stage.Stage;
+//import javafx.util.Duration;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
-public class JavaFXDisplay extends Application implements Runnable {
+/*public class JavaFXDisplay extends Application implements Runnable {
     public static CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = Island.islandSimulationObjects;
 
     public static volatile CopyOnWriteArrayList<Animal> animals = Island.getAnimalList();
@@ -122,3 +122,5 @@ public class JavaFXDisplay extends Application implements Runnable {
         Application.launch();
     }
 }
+
+ */

@@ -6,7 +6,7 @@ import com.project.islandSimulationObjects.Animals.Animal;
 import com.project.islandSimulationObjects.Animals.herbivorous.Goat;
 import com.project.islandSimulationObjects.Coordinate;
 
-import javafx.scene.control.Label;
+//import javafx.scene.control.Label;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;

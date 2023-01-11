@@ -1,13 +1,14 @@
 package com.project.islandSimulationObjects.Animals.herbivorous;
 
 import com.project.island.BoxCharacteristicsObject;
+import com.project.islandSimulationObjects.Animals.Animal;
 import com.project.islandSimulationObjects.Coordinate;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class Buffalo extends Herbivores {
+public class Buffalo extends Animal {
 
     public boolean isHunger;
 
@@ -79,7 +80,7 @@ this.progeny = progeny;
    // public Label label = new Label(typePicture);
 
     private  final List<String> initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES,
-            BoxCharacteristicsObject.TYPE_STRING_GRASS);
+            BoxCharacteristicsObject.TYPE_STRING_GRASS,BoxCharacteristicsObject.TYPE_STRING_CATERPILLAR);
     private final CopyOnWriteArrayList<String> foodStuffs = new CopyOnWriteArrayList<>(initialList);
 
     public Buffalo( int age) {

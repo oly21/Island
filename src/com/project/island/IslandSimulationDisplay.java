@@ -51,7 +51,7 @@ public class IslandSimulationDisplay implements Runnable {
 
 
    public  void run() {
-      // synchronized (islandArray) {
+       synchronized (islandArray) {
         for (int i = 0; i < islandArray.length; i++) {
             System.out.println();
 
@@ -70,7 +70,7 @@ public class IslandSimulationDisplay implements Runnable {
        System.out.println();
 
 
-       // }
+        }
 
     }
 

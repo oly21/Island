@@ -8,7 +8,7 @@ import com.project.islandSimulationObjects.Coordinate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-import javafx.scene.control.Label;
+//import javafx.scene.control.Label;
 public class Goat extends Herbivores {
     public String typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_GOAT;
     public String typeString = BoxCharacteristicsObject.TYPE_STRING_GOAT;

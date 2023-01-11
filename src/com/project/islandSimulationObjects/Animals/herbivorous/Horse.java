@@ -1,14 +1,15 @@
 package com.project.islandSimulationObjects.Animals.herbivorous;
 
 import com.project.island.BoxCharacteristicsObject;
+import com.project.islandSimulationObjects.Animals.Animal;
 import com.project.islandSimulationObjects.Coordinate;
-import javafx.scene.control.Label;
+//import javafx.scene.control.Label;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class Horse extends Herbivores {
+public class Horse extends Animal {
    public String typePicture  = BoxCharacteristicsObject.STRING_TYPE_PICTURE_HORSE;
 //    public Label label = new Label(typePicture);
 

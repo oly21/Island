@@ -128,8 +128,8 @@ public class Island {
         }
         islandSimulationObjects.addAll(animals);
             islandSimulationObjects.addAll(plants);
-            Animal.numberAnimals.addAndGet(150);
-            Animal.numberPlants.addAndGet(50);
+            Animal.numberAnimals.addAndGet((herbivoresNumber*7)+(predatorsNumber* 8));
+            Animal.numberPlants.addAndGet(plants.size());
 
 
 

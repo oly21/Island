@@ -11,18 +11,18 @@ import com.project.islandSimulationObjects.*;
 import com.project.islandSimulationObjects.Animals.predators.*;
 import com.project.islandSimulationObjects.Animals.herbivorous.*;
 import com.project.islandSimulationObjects.Plants.Plant;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
+//import javafx.scene.control.Label;
+//import javafx.scene.layout.Pane;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class Animal implements IslandSimulationObject, Runnable {
 
     public static volatile CopyOnWriteArrayList<Coordinate> freeCells = IslandSimulation.getListFreeCells();
-    public static volatile CopyOnWriteArrayList<Animal> animals = IslandSimulation.animals;
+    public static volatile CopyOnWriteArrayList<Animal> animals =  Island.getAnimalList();;
     public static volatile CopyOnWriteArrayList<Plant> plants = Island.getPlantList();
     // public static PrintingIslandSimulationStatistics printingIslandSimulationStatistics = PrintingIslandSimulationStatistics.getPrintingIslandSimulationStatistics();
-    public static volatile Pane root = JavaFXDisplay.getRoot();
+   // public static volatile Pane root = JavaFXDisplay.getRoot();
     public static Island island = Island.getIsland();
     public static volatile IslandSimulationObject[][] islandArray;
 
@@ -33,8 +33,8 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
     }
 
     public static CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = Island.islandSimulationObjects;
-    public static CopyOnWriteArrayList<Label> label = JavaFXDisplay.getLabelArray();
-    public static volatile Label[][] labelArray = JavaFXDisplay.getLabelArray1();
+    //public static CopyOnWriteArrayList<Label> label = JavaFXDisplay.getLabelArray();
+    //public static volatile Label[][] labelArray = JavaFXDisplay.getLabelArray1();
 
     private CopyOnWriteArrayList<Coordinate> neighboringCells = new CopyOnWriteArrayList<>();
     public boolean isHunger = true;
@@ -145,10 +145,16 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
 
         }
 
-        if (this.getStop() == false && this.getEat() == false) {
+        if (this.getStop() == false && this.getEat() == false&& freeCells.size()!=0) {
             choiceDirectionForMoveAndCallMove();
             numberAnimalMoves.incrementAndGet();
         }
+        if(this.getStop() == false && this.getEat() == false && freeCells.size()==0){
+            swapPlacesWithNeighbor();
+            numberAnimalMoves.incrementAndGet();
+        }
+
+
         runFinish.incrementAndGet();
     }
 
@@ -156,61 +162,66 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
     public void eat() {
         startEat.incrementAndGet();
         Double chanceToEat = 1.0;
-        //synchronized (islandArray) {
-
-        neighboringCells = getListNeighboringCells();
-        startFor.incrementAndGet();
-        for (Coordinate coordinate1 : neighboringCells) {
-
-            int x = coordinate1.getX();
-            int y = coordinate1.getY();
-            if (this.getStop() == false && islandArray[x][y] != null) {
 
 
-                if (this.getFoodStuffs().contains(islandArray[x][y].getTypeString())) {
 
-                    if (this instanceof Predators) {
-                        // if  (( (Animal) islandArray[x][y]).getStop() == false){
-                        // }
-                        chanceToEatMap = (((Predators) this).getMapChanceToEat());
-                        chanceToEat = chanceToEatMap.get(islandArray[x][y].getTypeString());
+            neighboringCells = getListNeighboringCells();
 
-                    }
-                  //  if (ThreadLocalRandom.current().nextDouble(0, 1) < chanceToEat) {
+            startFor.incrementAndGet();
+            for (Coordinate coordinate1 : neighboringCells) {
+
+                int x = coordinate1.getX();
+                int y = coordinate1.getY();
 
 
-                        this.setEatenKg(this.getEatenKg() + islandArray[x][y].getWeight());
-                        // if (this.getEatenKg() <= this.getNeededFoodKg()%2) {
-                        //    this.setIsHunger(true);
 
-                        //   }
+                    if (this.getStop() == false && islandArray[x][y] != null) {
+                        synchronized (islandArray) {
 
-                        //   else{
-                        //      this.setIsHunger(false);
-                        //   }
+                            if (this.getFoodStuffs().contains(islandArray[x][y].getTypeString())) {
 
-                        this.setEat(true);
-                        islandSimulationObjects.remove(islandArray[x][y]);
+                                // if (this instanceof Predators) {
+                                // if  (( (Animal) islandArray[x][y]).getStop() == false){
+                                // }
+                                // chanceToEatMap = (((Predators) this).getMapChanceToEat());
+                                chanceToEat = chanceToEatMap.get(islandArray[x][y].getTypeString());
 
-
-                        islandArray[x][y].setXY(-1, -1);
-
-                        if (islandArray[x][y] instanceof Animal) {
-                            numberAnimals.decrementAndGet();
-                            numberDeadAnimals.incrementAndGet();
-                            animals.remove(islandArray[x][y]);
-                            Animal animal = (Animal) islandArray[x][y];
-                            animal.setStop(true);
-
-                        } else {
-                            numberPlants.decrementAndGet();
-                            numberEatenPlants.incrementAndGet();
-                            plants.remove(islandArray[x][y]);
-                        }
-                        int count = 0;
+                                // }
+                                //  if (ThreadLocalRandom.current().nextDouble(0, 1) < chanceToEat) {
 
 
-                        startMove.incrementAndGet();
+                                this.setEatenKg(this.getEatenKg() + islandArray[x][y].getWeight());
+                                // if (this.getEatenKg() <= this.getNeededFoodKg()%2) {
+                                //    this.setIsHunger(true);
+
+                                //   }
+
+                                //   else{
+                                //      this.setIsHunger(false);
+                                //   }
+
+                                this.setEat(true);
+                                islandSimulationObjects.remove(islandArray[x][y]);
+
+
+                                islandArray[x][y].setXY(-1, -1);
+
+                                if (islandArray[x][y] instanceof Animal) {
+                                    numberAnimals.decrementAndGet();
+                                    numberDeadAnimals.incrementAndGet();
+                                    animals.remove(islandArray[x][y]);
+                                    Animal animal = (Animal) islandArray[x][y];
+                                    animal.setStop(true);
+
+                                } else {
+                                    numberPlants.decrementAndGet();
+                                    numberEatenPlants.incrementAndGet();
+                                    plants.remove(islandArray[x][y]);
+                                }
+                                int count = 0;
+
+
+                                startMove.incrementAndGet();
 
 
 
@@ -257,133 +268,138 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
                             }
                       */ // }
 
-                    labelArray[coordinate1.getX()][coordinate1.getY()]=labelArray[this.getX()][this.getY()];
-                    labelArray[this.getX()][this.getY()]=null;
+                                //labelArray[coordinate1.getX()][coordinate1.getY()]=labelArray[this.getX()][this.getY()];
+                                // labelArray[this.getX()][this.getY()]=null;
 
-                    this.move(coordinate1, this);
-                        //for (int i = 0; i < label.size(); i++) {
-                          //  if ((int) root.getChildren().get(i).getLayoutX() / 20 == this.getX() && (int) root.getChildren().get(i).getLayoutY() / 20 == this.getY()) {
-                              //  root.getChildren().get(i).setAccessibleText(islandArray[x][y].getTypeString());
-                          // break;
-                           // }
+                                this.move(coordinate1, this);
 
-                      //  }
+                                //for (int i = 0; i < label.size(); i++) {
+                                //  if ((int) root.getChildren().get(i).getLayoutX() / 20 == this.getX() && (int) root.getChildren().get(i).getLayoutY() / 20 == this.getY()) {
+                                //  root.getChildren().get(i).setAccessibleText(islandArray[x][y].getTypeString());
+                                // break;
+                                // }
 
-                        finishMove.incrementAndGet();
+                                //  }
 
+                                finishMove.incrementAndGet();
+
+                                break;
+                            }
+                        }
+
+                        //}
+
+
+                        // }
+                        //  }
+                    }
+                    else {
                         break;
-
                     }
 
-                    //}
-
-
-                    // }
                 }
 
-             else {
-                break;
-            }
-
+            finishFor.incrementAndGet();
+            finishEat.incrementAndGet();
         }
-
-        finishFor.incrementAndGet();
-        finishEat.incrementAndGet();
-    }
 
     public void reproduct() {
         startR.incrementAndGet();
-        neighboringCells = getListNeighboringCells();
-        startFor.incrementAndGet();
-        for (Coordinate coordinate1 : neighboringCells) {
+        synchronized (islandArray) {
+            neighboringCells = getListNeighboringCells();
+            startFor.incrementAndGet();
+            for (Coordinate coordinate1 : neighboringCells) {
 
-            int x = coordinate1.getX();
-            int y = coordinate1.getY();
-            if (this.getStop() == false && islandArray[x][y] instanceof Animal && ((Animal) islandArray[x][y]).getStop() == false) {
+                    int x = coordinate1.getX();
+                    int y = coordinate1.getY();
+               // synchronized (islandArray[x][y]) {
+                    if (this.getStop() == false && islandArray[x][y] instanceof Animal && ((Animal) islandArray[x][y]).getStop() == false) {
 
-                if (islandArray[x][y] != null) {
-                    if (this.getFoodStuffs().contains(islandArray[x][y].getTypeString())) {
-                        //progeny < 2 &&
-                        if (freeCells.size() > 0) {
-                            Animal animalCopy;
+                        if (islandArray[x][y] != null) {
+                            if (this.getFoodStuffs().contains(islandArray[x][y].getTypeString())) {
+                                //progeny < 2 &&
+                                if (freeCells.size() > 0) {
+                                    Animal animalCopy;
 
-                            if (this instanceof Fox) {
-                                animalCopy = new Fox(1, 1);
-                                // progeny++;
-                            } else if (this instanceof Buffalo) {
-                                animalCopy = new Buffalo(1, 1);
-                                // progeny++;
-                            } else if (this instanceof Caterpillar) {
-                                animalCopy = new Caterpillar(1, 1);
-                                //  progeny++;
-                            } else if (this instanceof Deer) {
-                                animalCopy = new Deer(1, 1);
-                                // progeny++;
-                            } else if (this instanceof Horse) {
-                                animalCopy = new Horse(1, 1);
-                                //   progeny++;
-                            } else if (this instanceof Bear) {
-                                animalCopy = new Bear(1, 1);
-                                // progeny++;
-                            } else if (this instanceof Eagle) {
-                                animalCopy = new Eagle(1, 1);
-                                //  progeny++;
-                            } else if (this instanceof Wolf) {
-                                animalCopy = new Wolf(1, 1);
-                                //   progeny++;
-                            } else if (this instanceof Boar) {
-                                animalCopy = new Boar(1, 1);
-                                //  progeny++;
-                            } else if (this instanceof Rabbit) {
-                                animalCopy = new Rabbit(1, 1);
-                                //   this.progeny++;
-                            } else if (this instanceof Duck) {
-                                animalCopy = new Duck(1, 1);
-                                //   this.progeny++;
-                            } else if (this instanceof Goat) {
-                                animalCopy = new Goat(1, 1);
-                                //  this.progeny++;
-                            } else if (this instanceof Mouse) {
-                                animalCopy = new Mouse(1, 1);
-                                //  this.progeny++;
-                            } else if (this instanceof Sheep) {
-                                animalCopy = new Sheep(1, 1);
-                                //  this.progeny++;
-                            } else {
+                                    if (this instanceof Fox) {
+                                        animalCopy = new Fox(1, 1);
+                                        // progeny++;
+                                    } else if (this instanceof Buffalo) {
+                                        animalCopy = new Buffalo(1, 1);
+                                        // progeny++;
+                                    } else if (this instanceof Caterpillar) {
+                                        animalCopy = new Caterpillar(1, 1);
+                                        //  progeny++;
+                                    } else if (this instanceof Deer) {
+                                        animalCopy = new Deer(1, 1);
+                                        // progeny++;
+                                    } else if (this instanceof Horse) {
+                                        animalCopy = new Horse(1, 1);
+                                        //   progeny++;
+                                    } else if (this instanceof Bear) {
+                                        animalCopy = new Bear(1, 1);
+                                        // progeny++;
+                                    } else if (this instanceof Eagle) {
+                                        animalCopy = new Eagle(1, 1);
+                                        //  progeny++;
+                                    } else if (this instanceof Wolf) {
+                                        animalCopy = new Wolf(1, 1);
+                                        //   progeny++;
+                                    } else if (this instanceof Boar) {
+                                        animalCopy = new Boar(1, 1);
+                                        //  progeny++;
+                                    } else if (this instanceof Rabbit) {
+                                        animalCopy = new Rabbit(1, 1);
+                                        //   this.progeny++;
+                                    } else if (this instanceof Duck) {
+                                        animalCopy = new Duck(1, 1);
+                                        //   this.progeny++;
+                                    } else if (this instanceof Goat) {
+                                        animalCopy = new Goat(1, 1);
+                                        //  this.progeny++;
+                                    } else if (this instanceof Mouse) {
+                                        animalCopy = new Mouse(1, 1);
+                                        //  this.progeny++;
+                                    } else if (this instanceof Sheep) {
+                                        animalCopy = new Sheep(1, 1);
+                                        //  this.progeny++;
+                                    } else {
+                                        break;
+                                    }
+                                    //Label label1 = new Label(this.getTypeString());
+
+
+                                    if (freeCells.size() != 0) {
+                                        for (Coordinate freeCell : IslandSimulation.getListFreeCells()) {
+                                            setPositionForNewbornAnimal(freeCell, animalCopy);
+                                            // label1.setLayoutX(freeCell.getX() * 20);
+                                            //label1.setLayoutY(freeCell.getY() * 20);
+                                            // root.getChildren().add(label1);
+                                            //label.add(label1);
+                                            //labelArray[freeCell.getX()][freeCell.getY()]=label1 ;
+                                            freeCells.remove(freeCell);
+                                            break;
+                                        }
+                                        numberAnimals.incrementAndGet();
+
+                                        animals.add(animalCopy);
+                                        numberBornAnimals.incrementAndGet();
+                                        islandSimulationObjects.add(animalCopy);
+                                    }
+                                } else {
+                                    break;
+                                }
+
                                 break;
                             }
-                            Label label1 = new Label(this.getTypeString());
 
 
-
-                            for (Coordinate freeCell : IslandSimulation.getListFreeCells()) {
-                                setPositionForNewbornAnimal(freeCell, animalCopy);
-                                label1.setLayoutX(freeCell.getX() * 20);
-                                label1.setLayoutY(freeCell.getY() * 20);
-                                root.getChildren().add(label1);
-                                label.add(label1);
-                                labelArray[freeCell.getX()][freeCell.getY()]=label1 ;
-                                freeCells.remove(freeCell);
-                                break;
-                            }
-                            numberAnimals.incrementAndGet();
-
-                            animals.add(animalCopy);
-                            numberBornAnimals.incrementAndGet();
-
-
-                            islandSimulationObjects.add(animalCopy);
                         } else {
                             break;
                         }
 
-                        break;
                     }
-
-
-                } else {
-                    break;
-                }
+               // }
             }
         }
         finishFor.incrementAndGet();
@@ -391,42 +407,42 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
     }
 
     public void choiceDirectionForMoveAndCallMove() {
+        synchronized (islandArray) {
+            startM2.incrementAndGet();
 
-        startM2.incrementAndGet();
+            neighboringCells = getListNeighboringCells();
 
-        neighboringCells = getListNeighboringCells();
+            for (Coordinate coordinate : neighboringCells) {
+                if (this.getStop() == false) {
+                    if (freeCells.contains(coordinate)) {
 
-        for (Coordinate coordinate : neighboringCells) {
-            if (this.getStop() == false) {
-                if (freeCells.contains(coordinate)) {
+                        move(coordinate, this);
+                        // for (int i = 0; i < label.size(); i++) {
 
-                    move(coordinate, this);
-                    for (int i = 0; i < label.size(); i++) {
-
-                        labelArray[coordinate.getX()][coordinate.getY()]=  labelArray[this.getX()][this.getY()]  ;
-                        labelArray[this.getX()][this.getY()]=null;
-                       // if ((int) root.getChildren().get(i).getLayoutX() / 20 == this.getX() && (int) root.getChildren().get(i).getLayoutY() / 20 == this.getY()) {
+                        // labelArray[coordinate.getX()][coordinate.getY()]=  labelArray[this.getX()][this.getY()]  ;
+                        // labelArray[this.getX()][this.getY()]=null;
+                        // if ((int) root.getChildren().get(i).getLayoutX() / 20 == this.getX() && (int) root.getChildren().get(i).getLayoutY() / 20 == this.getY()) {
 
 
-                         //   root.getChildren().get(i).setLayoutX(coordinate.getX() * 20);
-                           // root.getChildren().get(i).setLayoutX(coordinate.getY() * 20);
-                      //  }
+                        //   root.getChildren().get(i).setLayoutX(coordinate.getX() * 20);
+                        // root.getChildren().get(i).setLayoutX(coordinate.getY() * 20);
+                        //  }
 
+                        // }
+                        freeCells.remove(coordinate);
+                        break;
                     }
-                    freeCells.remove(coordinate);
+
+
+                } else {
                     break;
                 }
 
-
-            } else {
-                break;
             }
-
+            // neighboringCells = getListNeighboringCells();
+            finishM2.incrementAndGet();
         }
-        // neighboringCells = getListNeighboringCells();
-        finishM2.incrementAndGet();
     }
-
 
     // public void Hunt() throws InstantiationException, IllegalAccessException {
 
@@ -599,5 +615,37 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
         islandArray[coordinate.getX()][coordinate.getY()] = animal;
 
         finishMove.incrementAndGet();
+    }
+    public void  swapPlacesWithNeighbor(){
+        synchronized (islandArray) {
+            startM2.incrementAndGet();
+
+            neighboringCells = getListNeighboringCells();
+
+            for (Coordinate coordinate : neighboringCells) {
+                if (this.getStop() == false&& islandArray[coordinate.getX()][coordinate.getY()] !=null ) {
+                    int x = this.getX();
+
+                    int y = this.getY();
+
+
+                    islandArray[x][y] =  islandArray[coordinate.getX()][coordinate.getY()];
+                    islandArray[x][y].setXY(x,y);
+                    islandArray[coordinate.getX()][coordinate.getY()]= this;
+                       this.setXY(coordinate.getX(),coordinate.getY());
+                        break;
+                    }
+
+
+                 else {
+                    break;
+                }
+
+            }
+
+            finishM2.incrementAndGet();
+        }
+
+
     }
 }
