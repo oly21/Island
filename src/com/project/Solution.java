@@ -5,6 +5,7 @@ import com.project.island.IslandSimulation;
 
 import com.project.islandSimulationObjects.Animals.Animal;
 import com.project.islandSimulationObjects.IslandSimulationObject;
+
 import java.util.Scanner;
 
 //import javafx.animation.Animation;
@@ -25,35 +26,32 @@ import java.util.Scanner;
 
 import java.io.InputStream;
 import java.util.concurrent.*;
-public  class Solution    {
+
+public class Solution {
 
     public static volatile CopyOnWriteArrayList<Animal> animals = Island.getAnimalList();
+    public static CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = Island.getIslandSimulationObjectList();
 
-
-
-    public static CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = Island.islandSimulationObjects;
-
-    //public  static Island instance;
     public static void main(String[] args) throws InterruptedException, ExecutionException, TimeoutException, InstantiationException, IllegalAccessException, ExceptionInInitializerError {
-         Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Здравствуйте вы запустили islandSimulation , для продолжения введите " +
-                        " размеры острова, для начал" +
-                "а пожалуйста введите x(целое число)");
+                            " размеры острова, для начала" + " пожалуйста введите x(целое число)");
         Island.x = scanner.nextInt();
         System.out.println(" теперь введите y");
         Island.y = scanner.nextInt();
         System.out.println("Вам также нужно ввести  начальное количество Predators каждого вида  " +
-                "например если введете 10 то создастся 10 лис 10 волков и тд а  ");
+                          "например если введете 10 то создастся 10 лис 10 волков и тд а, животных " +
+                           "не должно" + " быть больше клеток  ");
         Island.predatorsNumber = scanner.nextInt();
-        Island.herbivoresNumber  =  Island.predatorsNumber * 2;
+        Island.herbivoresNumber = Island.predatorsNumber * 2;
 
         System.out.println("Выберите условие остановки симуляции " +
                 "введите цыфру выброного вами условия: 1)На острове остались только predators(хишники) " +
-                "2) сьели все растения " );
+                "2) сьели все растения ");
 
-        Island.conditionNumberStopSimulation  = scanner.nextInt();
-        System.out.println("Спасибо,islandSimulation продолжает свою работу ");
-         Island island = Island.getIsland();
+        Island.conditionNumberStopSimulation = scanner.nextInt();
+        System.out.println("Спасибо,islandSimulation продолжит свою работу ");
+        Island island = Island.getIsland();
         IslandSimulation islandSimulation = IslandSimulation.getIslandSimulation();
         islandSimulation.startSimulation();
 

@@ -1,4 +1,5 @@
 package com.project.island;
+
 import com.project.islandSimulationObjects.Animals.Animal;
 import com.project.islandSimulationObjects.IslandSimulationObject;
 
@@ -9,19 +10,18 @@ import java.util.concurrent.ThreadLocalRandom;
 
 
 public class IslandSimulationDisplay implements Runnable {
-    private static volatile IslandSimulationObject[][] islandArray;
+    private  volatile static  IslandSimulationObject[][] islandArray;
 
     static {
 
-            islandArray = Island.getIslandArray();
+        islandArray = Island.getIslandArray();
 
     }
 
     private static IslandSimulationDisplay instance;
-    public Island island = Island.getIsland();
+    private final Island island = Island.getIsland();
 
-    public static CopyOnWriteArrayList<Animal> animals = Island.getAnimalList();
-    public static CopyOnWriteArrayList<Animal> animalsCopy = new CopyOnWriteArrayList<>();
+    private volatile static  CopyOnWriteArrayList<Animal> animals = Island.getAnimalList();
 
     private IslandSimulationDisplay() {
 
@@ -34,40 +34,23 @@ public class IslandSimulationDisplay implements Runnable {
         return instance;
     }
 
-   // @Override
- //   public void run() {
-     //   animalsCopy.addAll(animals);
-      //  ExecutorService executorService = Executors.newFixedThreadPool(animals.size() - 1);
-      //  System.out.println("start");
 
+    public void run() {
+        synchronized (islandArray) {
+            for ( int i = 0; i<islandArray.length; i++) {
+                System.out.println();
 
-       // for (Runnable task : animalsCopy) {
-
-
-           // executorService.submit(task);
-
-
-       // }
-
-
-   public  void run() {
-       synchronized (islandArray) {
-        for (int i = 0; i < islandArray.length; i++) {
-            System.out.println();
-
-                for (int j = 0; j < islandArray[i].length; j++) {
+                for ( int j = 0; j<islandArray[i].length; j++) {
                     if (islandArray[i][j] != null) {
-                          System.out.print(islandArray[i][j].getTypePicture() + " ");
+                        System.out.print(islandArray[i][j].getTypePicture() + " ");
 
-                        }
-
-                    else {
-                        System.out.print( "🟫" + " ");
+                    } else {
+                        System.out.print("🟫" + " ");
                     }
                 }
 
             }
-       System.out.println();
+            System.out.println();
 
 
         }
@@ -75,10 +58,10 @@ public class IslandSimulationDisplay implements Runnable {
     }
 
 
-        //try {    java.awt.Robot robot=new java.awt.Robot();
-        //  robot.mouseMove(0,0); }
+    //try {    java.awt.Robot robot=new java.awt.Robot();
+    //  robot.mouseMove(0,0); }
 
-        // catch (java.lang.Exception e) {   }
+    // catch (java.lang.Exception e) {   }
 
 
-    }
+}

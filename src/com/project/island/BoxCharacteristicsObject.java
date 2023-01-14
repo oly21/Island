@@ -67,47 +67,47 @@ public   class BoxCharacteristicsObject {
 
 
     public static final int SPEED_WOLF = 3;
-    public static final int SPEED_BOA = 1;
-    public static final int SPEED_FOX = 2;
-    public static final int SPEED_BEAR = 2;
+    public static final int SPEED_BOA = 3;
+    public static final int SPEED_FOX = 3;
+    public static final int SPEED_BEAR = 3;
     public static final int SPEED_EAGLE = 3;
-    public static final int SPEED_HORSE = 4;
-    public static final int SPEED_DEER = 4;
-    public static final int SPEED_RABBIT = 2;
-    public static final int SPEED_MOUSE = 1;
-    public static final int SPEED_GOAT = 3;
+    public static final int SPEED_HORSE = 3;
+    public static final int SPEED_DEER = 3;
+    public static final int SPEED_RABBIT = 3;
+    public static final int SPEED_MOUSE = 3;
+    public static final int SPEED_GOAT = 2;
     public static final int SPEED_SHEEP = 3;
-    public static final int SPEED_BOAR = 2;
+    public static final int SPEED_BOAR = 3;
     public static final int SPEED_BUFFALO = 3;
-    public static final int SPEED_DUCK = 4;
-    public static final int SPEED_CATERPILLAR = 0;
+    public static final int SPEED_DUCK = 3;
+    public static final int SPEED_CATERPILLAR = 2;
 
 
 
-    public static final int MEAL_REQUIRED_KG_WOLF = 8;
-    public static final int MEAL_REQUIRED_KG_BOA = 3;
-    public static final int MEAL_REQUIRED_KG_FOX = 2;
-    public static final int MEAL_REQUIRED_KG_BEAR = 80;
+    public static final int MEAL_REQUIRED_KG_WOLF = 5;
+    public static final int MEAL_REQUIRED_KG_BOA = 2;
+    public static final int MEAL_REQUIRED_KG_FOX = 5;
+    public static final int MEAL_REQUIRED_KG_BEAR = 20;
     public static final int MEAL_REQUIRED_KG_EAGLE = 1;
-    public static final int MEAL_REQUIRED_KG_HORSE = 60;
-    public static final int MEAL_REQUIRED_KG_DEER = 50;
+    public static final int MEAL_REQUIRED_KG_HORSE = 2;
+    public static final int MEAL_REQUIRED_KG_DEER = 2;
     public static final int MEAL_REQUIRED_KG_RABBIT = 1;
     public static final int MEAL_REQUIRED_KG_MOUSE = 1;
-    public static final int MEAL_REQUIRED_KG_GOAT = 10;
-    public static final int MEAL_REQUIRED_KG_SHEEP = 15;
-    public static final int MEAL_REQUIRED_KG_BOAR = 50;
-    public static final int MEAL_REQUIRED_KG_BUFFALO = 100;
+    public static final int MEAL_REQUIRED_KG_GOAT = 2;
+    public static final int MEAL_REQUIRED_KG_SHEEP = 2;
+    public static final int MEAL_REQUIRED_KG_BOAR = 2;
+    public static final int MEAL_REQUIRED_KG_BUFFALO = 3;
     public static final int MEAL_REQUIRED_KG_DUCK = 1;
-    public static final int MEAL_REQUIRED_KG_CATERPILLAR = 0;
+    public static final int MEAL_REQUIRED_KG_CATERPILLAR = 1;
 
 
 
 
     public static final double PROBABILITY_WOLF_EAT_HORSE = 0.1;
     public static final double PROBABILITY_WOLF_EAT_DEER = 0.15;
-    public static final double PROBABILITY_WOLF_EAT_RABBIT = 1;
-    public static final double PROBABILITY_WOLF_EAT_MOUSE = 1;
-    public static final double PROBABILITY_WOLF_EAT_GOAT = 0.6;
+    public static final double PROBABILITY_WOLF_EAT_RABBIT = 0.7;
+    public static final double PROBABILITY_WOLF_EAT_MOUSE = 0.7;
+    public static final double PROBABILITY_WOLF_EAT_GOAT = 0.7;
     public static final double PROBABILITY_WOLF_EAT_SHEEP = 0.7;
     public static final double PROBABILITY_WOLF_EAT_DUCK = 0.7;
 
@@ -120,8 +120,8 @@ public   class BoxCharacteristicsObject {
 
     public static final double PROBABILITY_FOX_EAT_HORSE = 0.1;
     public static final double PROBABILITY_FOX_EAT_DEER = 0.15;
-    public static final double PROBABILITY_FOX_EAT_RABBIT = 1;
-    public static final double PROBABILITY_FOX_EAT_MOUSE = 1;
+    public static final double PROBABILITY_FOX_EAT_RABBIT = 0.7;
+    public static final double PROBABILITY_FOX_EAT_MOUSE = 0.7;
 
 
     public static final double PROBABILITY_BEAR_EAT_BOA = 0.8;

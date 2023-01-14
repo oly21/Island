@@ -4,7 +4,6 @@ import com.project.island.BoxCharacteristicsObject;
 import com.project.islandSimulationObjects.Animals.Animal;
 import com.project.islandSimulationObjects.Coordinate;
 
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -12,12 +11,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Goat extends Herbivores {
     public String typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_GOAT;
     public String typeString = BoxCharacteristicsObject.TYPE_STRING_GOAT;
-    public int progenyLimit = 10;
-    private int step = BoxCharacteristicsObject.SPEED_GOAT;
+    public int progenyLimit = 5;
+    private final int step = BoxCharacteristicsObject.SPEED_GOAT;
 
    // public Label label = new Label(typePicture);
-    private int weight = BoxCharacteristicsObject.WEIGHT_GOAT;
-    private int age;
+    private  volatile int weight = BoxCharacteristicsObject.WEIGHT_GOAT;
+    private volatile int age;
     private final int neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_GOAT;
     private volatile int x;
     private volatile int y;
@@ -44,78 +43,67 @@ public class Goat extends Herbivores {
         super();
         this.age = age;
     }
-    public boolean isHunger;
-
-
-
-
-
+    public  volatile boolean isHunger= true;
     private  volatile boolean stop = false;
 
     @Override
-    public boolean getStop() {
+    public  synchronized boolean getStop() {
         return stop;
     }
 
     @Override
-    public void setStop(boolean stop) {
+    public synchronized void setStop(boolean stop) {
         this.stop = stop;
     }
 
-
     @Override
-    public  void  setIsHunger(boolean isHunger){
+    public synchronized   void  setIsHunger(boolean isHunger){
         this.isHunger = isHunger;
     }
 
-    private boolean eat = false;
+    private  volatile boolean eat = false;
     @Override
-    public  boolean getEat(){
+    public  synchronized boolean getEat(){
         return  eat;
     }
 
-
     @Override
-    public  void  setEat(boolean eat ){
+    public synchronized   void  setEat(boolean eat ){
         this.eat = eat;
     }
     private int progeny = 0;
 
     @Override
-    public  int getProgeny(){
+    public  synchronized int getProgeny(){
         return progeny;
     }
     @Override
-    public  void  setProgeny(int progeny ){
+    public synchronized void  setProgeny(int progeny ){
         this.progeny = progeny;
     }
-    private int eatenKg = 0;
+    private  volatile int eatenKg = 0;
 
     @Override
-    public int getEatenKg (){
+    public  synchronized int getEatenKg (){
         return eatenKg;
     }
 
-
-
     @Override
-    public  void  setEatenKg (int eatenKg ){
+    public   synchronized void  setEatenKg (int eatenKg ){
         this.eatenKg = eatenKg;
     }
 
-
-
-    public boolean getIsHunger() {
+    public  synchronized boolean getIsHunger() {
         return false;
     }
 
     @Override
-    public int getX() {
+    public  synchronized int getX() {
         return x;
     }
 
     @Override
-    public int getY() {
+    public synchronized int getY() {
         return y;
     }
 
@@ -126,16 +114,16 @@ public class Goat extends Herbivores {
     }
 
     @Override
-    public int getWeight() {
+    public synchronized int getWeight() {
         return weight;
     }
 
     @Override
-    public int getAge() {
+    public synchronized int getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public synchronized void setAge(int age) {
         this.age = age;
     }
 
@@ -177,50 +165,69 @@ public class Goat extends Herbivores {
     }
 
 
+  //  @Override
+  //  public void reproduce()  {
+   //    for (int i = 0; i<=2; i++){
+     //      super.reproduce();
+    //   }
+
+
+
+   // }
+    private volatile int daysWithoutFood = 0;
+    private  volatile int countDays = 0;
+    private  volatile int  dailyMealCounter  = 0;
+
     @Override
-    public void reproduct()  {
-       for (int i = 0; i<=2; i++){
-           super.reproduct();
-       }
+    public  synchronized int getDaysWithoutFood() {
+        return daysWithoutFood;
+    }
 
+    @Override
+    public synchronized void setDaysWithoutFood(  int daysWithoutFood) {
+        this.daysWithoutFood = daysWithoutFood;
+    }
 
+    @Override
+    public  synchronized int getCountDays() {
+        return countDays;
+    }
+
+    @Override
+    public synchronized void setCountDays(int countDays) {
+        this.countDays = countDays;
 
     }
 
-  /*  public void reproduct(Goat animal) throws InstantiationException, IllegalAccessException {
-        if (progeny < 10) {
-
-
-            Goat goatCopy = new Goat(2, 2, 1);
-            Goat goatCopy2 = new Goat(2, 2, 1);
-
-            this.progeny++;
-
-
-
-            numberAnimals = printingIslandSimulationStatistics.getNumberAnimals();
-            numberAnimals++;
-            numberAnimals++;
-            animals.add(goatCopy);
-            animals.add(goatCopy2);
-            printingIslandSimulationStatistics.setNumberAnimals(numberAnimals);
-
-            Animal.numberBornAnimals = printingIslandSimulationStatistics.getNumberBornAnimals();
-            numberBornAnimals++;
-
-            printingIslandSimulationStatistics.setNumberBornAnimals(numberBornAnimals);
-
-            islandSimulationObjects.add(goatCopy);
-            islandSimulationObjects.add(goatCopy2);
-            for (Coordinate freeCell : IslandSimulation.getListFreeCells()) {
-                move(freeCell, goatCopy);
-                move(freeCell, goatCopy2);
-                break;
-            }
-
-
-        }
-
+    @Override
+    public  synchronized int getDailyMealCounter() {
+        return dailyMealCounter;
     }
-*/
+
+    @Override
+    public synchronized void setDailyMealCounter(int dailyMealCounter) {
+        this.dailyMealCounter = dailyMealCounter;
+    }
+    private  volatile int  hungryDaysCounter = 0;
+    @Override
+    public  synchronized int getHungryDaysCounter() {
+        return hungryDaysCounter;
+    }
+
+    @Override
+    public synchronized void setHungryDaysCounter(  int hungryDaysCounter) {
+        this.hungryDaysCounter = hungryDaysCounter;
+    }
+
+    private volatile int attemptsFindPartnerCounter = 0;
+
+    @Override
+    public synchronized int getAttemptsFindPartnerCounter() {
+        return attemptsFindPartnerCounter;
+    }
+
+    @Override
+    public synchronized void setAttemptsFindPartnerCounter(int attemptsFindPartnerCounter) {
+        this.attemptsFindPartnerCounter = attemptsFindPartnerCounter;
+    }
 }

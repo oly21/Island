@@ -1,9 +1,9 @@
 package com.project.islandSimulationObjects.Animals.herbivorous;
+
 import com.project.island.BoxCharacteristicsObject;
 import com.project.islandSimulationObjects.Animals.Animal;
 import com.project.islandSimulationObjects.Coordinate;
 //import javafx.scene.control.Label;
-
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,74 +14,72 @@ public class Duck extends Animal {
     public String typeString = BoxCharacteristicsObject.TYPE_STRING_DUCK;
     public int progenyLimit = 10;
     private int step = BoxCharacteristicsObject.SPEED_DUCK;
-    public boolean isHunger;
+    public  volatile boolean isHunger = true;
 
     @Override
-    public  boolean getIsHunger(){
-        return  isHunger;
+    public synchronized boolean getIsHunger() {
+        return isHunger;
     }
-
-
-
-
-
-
     @Override
-    public  void  setIsHunger(boolean isHunger){
+    public  synchronized void setIsHunger(boolean isHunger) {
         this.isHunger = isHunger;
     }
 
-    private boolean eat = false;
+    private volatile boolean eat = false;
+
     @Override
-    public  boolean getEat(){
-        return  eat;
+    public synchronized boolean getEat() {
+        return eat;
     }
 
 
     @Override
-    public  void  setEat(boolean eat ){
+    public synchronized void setEat(boolean eat) {
         this.eat = eat;
     }
-    private int progeny = 0;
+
+    private  volatile int progeny = 0;
 
     @Override
-    public  int getProgeny(){
+    public  synchronized int getProgeny() {
         return progeny;
     }
-    @Override
-    public  void  setProgeny(int progeny ){
-        this.progeny = progeny;
-    }
-    private int eatenKg = 0;
 
     @Override
-    public int getEatenKg (){
+    public  synchronized void setProgeny(int progeny) {
+        this.progeny = progeny;
+    }
+
+    private volatile int eatenKg = 0;
+
+    @Override
+    public synchronized int getEatenKg() {
         return eatenKg;
     }
 
-    private  volatile boolean stop = false;
+    private volatile boolean stop = false;
 
     @Override
-    public boolean getStop() {
+    public synchronized boolean getStop() {
         return stop;
     }
 
     @Override
-    public void setStop(boolean stop) {
+    public  synchronized void setStop(boolean stop) {
         this.stop = stop;
     }
 
     @Override
-    public  void  setEatenKg (int eatenKg ){
+    public  synchronized void setEatenKg(int eatenKg) {
         this.eatenKg = eatenKg;
     }
 
 
-    private int weight = BoxCharacteristicsObject.WEIGHT_DUCK;
-    private int age;
+    private volatile int weight = BoxCharacteristicsObject.WEIGHT_DUCK;
+    private volatile int age;
     private final int neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_DUCK;
-    private  int x;
-    private  int y;
+    private volatile int x;
+    private volatile int y;
 
 
     private final List<String> initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES,
@@ -90,34 +88,30 @@ public class Duck extends Animal {
     public CopyOnWriteArrayList<String> foodStuffs = new CopyOnWriteArrayList<>(initialList);
 
 
-
-
-
-
-
     public Duck(int weight, int age) {
         super();
         this.weight = weight;
         this.age = age;
     }
-//    public Label label = new Label(typePicture);
+
+    //    public Label label = new Label(typePicture);
     public Duck(int age) {
         super();
         this.age = age;
     }
-  //  @Override
-   // public Label getLabel() {
-       // return label;
-   // }
+    //  @Override
+    // public Label getLabel() {
+    // return label;
+    // }
 
 
     @Override
-    public int getX() {
+    public synchronized int getX() {
         return x;
     }
 
     @Override
-    public int getY() {
+    public synchronized int getY() {
         return y;
     }
 
@@ -128,21 +122,21 @@ public class Duck extends Animal {
     }
 
     @Override
-    public int getWeight() {
+    public  synchronized int getWeight() {
         return weight;
     }
 
     @Override
-    public int getAge() {
+    public  synchronized int getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public synchronized void setAge(int age) {
         this.age = age;
     }
 
     @Override
-    public  Coordinate getXY() {
+    public synchronized Coordinate getXY() {
 
         return new Coordinate(x, y);
     }
@@ -164,7 +158,7 @@ public class Duck extends Animal {
     }
 
     @Override
-    public int getNeededFoodKg() {
+    public  int getNeededFoodKg() {
         return neededFoodKg;
     }
 
@@ -179,55 +173,72 @@ public class Duck extends Animal {
     }
 
     @Override
-    public void reproduct()  {
-        for (int i = 0; i <= 2; i++) {
-            super.reproduct();
+    public void reproduce() {
+       for (int i = 0; i <= 2; i++) {
+            super.reproduce();
         }
+    }
+
+    private volatile int daysWithoutFood = 0;
+    private  volatile int countDays = 0;
+    private  volatile int  dailyMealCounter  = 0;
+
+    @Override
+    public  synchronized int getDaysWithoutFood() {
+        return daysWithoutFood;
+    }
+
+    @Override
+    public synchronized void setDaysWithoutFood(  int daysWithoutFood) {
+        this.daysWithoutFood = daysWithoutFood;
+    }
+
+    @Override
+    public  synchronized int getCountDays() {
+        return countDays;
+    }
+
+    @Override
+    public synchronized void setCountDays(int countDays) {
+        this.countDays = countDays;
+
+    }
+
+    @Override
+    public  synchronized int getDailyMealCounter() {
+        return dailyMealCounter;
+    }
+
+    @Override
+    public synchronized void setDailyMealCounter(int dailyMealCounter) {
+        this.dailyMealCounter = dailyMealCounter;
+    }
+    private  volatile int  hungryDaysCounter = 0;
+    @Override
+    public  synchronized int getHungryDaysCounter() {
+        return hungryDaysCounter;
+    }
+
+    @Override
+    public synchronized void setHungryDaysCounter(  int hungryDaysCounter) {
+        this.hungryDaysCounter = hungryDaysCounter;
+    }
+    private volatile int attemptsFindPartnerCounter = 0;
+
+    @Override
+    public synchronized int getAttemptsFindPartnerCounter() {
+        return attemptsFindPartnerCounter;
+    }
+
+    @Override
+    public synchronized void setAttemptsFindPartnerCounter(int attemptsFindPartnerCounter) {
+        this.attemptsFindPartnerCounter = attemptsFindPartnerCounter;
     }
 }
 
 
 
 
-
-
-
-        /*public void reproduct(Duck animal) throws InstantiationException, IllegalAccessException {
-        if (progeny < 10) {
-
-
-            Duck duckCopy = new Duck(2, 2, 1);
-            Duck duckCopy2 = new Duck(2, 2, 1);
-
-                this.progeny++;
-
-
-
-            numberAnimals = printingIslandSimulationStatistics.getNumberAnimals();
-            numberAnimals++;
-            numberAnimals++;
-            animals.add(duckCopy);
-            animals.add(duckCopy2);
-            printingIslandSimulationStatistics.setNumberAnimals(numberAnimals);
-
-            Animal.numberBornAnimals = printingIslandSimulationStatistics.getNumberBornAnimals();
-            numberBornAnimals++;
-
-            printingIslandSimulationStatistics.setNumberBornAnimals(numberBornAnimals);
-
-            islandSimulationObjects.add(duckCopy);
-            islandSimulationObjects.add(duckCopy2);
-            for (Coordinate freeCell : IslandSimulation.getListFreeCells()) {
-                move(freeCell, duckCopy);
-                move(freeCell, duckCopy2);
-                break;
-            }
-
-
-        }
-
-
-*/
 
 
 

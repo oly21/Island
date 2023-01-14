@@ -9,22 +9,22 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class Sheep  extends Herbivores {
-    public String   typePicture  = BoxCharacteristicsObject.STRING_TYPE_PICTURE_SHEEP;
+public class Sheep extends Herbivores {
+    private final String typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_SHEEP;
     //public Label   label = new Label(typePicture);
-    public String typeString =  BoxCharacteristicsObject.TYPE_STRING_SHEEP;
-    public int progenyLimit = 30;
+    private final String typeString = BoxCharacteristicsObject.TYPE_STRING_SHEEP;
+    private final int progenyLimit = 30;
 
     private final List<String> initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES,
-            BoxCharacteristicsObject.TYPE_STRING_GRASS,BoxCharacteristicsObject.TYPE_STRING_FRUIT,
-            BoxCharacteristicsObject.TYPE_STRING_BERRIES,BoxCharacteristicsObject.TYPE_STRING_VEGETABLES);
-    public CopyOnWriteArrayList<String> foodStuffs = new CopyOnWriteArrayList<>(initialList);
+            BoxCharacteristicsObject.TYPE_STRING_GRASS, BoxCharacteristicsObject.TYPE_STRING_FRUIT,
+            BoxCharacteristicsObject.TYPE_STRING_BERRIES, BoxCharacteristicsObject.TYPE_STRING_VEGETABLES);
+    private final CopyOnWriteArrayList<String> foodStuffs = new CopyOnWriteArrayList<>(initialList);
 
     private final int step = BoxCharacteristicsObject.SPEED_SHEEP;
 
 
-    private int weight = BoxCharacteristicsObject.WEIGHT_SHEEP;
-    private int age;
+    private volatile int weight = BoxCharacteristicsObject.WEIGHT_SHEEP;
+    private volatile int age;
     private final int neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_SHEEP;
     private volatile int x;
     private volatile int y;
@@ -35,69 +35,69 @@ public class Sheep  extends Herbivores {
         this.age = age;
     }
 
-   // @Override
-   // public Label getLabel() {
-   //     return label;
+    // @Override
+    // public Label getLabel() {
+    //     return label;
     //  }
-   public boolean isHunger;
+    public volatile boolean isHunger = true;
 
     @Override
-    public  boolean getIsHunger(){
-        return  isHunger;
+    public  synchronized boolean getIsHunger() {
+        return isHunger;
     }
 
 
-
-
-
-
     @Override
-    public  void  setIsHunger(boolean isHunger){
+    public synchronized void setIsHunger(boolean isHunger) {
         this.isHunger = isHunger;
     }
 
-    private boolean eat = false;
+    private volatile boolean eat = false;
+
     @Override
-    public  boolean getEat(){
-        return  eat;
+    public  synchronized boolean getEat() {
+        return eat;
     }
 
 
     @Override
-    public  void  setEat(boolean eat ){
+    public synchronized void setEat(boolean eat) {
         this.eat = eat;
     }
-    private int progeny = 0;
+
+    private  volatile int progeny = 0;
 
     @Override
-    public  int getProgeny(){
+    public synchronized int getProgeny() {
         return progeny;
     }
-    @Override
-    public  void  setProgeny(int progeny ){
-        this.progeny = progeny;
-    }
-    private int eatenKg = 0;
 
     @Override
-    public int getEatenKg (){
+    public synchronized void setProgeny(int progeny) {
+        this.progeny = progeny;
+    }
+
+    private volatile int eatenKg = 0;
+
+    @Override
+    public synchronized int getEatenKg() {
         return eatenKg;
     }
 
     private volatile boolean stop = false;
 
     @Override
-    public boolean getStop() {
+    public synchronized boolean getStop() {
         return stop;
     }
 
     @Override
-    public void setStop(boolean stop) {
+    public synchronized void setStop(boolean stop) {
         this.stop = stop;
     }
 
     @Override
-    public  void  setEatenKg (int eatenKg ){
+    public synchronized void setEatenKg(int eatenKg) {
         this.eatenKg = eatenKg;
     }
 
@@ -108,12 +108,12 @@ public class Sheep  extends Herbivores {
 
 
     @Override
-    public int getX() {
+    public  synchronized int getX() {
         return x;
     }
 
     @Override
-    public int getY() {
+    public  synchronized int getY() {
         return y;
     }
 
@@ -124,16 +124,16 @@ public class Sheep  extends Herbivores {
     }
 
     @Override
-    public int getWeight() {
+    public  synchronized int getWeight() {
         return weight;
     }
 
     @Override
-    public int getAge() {
+    public  synchronized int getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public  synchronized void setAge(int age) {
         this.age = age;
     }
 
@@ -175,62 +175,65 @@ public class Sheep  extends Herbivores {
     }
 
     @Override
-    public void reproduct()  {
+    public void reproduce() {
         for (int i = 0; i <= 5; i++) {
-            super.reproduct();
+            super.reproduce();
         }
     }
-    /* public void reproduct(Sheep animal) throws InstantiationException, IllegalAccessException {
-        if (progeny < 30) {
+    private volatile int daysWithoutFood = 0;
+    private  volatile int countDays = 0;
+    private  volatile int  dailyMealCounter  = 0;
 
+    @Override
+    public  synchronized int getDaysWithoutFood() {
+        return daysWithoutFood;
+    }
 
-            Sheep sheepCopy = new Sheep(2, 2, 1);
-            Sheep  sheepCopy2 = new Sheep(2, 2, 1);
-            Sheep  sheepCopy3 = new Sheep(2, 2, 1);
-            Sheep  sheepCopy4 = new Sheep(2, 2, 1);
-            Sheep  sheepCopy5= new Sheep(2, 2, 1);
+    @Override
+    public synchronized void setDaysWithoutFood(  int daysWithoutFood) {
+        this.daysWithoutFood = daysWithoutFood;
+    }
 
-            this.progeny++;
+    @Override
+    public  synchronized int getCountDays() {
+        return countDays;
+    }
 
-
-
-            numberAnimals = printingIslandSimulationStatistics.getNumberAnimals();
-            numberAnimals++;
-            numberAnimals++;
-            animals.add(sheepCopy);
-            animals.add(sheepCopy2);
-            animals.add(sheepCopy3);
-            animals.add(sheepCopy4);
-            animals.add(sheepCopy5);
-
-
-            printingIslandSimulationStatistics.setNumberAnimals(numberAnimals);
-
-            Animal.numberBornAnimals = printingIslandSimulationStatistics.getNumberBornAnimals();
-            numberBornAnimals++;
-
-            printingIslandSimulationStatistics.setNumberBornAnimals(numberBornAnimals);
-
-            islandSimulationObjects.add(sheepCopy);
-            islandSimulationObjects.add(sheepCopy2);
-            islandSimulationObjects.add(sheepCopy3);
-            islandSimulationObjects.add(sheepCopy4);
-            islandSimulationObjects.add(sheepCopy5);
-
-
-            for (Coordinate freeCell : IslandSimulation.getListFreeCells()) {
-                move(freeCell, sheepCopy);
-                move(freeCell, sheepCopy);
-                move(freeCell, sheepCopy);
-                move(freeCell, sheepCopy );
-                move(freeCell, sheepCopy);
-                break;
-            }
-
-
-        }
+    @Override
+    public synchronized void setCountDays(int countDays) {
+        this.countDays = countDays;
 
     }
 
-*/
+    @Override
+    public  synchronized int getDailyMealCounter() {
+        return dailyMealCounter;
+    }
+
+    @Override
+    public synchronized void setDailyMealCounter(int dailyMealCounter) {
+        this.dailyMealCounter = dailyMealCounter;
+    }
+
+    private  volatile int  hungryDaysCounter = 0;
+    @Override
+    public  synchronized int getHungryDaysCounter() {
+        return hungryDaysCounter;
+    }
+
+    @Override
+    public synchronized void setHungryDaysCounter(  int hungryDaysCounter) {
+        this.hungryDaysCounter = hungryDaysCounter;
+    }
+    private volatile int attemptsFindPartnerCounter = 0;
+
+    @Override
+    public synchronized int getAttemptsFindPartnerCounter() {
+        return attemptsFindPartnerCounter;
+    }
+
+    @Override
+    public synchronized void setAttemptsFindPartnerCounter(int attemptsFindPartnerCounter) {
+        this.attemptsFindPartnerCounter = attemptsFindPartnerCounter;
+    }
 }

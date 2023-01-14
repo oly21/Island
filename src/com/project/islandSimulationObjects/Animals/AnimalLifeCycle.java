@@ -1,6 +1,8 @@
 package com.project.islandSimulationObjects.Animals;
 
 import com.project.island.Island;
+import com.project.island.IslandSimulation;
+
 import java.util.concurrent.*;
 
 public class AnimalLifeCycle implements Runnable {
@@ -30,31 +32,36 @@ public class AnimalLifeCycle implements Runnable {
 
 
     public void run() {
-
+      System.out.println(animals);
+        System.out.println(animals.size());
+        System.out.println(animalsCopy.size());
+        IslandSimulation.DaysCount.incrementAndGet();
         animalsCopy.clear();
         //executorService.shutdown();
         animalsCopy.addAll(animals);
+        System.out.println(animalsCopy.size());
         ExecutorService executorService  = Executors.newFixedThreadPool(animals.size());
         System.out.println("Start AnimalLiveCycle");
-        for (Animal animal : animals) {
-            age = animal.getAge()+1;
-            animal.setAge(age);
+        if(IslandSimulation.DaysCount.get()%2 == 0) {
+            for (Animal animal : animals) {
+                age = animal.getAge() + 1;
+                animal.setAge(age);
+            }
+
         }
-
-
         // for (Animal task : animals) {
         //  task.isHunger = true;
 
         //  }
 
 
-        for (Runnable task : animalsCopy) {
+        for (Runnable task : animals) {
 
             int IndexAnimalTask = ThreadLocalRandom.current().nextInt(animalsCopy.size()) % animalsCopy.size();
 
             Runnable animalTask = animalsCopy.get(IndexAnimalTask);
             executorService.submit(animalTask);
-            animalsCopy.remove(IndexAnimalTask);
+             animalsCopy.remove(IndexAnimalTask);
 
 
             // try {
