@@ -11,84 +11,24 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Horse extends Animal {
     private final String typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_HORSE;
-//    public Label label = new Label(typePicture);
-
-    public  volatile boolean isHunger= true;
-
-    @Override
-    public synchronized boolean getIsHunger() {
-        return isHunger;
-    }
-
-    @Override
-    public synchronized void setIsHunger(boolean isHunger) {
-        this.isHunger = isHunger;
-    }
-
-    private volatile boolean eat = false;
-
-    @Override
-    public  synchronized boolean getEat() {
-        return eat;
-    }
-
-
-    @Override
-    public synchronized void setEat(boolean eat) {
-        this.eat = eat;
-    }
-
-    private  volatile int progeny = 0;
-
-    @Override
-    public  synchronized int getProgeny() {
-        return progeny;
-    }
-
-    @Override
-    public synchronized void setProgeny(int progeny) {
-        this.progeny = progeny;
-    }
-
+    //    public Label label = new Label(typePicture);
     private volatile int eatenKg = 0;
-
-    @Override
-    public synchronized int getEatenKg() {
-        return eatenKg;
-    }
-
-
-    @Override
-    public synchronized void setEatenKg(int eatenKg) {
-        this.eatenKg = eatenKg;
-    }
-
-
+    private volatile int progeny = 0;
+    private volatile boolean eat = false;
+    private volatile int attemptsFindPartnerCounter = 0;
+    private volatile int daysWithoutFood = 0;
+    private volatile int countDays = 0;
+    private volatile int dailyMealCounter = 0;
     private final List<String> initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES,
             BoxCharacteristicsObject.TYPE_STRING_GRASS, BoxCharacteristicsObject.TYPE_STRING_FRUIT,
             BoxCharacteristicsObject.TYPE_STRING_BERRIES, BoxCharacteristicsObject.TYPE_STRING_VEGETABLES);
     private final CopyOnWriteArrayList<String> foodStuffs = new CopyOnWriteArrayList<>(initialList);
 
-    private final   String typeString = BoxCharacteristicsObject.TYPE_STRING_HORSE;
+    private final String typeString = BoxCharacteristicsObject.TYPE_STRING_HORSE;
     public volatile int progenyLimit = 10;
-    private  final int step = BoxCharacteristicsObject.SPEED_HORSE;
+    private final int step = BoxCharacteristicsObject.SPEED_HORSE;
     private volatile boolean stop = false;
-
-    @Override
-    public  synchronized boolean getStop() {
-        return stop;
-    }
-
-    @Override
-    public  synchronized void setStop(boolean stop) {
-        this.stop = stop;
-    }
-
-    private  volatile int weight = BoxCharacteristicsObject.WEIGHT_HORSE;
-    private volatile int age;
-    private final int neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_HORSE;
-    private volatile int x;
-    private volatile int y;
+    public volatile boolean isHunger = true;
 
     public Horse(int weight, int age) {
         super();
@@ -107,6 +47,68 @@ public class Horse extends Animal {
         super();
         this.age = age;
     }
+
+    @Override
+    public synchronized boolean getIsHunger() {
+        return isHunger;
+    }
+
+    @Override
+    public synchronized void setIsHunger(boolean isHunger) {
+        this.isHunger = isHunger;
+    }
+
+
+    @Override
+    public synchronized boolean getEat() {
+        return eat;
+    }
+
+
+    @Override
+    public synchronized void setEat(boolean eat) {
+        this.eat = eat;
+    }
+
+
+    @Override
+    public synchronized int getProgeny() {
+        return progeny;
+    }
+
+    @Override
+    public synchronized void setProgeny(int progeny) {
+        this.progeny = progeny;
+    }
+
+
+    @Override
+    public synchronized int getEatenKg() {
+        return eatenKg;
+    }
+
+
+    @Override
+    public synchronized void setEatenKg(int eatenKg) {
+        this.eatenKg = eatenKg;
+    }
+
+
+    @Override
+    public synchronized boolean getStop() {
+        return stop;
+    }
+
+    @Override
+    public synchronized void setStop(boolean stop) {
+        this.stop = stop;
+    }
+
+    private volatile int weight = BoxCharacteristicsObject.WEIGHT_HORSE;
+    private volatile int age;
+    private final int neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_HORSE;
+    private volatile int x;
+    private volatile int y;
 
 
     @Override
@@ -175,22 +177,20 @@ public class Horse extends Animal {
     public int getStep() {
         return step;
     }
-    private volatile int daysWithoutFood = 0;
-    private  volatile int countDays = 0;
-    private  volatile int  dailyMealCounter  = 0;
+
 
     @Override
-    public  synchronized int getDaysWithoutFood() {
+    public synchronized int getDaysWithoutFood() {
         return daysWithoutFood;
     }
 
     @Override
-    public synchronized void setDaysWithoutFood(  int daysWithoutFood) {
+    public synchronized void setDaysWithoutFood(int daysWithoutFood) {
         this.daysWithoutFood = daysWithoutFood;
     }
 
     @Override
-    public  synchronized int getCountDays() {
+    public synchronized int getCountDays() {
         return countDays;
     }
 
@@ -201,7 +201,7 @@ public class Horse extends Animal {
     }
 
     @Override
-    public  synchronized int getDailyMealCounter() {
+    public synchronized int getDailyMealCounter() {
         return dailyMealCounter;
     }
 
@@ -209,17 +209,18 @@ public class Horse extends Animal {
     public synchronized void setDailyMealCounter(int dailyMealCounter) {
         this.dailyMealCounter = dailyMealCounter;
     }
-    private  volatile int  hungryDaysCounter = 0;
+
+    private volatile int hungryDaysCounter = 0;
+
     @Override
-    public  synchronized int getHungryDaysCounter() {
+    public synchronized int getHungryDaysCounter() {
         return hungryDaysCounter;
     }
 
     @Override
-    public synchronized void setHungryDaysCounter(  int hungryDaysCounter) {
+    public synchronized void setHungryDaysCounter(int hungryDaysCounter) {
         this.hungryDaysCounter = hungryDaysCounter;
     }
-    private volatile int attemptsFindPartnerCounter = 0;
 
     @Override
     public synchronized int getAttemptsFindPartnerCounter() {

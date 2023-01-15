@@ -17,7 +17,8 @@ public class Wolf extends Predators {
             BoxCharacteristicsObject.TYPE_STRING_RABBIT, BoxCharacteristicsObject.TYPE_STRING_DEER,
             BoxCharacteristicsObject.TYPE_STRING_SHEEP, BoxCharacteristicsObject.TYPE_STRING_GOAT,
             BoxCharacteristicsObject.TYPE_STRING_DUCK, BoxCharacteristicsObject.TYPE_STRING_CATERPILLAR,
-            BoxCharacteristicsObject.TYPE_STRING_BERRIES, BoxCharacteristicsObject.TYPE_STRING_FRUIT, BoxCharacteristicsObject.TYPE_STRING_VEGETABLES);
+            BoxCharacteristicsObject.TYPE_STRING_BERRIES, BoxCharacteristicsObject.TYPE_STRING_FRUIT,
+            BoxCharacteristicsObject.TYPE_STRING_VEGETABLES);
 
     private final CopyOnWriteArrayList<String> foodStuffs = new CopyOnWriteArrayList<>(initialList);
     private final ConcurrentHashMap<String, Double> chanceToEat = new ConcurrentHashMap<>();
@@ -32,83 +33,23 @@ public class Wolf extends Predators {
         chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_DUCK, BoxCharacteristicsObject.PROBABILITY_WOLF_EAT_DUCK);
     }
 
-   private  volatile  int count = 0;
-    public synchronized ConcurrentHashMap<String, Double> getMapChanceToEat() {
-        if(count == 0) {
-            initializationMapChanceToEat();
-            count++;
-        }
-        return chanceToEat;
-    }
-
-
-    public volatile boolean isHunger= true;
-
-    @Override
-    public  synchronized boolean getIsHunger() {
-        return isHunger;
-    }
-
-
-    @Override
-    public synchronized void setIsHunger(boolean isHunger) {
-        this.isHunger = isHunger;
-    }
-
     private volatile boolean eat = false;
-
-    @Override
-    public  synchronized boolean getEat() {
-        return eat;
-    }
-
-
-    @Override
-    public  synchronized void setEat(boolean eat) {
-        this.eat = eat;
-    }
-
+    private volatile int count = 0;
+    public volatile boolean isHunger = true;
+    private final int progenyLimit = 5;
+    private final int step = BoxCharacteristicsObject.SPEED_WOLF;
+    private volatile int eatenKg = 0;
     private volatile int progeny = 0;
 
-    @Override
-    public synchronized int getProgeny() {
-        return progeny;
-    }
-
-    @Override
-    public  synchronized void setProgeny(int progeny) {
-        this.progeny = progeny;
-    }
-
-    private volatile int eatenKg = 0;
-
-    @Override
-    public synchronized int getEatenKg() {
-        return eatenKg;
-    }
-
-
-    @Override
-    public  synchronized void setEatenKg(int eatenKg) {
-        this.eatenKg = eatenKg;
-    }
-
-
-    //@Override
-    // public Label getLabel() {
-    //     return label;
-    // }
-
-
-    private  final int progenyLimit = 5;
-    private final int step = BoxCharacteristicsObject.SPEED_WOLF;
-
-
-    private  volatile int weight = BoxCharacteristicsObject.WEIGHT_WOLF;
+    private volatile int weight = BoxCharacteristicsObject.WEIGHT_WOLF;
     private volatile int age;
     private final int neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_WOLF;
     private volatile int x;
     private volatile int y;
+    private volatile int hungryDaysCounter = 0;
+    private volatile int daysWithoutFood = 0;
+    private volatile int countDays = 0;
+    private volatile int dailyMealCounter = 0;
 
     public Wolf(int weight, int age) {
         super();
@@ -122,13 +63,75 @@ public class Wolf extends Predators {
     }
 
 
+    public synchronized ConcurrentHashMap<String, Double> getMapChanceToEat() {
+        if (count == 0) {
+            initializationMapChanceToEat();
+            count++;
+        }
+        return chanceToEat;
+    }
+
+
+    @Override
+    public synchronized boolean getIsHunger() {
+        return isHunger;
+    }
+
+
+    @Override
+    public synchronized void setIsHunger(boolean isHunger) {
+        this.isHunger = isHunger;
+    }
+
+
+    @Override
+    public synchronized boolean getEat() {
+        return eat;
+    }
+
+
+    @Override
+    public synchronized void setEat(boolean eat) {
+        this.eat = eat;
+    }
+
+
+    @Override
+    public synchronized int getProgeny() {
+        return progeny;
+    }
+
+    @Override
+    public synchronized void setProgeny(int progeny) {
+        this.progeny = progeny;
+    }
+
+
+    @Override
+    public synchronized int getEatenKg() {
+        return eatenKg;
+    }
+
+
+    @Override
+    public synchronized void setEatenKg(int eatenKg) {
+        this.eatenKg = eatenKg;
+    }
+
+
+    //@Override
+    // public Label getLabel() {
+    //     return label;
+    // }
+
+
     @Override
     public synchronized int getX() {
         return x;
     }
 
     @Override
-    public  synchronized int getY() {
+    public synchronized int getY() {
         return y;
     }
 
@@ -144,11 +147,11 @@ public class Wolf extends Predators {
     }
 
     @Override
-    public  synchronized int getAge() {
+    public synchronized int getAge() {
         return age;
     }
 
-    public  synchronized void setAge(int age) {
+    public synchronized void setAge(int age) {
         this.age = age;
     }
 
@@ -160,7 +163,7 @@ public class Wolf extends Predators {
 
 
     @Override
-    public  String getTypePicture() {
+    public String getTypePicture() {
         return typePicture;
     }
 
@@ -182,7 +185,7 @@ public class Wolf extends Predators {
     }
 
     @Override
-    public  synchronized void setStop(boolean stop) {
+    public synchronized void setStop(boolean stop) {
         this.stop = stop;
     }
 
@@ -200,22 +203,19 @@ public class Wolf extends Predators {
     public int getStep() {
         return step;
     }
-    private volatile int daysWithoutFood = 0;
-    private  volatile int countDays = 0;
-    private  volatile int  dailyMealCounter  = 0;
 
     @Override
-    public  synchronized int getDaysWithoutFood() {
+    public synchronized int getDaysWithoutFood() {
         return daysWithoutFood;
     }
 
     @Override
-    public synchronized void setDaysWithoutFood(  int daysWithoutFood) {
+    public synchronized void setDaysWithoutFood(int daysWithoutFood) {
         this.daysWithoutFood = daysWithoutFood;
     }
 
     @Override
-    public  synchronized int getCountDays() {
+    public synchronized int getCountDays() {
         return countDays;
     }
 
@@ -226,7 +226,7 @@ public class Wolf extends Predators {
     }
 
     @Override
-    public  synchronized int getDailyMealCounter() {
+    public synchronized int getDailyMealCounter() {
         return dailyMealCounter;
     }
 
@@ -234,16 +234,18 @@ public class Wolf extends Predators {
     public synchronized void setDailyMealCounter(int dailyMealCounter) {
         this.dailyMealCounter = dailyMealCounter;
     }
-    private  volatile int  hungryDaysCounter = 0;
+
+
     @Override
-    public  synchronized int getHungryDaysCounter() {
+    public synchronized int getHungryDaysCounter() {
         return hungryDaysCounter;
     }
 
     @Override
-    public synchronized void setHungryDaysCounter(  int hungryDaysCounter) {
+    public synchronized void setHungryDaysCounter(int hungryDaysCounter) {
         this.hungryDaysCounter = hungryDaysCounter;
     }
+
     private volatile int attemptsFindPartnerCounter = 0;
 
     @Override

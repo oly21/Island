@@ -33,85 +33,22 @@ public class Boa extends Predators {
 
     }
  private volatile int count = 0;
-    public  synchronized ConcurrentHashMap<String, Double> getMapChanceToEat() {
-        if(count == 0) {
-            initializationMapChanceToEat();
-        count++;
-        }
-
-        return chanceToEat;
-    }
-
-    private  final int progenyLimit = 10;
+    private volatile int daysWithoutFood = 0;
+    private  volatile int countDays = 0;
+    private  volatile int  dailyMealCounter  = 0;
+    private volatile int attemptsFindPartnerCounter = 0;
+    private  volatile int  hungryDaysCounter = 0;
+    private  final int progenyLimit = 2;
     private final int step = BoxCharacteristicsObject.SPEED_BOA;
 
     //    public Label label = new Label(typePicture);
     private volatile int weight = BoxCharacteristicsObject.WEIGHT_BOA;
 
     public volatile boolean isHunger= true;
-
-    @Override
-    public  synchronized boolean getIsHunger() {
-        return isHunger;
-    }
-
-
-    @Override
-    public  synchronized void setIsHunger(boolean isHunger) {
-        this.isHunger = isHunger;
-    }
-
-    private  volatile boolean eat = false;
-
-    @Override
-    public synchronized boolean getEat() {
-        return eat;
-    }
-
-
-    @Override
-    public  synchronized void setEat(boolean eat) {
-        this.eat = eat;
-    }
-
-    private volatile int progeny = 0;
-
-    @Override
-    public synchronized int getProgeny() {
-        return progeny;
-    }
-
-    @Override
-    public  synchronized void setProgeny(int progeny) {
-        this.progeny = progeny;
-    }
-
-    private volatile int eatenKg = 0;
-
-    @Override
-    public  synchronized int getEatenKg() {
-        return eatenKg;
-    }
-
-
     private volatile boolean stop = false;
-
-    @Override
-    public synchronized boolean getStop() {
-        return stop;
-    }
-
-    @Override
-    public synchronized void setStop(boolean stop) {
-        this.stop = stop;
-    }
-
-    @Override
-    public  synchronized void setEatenKg(int eatenKg) {
-        this.eatenKg = eatenKg;
-    }
-
-
+    private volatile int eatenKg = 0;
+    private volatile int progeny = 0;
+    private  volatile boolean eat = false;
     private  volatile int age;
     private final int neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_BOA;
     private volatile int x;
@@ -126,6 +63,75 @@ public class Boa extends Predators {
     public Boa(int age) {
         super();
         this.age = age;
+    }
+
+
+    public  synchronized ConcurrentHashMap<String, Double> getMapChanceToEat() {
+        if(count == 0) {
+            initializationMapChanceToEat();
+        count++;
+        }
+
+        return chanceToEat;
+    }
+
+
+    @Override
+    public  synchronized boolean getIsHunger() {
+        return isHunger;
+    }
+
+
+    @Override
+    public  synchronized void setIsHunger(boolean isHunger) {
+        this.isHunger = isHunger;
+    }
+
+
+
+    @Override
+    public synchronized boolean getEat() {
+        return eat;
+    }
+
+
+    @Override
+    public  synchronized void setEat(boolean eat) {
+        this.eat = eat;
+    }
+
+
+    @Override
+    public synchronized int getProgeny() {
+        return progeny;
+    }
+
+    @Override
+    public  synchronized void setProgeny(int progeny) {
+        this.progeny = progeny;
+    }
+
+
+    @Override
+    public  synchronized int getEatenKg() {
+        return eatenKg;
+    }
+
+
+
+    @Override
+    public synchronized boolean getStop() {
+        return stop;
+    }
+
+    @Override
+    public synchronized void setStop(boolean stop) {
+        this.stop = stop;
+    }
+
+    @Override
+    public  synchronized void setEatenKg(int eatenKg) {
+        this.eatenKg = eatenKg;
     }
 
 
@@ -201,15 +207,12 @@ public class Boa extends Predators {
         return step;
     }
 
-    @Override
-    public void reproduce() {
-        for (int i = 0; i <= 4; i++) {
-            super.reproduce();
-        }
-    }
-    private volatile int daysWithoutFood = 0;
-    private  volatile int countDays = 0;
-    private  volatile int  dailyMealCounter  = 0;
+   // @Override
+   // public void reproduce() {
+     //   for (int i = 0; i <= 4; i++) {
+          //  super.reproduce();
+        //}
+   // }
 
     @Override
     public  synchronized int getDaysWithoutFood() {
@@ -241,7 +244,6 @@ public class Boa extends Predators {
     public synchronized void setDailyMealCounter(int dailyMealCounter) {
         this.dailyMealCounter = dailyMealCounter;
     }
-    private  volatile int  hungryDaysCounter = 0;
     @Override
     public  synchronized int getHungryDaysCounter() {
         return hungryDaysCounter;
@@ -251,7 +253,6 @@ public class Boa extends Predators {
     public synchronized void setHungryDaysCounter(  int hungryDaysCounter) {
         this.hungryDaysCounter = hungryDaysCounter;
     }
-    private volatile int attemptsFindPartnerCounter = 0;
 
     @Override
     public synchronized int getAttemptsFindPartnerCounter() {

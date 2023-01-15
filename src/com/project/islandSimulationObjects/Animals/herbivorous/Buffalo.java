@@ -10,61 +10,14 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Buffalo extends Animal {
 
-    private volatile boolean isHunger=true;
-
-    @Override
-    public synchronized boolean getIsHunger() {
-        return isHunger;
-    }
-
-
-    @Override
-    public synchronized void setIsHunger(boolean isHunger) {
-        this.isHunger = isHunger;
-    }
-
+    private volatile boolean isHunger = true;
     private volatile boolean eat = false;
-
-    @Override
-    public  synchronized boolean getEat() {
-        return eat;
-    }
-
-    @Override
-    public synchronized void setEat(boolean eat) {
-        this.eat = eat;
-    }
-
     private volatile int progeny = 0;
-
-    @Override
-    public synchronized int getProgeny() {
-        return progeny;
-    }
-
-    @Override
-    public synchronized void setProgeny(int progeny) {
-        this.progeny = progeny;
-    }
-
     private static int eatenKg = 0;
-
-    @Override
-    public  synchronized int getEatenKg() {
-        return eatenKg;
-    }
-
-
-    @Override
-    public synchronized void setEatenKg(int eatenKg) {
-        this.eatenKg = eatenKg;
-    }
-
-
     private final int step = BoxCharacteristicsObject.SPEED_BUFFALO;
 
 
-    private  volatile int weight = BoxCharacteristicsObject.WEIGHT_BUFFALO;
+    private volatile int weight = BoxCharacteristicsObject.WEIGHT_BUFFALO;
     private volatile int age = 0;
     private final int progenyLimit = 5;
     private final int neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_BUFFALO;
@@ -80,6 +33,12 @@ public class Buffalo extends Animal {
             BoxCharacteristicsObject.TYPE_STRING_GRASS, BoxCharacteristicsObject.TYPE_STRING_CATERPILLAR);
     private final CopyOnWriteArrayList<String> foodStuffs = new CopyOnWriteArrayList<>(initialList);
 
+    private volatile boolean stop = false;
+
+    private volatile int daysWithoutFood = 0;
+    private volatile int countDays = 0;
+    private volatile int dailyMealCounter = 0;
+
     public Buffalo(int age) {
         super();
 
@@ -92,6 +51,52 @@ public class Buffalo extends Animal {
         this.weight = weight;
         this.age = age;
     }
+
+    @Override
+    public synchronized boolean getIsHunger() {
+        return isHunger;
+    }
+
+
+    @Override
+    public synchronized void setIsHunger(boolean isHunger) {
+        this.isHunger = isHunger;
+    }
+
+
+    @Override
+    public synchronized boolean getEat() {
+        return eat;
+    }
+
+    @Override
+    public synchronized void setEat(boolean eat) {
+        this.eat = eat;
+    }
+
+
+    @Override
+    public synchronized int getProgeny() {
+        return progeny;
+    }
+
+    @Override
+    public synchronized void setProgeny(int progeny) {
+        this.progeny = progeny;
+    }
+
+
+    @Override
+    public synchronized int getEatenKg() {
+        return eatenKg;
+    }
+
+
+    @Override
+    public synchronized void setEatenKg(int eatenKg) {
+        this.eatenKg = eatenKg;
+    }
+
 
     @Override
     public synchronized int getX() {
@@ -115,7 +120,7 @@ public class Buffalo extends Animal {
     }
 
     @Override
-    public  synchronized int getWeight() {
+    public synchronized int getWeight() {
         return weight;
     }
 
@@ -134,10 +139,9 @@ public class Buffalo extends Animal {
         return new Coordinate(x, y);
     }
 
-    private volatile boolean stop = false;
 
     @Override
-    public  synchronized boolean getStop() {
+    public synchronized boolean getStop() {
         return stop;
     }
 
@@ -167,7 +171,7 @@ public class Buffalo extends Animal {
     }
 
     @Override
-    public  synchronized int getProgenyLimit() {
+    public synchronized int getProgenyLimit() {
         return progenyLimit;
     }
 
@@ -175,22 +179,20 @@ public class Buffalo extends Animal {
     public int getStep() {
         return step;
     }
-    private volatile int daysWithoutFood = 0;
-    private  volatile int countDays = 0;
-    private  volatile int  dailyMealCounter  = 0;
+
 
     @Override
-    public  synchronized int getDaysWithoutFood() {
+    public synchronized int getDaysWithoutFood() {
         return daysWithoutFood;
     }
 
     @Override
-    public synchronized void setDaysWithoutFood(  int daysWithoutFood) {
+    public synchronized void setDaysWithoutFood(int daysWithoutFood) {
         this.daysWithoutFood = daysWithoutFood;
     }
 
     @Override
-    public  synchronized int getCountDays() {
+    public synchronized int getCountDays() {
         return countDays;
     }
 
@@ -201,7 +203,7 @@ public class Buffalo extends Animal {
     }
 
     @Override
-    public  synchronized int getDailyMealCounter() {
+    public synchronized int getDailyMealCounter() {
         return dailyMealCounter;
     }
 
@@ -210,16 +212,18 @@ public class Buffalo extends Animal {
         this.dailyMealCounter = dailyMealCounter;
     }
 
-    private  volatile int  hungryDaysCounter = 0;
+    private volatile int hungryDaysCounter = 0;
+
     @Override
-    public  synchronized int getHungryDaysCounter() {
+    public synchronized int getHungryDaysCounter() {
         return hungryDaysCounter;
     }
 
     @Override
-    public synchronized void setHungryDaysCounter(  int hungryDaysCounter) {
+    public synchronized void setHungryDaysCounter(int hungryDaysCounter) {
         this.hungryDaysCounter = hungryDaysCounter;
     }
+
     private volatile int attemptsFindPartnerCounter = 0;
 
     @Override

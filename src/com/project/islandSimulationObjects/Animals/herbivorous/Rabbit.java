@@ -19,74 +19,15 @@ public class Rabbit extends Herbivores {
             BoxCharacteristicsObject.TYPE_STRING_GRASS, BoxCharacteristicsObject.TYPE_STRING_FRUIT,
             BoxCharacteristicsObject.TYPE_STRING_BERRIES, BoxCharacteristicsObject.TYPE_STRING_VEGETABLES);
     private final CopyOnWriteArrayList<String> foodStuffs = new CopyOnWriteArrayList<>(initialList);
-    private volatile boolean isHunger= true;
-
-    @Override
-    public synchronized boolean getIsHunger() {
-        return isHunger;
-    }
-
-
-    @Override
-    public synchronized void setIsHunger(boolean isHunger) {
-        this.isHunger = isHunger;
-    }
-
-    private  volatile boolean eat = false;
-
-    @Override
-    public synchronized boolean getEat() {
-        return eat;
-    }
-
-
-    @Override
-    public  synchronized void setEat(boolean eat) {
-        this.eat = eat;
-    }
-
+    private volatile boolean isHunger = true;
+    private volatile boolean eat = false;
+    private final int step = BoxCharacteristicsObject.SPEED_RABBIT;
+    private volatile boolean stop = false;
     private volatile int progeny = 0;
-
-    @Override
-    public  synchronized int getProgeny() {
-        return progeny;
-    }
-
-    @Override
-    public synchronized void setProgeny(int progeny) {
-        this.progeny = progeny;
-    }
-
     private volatile int eatenKg = 0;
 
-    @Override
-    public  synchronized int getEatenKg() {
-        return eatenKg;
-    }
-
-
-    private volatile boolean stop = false;
-
-    @Override
-    public  synchronized boolean getStop() {
-        return stop;
-    }
-
-    @Override
-    public  synchronized void setStop(boolean stop) {
-        this.stop = stop;
-    }
-
-    @Override
-    public  synchronized void setEatenKg(int eatenKg) {
-        this.eatenKg = eatenKg;
-    }
-
-    private final int step = BoxCharacteristicsObject.SPEED_RABBIT;
-
-
     private volatile int weight = BoxCharacteristicsObject.WEIGHT_RABBIT;
-    private  volatile int age;
+    private volatile int age;
     private final int neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_RABBIT;
     private volatile int x;
     private volatile int y;
@@ -100,6 +41,67 @@ public class Rabbit extends Herbivores {
     public Rabbit(int age) {
         super();
         this.age = age;
+    }
+
+    private volatile int attemptsFindPartnerCounter = 0;
+    private volatile int daysWithoutFood = 0;
+    private volatile int countDays = 0;
+    private volatile int dailyMealCounter = 0;
+
+    @Override
+    public synchronized boolean getIsHunger() {
+        return isHunger;
+    }
+
+
+    @Override
+    public synchronized void setIsHunger(boolean isHunger) {
+        this.isHunger = isHunger;
+    }
+
+
+    @Override
+    public synchronized boolean getEat() {
+        return eat;
+    }
+
+
+    @Override
+    public synchronized void setEat(boolean eat) {
+        this.eat = eat;
+    }
+
+
+    @Override
+    public synchronized int getProgeny() {
+        return progeny;
+    }
+
+    @Override
+    public synchronized void setProgeny(int progeny) {
+        this.progeny = progeny;
+    }
+
+
+    @Override
+    public synchronized int getEatenKg() {
+        return eatenKg;
+    }
+
+
+    @Override
+    public synchronized boolean getStop() {
+        return stop;
+    }
+
+    @Override
+    public synchronized void setStop(boolean stop) {
+        this.stop = stop;
+    }
+
+    @Override
+    public synchronized void setEatenKg(int eatenKg) {
+        this.eatenKg = eatenKg;
     }
 
 
@@ -146,7 +148,7 @@ public class Rabbit extends Herbivores {
 
 
     @Override
-    public  String getTypePicture() {
+    public String getTypePicture() {
         return typePicture;
     }
 
@@ -181,22 +183,20 @@ public class Rabbit extends Herbivores {
             super.reproduce();
         }
     }
-    private volatile int daysWithoutFood = 0;
-    private  volatile int countDays = 0;
-    private  volatile int  dailyMealCounter  = 0;
+
 
     @Override
-    public  synchronized int getDaysWithoutFood() {
+    public synchronized int getDaysWithoutFood() {
         return daysWithoutFood;
     }
 
     @Override
-    public synchronized void setDaysWithoutFood(  int daysWithoutFood) {
+    public synchronized void setDaysWithoutFood(int daysWithoutFood) {
         this.daysWithoutFood = daysWithoutFood;
     }
 
     @Override
-    public  synchronized int getCountDays() {
+    public synchronized int getCountDays() {
         return countDays;
     }
 
@@ -207,7 +207,7 @@ public class Rabbit extends Herbivores {
     }
 
     @Override
-    public  synchronized int getDailyMealCounter() {
+    public synchronized int getDailyMealCounter() {
         return dailyMealCounter;
     }
 
@@ -216,17 +216,17 @@ public class Rabbit extends Herbivores {
         this.dailyMealCounter = dailyMealCounter;
     }
 
-    private  volatile int  hungryDaysCounter = 0;
+    private volatile int hungryDaysCounter = 0;
+
     @Override
-    public  synchronized int getHungryDaysCounter() {
+    public synchronized int getHungryDaysCounter() {
         return hungryDaysCounter;
     }
 
     @Override
-    public synchronized void setHungryDaysCounter(  int hungryDaysCounter) {
+    public synchronized void setHungryDaysCounter(int hungryDaysCounter) {
         this.hungryDaysCounter = hungryDaysCounter;
     }
-    private volatile int attemptsFindPartnerCounter = 0;
 
     @Override
     public synchronized int getAttemptsFindPartnerCounter() {

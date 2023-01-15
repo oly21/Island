@@ -15,7 +15,14 @@ public class Mouse extends Herbivores {
 
     private final static String typeString = BoxCharacteristicsObject.TYPE_STRING_MOUSE;
     private final static int progenyLimit = 20;
-
+    private volatile int attemptsFindPartnerCounter = 0;
+    private volatile int hungryDaysCounter = 0;
+    private volatile int daysWithoutFood = 0;
+    private volatile int countDays = 0;
+    private volatile int dailyMealCounter = 0;
+    private volatile int eatenKg = 0;
+    private volatile boolean eat = false;
+    public volatile boolean isHunger = true;
     private final static List<String> initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_FRUIT,
             BoxCharacteristicsObject.TYPE_STRING_BERRIES, BoxCharacteristicsObject.TYPE_STRING_VEGETABLES,
             BoxCharacteristicsObject.TYPE_STRING_GRASS, BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES);
@@ -30,7 +37,8 @@ public class Mouse extends Herbivores {
     private volatile int x;
     private volatile int y;
 
-    private  volatile int progeny = 0;
+    private volatile int progeny = 0;
+
     public Mouse(int weight, int age) {
         super();
         this.weight = weight;
@@ -50,17 +58,17 @@ public class Mouse extends Herbivores {
     }
 
     @Override
-    public  synchronized void setStop(boolean stop) {
+    public synchronized void setStop(boolean stop) {
         this.stop = stop;
     }
 
     @Override
-    public  synchronized int getX() {
+    public synchronized int getX() {
         return x;
     }
 
     @Override
-    public  synchronized int getY() {
+    public synchronized int getY() {
         return y;
     }
 
@@ -80,7 +88,7 @@ public class Mouse extends Herbivores {
         return age;
     }
 
-    public  synchronized void setAge(int age) {
+    public synchronized void setAge(int age) {
         this.age = age;
     }
 
@@ -90,20 +98,18 @@ public class Mouse extends Herbivores {
         return new Coordinate(x, y);
     }
 
-    public  volatile boolean isHunger = true;
 
     @Override
-    public  synchronized boolean getIsHunger() {
+    public synchronized boolean getIsHunger() {
         return isHunger;
     }
 
 
     @Override
-    public  synchronized void setIsHunger(boolean isHunger) {
+    public synchronized void setIsHunger(boolean isHunger) {
         this.isHunger = isHunger;
     }
 
-    private  volatile boolean eat = false;
 
     @Override
     public synchronized boolean getEat() {
@@ -112,14 +118,13 @@ public class Mouse extends Herbivores {
 
 
     @Override
-    public  synchronized void setEat(boolean eat) {
+    public synchronized void setEat(boolean eat) {
         this.eat = eat;
     }
 
 
-
     @Override
-    public  synchronized int getProgeny() {
+    public synchronized int getProgeny() {
         return progeny;
     }
 
@@ -128,16 +133,15 @@ public class Mouse extends Herbivores {
         this.progeny = progeny;
     }
 
-    private volatile int eatenKg = 0;
 
     @Override
-    public  synchronized int getEatenKg() {
+    public synchronized int getEatenKg() {
         return eatenKg;
     }
 
 
     @Override
-    public  synchronized void setEatenKg(int eatenKg) {
+    public synchronized void setEatenKg(int eatenKg) {
         this.eatenKg = eatenKg;
     }
 
@@ -183,22 +187,19 @@ public class Mouse extends Herbivores {
     //  public Label getLabel() {
     // return label;
     // }
-    private volatile int daysWithoutFood = 0;
-    private  volatile int countDays = 0;
-    private  volatile int  dailyMealCounter  = 0;
 
     @Override
-    public  synchronized int getDaysWithoutFood() {
+    public synchronized int getDaysWithoutFood() {
         return daysWithoutFood;
     }
 
     @Override
-    public synchronized void setDaysWithoutFood(  int daysWithoutFood) {
+    public synchronized void setDaysWithoutFood(int daysWithoutFood) {
         this.daysWithoutFood = daysWithoutFood;
     }
 
     @Override
-    public  synchronized int getCountDays() {
+    public synchronized int getCountDays() {
         return countDays;
     }
 
@@ -209,7 +210,7 @@ public class Mouse extends Herbivores {
     }
 
     @Override
-    public  synchronized int getDailyMealCounter() {
+    public synchronized int getDailyMealCounter() {
         return dailyMealCounter;
     }
 
@@ -217,17 +218,16 @@ public class Mouse extends Herbivores {
     public synchronized void setDailyMealCounter(int dailyMealCounter) {
         this.dailyMealCounter = dailyMealCounter;
     }
-    private  volatile int  hungryDaysCounter = 0;
+
     @Override
-    public  synchronized int getHungryDaysCounter() {
+    public synchronized int getHungryDaysCounter() {
         return hungryDaysCounter;
     }
 
     @Override
-    public synchronized void setHungryDaysCounter(  int hungryDaysCounter) {
+    public synchronized void setHungryDaysCounter(int hungryDaysCounter) {
         this.hungryDaysCounter = hungryDaysCounter;
     }
-    private volatile int attemptsFindPartnerCounter = 0;
 
     @Override
     public synchronized int getAttemptsFindPartnerCounter() {

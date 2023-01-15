@@ -20,6 +20,17 @@ public class Eagle extends Predators {
     private final CopyOnWriteArrayList<String> foodStuffs = new CopyOnWriteArrayList<>(initialList);
     private final ConcurrentHashMap<String, Double> chanceToEat = new ConcurrentHashMap<>();
 
+    private volatile int weight = BoxCharacteristicsObject.WEIGHT_EAGLE;
+    private volatile int age;
+    private final int neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_EAGLE;
+    private volatile int x;
+    private volatile int y;
+    private volatile boolean stop = false;
+    private  volatile int eatenKg = 0;
+    private volatile int progeny = 0;
+    private  volatile boolean eat = false;
+    public volatile boolean isHunger= true;
+    private final   int progenyLimit = 5;
     private synchronized void initializationMapChanceToEat() {
         chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_FOX, BoxCharacteristicsObject.PROBABILITY_EAGLE__EAT_FOX);
         chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_RABBIT, BoxCharacteristicsObject.PROBABILITY_EAGLE_EAT_RABBIT);
@@ -28,6 +39,17 @@ public class Eagle extends Predators {
 
     }
    private volatile int  count= 0;
+    public Eagle(int weight, int age) {
+        super();
+        this.weight = weight;
+        this.age = age;
+    }
+
+    public Eagle(int age) {
+        super();
+        this.age = age;
+    }
+
     public  synchronized ConcurrentHashMap<String, Double> getMapChanceToEat() {
         if(count == 0) {
             initializationMapChanceToEat();
@@ -36,10 +58,9 @@ public class Eagle extends Predators {
         return chanceToEat;
     }
 
-    private final   int progenyLimit = 5;
+
     private final int step = BoxCharacteristicsObject.SPEED_EAGLE;
     //    public Label label = new Label(typePicture);
-    public volatile boolean isHunger= true;
 
     @Override
     public  synchronized boolean getIsHunger() {
@@ -52,7 +73,6 @@ public class Eagle extends Predators {
         this.isHunger = isHunger;
     }
 
-    private  volatile boolean eat = false;
 
     @Override
     public synchronized boolean getEat() {
@@ -65,7 +85,6 @@ public class Eagle extends Predators {
         this.eat = eat;
     }
 
-    private volatile int progeny = 0;
 
     @Override
     public  synchronized int getProgeny() {
@@ -77,7 +96,6 @@ public class Eagle extends Predators {
         this.progeny = progeny;
     }
 
-    private  volatile int eatenKg = 0;
 
     @Override
     public  synchronized int getEatenKg() {
@@ -85,7 +103,6 @@ public class Eagle extends Predators {
     }
 
 
-    private volatile boolean stop = false;
 
     @Override
     public  synchronized boolean getStop() {
@@ -102,27 +119,12 @@ public class Eagle extends Predators {
         this.eatenKg = eatenKg;
     }
 
-    private volatile int weight = BoxCharacteristicsObject.WEIGHT_EAGLE;
-    private volatile int age;
-    private final int neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_EAGLE;
-    private volatile int x;
-    private volatile int y;
 
     // @Override
     // public Label getLabel() {
     //      return label;
     // }
 
-    public Eagle(int weight, int age) {
-        super();
-        this.weight = weight;
-        this.age = age;
-    }
-
-    public Eagle(int age) {
-        super();
-        this.age = age;
-    }
 
 
     @Override

@@ -40,7 +40,31 @@ public class Bear extends Predators {
     }
 
     private volatile boolean stop = false;
+    private final int step = BoxCharacteristicsObject.SPEED_BEAR;
+    private volatile int weight = BoxCharacteristicsObject.WEIGHT_BEAR;
+    private  volatile int age;
+    private final int neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_BEAR;
+    private volatile int x;
+    private volatile int y;
+    private volatile int attemptsFindPartnerCounter = 0;
+    private volatile int daysWithoutFood = 0;
+    private  volatile int countDays = 0;
+    private  volatile int  dailyMealCounter  = 0;
+    private volatile int eatenKg = 0;
+    private  volatile int progeny = 0;
+    private  volatile int  hungryDaysCounter = 0;
+    private  volatile boolean eat = false;
+    public volatile boolean isHunger= true;
+    public Bear(int weight, int age) {
+        super();
+        this.weight = weight;
+        this.age = age;
+    }
 
+    public Bear(int age) {
+        super();
+        this.age = age;
+    }
     @Override
     public synchronized boolean getStop() {
         return stop;
@@ -61,25 +85,7 @@ public class Bear extends Predators {
     }
 
 
-    private final int step = BoxCharacteristicsObject.SPEED_BEAR;
 
-
-    private volatile int weight = BoxCharacteristicsObject.WEIGHT_BEAR;
-    private  volatile int age;
-    private final int neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_BEAR;
-    private volatile int x;
-    private volatile int y;
-
-    public Bear(int weight, int age) {
-        super();
-        this.weight = weight;
-        this.age = age;
-    }
-
-    public Bear(int age) {
-        super();
-        this.age = age;
-    }
     // public Label label = new Label(typePicture);
 
     @Override
@@ -105,7 +111,7 @@ public class Bear extends Predators {
     //  }
 
 
-    public volatile boolean isHunger= true;
+
 
     @Override
     public  synchronized boolean getIsHunger() {
@@ -118,7 +124,6 @@ public class Bear extends Predators {
         this.isHunger = isHunger;
     }
 
-    private  volatile boolean eat = false;
 
     @Override
     public  synchronized boolean getEat() {
@@ -131,9 +136,7 @@ public class Bear extends Predators {
         this.eat = eat;
     }
 
-    private  volatile int progeny = 0;
 
-    @Override
     public synchronized int getProgeny() {
         return progeny;
     }
@@ -143,7 +146,6 @@ public class Bear extends Predators {
         this.progeny = progeny;
     }
 
-    private volatile int eatenKg = 0;
 
     @Override
     public synchronized int getEatenKg() {
@@ -208,9 +210,6 @@ public class Bear extends Predators {
         return step;
     }
 
-    private volatile int daysWithoutFood = 0;
-    private  volatile int countDays = 0;
-    private  volatile int  dailyMealCounter  = 0;
 
     @Override
     public  synchronized int getDaysWithoutFood() {
@@ -243,7 +242,7 @@ public class Bear extends Predators {
         this.dailyMealCounter = dailyMealCounter;
     }
 
-    private  volatile int  hungryDaysCounter = 0;
+
     @Override
     public  synchronized int getHungryDaysCounter() {
         return hungryDaysCounter;
@@ -253,7 +252,6 @@ public class Bear extends Predators {
     public synchronized void setHungryDaysCounter(  int hungryDaysCounter) {
         this.hungryDaysCounter = hungryDaysCounter;
     }
-    private volatile int attemptsFindPartnerCounter = 0;
 
     @Override
     public synchronized int getAttemptsFindPartnerCounter() {

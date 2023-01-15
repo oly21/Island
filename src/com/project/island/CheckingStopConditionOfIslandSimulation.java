@@ -33,29 +33,30 @@ public class CheckingStopConditionOfIslandSimulation implements  Runnable{
 
    @Override
     public void run() {
-       System.out.println("cheсk start");
+
         int countHerbivores = 0;
-        for (Animal animal : animals) {
-            if (animal instanceof Herbivores) {
-                countHerbivores++;
-            }
+       synchronized (animals) {
+           for (Animal animal : animals) {
+               if (animal instanceof Herbivores) {
+                   countHerbivores++;
+               }
 
-        }
+           }
 
-   System.out.println("countHerbivores:"+" "+ countHerbivores);
+           System.out.println("countHerbivores:" + " " + countHerbivores);
 
+       }
 
-
-
+       System.out.println("cheсk start");
 
         if(conditionOfIslandSimulationInt == 1 ){
-           ConditionOfIslandSimulation = (countHerbivores == 0);
+           ConditionOfIslandSimulation = (countHerbivores <5);
        }
        else{
            ConditionOfIslandSimulation = ( plants.size()==0);
        }
         if( ConditionOfIslandSimulation ){
-
+            System.out.println(" конец:" + " " + countHerbivores);
             IslandSimulation.executorScheduledServiceDisplay.shutdown();
             IslandSimulation.executorScheduledServiceAnimalLifeCycle.shutdown();
             IslandSimulation.executorScheduledServicePlantGrowth.shutdown();
@@ -63,7 +64,7 @@ public class CheckingStopConditionOfIslandSimulation implements  Runnable{
             IslandSimulation.executorScheduledServiceDisplay.shutdown();
 
         if(conditionOfIslandSimulationInt == 1) {
-            System.out.println("Симуляция закончилась, на острове остались одни хищники");
+            System.out.println("Симуляция закончилась, на острове остались одни хищники или осталось  травояжных не больше 5");
             IslandSimulation.executorScheduledCheckStopConditionOfIslandSimulation.shutdown();
         }
 

@@ -14,76 +14,30 @@ public class Deer extends Herbivores {
 
     private volatile int weight = BoxCharacteristicsObject.WEIGHT_DEER;
     private volatile int age;
-    private  final int progenyLimit = 10;
+    private final int progenyLimit = 10;
     private final int neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_DEER;
     private volatile int x;
     private volatile int y;
-    public  volatile boolean isHunger = true;
+    public volatile boolean isHunger = true;
+    private volatile boolean stop = false;
+    private volatile int eatenKg = 0;
+    private volatile int progeny = 0;
+    private volatile boolean eat = false;
 
-    @Override
-    public  synchronized boolean getIsHunger(){
-        return  isHunger;
-    }
+    public String typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_DEER;
+    public String typeString = BoxCharacteristicsObject.TYPE_STRING_DEER;
 
-    @Override
-    public   synchronized void  setIsHunger(boolean isHunger){
-        this.isHunger = isHunger;
-    }
+    private volatile int attemptsFindPartnerCounter = 0;
 
-    private  volatile boolean eat = false;
-    @Override
-    public  synchronized boolean getEat(){
-        return  eat;
-    }
+    private volatile int daysWithoutFood = 0;
+    private volatile int countDays = 0;
+    private volatile int dailyMealCounter = 0;
 
-
-    @Override
-    public synchronized void  setEat(boolean eat ){
-        this.eat = eat;
-    }
-    private  volatile int progeny = 0;
-
-    @Override
-    public  synchronized int getProgeny(){
-        return progeny;
-    }
-    @Override
-    public  synchronized void  setProgeny(int progeny ){
-        this.progeny = progeny;
-    }
-    private  volatile int eatenKg = 0;
-
-    @Override
-    public  synchronized int getEatenKg (){
-        return eatenKg;
-    }
-
-    private   volatile boolean stop = false;
-
-    @Override
-    public boolean getStop() {
-        return stop;
-    }
-
-    @Override
-    public void setStop(boolean stop) {
-        this.stop = stop;
-    }
-
-    @Override
-    public  synchronized void  setEatenKg (int eatenKg ){
-        this.eatenKg = eatenKg;
-    }
-
-
-    public String typePicture  = BoxCharacteristicsObject.STRING_TYPE_PICTURE_DEER;
-    public String typeString  =  BoxCharacteristicsObject.TYPE_STRING_DEER;
     private final List<String> initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES,
-            BoxCharacteristicsObject.TYPE_STRING_GRASS,BoxCharacteristicsObject.TYPE_STRING_FRUIT,
-            BoxCharacteristicsObject.TYPE_STRING_BERRIES,BoxCharacteristicsObject.TYPE_STRING_VEGETABLES);
+            BoxCharacteristicsObject.TYPE_STRING_GRASS, BoxCharacteristicsObject.TYPE_STRING_FRUIT,
+            BoxCharacteristicsObject.TYPE_STRING_BERRIES, BoxCharacteristicsObject.TYPE_STRING_VEGETABLES);
     public CopyOnWriteArrayList<String> foodStuffs = new CopyOnWriteArrayList<>(initialList);
 
-  //  public Label label = new Label(typePicture);
 
     public Deer(int weight, int age) {
         super();
@@ -96,29 +50,85 @@ public class Deer extends Herbivores {
         this.age = age;
     }
 
-   // @Override
-   // public Label getLabel() {
-   //     return label;
-   // }
+    @Override
+    public synchronized boolean getIsHunger() {
+        return isHunger;
+    }
 
     @Override
-    public  synchronized int getX() {
+    public synchronized void setIsHunger(boolean isHunger) {
+        this.isHunger = isHunger;
+    }
+
+
+    @Override
+    public synchronized boolean getEat() {
+        return eat;
+    }
+
+
+    @Override
+    public synchronized void setEat(boolean eat) {
+        this.eat = eat;
+    }
+
+    @Override
+    public synchronized int getProgeny() {
+        return progeny;
+    }
+
+    @Override
+    public synchronized void setProgeny(int progeny) {
+        this.progeny = progeny;
+    }
+
+    @Override
+    public synchronized int getEatenKg() {
+        return eatenKg;
+    }
+
+
+    @Override
+    public boolean getStop() {
+        return stop;
+    }
+
+    @Override
+    public void setStop(boolean stop) {
+        this.stop = stop;
+    }
+
+    @Override
+    public synchronized void setEatenKg(int eatenKg) {
+        this.eatenKg = eatenKg;
+    }
+
+    //  public Label label = new Label(typePicture);
+
+
+    // @Override
+    // public Label getLabel() {
+    //     return label;
+    // }
+
+    @Override
+    public synchronized int getX() {
         return x;
     }
 
     @Override
-    public  synchronized int getY() {
+    public synchronized int getY() {
         return y;
     }
 
     @Override
-    public  void setXY(int x, int y) {
+    public void setXY(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
     @Override
-    public  synchronized int getWeight() {
+    public synchronized int getWeight() {
         return weight;
     }
 
@@ -168,22 +178,18 @@ public class Deer extends Herbivores {
         return step;
     }
 
-    private volatile int daysWithoutFood = 0;
-    private  volatile int countDays = 0;
-    private  volatile int  dailyMealCounter  = 0;
-
     @Override
-    public  synchronized int getDaysWithoutFood() {
+    public synchronized int getDaysWithoutFood() {
         return daysWithoutFood;
     }
 
     @Override
-    public synchronized void setDaysWithoutFood(  int daysWithoutFood) {
+    public synchronized void setDaysWithoutFood(int daysWithoutFood) {
         this.daysWithoutFood = daysWithoutFood;
     }
 
     @Override
-    public  synchronized int getCountDays() {
+    public synchronized int getCountDays() {
         return countDays;
     }
 
@@ -194,7 +200,7 @@ public class Deer extends Herbivores {
     }
 
     @Override
-    public  synchronized int getDailyMealCounter() {
+    public synchronized int getDailyMealCounter() {
         return dailyMealCounter;
     }
 
@@ -202,17 +208,18 @@ public class Deer extends Herbivores {
     public synchronized void setDailyMealCounter(int dailyMealCounter) {
         this.dailyMealCounter = dailyMealCounter;
     }
-    private  volatile int  hungryDaysCounter = 0;
+
+    private volatile int hungryDaysCounter = 0;
+
     @Override
-    public  synchronized int getHungryDaysCounter() {
+    public synchronized int getHungryDaysCounter() {
         return hungryDaysCounter;
     }
 
     @Override
-    public synchronized void setHungryDaysCounter(  int hungryDaysCounter) {
+    public synchronized void setHungryDaysCounter(int hungryDaysCounter) {
         this.hungryDaysCounter = hungryDaysCounter;
     }
-    private volatile int attemptsFindPartnerCounter = 0;
 
     @Override
     public synchronized int getAttemptsFindPartnerCounter() {

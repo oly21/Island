@@ -73,7 +73,7 @@ public class IslandSimulation {
 
         executorScheduledServicePrintingIslandSimulationStatistics.scheduleAtFixedRate(printingIslandSimulationStatistics, 0, 10, TimeUnit.SECONDS);
         executorScheduledServiceDisplay.scheduleAtFixedRate(islandSimulationDisplay, 1, 10, TimeUnit.SECONDS);
-        executorScheduledServicePlantGrowth.scheduleAtFixedRate(plantGrowth, 0, 10, TimeUnit.SECONDS);
+        executorScheduledServicePlantGrowth.scheduleAtFixedRate(plantGrowth, 0, 20, TimeUnit.SECONDS);
         executorScheduledCheckStopConditionOfIslandSimulation.scheduleAtFixedRate(checkingStopConditionOfIslandSimulation, 10, 40, TimeUnit.SECONDS);
         //  }
 

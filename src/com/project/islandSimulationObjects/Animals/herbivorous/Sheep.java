@@ -28,6 +28,19 @@ public class Sheep extends Herbivores {
     private final int neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_SHEEP;
     private volatile int x;
     private volatile int y;
+    private volatile int daysWithoutFood = 0;
+    private volatile int countDays = 0;
+    private volatile int dailyMealCounter = 0;
+    private volatile boolean stop = false;
+    private volatile int eatenKg = 0;
+    private volatile int progeny = 0;
+    private volatile boolean eat = false;
+
+    public Sheep(int age) {
+        super();
+        this.age = age;
+    }
+
 
     public Sheep(int weight, int age) {
         super();
@@ -42,7 +55,7 @@ public class Sheep extends Herbivores {
     public volatile boolean isHunger = true;
 
     @Override
-    public  synchronized boolean getIsHunger() {
+    public synchronized boolean getIsHunger() {
         return isHunger;
     }
 
@@ -52,10 +65,9 @@ public class Sheep extends Herbivores {
         this.isHunger = isHunger;
     }
 
-    private volatile boolean eat = false;
 
     @Override
-    public  synchronized boolean getEat() {
+    public synchronized boolean getEat() {
         return eat;
     }
 
@@ -65,7 +77,6 @@ public class Sheep extends Herbivores {
         this.eat = eat;
     }
 
-    private  volatile int progeny = 0;
 
     @Override
     public synchronized int getProgeny() {
@@ -77,14 +88,12 @@ public class Sheep extends Herbivores {
         this.progeny = progeny;
     }
 
-    private volatile int eatenKg = 0;
 
     @Override
     public synchronized int getEatenKg() {
         return eatenKg;
     }
 
-    private volatile boolean stop = false;
 
     @Override
     public synchronized boolean getStop() {
@@ -101,19 +110,14 @@ public class Sheep extends Herbivores {
         this.eatenKg = eatenKg;
     }
 
-    public Sheep(int age) {
-        super();
-        this.age = age;
-    }
-
 
     @Override
-    public  synchronized int getX() {
+    public synchronized int getX() {
         return x;
     }
 
     @Override
-    public  synchronized int getY() {
+    public synchronized int getY() {
         return y;
     }
 
@@ -124,16 +128,16 @@ public class Sheep extends Herbivores {
     }
 
     @Override
-    public  synchronized int getWeight() {
+    public synchronized int getWeight() {
         return weight;
     }
 
     @Override
-    public  synchronized int getAge() {
+    public synchronized int getAge() {
         return age;
     }
 
-    public  synchronized void setAge(int age) {
+    public synchronized void setAge(int age) {
         this.age = age;
     }
 
@@ -176,26 +180,23 @@ public class Sheep extends Herbivores {
 
     @Override
     public void reproduce() {
-        for (int i = 0; i <= 5; i++) {
+        for (int i = 0; i <= 2; i++) {
             super.reproduce();
         }
     }
-    private volatile int daysWithoutFood = 0;
-    private  volatile int countDays = 0;
-    private  volatile int  dailyMealCounter  = 0;
 
     @Override
-    public  synchronized int getDaysWithoutFood() {
+    public synchronized int getDaysWithoutFood() {
         return daysWithoutFood;
     }
 
     @Override
-    public synchronized void setDaysWithoutFood(  int daysWithoutFood) {
+    public synchronized void setDaysWithoutFood(int daysWithoutFood) {
         this.daysWithoutFood = daysWithoutFood;
     }
 
     @Override
-    public  synchronized int getCountDays() {
+    public synchronized int getCountDays() {
         return countDays;
     }
 
@@ -206,7 +207,7 @@ public class Sheep extends Herbivores {
     }
 
     @Override
-    public  synchronized int getDailyMealCounter() {
+    public synchronized int getDailyMealCounter() {
         return dailyMealCounter;
     }
 
@@ -215,16 +216,18 @@ public class Sheep extends Herbivores {
         this.dailyMealCounter = dailyMealCounter;
     }
 
-    private  volatile int  hungryDaysCounter = 0;
+    private volatile int hungryDaysCounter = 0;
+
     @Override
-    public  synchronized int getHungryDaysCounter() {
+    public synchronized int getHungryDaysCounter() {
         return hungryDaysCounter;
     }
 
     @Override
-    public synchronized void setHungryDaysCounter(  int hungryDaysCounter) {
+    public synchronized void setHungryDaysCounter(int hungryDaysCounter) {
         this.hungryDaysCounter = hungryDaysCounter;
     }
+
     private volatile int attemptsFindPartnerCounter = 0;
 
     @Override

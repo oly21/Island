@@ -3,7 +3,6 @@ package com.project.islandSimulationObjects.Animals.herbivorous;
 import com.project.island.BoxCharacteristicsObject;
 import com.project.islandSimulationObjects.Animals.Animal;
 import com.project.islandSimulationObjects.Coordinate;
-
 //import javafx.scene.control.Label;
 import java.util.Arrays;
 import java.util.List;
@@ -13,12 +12,29 @@ public class Boar extends Animal {
     public String typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_BOAR;
     public String typeString = BoxCharacteristicsObject.TYPE_STRING_BOAR;
     //public Label label = new Label(typePicture);
+    private volatile boolean isHunger = true;
+    private volatile boolean eat = false;
+    private volatile int progeny = 0;
+    private volatile int eatenKg = 0;
+    private volatile boolean stop = false;
+    private volatile int attemptsFindPartnerCounter = 0;
+    private final int step = BoxCharacteristicsObject.SPEED_BOAR;
+    private volatile int weight = BoxCharacteristicsObject.WEIGHT_BOAR;
+    public volatile int progenyLimit = 5;
+    private volatile int age;
+    private final int neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_BOAR;
+    private volatile int x;
+    private volatile int y;
+    private volatile int daysWithoutFood = 0;
+    private volatile int countDays = 0;
+    private volatile int dailyMealCounter = 0;
+    private volatile int hungryDaysCounter = 0;
 
     private final List<String> initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_FRUIT,
             BoxCharacteristicsObject.TYPE_STRING_BERRIES, BoxCharacteristicsObject.TYPE_STRING_VEGETABLES,
             BoxCharacteristicsObject.TYPE_STRING_FRUIT, BoxCharacteristicsObject.TYPE_STRING_CATERPILLAR);
     public CopyOnWriteArrayList<String> foodStuffs = new CopyOnWriteArrayList<>(initialList);
-    private volatile boolean isHunger= true;
+
 
     @Override
     public synchronized boolean getIsHunger() {
@@ -30,8 +46,6 @@ public class Boar extends Animal {
         this.isHunger = isHunger;
     }
 
-    private volatile boolean eat = false;
-
     @Override
     public synchronized boolean getEat() {
         return eat;
@@ -42,7 +56,6 @@ public class Boar extends Animal {
         this.eat = eat;
     }
 
-    private volatile int progeny = 0;
 
     @Override
     public synchronized int getProgeny() {
@@ -54,15 +67,12 @@ public class Boar extends Animal {
         this.progeny = progeny;
     }
 
-    private volatile int eatenKg = 0;
 
     @Override
     public synchronized int getEatenKg() {
         return eatenKg;
     }
 
-
-    private volatile boolean stop = false;
 
     @Override
     public synchronized boolean getStop() {
@@ -79,7 +89,6 @@ public class Boar extends Animal {
         this.eatenKg = eatenKg;
     }
 
-    private volatile int attemptsFindPartnerCounter = 0;
 
     @Override
     public synchronized int getAttemptsFindPartnerCounter() {
@@ -95,18 +104,6 @@ public class Boar extends Animal {
     //     return label;
     //  }
 
-
-    public volatile int progenyLimit = 5;
-    private final int step = BoxCharacteristicsObject.SPEED_BOAR;
-    private volatile int weight = BoxCharacteristicsObject.WEIGHT_BOAR;
-    private volatile int age;
-    private final int neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_BOAR;
-    private volatile int x;
-    private volatile int y;
-    private volatile int daysWithoutFood = 0;
-    private volatile int countDays = 0;
-    private volatile int dailyMealCounter = 0;
-    private volatile int hungryDaysCounter = 0;
 
     @Override
     public synchronized int getHungryDaysCounter() {

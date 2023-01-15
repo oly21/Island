@@ -49,13 +49,13 @@ public class AnimalLifeCycle implements Runnable {
         //  }
 
 
-        for (Runnable task : animalsCopy) {
+        for (Runnable task : animals) {
 
-           // int IndexAnimalTask = ThreadLocalRandom.current().nextInt(animalsCopy.size()) % animalsCopy.size();
+            int IndexAnimalTask = ThreadLocalRandom.current().nextInt(animalsCopy.size()) % animalsCopy.size();
 
-           // Runnable animalTask = animalsCopy.get(IndexAnimalTask);
+            Runnable animalTask = animalsCopy.get(IndexAnimalTask);
             executorService.submit(task);
-           // animalsCopy.remove(IndexAnimalTask);
+            animalsCopy.remove(IndexAnimalTask);
 
 
             // try {

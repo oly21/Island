@@ -26,7 +26,7 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
 
     static {
 
-            islandArray = Island.getIslandArray();
+        islandArray = Island.getIslandArray();
 
     }
 
@@ -41,6 +41,7 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
     private boolean eat = false;
 
     public abstract boolean getEat();
+
     public ConcurrentHashMap<String, Double> chanceToEatMap = new ConcurrentHashMap<>();
 
     public abstract CopyOnWriteArrayList<String> getFoodStuffs();
@@ -66,18 +67,21 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
     public static volatile int limitDownX = Island.x - 1;
 
 
-    public static volatile AtomicInteger numberAnimals = new AtomicInteger();
-    public static volatile AtomicInteger numberDeadAnimals = new AtomicInteger();
+    public static volatile AtomicInteger numberAnimals = new AtomicInteger(0);
+    public static volatile AtomicInteger numberDeadAnimals = new AtomicInteger(0);
     public static volatile AtomicInteger numberBornAnimals = new AtomicInteger(0);
     public static volatile AtomicInteger numberAnimalMoves = new AtomicInteger(0);
     public static volatile AtomicInteger numberEatenPlants = new AtomicInteger(0);
-    public static volatile AtomicInteger numberPlants = new AtomicInteger(plants.size());
+    public static volatile AtomicInteger numberPlants = new AtomicInteger();
     public static volatile AtomicInteger numberTask = new AtomicInteger(0);
 
     public static volatile AtomicInteger runStart = new AtomicInteger(0);
     public static volatile AtomicInteger runFinish = new AtomicInteger(0);
-    public static volatile AtomicInteger startHunt = new AtomicInteger(plants.size());
-    public static volatile AtomicInteger finishHunt = new AtomicInteger(0);
+
+    public static volatile AtomicInteger startHavingVitality = new AtomicInteger(0);
+    public static volatile AtomicInteger finishHavingVitality = new AtomicInteger(0);
+    public static volatile AtomicInteger finishDeathFromOldAge = new AtomicInteger(0);
+    public static volatile AtomicInteger startDeathFromOldAge = new AtomicInteger(0);
 
     public static volatile AtomicInteger startGet = new AtomicInteger(0);
     public static volatile AtomicInteger finishGet = new AtomicInteger(0);
@@ -129,8 +133,6 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
     public static volatile AtomicInteger numberDeadWolf = new AtomicInteger(0);
 
 
-
-
     public static volatile AtomicInteger numberBoars = new AtomicInteger();
     public static volatile AtomicInteger numberBuffalo = new AtomicInteger();
     public static volatile AtomicInteger numberCaterpillars = new AtomicInteger(0);
@@ -148,29 +150,28 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
     public static volatile AtomicInteger numberWolfs = new AtomicInteger(0);
 
 
-
-    public  abstract int getDaysWithoutFood();
-
-
-    public abstract void setDaysWithoutFood(  int daysWithoutFood);
+    public abstract int getDaysWithoutFood();
 
 
-    public  abstract int getCountDays();
+    public abstract void setDaysWithoutFood(int daysWithoutFood);
+
+
+    public abstract int getCountDays();
 
 
     public abstract void setCountDays(int countDays);
 
 
-    public  abstract int getDailyMealCounter();
+    public abstract int getDailyMealCounter();
 
 
     public abstract void setDailyMealCounter(int dailyMealCounter);
-   // private  volatile int  hungryDaysCounter = 0;
+    // private  volatile int  hungryDaysCounter = 0;
 
-    public  abstract int getHungryDaysCounter();
+    public abstract int getHungryDaysCounter();
 
 
-    public abstract void setHungryDaysCounter(  int hungryDaysCounter);
+    public abstract void setHungryDaysCounter(int hungryDaysCounter);
     //private volatile int attemptsFindPartnerCounter = 0;
 
 
@@ -208,30 +209,68 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
 
     public abstract void setStop(boolean stop);
 
+    public static volatile AtomicInteger deathFromStarvation = new AtomicInteger(0);
+    public static volatile AtomicInteger deathFromOldAge = new AtomicInteger(0);
 
     public void run() {
-
+        this.setCountDays(this.getCountDays() + 1);
+        this.setDailyMealCounter(0);
+        this.setAttemptsFindPartnerCounter(0);
         this.setEat(false);
         runStart.incrementAndGet();
-        if (this.getStop() == false) {
+        if ((!this.getStop() && havingVitality() && !deathFromOldAge()) && this.getIsHunger()) {
             this.eat();
-            if (this.getStop() == false) {
-                this.reproduce();
+
+
+            if (!this.getEat()) {
+                this.setDaysWithoutFood(this.getDaysWithoutFood() + 1);
+            }
+
+            if (this.getIsHunger()) {
+                this.setHungryDaysCounter(this.getHungryDaysCounter() + 1);
             }
 
         }
 
-        if (this.getStop() == false && this.getEat() == false) {
+        if (this.getCountDays() % 4 == 0) {
+            this.setProgeny(0);
+        }
+
+
+        if ((!this.getStop() && havingVitality() && !deathFromOldAge())) {
+            if (this instanceof Predators) {
+                if (!this.getStop() && this.progeny < this.getProgenyLimit() && this.getAge() >= 2 && (checkNumberAnimalsOfAParticularSpecies(this))< Island.x+10) {
+                    if (this.getEat() || !this.getIsHunger()) {
+                        this.reproduce();
+                    }
+                } //&& numberPlants.get()>50
+            } else {
+                if (!this.getStop() && this.progeny < this.getProgenyLimit() && this.getAge() >= 2 &&(checkNumberAnimalsOfAParticularSpecies(this))< (Island.x)) {
+                   // if (this.getEat() || !this.getIsHunger()) {
+                        this.reproduce();
+                   // }
+
+
+                }
+            }
+        }
+
+        if (!this.getStop() && !this.getEat()) {
             choiceDirectionForMoveAndCallMove();
             numberAnimalMoves.incrementAndGet();
         }
+        if (!this.getStop() && !this.getEat() && freeCells.size() == 0) {
+            swapPlacesWithNeighbor();
+            numberAnimalMoves.incrementAndGet();
+        }
+
         runFinish.incrementAndGet();
     }
 
 
-
-
     public void eat() {
+        this.setEat(false);
+        this.setDailyMealCounter(this.getDailyMealCounter() + 1);
         startEat.incrementAndGet();
         Double chanceToEat = 1.0;
 
@@ -255,72 +294,80 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
 
                                     }
                                 }
-                                    if (this instanceof Predators) {
-                                        // if  (( (Animal) islandArray[x][y]).getStop() == false){
-                                        // }
-                                        if (chanceToEatMap.containsKey(this)) {
-                                            chanceToEatMap = (((Predators) this).getMapChanceToEat());
-                                            chanceToEat = chanceToEatMap.get(islandArray[x][y].getTypeString());
-                                        }
-                                    }
-                                    if (ThreadLocalRandom.current().nextDouble(0, 1) < chanceToEat) {
-
-
-                                        this.setEatenKg(this.getEatenKg() + islandArray[x][y].getWeight());
-                                        // if (this.getEatenKg() <= this.getNeededFoodKg()%2) {
-                                        //    this.setIsHunger(true);
-
-                                        //   }
-
-                                        //   else{
-                                        //      this.setIsHunger(false);
-                                        //   }
-
-                                        this.setEat(true);
-                                        islandSimulationObjects.remove(islandArray[x][y]);
-
-
-                                        if (islandArray[x][y] instanceof Animal) {
-                                            decreaseTheNumberOfOneTypeOfAnimal((Animal)islandArray[x][y] );
-                                            numberAnimals.decrementAndGet();
-                                            numberDeadAnimals.incrementAndGet();
-                                            animals.remove(islandArray[x][y]);
-                                            Animal animal = (Animal) islandArray[x][y];
-                                            animal.setStop(true);
-
-                                        } else {
-                                            numberPlants.decrementAndGet();
-                                            numberEatenPlants.incrementAndGet();
-                                            plants.remove(islandArray[x][y]);
-                                        }
-                                        islandArray[x][y].setXY(-1, -1);
-                                        startMove.incrementAndGet();
-
-                                        this.move(coordinate1, this);
-                                        finishMove.incrementAndGet();
-
-                                        break;
-
-                                    }
-
-                                    //}
-
-
+                                if (this instanceof Predators) {
+                                    // if  (( (Animal) islandArray[x][y]).getStop() == false){
                                     // }
+                                    if (chanceToEatMap.containsKey(this)) {
+                                        chanceToEatMap = (((Predators) this).getMapChanceToEat());
+                                        chanceToEat = chanceToEatMap.get(islandArray[x][y].getTypeString());
+                                    }
+                                }
+                                if (ThreadLocalRandom.current().nextDouble(0, 1) < chanceToEat) {
+
+
+                                    this.setEatenKg(this.getEatenKg() + islandArray[x][y].getWeight());
+                                    if (this.getEatenKg() < this.getNeededFoodKg() / 2) {
+                                        this.setIsHunger(true);
+
+                                    } else {
+                                        this.setIsHunger(false);
+                                    }
+
+
+                                    // if (this.getEatenKg() <= this.getNeededFoodKg()%2) {
+                                    //    this.setIsHunger(true);
+
+                                    //   }
+
+                                    //   else{
+                                    //      this.setIsHunger(false);
+                                    //   }
+
+                                    this.setEat(true);
+                                    islandSimulationObjects.remove(islandArray[x][y]);
+
+
+                                    if (islandArray[x][y] instanceof Animal) {
+                                        decreaseTheNumberOfOneTypeOfAnimal((Animal) islandArray[x][y]);
+                                        numberAnimals.decrementAndGet();
+                                        numberDeadAnimals.incrementAndGet();
+                                        animals.remove(islandArray[x][y]);
+                                        Animal animal = (Animal) islandArray[x][y];
+                                        animal.setStop(true);
+
+                                    } else {
+                                        numberPlants.decrementAndGet();
+                                        numberEatenPlants.incrementAndGet();
+                                        plants.remove(islandArray[x][y]);
+                                    }
+                                    islandArray[x][y].setXY(-1, -1);
+                                    startMove.incrementAndGet();
+                                    this.move(coordinate1, this);
+
+                                    finishMove.incrementAndGet();
+
+                                    break;
+
                                 }
 
-                            } else {
-                                break;
+                                //}
+
+
+                                // }
                             }
 
+                        } else {
+                            break;
                         }
-                    }
 
+                    }
                 }
+
             }
-            finishFor.incrementAndGet();
-            finishEat.incrementAndGet();
         }
+        finishFor.incrementAndGet();
+        finishEat.incrementAndGet();
+    }
 
     public void reproduce() {
         startR.incrementAndGet();
@@ -328,110 +375,115 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
         startFor.incrementAndGet();
         if (!this.getStop()) {
             synchronized (islandArray) {
-                for (Coordinate coordinate1 : neighboringCells) {
+                synchronized (freeCells) {
+                    for (Coordinate coordinate1 : neighboringCells) {
 
-                    int x = coordinate1.getX();
-                    int y = coordinate1.getY();
-                    if (!this.getStop() && islandArray[x][y] instanceof Animal && !((Animal) islandArray[x][y]).getStop()) {
+                        int x = coordinate1.getX();
+                        int y = coordinate1.getY();
+                        if (!this.getStop() && islandArray[x][y] instanceof Animal && !((Animal) islandArray[x][y]).getStop()) {
 
-                        if (islandArray[x][y] != null) {
-                            if (this.getTypeString().equals(islandArray[x][y].getTypeString())) {
-                                //progeny < 2 &&
-                                if (freeCells.size() > 0) {
-                                    Animal animalCopy;
+                            if (islandArray[x][y] != null) {
+                                if (this.getTypeString().equals(islandArray[x][y].getTypeString())) {
+                                    //progeny < 2 &&
+                                    if (freeCells.size() > 0) {
+                                        Animal animalCopy;
 
-                                    if (this instanceof Fox) {
-                                        animalCopy = new Fox(1, 1);
-                                        numberBornFox.incrementAndGet();
-                                        numberFoxes.incrementAndGet();
-                                    } else if (this instanceof Boa) {
-                                        animalCopy = new Boa(1, 1);
-                                        numberBornBoa.incrementAndGet();
-                                        numberBoas.incrementAndGet();
-                                    } else if (this instanceof Buffalo) {
-                                        animalCopy = new Buffalo(1, 1);
-                                        numberBornBuffalo.incrementAndGet();
-                                        numberBuffalo.incrementAndGet();
-                                    } else if (this instanceof Caterpillar) {
-                                        animalCopy = new Caterpillar(1, 1);
-                                        numberBornCaterpillar.incrementAndGet();
-                                        numberCaterpillars.incrementAndGet();
-                                    } else if (this instanceof Deer) {
-                                        animalCopy = new Deer(1, 1);
-                                        numberBornDeer.incrementAndGet();
-                                        numberDeer.incrementAndGet();
-                                    } else if (this instanceof Horse) {
-                                        animalCopy = new Horse(1, 1);
-                                        numberBornHorse.incrementAndGet();
-                                        numberHorses.incrementAndGet();
-                                    } else if (this instanceof Bear) {
-                                        animalCopy = new Bear(1, 1);
-                                        numberBears.incrementAndGet();
-                                    } else if (this instanceof Eagle) {
-                                        animalCopy = new Eagle(1, 1);
-                                        numberBornEagle.incrementAndGet();
-                                        numberEagles.incrementAndGet();
-                                    } else if (this instanceof Wolf) {
-                                        animalCopy = new Wolf(1, 1);
-                                        numberBornWolf.incrementAndGet();
-                                        numberWolfs.incrementAndGet();
-                                    } else if (this instanceof Boar) {
-                                        animalCopy = new Boar(1, 1);
-                                        numberBornBoar.incrementAndGet();
-                                        numberBoars.incrementAndGet();
-                                    } else if (this instanceof Rabbit) {
-                                        animalCopy = new Rabbit(1, 1);
-                                        numberBornRabbit.incrementAndGet();
-                                        numberRabbits.incrementAndGet();
-                                    } else if (this instanceof Duck) {
-                                        animalCopy = new Duck(1, 1);
-                                        numberBornDuck.incrementAndGet();
-                                        numberDucks.incrementAndGet();
-                                    } else if (this instanceof Goat) {
-                                        animalCopy = new Goat(1, 1);
-                                        numberBornGoat.incrementAndGet();
-                                        numberGoats.incrementAndGet();
-                                    } else if (this instanceof Mouse) {
-                                        animalCopy = new Mouse(1, 1);
-                                        numberBornMouse.incrementAndGet();
-                                        numberMouses.incrementAndGet();
-                                    } else if (this instanceof Sheep) {
-                                        animalCopy = new Sheep(1, 1);
-                                        numberBornSheep.incrementAndGet();
-                                        numberSheep.incrementAndGet();
+                                        if (this instanceof Fox) {
+                                            animalCopy = new Fox(1, 1);
+                                            numberBornFox.incrementAndGet();
+                                            numberFoxes.incrementAndGet();
+                                        } else if (this instanceof Boa) {
+                                            animalCopy = new Boa(1, 1);
+                                            numberBornBoa.incrementAndGet();
+                                            numberBoas.incrementAndGet();
+                                        } else if (this instanceof Buffalo) {
+                                            animalCopy = new Buffalo(1, 1);
+                                            numberBornBuffalo.incrementAndGet();
+                                            numberBuffalo.incrementAndGet();
+                                        } else if (this instanceof Caterpillar) {
+                                            animalCopy = new Caterpillar(1, 1);
+                                            numberBornCaterpillar.incrementAndGet();
+                                            numberCaterpillars.incrementAndGet();
+                                        } else if (this instanceof Deer) {
+                                            animalCopy = new Deer(1, 1);
+                                            numberBornDeer.incrementAndGet();
+                                            numberDeer.incrementAndGet();
+                                        } else if (this instanceof Horse) {
+                                            animalCopy = new Horse(1, 1);
+                                            numberBornHorse.incrementAndGet();
+                                            numberHorses.incrementAndGet();
+                                        } else if (this instanceof Bear) {
+                                            animalCopy = new Bear(1, 1);
+                                            numberBornBear.incrementAndGet();
+                                            numberBears.incrementAndGet();
+                                        } else if (this instanceof Eagle) {
+                                            animalCopy = new Eagle(1, 1);
+                                            numberBornEagle.incrementAndGet();
+                                            numberEagles.incrementAndGet();
+                                        } else if (this instanceof Wolf) {
+                                            animalCopy = new Wolf(1, 1);
+                                            numberBornWolf.incrementAndGet();
+                                            numberWolfs.incrementAndGet();
+                                        } else if (this instanceof Boar) {
+                                            animalCopy = new Boar(1, 1);
+                                            numberBornBoar.incrementAndGet();
+                                            numberBoars.incrementAndGet();
+                                        } else if (this instanceof Rabbit) {
+                                            animalCopy = new Rabbit(1, 1);
+                                            numberBornRabbit.incrementAndGet();
+                                            numberRabbits.incrementAndGet();
+                                        } else if (this instanceof Duck) {
+                                            animalCopy = new Duck(1, 1);
+                                            numberBornDuck.incrementAndGet();
+                                            numberDucks.incrementAndGet();
+                                        } else if (this instanceof Goat) {
+                                            animalCopy = new Goat(1, 1);
+                                            numberBornGoat.incrementAndGet();
+                                            numberGoats.incrementAndGet();
+                                        } else if (this instanceof Mouse) {
+                                            animalCopy = new Mouse(1, 1);
+                                            numberBornMouse.incrementAndGet();
+                                            numberMouses.incrementAndGet();
+                                        } else if (this instanceof Sheep) {
+                                            animalCopy = new Sheep(1, 1);
+                                            numberBornSheep.incrementAndGet();
+                                            numberSheep.incrementAndGet();
+                                        } else {
+                                            break;
+                                        }
+                                        numberAnimals.incrementAndGet();
+
+                                        animals.add(animalCopy);
+                                        numberBornAnimals.incrementAndGet();
+
+
+                                        islandSimulationObjects.add(animalCopy);
+
+                                        for (Coordinate freeCell : IslandSimulation.getListFreeCells()) {
+                                            setPositionForNewbornAnimal(freeCell, animalCopy);
+
+                                            freeCells.remove(freeCell);
+                                            break;
+                                        }
                                     } else {
                                         break;
                                     }
-                                    numberAnimals.incrementAndGet();
 
-                                    animals.add(animalCopy);
-                                    numberBornAnimals.incrementAndGet();
-
-
-                                    islandSimulationObjects.add(animalCopy);
-
-                                    for (Coordinate freeCell : IslandSimulation.getListFreeCells()) {
-                                        setPositionForNewbornAnimal(freeCell, animalCopy);
-
-                                        freeCells.remove(freeCell);
-                                        break;
-                                    }
-                                } else {
                                     break;
                                 }
 
+
+                            } else {
                                 break;
                             }
-
-
-                        } else {
-                            break;
                         }
                     }
-                }
 
+                }
             }
-        }finishFor.incrementAndGet();
+
+        }
+        finishFor.incrementAndGet();
         finishR.incrementAndGet();
     }
 
@@ -461,18 +513,15 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
     }
 
 
-    public void decreaseTheNumberOfOneTypeOfAnimal( Animal animal ) {
+    public void decreaseTheNumberOfOneTypeOfAnimal(Animal animal) {
 
         if (animal instanceof Fox) {
-            numberDeadFox.decrementAndGet();
+            numberDeadFox.incrementAndGet();
             numberFoxes.decrementAndGet();
-        }
-        else if(this instanceof Boa) {
-
+        } else if (this instanceof Boa) {
             numberDeadBoa.incrementAndGet();
             numberBoas.decrementAndGet();
-        }
-        else if (animal instanceof Buffalo) {
+        } else if (animal instanceof Buffalo) {
             numberDeadBuffalo.incrementAndGet();
             numberBuffalo.decrementAndGet();
         } else if (animal instanceof Caterpillar) {
@@ -493,8 +542,7 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
         } else if (animal instanceof Wolf) {
             numberDeadWolf.incrementAndGet();
             numberWolfs.decrementAndGet();
-        }
-        else if (animal instanceof Boar) {
+        } else if (animal instanceof Boar) {
             numberDeadBoar.incrementAndGet();
             numberBoars.decrementAndGet();
         } else if (animal instanceof Rabbit) {
@@ -515,15 +563,49 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
         }
     }
 
+    public int checkNumberAnimalsOfAParticularSpecies(Animal animal) {
+
+        if (animal instanceof Fox) {
+            return numberFoxes.get();
+
+        } else if (this instanceof Boa) {
+            return numberBoas.get();
+
+        } else if (animal instanceof Buffalo) {
+            return numberBuffalo.get();
+
+        } else if (animal instanceof Caterpillar) {
+            return numberCaterpillars.get();
+        } else if (animal instanceof Deer) {
+            return numberDeer.get();
+        } else if (animal instanceof Horse) {
+            return numberHorses.get();
+        } else if (animal instanceof Bear) {
+            return numberBears.get();
+        } else if (animal instanceof Eagle) {
+            return numberEagles.get();
+        } else if (animal instanceof Wolf) {
+            return numberWolfs.get();
+        } else if (animal instanceof Boar) {
+            return numberBoars.get();
+        } else if (animal instanceof Rabbit) {
+            return numberRabbits.get();
+        } else if (animal instanceof Duck) {
+            return numberDucks.get();
+        } else if (animal instanceof Goat) {
+            return numberGoats.get();
+        } else if (animal instanceof Mouse) {
+            return numberMouses.get();
+        } else if (animal instanceof Sheep) {
+            return numberSheep.get();
+        } else {
+            return 0;
+        }
+    }
 
     //public void increaseTheNumberOfOneTypeOfAnimal() {
 
-   // }
-
-
-
-
-
+    // }
 
 
     // public void Hunt() throws InstantiationException, IllegalAccessException {
@@ -674,10 +756,9 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
     }
 
     public void move(Coordinate coordinate, Animal animal) {
-        if (this.getStop() == false) {
+        if (!this.getStop()) {
             startMove.incrementAndGet();
             int x = this.getX();
-
             int y = this.getY();
             this.setXY(coordinate.getX(), coordinate.getY());
             islandArray[coordinate.getX()][coordinate.getY()] = animal;
@@ -697,4 +778,112 @@ public abstract class Animal implements IslandSimulationObject, Runnable {
 
         finishMove.incrementAndGet();
     }
+
+    public void swapPlacesWithNeighbor() {
+        synchronized (islandArray) {
+            startM2.incrementAndGet();
+
+            neighboringCells = getListNeighboringCells();
+
+            for (Coordinate coordinate : neighboringCells) {
+                if (!this.getStop() && islandArray[coordinate.getX()][coordinate.getY()] != null) {
+                    int x = this.getX();
+
+                    int y = this.getY();
+
+
+                    islandArray[x][y] = islandArray[coordinate.getX()][coordinate.getY()];
+                    islandArray[x][y].setXY(x, y);
+                    islandArray[coordinate.getX()][coordinate.getY()] = this;
+                    this.setXY(coordinate.getX(), coordinate.getY());
+                    break;
+                } else {
+                    break;
+                }
+
+            }
+
+            finishM2.incrementAndGet();
+        }
+    }
+
+    public boolean havingVitality() {
+        startHavingVitality.incrementAndGet();
+        if (this.getCountDays() % 2 == 0 && this.getCountDays() != 0 || this.getCountDays() % 5== 0 && this.getCountDays() != 0) {
+            System.out.println("четные дни" + this.getCountDays());
+             System.out.println("дней без еды" + this.getDaysWithoutFood());
+             System.out.println("голодные дни " + this.getHungryDaysCounter());
+            if (this.getDaysWithoutFood() >= 2 || this.getHungryDaysCounter() >= 5) {
+                 System.out.println("2 дня без еды " + this.getCountDays());
+                synchronized (islandArray) {
+
+                    islandSimulationObjects.remove(this);
+                    if( islandArray[this.getY()][this.getY()] instanceof  Animal) {
+                        animals.remove(this);
+                        numberDeadAnimals.incrementAndGet();
+                        deathFromStarvation.incrementAndGet();
+                        numberAnimals.decrementAndGet();
+                        decreaseTheNumberOfOneTypeOfAnimal(this);
+                    }
+                    islandArray[this.getY()][this.getY()] = null;
+                    freeCells.add(new Coordinate(this.getY(), this.getY()));
+
+                    this.setXY(-1, -1);
+                    this.setStop(true);
+                }
+                finishHavingVitality.incrementAndGet();
+                return false;
+            } else {
+                // System.out.println("h");
+                if (this.getCountDays() % 2 == 0) {
+                    this.setDaysWithoutFood(0);
+                    this.setIsHunger(true);
+                    this.setEatenKg(0);
+                } else if (this.getCountDays() % 5 == 0) {
+                    // System.out.println("h1");
+                    this.setHungryDaysCounter(0);
+                    this.setIsHunger(true);
+                    this.setEatenKg(0);
+                }
+                finishHavingVitality.incrementAndGet();
+                return true;
+            }
+        } else {
+            finishHavingVitality.incrementAndGet();
+            return true;
+        }
+
+    }
+
+    public boolean deathFromOldAge() {
+        startDeathFromOldAge.incrementAndGet();
+        if (this.getAge() >= 10) {
+
+            synchronized (islandArray) {
+                if( islandArray[this.getY()][this.getY()] instanceof  Animal) {
+                    animals.remove(this);
+                    numberDeadAnimals.incrementAndGet();
+                    deathFromOldAge.incrementAndGet();
+                    numberDeadAnimals.incrementAndGet();
+                    deathFromOldAge.incrementAndGet();
+                    numberAnimals.decrementAndGet();
+                    decreaseTheNumberOfOneTypeOfAnimal(this);
+                }
+                islandArray[this.getY()][this.getY()] = null;
+
+                islandSimulationObjects.remove(this);
+                freeCells.add(new Coordinate(this.getY(), this.getY()));
+
+
+                this.setXY(-1, -1);
+                this.setStop(true);
+            }
+            finishDeathFromOldAge.incrementAndGet();
+            return true;
+        } else {
+            finishDeathFromOldAge.incrementAndGet();
+            return false;
+        }
+    }
+
 }
