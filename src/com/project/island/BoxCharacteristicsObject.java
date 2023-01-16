@@ -1,18 +1,20 @@
 package com.project.island;
 
+import com.project.Solution;
+
 public   class BoxCharacteristicsObject {
 
     public static final int WEIGHT_WOLF = 50;
-    public static final int WEIGHT_BOA = 15;
+    public static final int WEIGHT_BOA = 1;
     public static final int WEIGHT_FOX = 8;
     public static final int WEIGHT_BEAR = 500;
     public static final int WEIGHT_EAGLE = 6;
-    public static final int WEIGHT_HORSE = 25;
-    public static final int WEIGHT_DEER = 30;
+    public static final int WEIGHT_HORSE = 1;
+    public static final int WEIGHT_DEER = 10;
     public static final int WEIGHT_RABBIT = 5;
     public static final int WEIGHT_MOUSE = 5;
-    public static final int WEIGHT_GOAT = 25;
-    public static final int WEIGHT_SHEEP = 15;
+    public static final int WEIGHT_GOAT = 10;
+    public static final int WEIGHT_SHEEP = 10;
     public static final int WEIGHT_BOAR = 400;
     public static final int WEIGHT_BUFFALO = 700;
     public static final int WEIGHT_DUCK = 1;
@@ -66,10 +68,10 @@ public   class BoxCharacteristicsObject {
 
 
 
-    public static final int SPEED_WOLF = 4;
+    public static final int SPEED_WOLF = 5;
     public static final int SPEED_BOA = 3;
-    public static final int SPEED_FOX =4;
-    public static final int SPEED_BEAR = 4;
+    public static final int SPEED_FOX =5;
+    public static final int SPEED_BEAR = 5;
     public static final int SPEED_EAGLE = 4;
     public static final int SPEED_HORSE = 3;
     public static final int SPEED_DEER = 3;
@@ -137,7 +139,10 @@ public   class BoxCharacteristicsObject {
 
     public static final double PROBABILITY_BOAR_EAT_MOUSE = 0.5;
 
-
+    public static final String MESSAGE_ENTER_NUMBER_OF_ANIMALS =
+                      "Вам также нужно ввести  начальное количество Predators каждого вида  "
+                    + "например если введете 10 то создастся 10 лис 10 волков и тд а, животных "+
+                       "не должно" + " быть больше";
 
 
 

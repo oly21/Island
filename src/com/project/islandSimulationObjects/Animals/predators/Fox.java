@@ -17,7 +17,7 @@ public class Fox extends Predators {
     private final String typeString = BoxCharacteristicsObject.TYPE_STRING_FOX;
     // public Label label = new Label(typePicture);
 
-    private final int progenyLimit = 5;
+    private final int progenyLimit = 10;
     private final List<String> initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_MOUSE,
             BoxCharacteristicsObject.TYPE_STRING_RABBIT, BoxCharacteristicsObject.TYPE_STRING_DEER,
             BoxCharacteristicsObject.TYPE_STRING_SHEEP, BoxCharacteristicsObject.TYPE_STRING_CATERPILLAR,

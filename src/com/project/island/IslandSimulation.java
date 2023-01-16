@@ -40,11 +40,11 @@ public class IslandSimulation {
     public static PrintingIslandSimulationStatistics printingIslandSimulationStatistics = PrintingIslandSimulationStatistics.getPrintingIslandSimulationStatistics();
    // public static IslandSimulationParameters islandSimulationParameters = new IslandSimulationParameters();
     private static IslandSimulation instance;
-   public  static ScheduledExecutorService executorScheduledServicePlantGrowth = Executors.newScheduledThreadPool(0);
-   public static ScheduledExecutorService executorScheduledServiceDisplay = Executors.newScheduledThreadPool(0);
+   public  static ScheduledExecutorService executorScheduledServicePlantGrowth = Executors.newScheduledThreadPool(1);
+   public static ScheduledExecutorService executorScheduledServiceDisplay = Executors.newScheduledThreadPool(1);
     public static ScheduledExecutorService executorScheduledServiceAnimalLifeCycle = Executors.newScheduledThreadPool(1);
-   public static ScheduledExecutorService executorScheduledServicePrintingIslandSimulationStatistics = Executors.newScheduledThreadPool(0);
-    public static ScheduledExecutorService executorScheduledCheckStopConditionOfIslandSimulation = Executors.newScheduledThreadPool(0);
+   public static ScheduledExecutorService executorScheduledServicePrintingIslandSimulationStatistics = Executors.newScheduledThreadPool(1);
+    public static ScheduledExecutorService executorScheduledCheckStopConditionOfIslandSimulation = Executors.newScheduledThreadPool(1);
    public  static CheckingStopConditionOfIslandSimulation checkingStopConditionOfIslandSimulation = CheckingStopConditionOfIslandSimulation.getCheckingStopConditionOfIslandSimulation();
 
     private IslandSimulation() {
@@ -68,14 +68,15 @@ public class IslandSimulation {
         // while (freeCells.size() != islandArray.length) {
 
 
-        executorScheduledServiceAnimalLifeCycle.scheduleAtFixedRate(animalLifeCycle, 0, 20, TimeUnit.SECONDS);
+        executorScheduledServiceAnimalLifeCycle.scheduleAtFixedRate(animalLifeCycle, 0, 1, TimeUnit.SECONDS);
 
 
-        executorScheduledServicePrintingIslandSimulationStatistics.scheduleAtFixedRate(printingIslandSimulationStatistics, 0, 10, TimeUnit.SECONDS);
-        executorScheduledServiceDisplay.scheduleAtFixedRate(islandSimulationDisplay, 1, 10, TimeUnit.SECONDS);
-        executorScheduledServicePlantGrowth.scheduleAtFixedRate(plantGrowth, 0, 20, TimeUnit.SECONDS);
-        executorScheduledCheckStopConditionOfIslandSimulation.scheduleAtFixedRate(checkingStopConditionOfIslandSimulation, 10, 40, TimeUnit.SECONDS);
+        executorScheduledServicePrintingIslandSimulationStatistics.scheduleAtFixedRate(printingIslandSimulationStatistics, 0, 5, TimeUnit.SECONDS);
+        executorScheduledServiceDisplay.scheduleAtFixedRate(islandSimulationDisplay, 2, 2, TimeUnit.SECONDS);
+        executorScheduledServicePlantGrowth.scheduleAtFixedRate(plantGrowth, 3, 2, TimeUnit.SECONDS);
+        executorScheduledCheckStopConditionOfIslandSimulation.scheduleAtFixedRate(checkingStopConditionOfIslandSimulation, 0, 500, TimeUnit.SECONDS);
         //  }
+
 
 
         //ExecutorService executorService  = Executors.newFixedThreadPool(1);

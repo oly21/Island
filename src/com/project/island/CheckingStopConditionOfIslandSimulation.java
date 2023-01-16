@@ -52,11 +52,16 @@ public class CheckingStopConditionOfIslandSimulation implements  Runnable{
         if(conditionOfIslandSimulationInt == 1 ){
            ConditionOfIslandSimulation = (countHerbivores <5);
        }
-       else{
-           ConditionOfIslandSimulation = ( plants.size()==0);
+       else if(conditionOfIslandSimulationInt == 2) {
+           ConditionOfIslandSimulation = ( Animal.numberPlants.get()<10);
        }
+        else if(conditionOfIslandSimulationInt == 3) {
+            ConditionOfIslandSimulation = ( animals.size()==0);
+        }
+
         if( ConditionOfIslandSimulation ){
-            System.out.println(" конец:" + " " + countHerbivores);
+            System.out.println(" конец:" + " countHerbivores"+ " "+  countHerbivores);
+
             IslandSimulation.executorScheduledServiceDisplay.shutdown();
             IslandSimulation.executorScheduledServiceAnimalLifeCycle.shutdown();
             IslandSimulation.executorScheduledServicePlantGrowth.shutdown();
@@ -69,11 +74,14 @@ public class CheckingStopConditionOfIslandSimulation implements  Runnable{
         }
 
         else if(conditionOfIslandSimulationInt == 2){
-            System.out.println("Симуляция закончилась, на острове закончились растения ");
+            System.out.println("Симуляция закончилась, на острове закончились растения или их осталось меньше 10 ");
         IslandSimulation.executorScheduledCheckStopConditionOfIslandSimulation.shutdown();
         }
 
-
+        else if(conditionOfIslandSimulationInt == 3){
+            System.out.println("Симуляция закончилась, к сожелению все погибли ");
+            IslandSimulation.executorScheduledCheckStopConditionOfIslandSimulation.shutdown();
+        }
         }
     }
 

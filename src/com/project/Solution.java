@@ -1,5 +1,6 @@
 package com.project;
 
+import com.project.island.BoxCharacteristicsObject;
 import com.project.island.Island;
 import com.project.island.IslandSimulation;
 
@@ -39,15 +40,19 @@ public class Solution {
         Island.x = scanner.nextInt();
         System.out.println(" теперь введите y");
         Island.y = scanner.nextInt();
-        System.out.println("Вам также нужно ввести  начальное количество Predators каждого вида  " +
-                          "например если введете 10 то создастся 10 лис 10 волков и тд а, животных " +
-                           "не должно" + " быть больше клеток  ");
-        Island.predatorsNumber = scanner.nextInt();
-        Island.herbivoresNumber = Island.predatorsNumber * 2;
+       int numberOfSimulationItems = ((Island.x * Island.y) - ((Island.x * Island.y)/4))/41;
 
-        System.out.println("Выберите условие остановки симуляции " +
-                "введите цыфру выброного вами условия: 1)На острове остались только predators(хишники) " +
-                "2) сьели все растения ");
+        //(predatorsNumber*9) +(herbivoresNumber*6)+(herbivoresNumber*10)
+
+
+        System.out.println(BoxCharacteristicsObject.MESSAGE_ENTER_NUMBER_OF_ANIMALS+  " "+   numberOfSimulationItems );
+
+        Island.predatorsNumber = scanner.nextInt();
+        Island.herbivoresNumber = Island.predatorsNumber*2;
+
+        System.out.println("Выберите условие остановки симуляции" + "  введите цыфру выброного вами условия:" +
+                           "\n 1)На острове остались только predators(хишники) " +
+                           " \n2) сьели все растения "+ "3) все погибли ");
 
         Island.conditionNumberStopSimulation = scanner.nextInt();
         System.out.println("Спасибо,islandSimulation продолжит свою работу ");

@@ -55,18 +55,17 @@ public class Island {
 
 
 
-
         for (int i = 0; i <= predatorsNumber; i++) {
 
-            animals.add(new Fox(1, 4));
+            animals.add(new Fox(1, 2));
             Animal.numberFoxes.incrementAndGet();
-            animals.add(new Wolf(1, 4));
+            animals.add(new Wolf(1, 2));
             Animal.numberWolfs.incrementAndGet();
             animals.add(new Deer(1, 5));
             Animal.numberDeer.incrementAndGet();
             animals.add(new Horse(1, 4));
             Animal.numberHorses.incrementAndGet();
-            animals.add(new Bear(1, 4));
+            animals.add(new Bear(1, 2));
             Animal.numberBears.incrementAndGet();
             animals.add(new Boar(1, 4));
             Animal.numberBoars.incrementAndGet();
@@ -82,9 +81,9 @@ public class Island {
 
             animals.add(new Caterpillar(1, 2));
             Animal.numberCaterpillars.incrementAndGet();
-            animals.add(new Mouse(1, 2)  );
+            animals.add(new Mouse(1, 4)  );
             Animal.numberMouses.incrementAndGet();
-            animals.add( new Rabbit(  1, 2));
+            animals.add( new Rabbit(  1, 4));
             Animal.numberRabbits.incrementAndGet();
             animals.add(new Sheep(1, 2));
             Animal.numberSheep.incrementAndGet();

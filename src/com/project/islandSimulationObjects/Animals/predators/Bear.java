@@ -13,7 +13,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Bear extends Predators {
 
     private final String typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_BEAR;
-    public volatile int progenyLimit = 5;
+    public volatile int progenyLimit = 10;
     private final String typeString = BoxCharacteristicsObject.TYPE_STRING_BEAR;
 
     private final List<String> initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES,

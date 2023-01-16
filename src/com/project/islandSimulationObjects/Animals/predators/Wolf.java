@@ -36,7 +36,7 @@ public class Wolf extends Predators {
     private volatile boolean eat = false;
     private volatile int count = 0;
     public volatile boolean isHunger = true;
-    private final int progenyLimit = 5;
+    private final int progenyLimit = 10;
     private final int step = BoxCharacteristicsObject.SPEED_WOLF;
     private volatile int eatenKg = 0;
     private volatile int progeny = 0;

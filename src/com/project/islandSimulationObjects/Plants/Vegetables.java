@@ -80,11 +80,15 @@ public class Vegetables extends Plant {
     }
 
 
-    @Override
+
     public void run() {
 
     }
 
+    @Override
+    public Void call() throws Exception {
+        return null;
+    }
 }
 
 

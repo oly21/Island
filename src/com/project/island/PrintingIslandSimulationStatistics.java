@@ -29,8 +29,8 @@ public class PrintingIslandSimulationStatistics implements Runnable {
                         " numbersPlantsGrew:" + " " + PlantGrowth.numbersPlantsGrew.get() + " " +
                         " numberPlants:" + " " + Animal.numberPlants.get() + " " +
                         "numberEatenPlants:" + " " + Animal.numberEatenPlants.get() + " " +
-                         " deathFromStarvation:" + " " + Animal.deathFromStarvation.get() + " " +
-                         " deathFromOldAge:" + " " + Animal.deathFromOldAge.get() + " "+
+                        " deathFromStarvation:" + " " + Animal.deathFromStarvation.get() + " " +
+                        " deathFromOldAge:" + " " + Animal.deathFromOldAge.get() + " " +
                         " numberBornBoar:" + " " + Animal.numberBornBoar.get() + " " +
                         " numberBornBuffalo:" + " " + Animal.numberBornBuffalo.get() + " " +
                         " numberBornCaterpillar:" + " " + Animal.numberBornCaterpillar.get() + " " +
@@ -77,15 +77,17 @@ public class PrintingIslandSimulationStatistics implements Runnable {
                         " numberDeadFox:" + " " + Animal.numberDeadFox.get() + " " +
                         " numberDeadWolf:" + " " + Animal.numberDeadWolf.get() + " " +
                         "numberDeadEagle:" + " " + Animal.numberDeadEagle.get() + " " +
-
-                        "finishM: " + " " + Animal.finishMove + " " + "startM " + " " + Animal.startMove + " "
+                        "startM " + " " + Animal.startMove + " " + "finishM: " + " " + Animal.finishMove + " "
                         + " startR:" + " " + Animal.startR + " " + "finishR " + " " + Animal.finishR + " " +
                         "startGet: " + " " + Animal.startGet + " " + " finishGet" + " " + Animal.finishGet + " " +
                         " startRun:" + " " + Animal.runStart + " " + " finishRun" + " " + Animal.runFinish + " " +
-                        "startM2: " + " " + Animal.startM2 + " " + "finishM2 " + " " + Animal.finishM2 + " " +
+                        "startSwapPlacesWithNeighbor: " + " " + Animal.startSwapPlacesWithNeighbor + " " + "finishSwapPlacesWithNeighbor: " + " " + Animal.finishSwapPlacesWithNeighbor + " " +
+                        "startSetPositionForNewbornAnima: " + " " + Animal.startSetPositionForNewbornAnimal + " " + "finishSetPositionForNewbornAnima: " + " " + Animal.finishSetPositionForNewbornAnimal + " " +
+                        "startChoiceDirectionForMoveAndCallMove: " + " " + Animal.startChoiceDirectionForMoveAndCallMove + " " + "finishChoiceDirectionForMoveAndCallMove: " + " " + Animal.finishChoiceDirectionForMoveAndCallMove + " " +
+                        "startDecreaseTheNumberOfOneTypeOfAnimal: " + " " + Animal.startDecreaseTheNumberOfOneTypeOfAnimal + " " + "finishDecreaseTheNumberOfOneTypeOfAnimal: " + " " + Animal.finishDecreaseTheNumberOfOneTypeOfAnimal + " " +
                         "startHavingVitality: " + " " + Animal.finishHavingVitality + " " + "finishHavingVitality " + " " + Animal.finishHavingVitality +
                         " " + " startEat:" + " " + Animal.startEat + " " + " finishEat" + " " + Animal.finishEat +
-                           " " + " startDeathFromOldAge:" + " " + Animal.startDeathFromOldAge + " " + " finishDeathFromOldAge" + " " + Animal.finishDeathFromOldAge + " " +
+                        " " + " startDeathFromOldAge:" + " " + Animal.startDeathFromOldAge + " " + " finishDeathFromOldAge" + " " + Animal.finishDeathFromOldAge + " " +
                         " startFor:" + " " + Animal.startFor + " " + " finishFor" + " " + Animal.finishFor
                 //   + " " + " startFood:" + " " + Animal.startFood + " " + " finishFood" + " " + Animal.finishFood
 

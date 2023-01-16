@@ -10,10 +10,11 @@ package com.project.islandSimulationObjects;
 //import javafx.util.Duration;
 //import javafx.scene.control.Label;
 //import java.awt.*;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 
 
-public interface IslandSimulationObject extends Runnable {
+public interface IslandSimulationObject extends Callable<Void> {
   //int  weight = 0;
   //String typePicture  = "🐻";
   //String typeString  = "IslandSimulationObject";
@@ -27,7 +28,7 @@ public interface IslandSimulationObject extends Runnable {
    int getX();
 
 
-   int getY();
+    int getY();
   // Label getLabel();
 
   int getWeight();
