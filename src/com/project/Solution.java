@@ -1,14 +1,5 @@
 package com.project;
 
-import com.project.island.BoxCharacteristicsObject;
-import com.project.island.Island;
-import com.project.island.IslandSimulation;
-
-import com.project.islandSimulationObjects.Animals.Animal;
-import com.project.islandSimulationObjects.IslandSimulationObject;
-
-import java.util.Scanner;
-
 //import javafx.animation.Animation;
 //import javafx.animation.KeyFrame;
 //import javafx.animation.Timeline;
@@ -25,40 +16,13 @@ import java.util.Scanner;
 //import javafx.stage.Stage;
 //import javafx.util.Duration;
 
-import java.io.InputStream;
-import java.util.concurrent.*;
 
 public class Solution {
 
-    public static volatile CopyOnWriteArrayList<Animal> animals = Island.getAnimalList();
-    public static CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = Island.getIslandSimulationObjectList();
 
-    public static void main(String[] args) throws InterruptedException, ExecutionException, TimeoutException, InstantiationException, IllegalAccessException, ExceptionInInitializerError {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Здравствуйте вы запустили islandSimulation , для продолжения введите " +
-                            " размеры острова, для начала" + " пожалуйста введите x(целое число)");
-        Island.x = scanner.nextInt();
-        System.out.println(" теперь введите y");
-        Island.y = scanner.nextInt();
-       int numberOfSimulationItems = ((Island.x * Island.y) - ((Island.x * Island.y)/4))/41;
-
-        //(predatorsNumber*9) +(herbivoresNumber*6)+(herbivoresNumber*10)
-
-
-        System.out.println(BoxCharacteristicsObject.MESSAGE_ENTER_NUMBER_OF_ANIMALS+  " "+   numberOfSimulationItems );
-
-        Island.predatorsNumber = scanner.nextInt();
-        Island.herbivoresNumber = Island.predatorsNumber*2;
-
-        System.out.println("Выберите условие остановки симуляции" + "  введите цыфру выброного вами условия:" +
-                           "\n 1)На острове остались только predators(хишники) " +
-                           " \n2) сьели все растения "+ "3) все погибли ");
-
-        Island.conditionNumberStopSimulation = scanner.nextInt();
-        System.out.println("Спасибо,islandSimulation продолжит свою работу ");
-        Island island = Island.getIsland();
-        IslandSimulation islandSimulation = IslandSimulation.getIslandSimulation();
-        islandSimulation.startSimulation();
+    public static void main(String[] args) throws InterruptedException, InstantiationException, IllegalAccessException, ExceptionInInitializerError {
+        IslandSimulationLoader programLoader = new IslandSimulationLoader();
+        programLoader.processingInput();
 
     }
 

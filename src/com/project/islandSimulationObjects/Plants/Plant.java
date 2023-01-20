@@ -76,7 +76,7 @@ public abstract class Plant implements IslandSimulationObject {
     }
 
 
-    public void start() {
+   public void start() {
 
         // Метод, который запускает анимацию перемещения животного
 
@@ -84,10 +84,10 @@ public abstract class Plant implements IslandSimulationObject {
         //ImageView imageView = new ImageView(this.getTypePicture());
 
         //Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000.0 / 60.0), event -> {
-            int x;
-            int y;
-            x = this.getX();
-            y = this.getY();
+           // int x;
+           // int y;
+           // x = this.getX();
+           // y = this.getY();
             //imageView.setX(x);
           //  imageView.setY(y);
        // }));

@@ -9,7 +9,7 @@ public   class BoxCharacteristicsObject {
     public static final int WEIGHT_FOX = 8;
     public static final int WEIGHT_BEAR = 500;
     public static final int WEIGHT_EAGLE = 6;
-    public static final int WEIGHT_HORSE = 1;
+    public static final int WEIGHT_HORSE = 10;
     public static final int WEIGHT_DEER = 10;
     public static final int WEIGHT_RABBIT = 5;
     public static final int WEIGHT_MOUSE = 5;
@@ -86,17 +86,17 @@ public   class BoxCharacteristicsObject {
 
 
 
-    public static final int MEAL_REQUIRED_KG_WOLF = 50;
+    public static final int MEAL_REQUIRED_KG_WOLF = 5;
     public static final int MEAL_REQUIRED_KG_BOA = 2;
-    public static final int MEAL_REQUIRED_KG_FOX = 50;
-    public static final int MEAL_REQUIRED_KG_BEAR = 100;
-    public static final int MEAL_REQUIRED_KG_EAGLE = 10;
+    public static final int MEAL_REQUIRED_KG_FOX = 5;
+    public static final int MEAL_REQUIRED_KG_BEAR = 5;
+    public static final int MEAL_REQUIRED_KG_EAGLE = 5;
     public static final int MEAL_REQUIRED_KG_HORSE = 5;
-    public static final int MEAL_REQUIRED_KG_DEER = 10;
-    public static final int MEAL_REQUIRED_KG_RABBIT = 5;
-    public static final int MEAL_REQUIRED_KG_MOUSE = 5;
-    public static final int MEAL_REQUIRED_KG_GOAT = 15;
-    public static final int MEAL_REQUIRED_KG_SHEEP = 15;
+    public static final int MEAL_REQUIRED_KG_DEER = 2;
+    public static final int MEAL_REQUIRED_KG_RABBIT = 2;
+    public static final int MEAL_REQUIRED_KG_MOUSE = 2;
+    public static final int MEAL_REQUIRED_KG_GOAT = 2;
+    public static final int MEAL_REQUIRED_KG_SHEEP = 2;
     public static final int MEAL_REQUIRED_KG_BOAR = 2;
     public static final int MEAL_REQUIRED_KG_BUFFALO = 2;
     public static final int MEAL_REQUIRED_KG_DUCK = 5;
@@ -140,9 +140,30 @@ public   class BoxCharacteristicsObject {
     public static final double PROBABILITY_BOAR_EAT_MOUSE = 0.5;
 
     public static final String MESSAGE_ENTER_NUMBER_OF_ANIMALS =
-                      "Вам также нужно ввести  начальное количество Predators каждого вида  "
-                    + "например если введете 10 то создастся 10 лис 10 волков и тд а, животных "+
-                       "не должно" + " быть больше";
+                      "Вам также нужно ввести начальное количество Predators каждого вида  "
+                    + "\nнапример если вы введете 10, то создастся 10 лис, 10, волков и тд "+
+                       "\nначальное количество Predators каждого вида  не должно" + " быть больше";
+
+    public static final String MESSAGE_ENTER_X = "Здравствуйте вы запустили islandSimulation, " +
+                                                 "для продолжения работы введите " + "размеры острова,\nдля начала" +
+                                                " пожалуйста введите x(целое число, не меньше 10)";
+
+
+    public static final String MESSAGE_ENTER_Y =  "теперь введите y(целое число, не меньше 10 и не больше 50)";
+
+    public static final String MESSAGE_STOPPING_CONDITION=  "Выберите условие остановки симуляции" + " " +
+                                                  " введите цыфру выброного вами условия:" +
+                                              "\n1)На острове остались только predators(хишники) "+
+                                               "\n2) сьели все растения "+ "3) все погибли ";
+
+    public static final String MESSAGE_THANKS_KEEP_WORKING =   "Спасибо,islandSimulation продолжит свою работу ";
+    public static final String MESSAGE_INPUT_INCORRECT =   "Ввод не верен ";
+
+    public static final String MESSAGE_TOO_MANY_ANIMALS =   " Начальное количество Predators каждого видадолжно быть меньше  " + " " ;
+
+    public static final String MESSAGE_WRONG_COMMAND_NUMBER =    "Вы вели не верный номер команды";
+
+
 
 
 
