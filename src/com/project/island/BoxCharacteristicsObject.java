@@ -146,7 +146,7 @@ public   class BoxCharacteristicsObject {
 
     public static final String MESSAGE_ENTER_X = "Здравствуйте вы запустили islandSimulation, " +
                                                  "для продолжения работы введите " + "размеры острова,\nдля начала" +
-                                                " пожалуйста введите x(целое число, не меньше 10)";
+                                                " пожалуйста введите x(целое число, не меньше 10 и не больше 50))";
 
 
     public static final String MESSAGE_ENTER_Y =  "теперь введите y(целое число, не меньше 10 и не больше 50)";
