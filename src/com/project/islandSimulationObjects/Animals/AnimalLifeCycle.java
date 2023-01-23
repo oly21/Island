@@ -19,6 +19,7 @@ public class AnimalLifeCycle implements Runnable {
         islandArray = Island.getIslandArray();
 
     }
+
     public int age;
 
     private static AnimalLifeCycle instance;
@@ -39,10 +40,10 @@ public class AnimalLifeCycle implements Runnable {
     }
 
 
-    public  synchronized void run() {
-       // synchronized (islandArray) {
-            System.out.println("Start AnimalLiveCycle");
-       // }
+    public synchronized void run() {
+        // synchronized (islandArray) {
+        System.out.println("Start AnimalLiveCycle");
+        // }
         //  System.out.println("Animallive" + animals.size());
         animalsCopy.clear();
         animalsCopy1.clear();
@@ -82,21 +83,21 @@ public class AnimalLifeCycle implements Runnable {
         //  } finally {
         //    executorService.shutdown();
         // }
-       // System.out.println("Start AnimalLiveCycle10");
+        // System.out.println("Start AnimalLiveCycle10");
 
 
         for (Callable task : animalsCopy1) {
             int IndexAnimalTask = ThreadLocalRandom.current().nextInt(animalsCopy.size()) % animalsCopy.size();
 
-                Callable animalTask = animalsCopy.get(IndexAnimalTask);
-                executorService.submit(animalTask);
+            Callable animalTask = animalsCopy.get(IndexAnimalTask);
+            executorService.submit(animalTask);
 
 
-                //Iterator<Callable<Void>>iterator = animalsCopy.iterator();
+            //Iterator<Callable<Void>>iterator = animalsCopy.iterator();
 
-                //Callable<Void> animal = iterator.next();
-                   //  iterator.remove();
-                animalsCopy.remove(IndexAnimalTask);
+            //Callable<Void> animal = iterator.next();
+            //  iterator.remove();
+            animalsCopy.remove(IndexAnimalTask);
 
         }
         executorService.shutdown();

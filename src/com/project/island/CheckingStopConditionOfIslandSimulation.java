@@ -20,7 +20,7 @@ public class CheckingStopConditionOfIslandSimulation implements Runnable {
     // IslandSimulation islandSimulation = IslandSimulation.getIslandSimulation();
     Island island = Island.getIsland();
     private static CheckingStopConditionOfIslandSimulation instance;
-    int conditionOfIslandSimulationInt = island.conditionNumberStopSimulation;
+    int conditionOfIslandSimulationInt = Island.conditionNumberStopSimulation;
     static boolean ConditionOfIslandSimulation;
 
     private CheckingStopConditionOfIslandSimulation() {

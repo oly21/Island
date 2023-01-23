@@ -15,7 +15,8 @@ public class IslandSimulationLoader {
         Scanner scanner = new Scanner(System.in);
         try {
             System.out.println(BoxCharacteristicsObject.MESSAGE_ENTER_X);
-            Island.x = scanner.nextInt();if (Island.x  < 10||Island.x>50) {
+            Island.x = scanner.nextInt();
+            if (Island.x  < 10||Island.x>50) {
                System.out.println(BoxCharacteristicsObject.MESSAGE_INPUT_INCORRECT);
                 throw new InputMismatchException();
            }

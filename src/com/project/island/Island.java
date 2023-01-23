@@ -122,13 +122,6 @@ public class Island {
 
     }
 
-   // public void initializeIslandVariables(int x, int y, int predatorsNumber, int herbivoresNumber, int conditionNumberStopSimulation) {
-       // Island.x = x;
-      //  Island.y = y;
-       // Island.predatorsNumber = predatorsNumber;
-       // Island.herbivoresNumber = herbivoresNumber;
-      //  this.conditionNumberStopSimulation = conditionNumberStopSimulation;
-   // }
 
 
     public static synchronized IslandSimulationObject[][] getIslandArray() {
@@ -138,9 +131,7 @@ public class Island {
 
 
     }
-    // public synchronized void setIslandArray(int x, int y, IslandSimulationObject value) {
-    //  islandArray[x][y] = value;
-    // }
+
 
     public static CopyOnWriteArrayList<Animal> getAnimalList() {
 

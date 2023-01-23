@@ -159,7 +159,7 @@ public class IslandSimulation {
 
 
     public static void creatListFreeCells() {
-        // freeCells.clear();
+
         for (int i = 0; i < islandArray.length - 1; i++) {
             for (int j = 0; j < islandArray[i].length - 1; j++) {
                 // synchronized (islandArray) {

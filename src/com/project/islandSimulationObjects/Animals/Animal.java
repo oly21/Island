@@ -233,8 +233,8 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
         }
 
 
-        this.setDailyMealCounter(0);
-        this.setAttemptsFindPartnerCounter(0);
+       // this.setDailyMealCounter(0);
+       // this.setAttemptsFindPartnerCounter(0);
         //  System.out.println(this.getProgeny());
         //  System.out.println(this.getEat());
         //this.setEat(false);
@@ -242,9 +242,9 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
         // System.out.println("run start"+ this.getCountDays());
         // System.out.println("Animal method" + animals.size());
         //&& this.getIsHunger()
-        if (this.getStop()) {
-           // System.out.println(" остановлена" + this.getX() + this.getStop() + animals.contains(this));
-        }
+        // if (this.getStop()) {
+        // System.out.println(" остановлена" + this.getX() + this.getStop() + animals.contains(this));
+        // }
 
         if (!this.getStop() && !deathFromOldAge()) {
 
@@ -275,11 +275,11 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
                 }
 
             } else {
-                if (!this.getStop() && this.getProgeny() < this.getProgenyLimit() && numberPlants.get() > 10 && this.getAge() >= 2 && (checkNumberAnimalsOfAParticularSpecies(this)) < (Island.x+20)) {
+                if (!this.getStop() && this.getProgeny() < this.getProgenyLimit() && numberPlants.get() > 10 && this.getAge() >= 2 && (checkNumberAnimalsOfAParticularSpecies(this)) < (Island.x + 20)) {
                     if (!this.getStop()) {
-                       // if (this.getEat() || !this.getIsHunger()) {
-                            this.reproduce();
-                     // }
+                        // if (this.getEat() || !this.getIsHunger()) {
+                        this.reproduce();
+                        // }
 
 
                     }
@@ -306,7 +306,7 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
 
     public void eat() {
         this.setEat(false);
-        this.setDailyMealCounter(this.getDailyMealCounter() + 1);
+        // this.setDailyMealCounter(this.getDailyMealCounter() + 1);
         startEat.incrementAndGet();
         Double chanceToEat = 1.0;
 
@@ -342,7 +342,7 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
 
 
                                     this.setEatenKg(this.getEatenKg() + islandArray[x][y].getWeight());
-                                    if (this.getEatenKg() < (this.getNeededFoodKg()/2)) {
+                                    if (this.getEatenKg() < (this.getNeededFoodKg() / 2)) {
                                         this.setIsHunger(true);
 
                                     } else {

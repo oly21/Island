@@ -35,7 +35,7 @@ public class Bear extends Predators {
         chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_MOUSE, BoxCharacteristicsObject.PROBABILITY_BEAR_EAT_MOUSE);
         chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_GOAT, BoxCharacteristicsObject.PROBABILITY_BEAR_EAT_GOAT);
         chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_SHEEP, BoxCharacteristicsObject.PROBABILITY_BEAR_EAT_SHEEP);
-        chanceToEat.put( BoxCharacteristicsObject.TYPE_STRING_DEER, BoxCharacteristicsObject.PROBABILITY_BEAR_EAT_DEER);
+
 
     }
 

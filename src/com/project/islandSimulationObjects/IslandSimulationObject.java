@@ -10,35 +10,38 @@ package com.project.islandSimulationObjects;
 //import javafx.util.Duration;
 //import javafx.scene.control.Label;
 //import java.awt.*;
+
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 
 
 public interface IslandSimulationObject extends Callable<Void> {
-  //int  weight = 0;
-  //String typePicture  = "🐻";
-  //String typeString  = "IslandSimulationObject";
-  //List<String> initialList = Arrays.asList("Rabbit", "Mouse");
-  //CopyOnWriteArrayList<String> foodStuffs = new CopyOnWriteArrayList<>(initialList);
-  ConcurrentHashMap<IslandSimulationObject, Integer> chanceToEat = new ConcurrentHashMap<>();
-   String getTypePicture();
+    //int  weight = 0;
+    //String typePicture  = "🐻";
+    //String typeString  = "IslandSimulationObject";
+    //List<String> initialList = Arrays.asList("Rabbit", "Mouse");
+    //CopyOnWriteArrayList<String> foodStuffs = new CopyOnWriteArrayList<>(initialList);
+    ConcurrentHashMap<IslandSimulationObject, Integer> chanceToEat = new ConcurrentHashMap<>();
 
-   String getTypeString();
-   void setXY(int x, int y);
-   int getX();
+    String getTypePicture();
+
+    String getTypeString();
+
+    void setXY(int x, int y);
+
+    int getX();
 
 
     int getY();
-  // Label getLabel();
+    // Label getLabel();
 
-  int getWeight();
-
-
-
-   int getAge();
+    int getWeight();
 
 
-   void setAge(int age);
+    int getAge();
+
+
+    void setAge(int age);
 
 
 }

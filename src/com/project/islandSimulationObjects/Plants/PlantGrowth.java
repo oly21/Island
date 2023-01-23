@@ -89,12 +89,12 @@ public class PlantGrowth implements Runnable {
     public void setInitialPositionsGrowPlants() {
 
         if (freeCells.size() > 0) {
-            int count = 0;
+            //int count = 0;
             for (int i = 0; i <= Island.x; i++) {
 
 
                 if (freeCells.size() > 0) {
-                    count++;
+                   // count++;
                     int coordinate = ThreadLocalRandom.current().nextInt(freeCells.size()) % freeCells.size();
 
                     Coordinate coordinate1 = freeCells.get(coordinate);
