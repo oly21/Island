@@ -22,7 +22,7 @@ public class IslandSimulationDisplay implements Runnable {
     public Island island = Island.getIsland();
 
     public static CopyOnWriteArrayList<Animal> animals = Island.getAnimalList();
-   // public static CopyOnWriteArrayList<Animal> animalsCopy = new CopyOnWriteArrayList<>();
+    // public static CopyOnWriteArrayList<Animal> animalsCopy = new CopyOnWriteArrayList<>();
 
     private IslandSimulationDisplay() {
 

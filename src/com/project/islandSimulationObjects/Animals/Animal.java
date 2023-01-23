@@ -233,8 +233,8 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
         }
 
 
-       // this.setDailyMealCounter(0);
-       // this.setAttemptsFindPartnerCounter(0);
+        // this.setDailyMealCounter(0);
+        // this.setAttemptsFindPartnerCounter(0);
         //  System.out.println(this.getProgeny());
         //  System.out.println(this.getEat());
         //this.setEat(false);

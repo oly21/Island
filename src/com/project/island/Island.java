@@ -40,9 +40,9 @@ public class Island {
         return instance;
     }
 
-   // public void setInstance(Island instance) {
+    // public void setInstance(Island instance) {
     //    Island.instance = instance;
-   // }
+    // }
 
 
     public volatile static CopyOnWriteArrayList<Animal> animals = new CopyOnWriteArrayList<>();
@@ -121,7 +121,6 @@ public class Island {
 
 
     }
-
 
 
     public static synchronized IslandSimulationObject[][] getIslandArray() {
