@@ -52,32 +52,33 @@ public class IslandSimulationDisplay implements Runnable {
 
 
     public synchronized void run() {
-        synchronized (islandArray) {
-            for (int i = 0; i < islandArray.length; i++) {
+        synchronized (System.out) {
+            synchronized (islandArray) {
+                for (int i = 0; i < islandArray.length; i++) {
+                    System.out.println();
+
+                    for (int j = 0; j < islandArray[i].length; j++) {
+                        if (islandArray[i][j] != null) {
+                            System.out.print(islandArray[i][j].getTypePicture() + " ");
+
+                        } else {
+                            System.out.print("🟫" + " ");
+                        }
+                    }
+
+                }
                 System.out.println();
 
-                for (int j = 0; j < islandArray[i].length; j++) {
-                    if (islandArray[i][j] != null) {
-                        System.out.print(islandArray[i][j].getTypePicture() + " ");
-
-                    } else {
-                        System.out.print("🟫" + " ");
-                    }
-                }
 
             }
-            System.out.println();
-
 
         }
 
+
+        //try {    java.awt.Robot robot=new java.awt.Robot();
+        //  robot.mouseMove(0,0); }
+
+        // catch (java.lang.Exception e) {   }
     }
-
-
-    //try {    java.awt.Robot robot=new java.awt.Robot();
-    //  robot.mouseMove(0,0); }
-
-    // catch (java.lang.Exception e) {   }
-
 
 }
