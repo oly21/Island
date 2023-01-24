@@ -246,9 +246,9 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
         // System.out.println(" остановлена" + this.getX() + this.getStop() + animals.contains(this));
         // }
 
-        if (!this.getStop() && !deathFromOldAge()) {
+        if (!this.getStop() && !deathFromOldAge() && this.getIsHunger()) {
 
-            // System.out.println("не остановлена");
+                 // System.out.println("не остановлена");
             this.eat();
 
             if (!this.getEat()) {
