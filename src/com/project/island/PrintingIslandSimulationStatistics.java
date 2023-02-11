@@ -1,19 +1,23 @@
 package com.project.island;
 
 import com.project.islandSimulationObjects.Animals.Animal;
+import com.project.islandSimulationObjects.CreationIslandSimulationObject;
 import com.project.islandSimulationObjects.IslandSimulationObject;
-import com.project.islandSimulationObjects.Plants.Plant;
 import com.project.islandSimulationObjects.Plants.PlantGrowth;
 
 public class PrintingIslandSimulationStatistics implements Runnable {
+
     private static PrintingIslandSimulationStatistics instance;
     public static volatile IslandSimulationObject[][] islandArray;
+    IslandSimulationObject islandSimulationObject;
 
     static {
 
         islandArray = Island.getIslandArray();
 
     }
+
+    CreationIslandSimulationObject creationIslandSimulationObject = CreationIslandSimulationObject.getCreationIslandSimulationObject();
 
     private PrintingIslandSimulationStatistics() {
 
@@ -30,86 +34,85 @@ public class PrintingIslandSimulationStatistics implements Runnable {
 
 
     public synchronized void run() {
-        // synchronized (islandArray) {
         synchronized (System.out) {
             System.out.println("numberAnimals:" + " " + Animal.numberAnimals.get()
-                            + " " + "numberBornAnimals:" + " " + Animal.numberBornAnimals.get() + " " +
-                            "numberDeadAnimals:" + " " + Animal.numberDeadAnimals.get() + " " +
-                            "numberAnimalMoves:" + " " + Animal.numberAnimalMoves.get() + " " +
-                            " numbersPlantsGrew:" + " " + PlantGrowth.numbersPlantsGrew.get() + " " +
-                            " numberPlants:" + " " + Animal.numberPlants.get() + " " +
-                            "numberEatenPlants:" + " " + Animal.numberEatenPlants.get() + " " +
-                            " deathFromStarvation:" + " " + Animal.deathFromStarvation.get() + " " +
-                            " deathFromOldAge:" + " " + Animal.deathFromOldAge.get() + " " +
-                            " numberBornBoar:" + " " + Animal.numberBornBoar.get() + " " +
-                            " numberBornBuffalo:" + " " + Animal.numberBornBuffalo.get() + " " +
-                            " numberBornCaterpillar:" + " " + Animal.numberBornCaterpillar.get() + " " +
-                            " numberBornDeer:" + " " + Animal.numberBornDeer.get() + " " +
-                            " numberBornDuck:" + " " + Animal.numberBornDuck.get() + " " +
-                            " numberBornGoat:" + " " + Animal.numberBornGoat.get() + " " +
-                            " numberBornHorse:" + " " + Animal.numberBornHorse.get() + " " +
-                            " numberBornMouse:" + " " + Animal.numberBornMouse.get() + " " +
-                            " numberBornRabbit:" + " " + Animal.numberBornRabbit.get() + " " +
-                            " numberBornSheep:" + " " + Animal.numberBornSheep.get() + " " +
-                            " numberBornBear:" + " " + Animal.numberBornBear.get() + " " +
-                            " numberBornBoa:" + " " + Animal.numberBornBoa.get() + " " +
-                            " numberBornFox:" + " " + Animal.numberBornFox.get() + " " +
-                            " numberBornWolf:" + " " + Animal.numberBornWolf.get() + " " +
-                            "numberBornEagle:" + " " + Animal.numberBornEagle.get() + " " +
+                    + " " + "numberBornAnimals:" + " " + Animal.numberBornAnimals.get() + " " +
+                    "numberDeadAnimals:" + " " + Animal.numberDeadAnimals.get() + " " +
+                    "numberAnimalMoves:" + " " + Animal.numberAnimalMoves.get() + " " +
+                    "numbersPlantsGrew:" + " " + PlantGrowth.numbersPlantsGrew.get() + " " +
+                    "numberPlants:" + " " + Animal.numberPlants.get() + " " +
+                    "numberEatenPlants:" + " " + Animal.numberEatenPlants.get() + " " +
+                    "\ndeathFromStarvation:" + " " + Animal.deathFromStarvation.get() + " " +
+                    "deathFromOldAge:" + " " + Animal.deathFromOldAge.get() + " " +
+                    "numberBornBoar:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_BOAR))).getNumberBornAnimalsOfParticularSpecies()) + " " +
+                    "numberBornBuffalo:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_BUFFALO))).getNumberBornAnimalsOfParticularSpecies()) + " " +
+                    "numberBornCaterpillar:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_CATERPILLAR))).getNumberBornAnimalsOfParticularSpecies()) + " " +
+                    "numberBornDeer:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_DEER))).getNumberBornAnimalsOfParticularSpecies()) + " " +
+                    "numberBornDuck:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_DUCK))).getNumberBornAnimalsOfParticularSpecies()) + " " +
+                    "numberBornGoat:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_GOAT))).getNumberBornAnimalsOfParticularSpecies()) + " " +
+                    "\nnumberBornHorse:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_HORSE))).getNumberBornAnimalsOfParticularSpecies()) + " " +
+                    "numberBornMouse:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_MOUSE))).getNumberBornAnimalsOfParticularSpecies()) + " " +
+                    "numberBornRabbit:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_RABBIT))).getNumberBornAnimalsOfParticularSpecies()) + " " +
+                    "numberBornSheep:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_SHEEP))).getNumberBornAnimalsOfParticularSpecies()) + " " +
+                    "numberBornBear:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_BEAR))).getNumberBornAnimalsOfParticularSpecies()) + " " +
+                    "numberBornBoa:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_BOA))).getNumberBornAnimalsOfParticularSpecies()) + " " +
+                    "numberBornFox:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_FOX))).getNumberBornAnimalsOfParticularSpecies()) + " " +
+                    "numberBornWolf:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_WOLF))).getNumberBornAnimalsOfParticularSpecies()) + " " +
+                    "\nnumberBornEagle:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_EAGLE))).getNumberBornAnimalsOfParticularSpecies()) + " " +
 
-                            " numberBoars:" + " " + Animal.numberBoars.get() + " " +
-                            " numberBuffalo:" + " " + Animal.numberBuffalo.get() + " " +
-                            " numberCaterpillars:" + " " + Animal.numberCaterpillars.get() + " " +
-                            " numberDeer:" + " " + Animal.numberDeer.get() + " " +
-                            " numberDucks:" + " " + Animal.numberDucks.get() + " " +
-                            " numberGoats:" + " " + Animal.numberGoats.get() + " " +
-                            " numberHorses:" + " " + Animal.numberHorses.get() + " " +
-                            " numberMouses:" + " " + Animal.numberMouses.get() + " " +
-                            " numberRabbits:" + " " + Animal.numberRabbits.get() + " " +
-                            " numberSheep:" + " " + Animal.numberSheep.get() + " " +
-                            " numberBears:" + " " + Animal.numberBears.get() + " " +
-                            " numberBoas:" + " " + Animal.numberBoas.get() + " " +
-                            " numberFoxes:" + " " + Animal.numberFoxes.get() + " " +
-                            " numberWolfs:" + " " + Animal.numberWolfs.get() + " " +
-                            "numberEagles:" + " " + Animal.numberEagles.get() + " " +
-                            " numberDeadBoar:" + " " + Animal.numberDeadBoar.get() + " " +
-                            " numberDeadBuffalo:" + " " + Animal.numberDeadBuffalo.get() + " " +
-                            " numberDeadCaterpillar:" + " " + Animal.numberDeadCaterpillar.get() + " " +
-                            " numberDeadDeer:" + " " + Animal.numberDeadDeer.get() + " " +
-                            " numberDeadDuck:" + " " + Animal.numberDeadDuck.get() + " " +
-                            " numberDeadGoat:" + " " + Animal.numberDeadGoat.get() + " " +
-                            " numberDeadHorse:" + " " + Animal.numberDeadHorse.get() + " " +
-                            " numberDeadMouse:" + " " + Animal.numberDeadMouse.get() + " " +
-                            " numberDeadRabbit:" + " " + Animal.numberDeadRabbit.get() + " " +
-                            " numberDeadSheep:" + " " + Animal.numberDeadSheep.get() + " " +
-                            " numberDeadBear:" + " " + Animal.numberDeadBear.get() + " " +
-                            " numberDeadBoa:" + " " + Animal.numberDeadBoa.get() + " " +
-                            " numberDeadFox:" + " " + Animal.numberDeadFox.get() + " " +
-                            " numberDeadWolf:" + " " + Animal.numberDeadWolf.get() + " " +
-                            "numberDeadEagle:" + " " + Animal.numberDeadEagle.get() + " " +
-                            "startM " + " " + Animal.startMove + " " + "finishM: " + " " + Animal.finishMove + " "
-                            + " startR:" + " " + Animal.startR + " " + "finishR " + " " + Animal.finishR + " " +
-                            "startGet: " + " " + Animal.startGet + " " + " finishGet" + " " + Animal.finishGet + " " +
-                            " startRun:" + " " + Animal.runStart + " " + " finishRun" + " " + Animal.runFinish + " " +
-                            "startSwapPlacesWithNeighbor: " + " " + Animal.startSwapPlacesWithNeighbor + " " +
-                            "finishSwapPlacesWithNeighbor: " + " " + Animal.finishSwapPlacesWithNeighbor + " " +
-                            "startSetPositionForNewbornAnima: " + " " + Animal.startSetPositionForNewbornAnimal + " "
-                            + "finishSetPositionForNewbornAnima: " + " " + Animal.finishSetPositionForNewbornAnimal + " " +
-                            "startChoiceDirectionForMoveAndCallMove: " + " " + Animal.startChoiceDirectionForMoveAndCallMove +
-                            " " + "finishChoiceDirectionForMoveAndCallMove: " + " " + Animal.finishChoiceDirectionForMoveAndCallMove + " " +
-                            "startDecreaseTheNumberOfOneTypeOfAnimal: " + " " + Animal.startDecreaseTheNumberOfOneTypeOfAnimal +
-                            " " + "finishDecreaseTheNumberOfOneTypeOfAnimal: " + " " + Animal.finishDecreaseTheNumberOfOneTypeOfAnimal + " " +
-                            "startHavingVitality: " + " " + Animal.finishHavingVitality + " " +
-                            "finishHavingVitality " + " " + Animal.finishHavingVitality + " " +
-                            " startEat:" + " " + Animal.startEat + " " + " finishEat" + " " + Animal.finishEat +
-                            " " + " startDeathFromOldAge:" + " " + Animal.startDeathFromOldAge + " " +
-                            " finishDeathFromOldAge" + " " + Animal.finishDeathFromOldAge + " " +
-                            " startFor:" + " " + Animal.startFor + " " + " finishFor" + " " + Animal.finishFor
-                    //   + " " + " startFood:" + " " + Animal.startFood + " " + " finishFood" + " " + Animal.finishFood
+                    "numberBoars:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_BOAR))).getNumberAnimalsOfParticularSpecies()) + " " +
+                    "numberBuffalo:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_BUFFALO))).getNumberAnimalsOfParticularSpecies()) + " " +
+                    "numberCaterpillars:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_CATERPILLAR))).getNumberAnimalsOfParticularSpecies()) + " " +
+                    "numberDeer:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_DEER))).getNumberAnimalsOfParticularSpecies()) + " " +
+                    "numberDucks:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_DUCK))).getNumberAnimalsOfParticularSpecies()) + " " +
+                    "numberGoats:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_GOAT))).getNumberAnimalsOfParticularSpecies()) + " " +
+                    "numberHorses:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_HORSE))).getNumberAnimalsOfParticularSpecies()) + " " +
+                    "numberMouses:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_MOUSE))).getNumberAnimalsOfParticularSpecies()) + " " +
+                    "\nnumberRabbits:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_RABBIT))).getNumberAnimalsOfParticularSpecies()) + " " +
+                    "numberSheep:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_SHEEP))).getNumberAnimalsOfParticularSpecies()) + " " +
+                    "numberBears:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_BEAR))).getNumberAnimalsOfParticularSpecies()) + " " +
+                    "numberBoas:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_BOA))).getNumberAnimalsOfParticularSpecies()) + " " +
+                    "numberFoxes:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_FOX))).getNumberAnimalsOfParticularSpecies()) + " " +
+                    "numberWolfs:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_WOLF))).getNumberAnimalsOfParticularSpecies()) + " " +
+                    "numberEagles:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_EAGLE))).getNumberAnimalsOfParticularSpecies()) + " " +
+
+                    "numberDeadBoar:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_BOAR))).getNumberDeadAnimalsOfParticularSpecies()) + " " +
+                    "numberDeadBuffalo:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_BUFFALO))).getNumberDeadAnimalsOfParticularSpecies()) + " " +
+                    "\nnumberDeadCaterpillar:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_CATERPILLAR))).getNumberDeadAnimalsOfParticularSpecies()) + " " +
+                    "numberDeadDeer:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_DEER))).getNumberDeadAnimalsOfParticularSpecies()) + " " +
+                    "numberDeadDuck:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_DUCK))).getNumberDeadAnimalsOfParticularSpecies()) + " " +
+                    "numberDeadGoat:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_GOAT))).getNumberDeadAnimalsOfParticularSpecies()) + " " +
+                    "numberDeadHorse:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_HORSE))).getNumberDeadAnimalsOfParticularSpecies()) + " " +
+                    "numberDeadMouse:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_MOUSE))).getNumberDeadAnimalsOfParticularSpecies()) + " " +
+                    "numberDeadRabbit:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_RABBIT))).getNumberDeadAnimalsOfParticularSpecies()) + " " +
+                    "numberDeadSheep:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_SHEEP))).getNumberDeadAnimalsOfParticularSpecies()) + " " +
+                    "\nnumberDeadBear:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_BEAR))).getNumberDeadAnimalsOfParticularSpecies()) + " " +
+                    "numberDeadBoa:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_BOA))).getNumberDeadAnimalsOfParticularSpecies()) + " " +
+                    "numberDeadFox:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_FOX))).getNumberDeadAnimalsOfParticularSpecies()) + " " +
+                    "numberDeadWolf:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_WOLF))).getNumberDeadAnimalsOfParticularSpecies()) + " " +
+                    "numberDeadEagle:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_EAGLE))).getNumberDeadAnimalsOfParticularSpecies()) + " " +
 
 
+                    "startM " + " " + Animal.startMove + " " + "finishM: " + " " + Animal.finishMove + " "
+                    + " startR:" + " " + Animal.startR + " " + "finishR " + " " + Animal.finishR + " " +
+                    "startGet: " + " " + Animal.startGet + " " + " finishGet" + " " + Animal.finishGet + " " +
+                    " startRun:" + " " + Animal.runStart + " " + " finishRun" + " " + Animal.runFinish + " " +
+                    "startSwapPlacesWithNeighbor: " + " " + Animal.startSwapPlacesWithNeighbor + " " +
+                    "finishSwapPlacesWithNeighbor: " + " " + Animal.finishSwapPlacesWithNeighbor + " " +
+                    "startSetPositionForNewbornAnima: " + " " + Animal.startSetPositionForNewbornAnimal + " "
+                    + "finishSetPositionForNewbornAnima: " + " " + Animal.finishSetPositionForNewbornAnimal + " " +
+                    "startChoiceDirectionForMoveAndCallMove: " + " " + Animal.startChoiceDirectionForMoveAndCallMove +
+                    " " + "finishChoiceDirectionForMoveAndCallMove: " + " " + Animal.finishChoiceDirectionForMoveAndCallMove + " " +
+                    "startDecreaseTheNumberOfOneTypeOfAnimal: " + " " + Animal.startDecreaseTheNumberOfOneTypeOfAnimal +
+                    " " + "finishDecreaseTheNumberOfOneTypeOfAnimal: " + " " + Animal.finishDecreaseTheNumberOfOneTypeOfAnimal + " " +
+                    "startHavingVitality: " + " " + Animal.finishHavingVitality + " " +
+                    "finishHavingVitality " + " " + Animal.finishHavingVitality + " " +
+                    " startEat:" + " " + Animal.startEat + " " + " finishEat" + " " + Animal.finishEat +
+                    " " + " startDeathFromOldAge:" + " " + Animal.startDeathFromOldAge + " " +
+                    " finishDeathFromOldAge" + " " + Animal.finishDeathFromOldAge + " " +
+                    " startFor:" + " " + Animal.startFor + " " + " finishFor" + " " + Animal.finishFor
             );
-            // }
         }
     }
-    }
+}
+

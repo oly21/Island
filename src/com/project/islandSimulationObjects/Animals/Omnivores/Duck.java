@@ -1,12 +1,10 @@
-package com.project.islandSimulationObjects.Animals.herbivorous;
+package com.project.islandSimulationObjects.Animals.Omnivores;
 
 import com.project.island.BoxCharacteristicsObject;
-
 import java.util.Arrays;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-
-public class Goat extends Herbivores {
+public class Duck  extends Omnivores {
     public static volatile int numberBornAnimalsOfParticularSpecies = 0;
     public static volatile int numberAnimalsOfParticularSpecies = 0;
     public static volatile int numberDeadAnimalsOfParticularSpecies = 0;
@@ -18,7 +16,7 @@ public class Goat extends Herbivores {
 
     @Override
     public synchronized void setNumberBornAnimalsOfParticularSpecies(int numberBornAnimalsOfParticularSpecies) {
-        Goat.numberBornAnimalsOfParticularSpecies = numberBornAnimalsOfParticularSpecies;
+        Duck.numberBornAnimalsOfParticularSpecies = numberBornAnimalsOfParticularSpecies;
     }
 
     @Override
@@ -28,7 +26,7 @@ public class Goat extends Herbivores {
 
     @Override
     public synchronized void setNumberAnimalsOfParticularSpecies(int numberAnimalsOfParticularSpecies) {
-        Goat.numberAnimalsOfParticularSpecies = numberAnimalsOfParticularSpecies;
+        Duck.numberAnimalsOfParticularSpecies = numberAnimalsOfParticularSpecies;
     }
 
     @Override
@@ -38,29 +36,45 @@ public class Goat extends Herbivores {
 
     @Override
     public synchronized void setNumberDeadAnimalsOfParticularSpecies(int numberDeadAnimalsOfParticularSpecies) {
-        Goat.numberDeadAnimalsOfParticularSpecies = numberDeadAnimalsOfParticularSpecies;
+        Duck.numberDeadAnimalsOfParticularSpecies = numberDeadAnimalsOfParticularSpecies;
     }
 
-    public Goat(int weight, int age) {
+    public Duck(int weight, int age) {
         super();
+        initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES,
+                BoxCharacteristicsObject.TYPE_STRING_GRASS, BoxCharacteristicsObject.TYPE_STRING_CATERPILLAR);
+        step = BoxCharacteristicsObject.SPEED_DUCK;
+        progenyLimit = 5;
+        neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_DUCK;
+        typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_DUCK;
+        typeString = BoxCharacteristicsObject.TYPE_STRING_DUCK;
+        foodStuffs = new CopyOnWriteArrayList<>(initialList);
         this.weight = weight;
         this.age = age;
-        step = BoxCharacteristicsObject.SPEED_GOAT;
-        progenyLimit = 5;
-        neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_GOAT;
-        typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_GOAT;
-        typeString = BoxCharacteristicsObject.TYPE_STRING_GOAT;
-        initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES,
-                BoxCharacteristicsObject.TYPE_STRING_GRASS, BoxCharacteristicsObject.TYPE_STRING_FRUIT,
-                BoxCharacteristicsObject.TYPE_STRING_BERRIES, BoxCharacteristicsObject.TYPE_STRING_VEGETABLES);
-        foodStuffs = new CopyOnWriteArrayList<>(initialList);
     }
 
-    public Goat(int age) {
+
+    public Duck(int age) {
         super();
         this.age = age;
+
+    }
+
+
+    @Override
+    public void reproduce() {
+        for (int i = 0; i <= 2; i++) {
+            super.reproduce();
+        }
     }
 
 
 }
+
+
+
+
+
+
+
 

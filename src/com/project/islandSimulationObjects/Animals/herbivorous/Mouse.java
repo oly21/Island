@@ -11,170 +11,59 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Mouse extends Herbivores {
-    private final static String typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_MOUSE;
 
-    private final static String typeString = BoxCharacteristicsObject.TYPE_STRING_MOUSE;
-    private final static int progenyLimit = 20;
-    private volatile int attemptsFindPartnerCounter = 0;
-    private volatile int hungryDaysCounter = 0;
-    private volatile int daysWithoutFood = 0;
-    private volatile int countDays = 0;
-    private volatile int dailyMealCounter = 0;
-    private volatile int eatenKg = 0;
-    private volatile boolean eat = false;
-    public volatile boolean isHunger = true;
-    private final static List<String> initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_FRUIT,
-            BoxCharacteristicsObject.TYPE_STRING_BERRIES, BoxCharacteristicsObject.TYPE_STRING_VEGETABLES,
-            BoxCharacteristicsObject.TYPE_STRING_GRASS, BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES);
-    private final static CopyOnWriteArrayList<String> foodStuffs = new CopyOnWriteArrayList<>(initialList);
+    public  static volatile int numberBornAnimalsOfParticularSpecies = 0;
+    public  static volatile int numberAnimalsOfParticularSpecies = 0;
+    public  static volatile int numberDeadAnimalsOfParticularSpecies = 0;
+    @Override
+    public synchronized int getNumberBornAnimalsOfParticularSpecies() {
+        return numberBornAnimalsOfParticularSpecies;
+    }
 
-    private final int step = BoxCharacteristicsObject.SPEED_MOUSE;
+    @Override
+    public synchronized void setNumberBornAnimalsOfParticularSpecies(int numberBornAnimalsOfParticularSpecies) {
+        Mouse.numberBornAnimalsOfParticularSpecies = numberBornAnimalsOfParticularSpecies;
+    }
+    @Override
+    public synchronized int getNumberAnimalsOfParticularSpecies() {
+        return numberAnimalsOfParticularSpecies;
+    }
 
+    @Override
+    public synchronized void setNumberAnimalsOfParticularSpecies(int numberAnimalsOfParticularSpecies) {
+        Mouse.numberAnimalsOfParticularSpecies = numberAnimalsOfParticularSpecies;
+    }
+    @Override
+    public synchronized int getNumberDeadAnimalsOfParticularSpecies() {
+        return numberDeadAnimalsOfParticularSpecies;
+    }
 
-    private volatile int weight = BoxCharacteristicsObject.WEIGHT_MOUSE;
-    private volatile int age;
-    private final int neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_MOUSE;
-    private volatile int x;
-    private volatile int y;
-
-    private volatile int progeny = 0;
+    @Override
+    public synchronized void setNumberDeadAnimalsOfParticularSpecies(int numberDeadAnimalsOfParticularSpecies) {
+        Mouse.numberDeadAnimalsOfParticularSpecies = numberDeadAnimalsOfParticularSpecies;
+    }
 
     public Mouse(int weight, int age) {
         super();
         this.weight = weight;
         this.age = age;
+        initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_FRUIT,
+                BoxCharacteristicsObject.TYPE_STRING_BERRIES, BoxCharacteristicsObject.TYPE_STRING_VEGETABLES,
+                BoxCharacteristicsObject.TYPE_STRING_GRASS, BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES);
+        step = BoxCharacteristicsObject.SPEED_MOUSE;
+        progenyLimit = 5;
+        neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_MOUSE;
+        typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_MOUSE;
+        typeString = BoxCharacteristicsObject.TYPE_STRING_MOUSE;
+        foodStuffs = new CopyOnWriteArrayList<>(initialList);
     }
 
     public Mouse(int age) {
         super();
+        weight = BoxCharacteristicsObject.WEIGHT_MOUSE;
         this.age = age;
     }
 
-    private volatile boolean stop = false;
-
-    @Override
-    public synchronized boolean getStop() {
-        return stop;
-    }
-
-    @Override
-    public synchronized void setStop(boolean stop) {
-        this.stop = stop;
-    }
-
-    @Override
-    public synchronized int getX() {
-        return x;
-    }
-
-    @Override
-    public synchronized int getY() {
-        return y;
-    }
-
-    @Override
-    public synchronized void setXY(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    @Override
-    public synchronized int getWeight() {
-        return weight;
-    }
-
-    @Override
-    public synchronized int getAge() {
-        return age;
-    }
-
-    public synchronized void setAge(int age) {
-        this.age = age;
-    }
-
-    @Override
-    public synchronized Coordinate getXY() {
-
-        return new Coordinate(x, y);
-    }
-
-
-    @Override
-    public synchronized boolean getIsHunger() {
-        return isHunger;
-    }
-
-
-    @Override
-    public synchronized void setIsHunger(boolean isHunger) {
-        this.isHunger = isHunger;
-    }
-
-
-    @Override
-    public synchronized boolean getEat() {
-        return eat;
-    }
-
-
-    @Override
-    public synchronized void setEat(boolean eat) {
-        this.eat = eat;
-    }
-
-
-    @Override
-    public synchronized int getProgeny() {
-        return progeny;
-    }
-
-    @Override
-    public synchronized void setProgeny(int progeny) {
-        this.progeny = progeny;
-    }
-
-
-    @Override
-    public synchronized int getEatenKg() {
-        return eatenKg;
-    }
-
-
-    @Override
-    public synchronized void setEatenKg(int eatenKg) {
-        this.eatenKg = eatenKg;
-    }
-
-
-    @Override
-    public String getTypePicture() {
-        return typePicture;
-    }
-
-    @Override
-    public String getTypeString() {
-        return typeString;
-    }
-
-    @Override
-    public CopyOnWriteArrayList<String> getFoodStuffs() {
-        return foodStuffs;
-    }
-
-    @Override
-    public int getNeededFoodKg() {
-        return neededFoodKg;
-    }
-
-    @Override
-    public int getProgenyLimit() {
-        return progenyLimit;
-    }
-
-    @Override
-    public int getStep() {
-        return step;
-    }
 
     @Override
     public void reproduce() {
@@ -183,59 +72,5 @@ public class Mouse extends Herbivores {
         }
     }
 
-    // @Override
-    //  public Label getLabel() {
-    // return label;
-    // }
 
-    @Override
-    public synchronized int getDaysWithoutFood() {
-        return daysWithoutFood;
-    }
-
-    @Override
-    public synchronized void setDaysWithoutFood(int daysWithoutFood) {
-        this.daysWithoutFood = daysWithoutFood;
-    }
-
-    @Override
-    public synchronized int getCountDays() {
-        return countDays;
-    }
-
-    @Override
-    public synchronized void setCountDays(int countDays) {
-        this.countDays = countDays;
-
-    }
-
-    @Override
-    public synchronized int getDailyMealCounter() {
-        return dailyMealCounter;
-    }
-
-    @Override
-    public synchronized void setDailyMealCounter(int dailyMealCounter) {
-        this.dailyMealCounter = dailyMealCounter;
-    }
-
-    @Override
-    public synchronized int getHungryDaysCounter() {
-        return hungryDaysCounter;
-    }
-
-    @Override
-    public synchronized void setHungryDaysCounter(int hungryDaysCounter) {
-        this.hungryDaysCounter = hungryDaysCounter;
-    }
-
-    @Override
-    public synchronized int getAttemptsFindPartnerCounter() {
-        return attemptsFindPartnerCounter;
-    }
-
-    @Override
-    public synchronized void setAttemptsFindPartnerCounter(int attemptsFindPartnerCounter) {
-        this.attemptsFindPartnerCounter = attemptsFindPartnerCounter;
-    }
 }

@@ -1,18 +1,18 @@
 package com.project.island;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-import com.project.Solution;
 import com.project.islandSimulationObjects.Animals.Animal;
-import com.project.islandSimulationObjects.Animals.herbivorous.*;
-import com.project.islandSimulationObjects.Animals.predators.*;
+import com.project.islandSimulationObjects.CreationIslandSimulationObject;
 import com.project.islandSimulationObjects.IslandSimulationObject;
 import com.project.islandSimulationObjects.Plants.*;
 
 public class Island {
 
-
+    CreationIslandSimulationObject creationIslandSimulationObject = CreationIslandSimulationObject.getCreationIslandSimulationObject();
     public static Island instance = null;
+
     public static volatile int x;
     public static volatile int y;
 
@@ -40,11 +40,31 @@ public class Island {
         return instance;
     }
 
-    // public void setInstance(Island instance) {
-    //    Island.instance = instance;
-    // }
 
+    List<String> initialList = Arrays.asList(
+            BoxCharacteristicsObject.TYPE_STRING_WOLF,
+            BoxCharacteristicsObject.TYPE_STRING_BOA,
+            BoxCharacteristicsObject.TYPE_STRING_FOX,
+            BoxCharacteristicsObject.TYPE_STRING_BEAR,
+            BoxCharacteristicsObject.TYPE_STRING_EAGLE,
+            BoxCharacteristicsObject.TYPE_STRING_HORSE,
+            BoxCharacteristicsObject.TYPE_STRING_DEER,
+            BoxCharacteristicsObject.TYPE_STRING_RABBIT,
+            BoxCharacteristicsObject.TYPE_STRING_MOUSE,
+            BoxCharacteristicsObject.TYPE_STRING_GOAT,
+            BoxCharacteristicsObject.TYPE_STRING_SHEEP,
+            BoxCharacteristicsObject.TYPE_STRING_BOAR,
+            BoxCharacteristicsObject.TYPE_STRING_BUFFALO,
+            BoxCharacteristicsObject.TYPE_STRING_DUCK,
+            BoxCharacteristicsObject.TYPE_STRING_CATERPILLAR,
+            BoxCharacteristicsObject.TYPE_STRING_BERRIES,
+            BoxCharacteristicsObject.TYPE_STRING_FRUIT,
+            BoxCharacteristicsObject.TYPE_STRING_GRASS,
+            BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES,
+            BoxCharacteristicsObject.TYPE_STRING_VEGETABLES
+    );
 
+    public volatile CopyOnWriteArrayList<String> typeString = new CopyOnWriteArrayList<>(initialList);
     public volatile static CopyOnWriteArrayList<Animal> animals = new CopyOnWriteArrayList<>();
 
     public volatile static CopyOnWriteArrayList<Plant> plants = new CopyOnWriteArrayList<>();
@@ -55,80 +75,30 @@ public class Island {
     public void listInitialization() {
 
 
-        for (int i = 0; i <= predatorsNumber; i++) {
+        for (int i = 0; i <= predatorsNumber * 2; i++) {
+            for (String typeString : typeString) {
+                IslandSimulationObject islandSimulationObject = creationIslandSimulationObject.createObject(null, typeString);
 
-            animals.add(new Fox(1, 2));
-            Animal.numberFoxes.incrementAndGet();
-            animals.add(new Wolf(1, 2));
-            Animal.numberWolfs.incrementAndGet();
-            animals.add(new Deer(1, 5));
-            Animal.numberDeer.incrementAndGet();
-            animals.add(new Horse(1, 4));
-            Animal.numberHorses.incrementAndGet();
-            animals.add(new Bear(1, 2));
-            Animal.numberBears.incrementAndGet();
-            animals.add(new Boar(1, 4));
-            Animal.numberBoars.incrementAndGet();
-            animals.add(new Eagle(1, 3));
-            Animal.numberEagles.incrementAndGet();
-            animals.add(new Buffalo(1, 4));
-            Animal.numberBuffalo.incrementAndGet();
-            animals.add(new Boa(1, 2));
-            Animal.numberBoas.incrementAndGet();
+                if (islandSimulationObject instanceof Animal) {
+                    animals.add((Animal) islandSimulationObject);
+                    islandSimulationObject.setNumberAnimalsOfParticularSpecies((islandSimulationObject).getNumberAnimalsOfParticularSpecies() + 1);
+
+                } else if (islandSimulationObject instanceof Plant) {
+                    plants.add((Plant) islandSimulationObject);
+                    Animal.numberPlants.incrementAndGet();
+
+                }
+            }
         }
-        for (int i = 0; i <= herbivoresNumber; i++) {
 
-
-            animals.add(new Caterpillar(1, 2));
-            Animal.numberCaterpillars.incrementAndGet();
-            animals.add(new Mouse(1, 4));
-            Animal.numberMouses.incrementAndGet();
-            animals.add(new Rabbit(1, 4));
-            Animal.numberRabbits.incrementAndGet();
-            animals.add(new Sheep(1, 2));
-            Animal.numberSheep.incrementAndGet();
-
-            animals.add(new Duck(1, 2));
-            Animal.numberDucks.incrementAndGet();
-
-            animals.add(new Goat(1, 2));
-            Animal.numberGoats.incrementAndGet();
-            plants.add(new Berries(1, 1));
-            Animal.numberPlants.incrementAndGet();
-            plants.add(new Fruit(1, 1));
-            Animal.numberPlants.incrementAndGet();
-            plants.add(new PlantLeaves(1, 1));
-            Animal.numberPlants.incrementAndGet();
-            plants.add(new Vegetables(1, 1));
-            Animal.numberPlants.incrementAndGet();
-            plants.add(new Grass(1, 1));
-            Animal.numberPlants.incrementAndGet();
-            plants.add(new Berries(1, 1));
-            Animal.numberPlants.incrementAndGet();
-            plants.add(new Fruit(1, 1));
-            Animal.numberPlants.incrementAndGet();
-            plants.add(new PlantLeaves(1, 1));
-            Animal.numberPlants.incrementAndGet();
-            plants.add(new Vegetables(1, 1));
-            Animal.numberPlants.incrementAndGet();
-            plants.add(new Grass(1, 1));
-            Animal.numberPlants.incrementAndGet();
-        }
         islandSimulationObjects.addAll(animals);
         islandSimulationObjects.addAll(plants);
         Animal.numberAnimals.addAndGet(animals.size());
-        // Animal.numberPlants.addAndGet(plants.size());
-
-
     }
-
 
     public static synchronized IslandSimulationObject[][] getIslandArray() {
 
-
         return islandArray;
-
-
     }
 
 
@@ -136,19 +106,16 @@ public class Island {
 
         return animals;
 
-
     }
 
     public static CopyOnWriteArrayList<Plant> getPlantList() {
 
         return plants;
 
-
     }
 
     public static CopyOnWriteArrayList<IslandSimulationObject> getIslandSimulationObjectList() {
         return islandSimulationObjects;
-
 
     }
 }

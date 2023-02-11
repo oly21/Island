@@ -1,8 +1,23 @@
 package com.project.island;
 
-import com.project.Solution;
+
 
 public   class BoxCharacteristicsObject {
+
+    public static final int WEIGHT_ = 50;
+    public static final String TYPE_STRING_ =   "Wolf";;
+    public static final String STRING_TYPE_PICTURE_ = "🐺" ;
+    public static final int SPEED_ = 5;
+    public static final int MEAL_REQUIRED_KG_ = 5;
+
+
+
+    public static final int WEIGHT_1 = 50;
+    public static final String TYPE_STRING_1 =   "Wolf";;
+    public static final String STRING_TYPE_PICTURE_1 = "🐺" ;
+    public static final int SPEED_1 = 5;
+    public static final int MEAL_REQUIRED_KG_1 = 5;
+    public static final double PROBABILITY_WOLF_EAT_1 = 0.7;
 
     public static final int WEIGHT_WOLF = 50;
     public static final int WEIGHT_BOA = 1;
@@ -62,7 +77,6 @@ public   class BoxCharacteristicsObject {
     public static final String STRING_TYPE_PICTURE_FRUIT =  "🍏";
     public static final String STRING_TYPE_PICTURE_Grass=  "🌱";
     public static final String STRING_TYPE_PICTURE_LEAVES =  "🥬";
-
     public static final String STRING_TYPE_PICTURE_VEGETABLES =  "🥕";
 
 

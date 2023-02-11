@@ -5,10 +5,10 @@ import com.project.island.Island;
 import com.project.island.IslandSimulation;
 import com.project.islandSimulationObjects.Animals.Animal;
 import com.project.islandSimulationObjects.Coordinate;
+import com.project.islandSimulationObjects.CreationIslandSimulationObject;
 import com.project.islandSimulationObjects.IslandSimulationObject;
 
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -27,6 +27,7 @@ public class PlantGrowth implements Runnable {
     private int weight = BoxCharacteristicsObject.WEIGHT_PLANT;
     private int age;
     public static volatile AtomicInteger numbersPlantsGrew = new AtomicInteger(100);
+    CreationIslandSimulationObject creationIslandSimulationObject = CreationIslandSimulationObject.getCreationIslandSimulationObject();
 
 
     private PlantGrowth() {
@@ -36,12 +37,13 @@ public class PlantGrowth implements Runnable {
 
 
     public static PlantGrowth getPlantGrowth() {
-        if(instance == null){
+        if (instance == null) {
 
             instance = new PlantGrowth();
         }
         return instance;
     }
+
     @Override
     public void run() {
 
@@ -58,27 +60,27 @@ public class PlantGrowth implements Runnable {
         for (int i = 0; i <= 2; i++) {
             if (freeCells.size() > 0) {
                 synchronized (islandArray) {
-                    plants.add(new Vegetables(2));
+                    plants.add((Plant)creationIslandSimulationObject.createObject(null,BoxCharacteristicsObject.TYPE_STRING_VEGETABLES));
                     if (freeCells.size() > 0) {
-                        plants.add(new Berries(2));
-                    }
-                    if (freeCells.size() > 0) {
-                        plants.add(new Fruit(2));
-                    }
-                    if (freeCells.size() > 0) {
-                        plants.add(new Grass(2));
-                    }
-                    if (freeCells.size() > 0) {
-                        plants.add(new PlantLeaves(2));
-                    }
-                   // islandSimulationObjects.add(new Vegetables(1));
-                  //  islandSimulationObjects.add(new Berries(1));
-                  //  islandSimulationObjects.add(new Fruit(1));
-                  //  islandSimulationObjects.add(new Grass(1));
-                 //   islandSimulationObjects.add(new PlantLeaves(1));
+                        plants.add((Plant)creationIslandSimulationObject.createObject(null,BoxCharacteristicsObject.TYPE_STRING_BERRIES));
 
+                    }
+                    if (freeCells.size() > 0) {
+                        plants.add((Plant)creationIslandSimulationObject.createObject(null,BoxCharacteristicsObject.TYPE_STRING_FRUIT));
 
+                    }
+                    if (freeCells.size() > 0) {
+                        plants.add((Plant)creationIslandSimulationObject.createObject(null,BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES));
 
+                    }
+                    if (freeCells.size() > 0) {
+                        plants.add((Plant)creationIslandSimulationObject.createObject(null,BoxCharacteristicsObject.TYPE_STRING_GRASS));
+
+                    }
+                    if (freeCells.size() > 0) {
+                        plants.add((Plant)creationIslandSimulationObject.createObject(null,BoxCharacteristicsObject.TYPE_STRING_VEGETABLES));
+
+                    }
 
                     setInitialPositionsGrowPlants();
                 }
@@ -89,12 +91,12 @@ public class PlantGrowth implements Runnable {
     public void setInitialPositionsGrowPlants() {
 
         if (freeCells.size() > 0) {
-            //int count = 0;
+
             for (int i = 0; i <= Island.x; i++) {
 
 
                 if (freeCells.size() > 0) {
-                   // count++;
+
                     int coordinate = ThreadLocalRandom.current().nextInt(freeCells.size()) % freeCells.size();
 
                     Coordinate coordinate1 = freeCells.get(coordinate);
@@ -108,24 +110,14 @@ public class PlantGrowth implements Runnable {
                     numbersPlantsGrew.incrementAndGet();
                     freeCells.remove(coordinate1);
                 } else {
-                    break;//tasksCopy.remove(islandSimulationObject);
+                    break;
                 }
 
             }
-           // if (count < 10) {
-             //   Iterator<Plant> iterator = plants.iterator();
-              //  for (int j = 0; j < (10 - count); j++){
-                //    Plant item = iterator.next();
 
-                   //     iterator.remove();
-                  //  }
-                //}
-               // for (int j = 0; j < 10 - count; j++) {
-               //     plants.remove(j);
-              //  }
-
-            }
 
         }
 
     }
+
+}

@@ -1,16 +1,13 @@
-package com.project.islandSimulationObjects.Animals.herbivorous;
+package com.project.islandSimulationObjects.Animals.Omnivores;
 
 import com.project.island.BoxCharacteristicsObject;
-
 import java.util.Arrays;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-
-public class Goat extends Herbivores {
-    public static volatile int numberBornAnimalsOfParticularSpecies = 0;
-    public static volatile int numberAnimalsOfParticularSpecies = 0;
-    public static volatile int numberDeadAnimalsOfParticularSpecies = 0;
-
+public class Horse  extends Omnivores {
+    public  static volatile int numberBornAnimalsOfParticularSpecies = 0;
+    public  static volatile int numberAnimalsOfParticularSpecies = 0;
+    public  static volatile int numberDeadAnimalsOfParticularSpecies = 0;
     @Override
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {
         return numberBornAnimalsOfParticularSpecies;
@@ -18,9 +15,8 @@ public class Goat extends Herbivores {
 
     @Override
     public synchronized void setNumberBornAnimalsOfParticularSpecies(int numberBornAnimalsOfParticularSpecies) {
-        Goat.numberBornAnimalsOfParticularSpecies = numberBornAnimalsOfParticularSpecies;
+        Horse.numberBornAnimalsOfParticularSpecies = numberBornAnimalsOfParticularSpecies;
     }
-
     @Override
     public synchronized int getNumberAnimalsOfParticularSpecies() {
         return numberAnimalsOfParticularSpecies;
@@ -28,9 +24,8 @@ public class Goat extends Herbivores {
 
     @Override
     public synchronized void setNumberAnimalsOfParticularSpecies(int numberAnimalsOfParticularSpecies) {
-        Goat.numberAnimalsOfParticularSpecies = numberAnimalsOfParticularSpecies;
+        Horse.numberAnimalsOfParticularSpecies = numberAnimalsOfParticularSpecies;
     }
-
     @Override
     public synchronized int getNumberDeadAnimalsOfParticularSpecies() {
         return numberDeadAnimalsOfParticularSpecies;
@@ -38,29 +33,32 @@ public class Goat extends Herbivores {
 
     @Override
     public synchronized void setNumberDeadAnimalsOfParticularSpecies(int numberDeadAnimalsOfParticularSpecies) {
-        Goat.numberDeadAnimalsOfParticularSpecies = numberDeadAnimalsOfParticularSpecies;
+        Horse.numberDeadAnimalsOfParticularSpecies = numberDeadAnimalsOfParticularSpecies;
     }
-
-    public Goat(int weight, int age) {
+    public Horse(int weight, int age) {
         super();
         this.weight = weight;
         this.age = age;
-        step = BoxCharacteristicsObject.SPEED_GOAT;
-        progenyLimit = 5;
-        neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_GOAT;
-        typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_GOAT;
-        typeString = BoxCharacteristicsObject.TYPE_STRING_GOAT;
         initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES,
                 BoxCharacteristicsObject.TYPE_STRING_GRASS, BoxCharacteristicsObject.TYPE_STRING_FRUIT,
                 BoxCharacteristicsObject.TYPE_STRING_BERRIES, BoxCharacteristicsObject.TYPE_STRING_VEGETABLES);
+
+        step = BoxCharacteristicsObject.SPEED_HORSE;
+        progenyLimit = 5;
+        neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_HORSE;
+        typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_HORSE;
+        typeString = BoxCharacteristicsObject.TYPE_STRING_HORSE;
         foodStuffs = new CopyOnWriteArrayList<>(initialList);
     }
 
-    public Goat(int age) {
+
+    public Horse(int age) {
         super();
         this.age = age;
     }
 
 
-}
+    protected volatile int weight = BoxCharacteristicsObject.WEIGHT_HORSE;
 
+
+}

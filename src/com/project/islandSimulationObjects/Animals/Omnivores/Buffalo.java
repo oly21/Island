@@ -1,15 +1,14 @@
-package com.project.islandSimulationObjects.Animals.herbivorous;
+package com.project.islandSimulationObjects.Animals.Omnivores;
 
 import com.project.island.BoxCharacteristicsObject;
-
 import java.util.Arrays;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-
-public class Goat extends Herbivores {
+public class Buffalo  extends Omnivores {
     public static volatile int numberBornAnimalsOfParticularSpecies = 0;
     public static volatile int numberAnimalsOfParticularSpecies = 0;
     public static volatile int numberDeadAnimalsOfParticularSpecies = 0;
+
 
     @Override
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {
@@ -18,7 +17,7 @@ public class Goat extends Herbivores {
 
     @Override
     public synchronized void setNumberBornAnimalsOfParticularSpecies(int numberBornAnimalsOfParticularSpecies) {
-        Goat.numberBornAnimalsOfParticularSpecies = numberBornAnimalsOfParticularSpecies;
+        Buffalo.numberBornAnimalsOfParticularSpecies = numberBornAnimalsOfParticularSpecies;
     }
 
     @Override
@@ -28,7 +27,7 @@ public class Goat extends Herbivores {
 
     @Override
     public synchronized void setNumberAnimalsOfParticularSpecies(int numberAnimalsOfParticularSpecies) {
-        Goat.numberAnimalsOfParticularSpecies = numberAnimalsOfParticularSpecies;
+        Buffalo.numberAnimalsOfParticularSpecies = numberAnimalsOfParticularSpecies;
     }
 
     @Override
@@ -38,29 +37,28 @@ public class Goat extends Herbivores {
 
     @Override
     public synchronized void setNumberDeadAnimalsOfParticularSpecies(int numberDeadAnimalsOfParticularSpecies) {
-        Goat.numberDeadAnimalsOfParticularSpecies = numberDeadAnimalsOfParticularSpecies;
+        Buffalo.numberDeadAnimalsOfParticularSpecies = numberDeadAnimalsOfParticularSpecies;
     }
 
-    public Goat(int weight, int age) {
+    public Buffalo(int age) {
+        super();
+        weight = BoxCharacteristicsObject.WEIGHT_BUFFALO;
+        this.age = age;
+    }
+
+
+    public Buffalo(int weight, int age) {
         super();
         this.weight = weight;
         this.age = age;
-        step = BoxCharacteristicsObject.SPEED_GOAT;
-        progenyLimit = 5;
-        neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_GOAT;
-        typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_GOAT;
-        typeString = BoxCharacteristicsObject.TYPE_STRING_GOAT;
         initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES,
-                BoxCharacteristicsObject.TYPE_STRING_GRASS, BoxCharacteristicsObject.TYPE_STRING_FRUIT,
-                BoxCharacteristicsObject.TYPE_STRING_BERRIES, BoxCharacteristicsObject.TYPE_STRING_VEGETABLES);
+                BoxCharacteristicsObject.TYPE_STRING_GRASS, BoxCharacteristicsObject.TYPE_STRING_CATERPILLAR);
+        step = BoxCharacteristicsObject.SPEED_BUFFALO;
+        progenyLimit = 5;
+        neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_BUFFALO;
+        typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_BUFFALO;
+        typeString = BoxCharacteristicsObject.TYPE_STRING_BUFFALO;
         foodStuffs = new CopyOnWriteArrayList<>(initialList);
     }
 
-    public Goat(int age) {
-        super();
-        this.age = age;
-    }
-
-
 }
-
