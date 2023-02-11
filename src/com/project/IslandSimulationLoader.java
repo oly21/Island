@@ -77,7 +77,7 @@ public class IslandSimulationLoader {
         loadingProgram();
     }
 
-    public void loadingProgram() throws InterruptedException, InstantiationException, IllegalAccessException {
+    public void loadingProgram()  {
         IslandSimulation islandSimulation = IslandSimulation.getIslandSimulation();
         islandSimulation.startSimulation();
     }

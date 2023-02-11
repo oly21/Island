@@ -4,13 +4,26 @@ package com.project.island;
 
 public   class BoxCharacteristicsObject {
 
-    public static final int WEIGHT_ = 50;
-    public static final String TYPE_STRING_ =   "Wolf";;
-    public static final String STRING_TYPE_PICTURE_ = "🐺" ;
-    public static final int SPEED_ = 5;
-    public static final int MEAL_REQUIRED_KG_ = 5;
+    public static final int WEIGHT_GIRAFFE = 50;
+    public static final String TYPE_STRING_GIRAFFE =   "Giraffe";;
+    public static final String STRING_TYPE_PICTURE_GIRAFFE = "🦒";
+    public static final int SPEED_GIRAFFE = 5;
+    public static final int MEAL_REQUIRED_KG_GIRAFFE = 5;
+
+    public static final int WEIGHT_ELEPHANT = 50;
+    public static final String TYPE_STRING_ELEPHANT =   "Elephant";;
+    public static final String STRING_TYPE_PICTURE_ELEPHANT = "🐘" ;
+    public static final int SPEED_ELEPHANT = 5;
+    public static final int MEAL_REQUIRED_KG_ELEPHANT = 5;
 
 
+
+    //GIRAFFE
+    //giraffe
+    //🦒
+     //🐘
+    //ELEPHANT
+    // Elephant
 
     public static final int WEIGHT_1 = 50;
     public static final String TYPE_STRING_1 =   "Wolf";;
@@ -160,10 +173,10 @@ public   class BoxCharacteristicsObject {
 
     public static final String MESSAGE_ENTER_X = "Здравствуйте вы запустили islandSimulation, " +
                                                  "для продолжения работы введите " + "размеры острова,\nдля начала" +
-                                                " пожалуйста введите x(целое число, не меньше 10 и не больше 50))";
+                                                " пожалуйста введите y(целое число, не меньше 10 и не больше 50))";
 
 
-    public static final String MESSAGE_ENTER_Y =  "теперь введите y(целое число, не меньше 10 и не больше 50)";
+    public static final String MESSAGE_ENTER_Y =  "теперь введите x(целое число, не меньше 10 и не больше 50)";
 
     public static final String MESSAGE_STOPPING_CONDITION=  "Выберите условие остановки симуляции" + " " +
                                                   " введите цыфру выброного вами условия:" +

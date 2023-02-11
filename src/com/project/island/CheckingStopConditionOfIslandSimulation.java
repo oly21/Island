@@ -1,9 +1,9 @@
 package com.project.island;
 
-import com.project.islandSimulationObjects.Animals.Animal;
-import com.project.islandSimulationObjects.Animals.herbivorous.Herbivores;
+import com.project.islandSimulationObjects.animals.Animal;
+import com.project.islandSimulationObjects.animals.herbivorous.Herbivores;
 import com.project.islandSimulationObjects.IslandSimulationObject;
-import com.project.islandSimulationObjects.Plants.Plant;
+import com.project.islandSimulationObjects.plants.Plant;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 

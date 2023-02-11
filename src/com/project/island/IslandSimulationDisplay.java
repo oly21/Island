@@ -1,6 +1,6 @@
 package com.project.island;
 
-import com.project.islandSimulationObjects.Animals.Animal;
+import com.project.islandSimulationObjects.animals.Animal;
 import com.project.islandSimulationObjects.IslandSimulationObject;
 import java.util.concurrent.CopyOnWriteArrayList;
 

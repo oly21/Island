@@ -3,10 +3,10 @@ package com.project.islandSimulationObjects;
 import com.project.island.BoxCharacteristicsObject;
 import com.project.island.Island;
 
-import com.project.islandSimulationObjects.Animals.Omnivores.*;
-import com.project.islandSimulationObjects.Animals.herbivorous.*;
-import com.project.islandSimulationObjects.Animals.predators.*;
-import com.project.islandSimulationObjects.Plants.*;
+import com.project.islandSimulationObjects.animals.omnivores.*;
+import com.project.islandSimulationObjects.animals.herbivorous.*;
+import com.project.islandSimulationObjects.animals.predators.*;
+import com.project.islandSimulationObjects.plants.*;
 
 import java.util.Objects;
 
@@ -114,7 +114,20 @@ public class CreationIslandSimulationObject {
             return new Vegetables(1, 1);
 
 
-        } else {
+        }
+    else if (islandSimulationObject instanceof Giraffe || Objects.equals(stringType, BoxCharacteristicsObject.TYPE_STRING_GIRAFFE)) {
+
+        return new Giraffe(1, 1);
+
+
+    }
+        else if (islandSimulationObject instanceof Elephant || Objects.equals(stringType, BoxCharacteristicsObject.TYPE_STRING_ELEPHANT)) {
+
+            return new Elephant(1, 1);
+
+
+        }
+    else {
             return new Rabbit(5, 0);
         }
 

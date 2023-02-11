@@ -1,9 +1,9 @@
 package com.project.island;
 
-import com.project.islandSimulationObjects.Animals.Animal;
+import com.project.islandSimulationObjects.animals.Animal;
 import com.project.islandSimulationObjects.CreationIslandSimulationObject;
 import com.project.islandSimulationObjects.IslandSimulationObject;
-import com.project.islandSimulationObjects.Plants.PlantGrowth;
+import com.project.islandSimulationObjects.plants.PlantGrowth;
 
 public class PrintingIslandSimulationStatistics implements Runnable {
 
@@ -44,6 +44,15 @@ public class PrintingIslandSimulationStatistics implements Runnable {
                     "numberEatenPlants:" + " " + Animal.numberEatenPlants.get() + " " +
                     "\ndeathFromStarvation:" + " " + Animal.deathFromStarvation.get() + " " +
                     "deathFromOldAge:" + " " + Animal.deathFromOldAge.get() + " " +
+
+                    "numberDeadGiraffe:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_GIRAFFE))).getNumberDeadAnimalsOfParticularSpecies()) + " " +
+                    "numberGiraffe" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_GIRAFFE))).getNumberAnimalsOfParticularSpecies()) + " " +
+                    "numberBornGiraffe:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_GIRAFFE))).getNumberBornAnimalsOfParticularSpecies()) + " " +
+
+                    "numberDeadElephant:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_ELEPHANT))).getNumberDeadAnimalsOfParticularSpecies()) + " " +
+                    "numberElephant:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_ELEPHANT))).getNumberAnimalsOfParticularSpecies()) + " " +
+                    "\nnumberBornElephant:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_ELEPHANT))).getNumberBornAnimalsOfParticularSpecies()) + " " +
+
                     "numberBornBoar:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_BOAR))).getNumberBornAnimalsOfParticularSpecies()) + " " +
                     "numberBornBuffalo:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_BUFFALO))).getNumberBornAnimalsOfParticularSpecies()) + " " +
                     "numberBornCaterpillar:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_CATERPILLAR))).getNumberBornAnimalsOfParticularSpecies()) + " " +

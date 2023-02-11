@@ -3,10 +3,10 @@ package com.project.island;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-import com.project.islandSimulationObjects.Animals.Animal;
+import com.project.islandSimulationObjects.animals.Animal;
 import com.project.islandSimulationObjects.CreationIslandSimulationObject;
 import com.project.islandSimulationObjects.IslandSimulationObject;
-import com.project.islandSimulationObjects.Plants.*;
+import com.project.islandSimulationObjects.plants.*;
 
 public class Island {
 
@@ -61,7 +61,9 @@ public class Island {
             BoxCharacteristicsObject.TYPE_STRING_FRUIT,
             BoxCharacteristicsObject.TYPE_STRING_GRASS,
             BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES,
-            BoxCharacteristicsObject.TYPE_STRING_VEGETABLES
+            BoxCharacteristicsObject.TYPE_STRING_VEGETABLES,
+            BoxCharacteristicsObject.TYPE_STRING_GIRAFFE,
+            BoxCharacteristicsObject.TYPE_STRING_ELEPHANT
     );
 
     public volatile CopyOnWriteArrayList<String> typeString = new CopyOnWriteArrayList<>(initialList);

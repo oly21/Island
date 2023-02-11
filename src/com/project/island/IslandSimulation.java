@@ -1,11 +1,10 @@
 package com.project.island;
 
 
-import com.project.islandSimulationObjects.Animals.AnimalLifeCycle;
+import com.project.islandSimulationObjects.animals.AnimalLifeCycle;
 import com.project.islandSimulationObjects.Coordinate;
 import com.project.islandSimulationObjects.IslandSimulationObject;
-import com.project.islandSimulationObjects.Plants.PlantGrowth;
-
+import com.project.islandSimulationObjects.plants.PlantGrowth;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.*;
@@ -43,7 +42,7 @@ public class IslandSimulation {
         return instance;
     }
 
-    public void startSimulation() {
+    public void startSimulation()  {
         island.listInitialization();
         creatListFreeCells();
         setInitialPositionsSimulationObjects();
@@ -74,6 +73,7 @@ public class IslandSimulation {
             freeCells.remove(coordinate1);
 
 
+
         }
 
     }
@@ -88,8 +88,12 @@ public class IslandSimulation {
                     freeCells.add(new Coordinate(i, j));
                 }
 
+
+
             }
         }
+
+
     }
 
 
