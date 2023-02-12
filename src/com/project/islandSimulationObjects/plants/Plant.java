@@ -95,9 +95,6 @@ public abstract class Plant implements IslandSimulationObject  {
     }
 
 
-    public Plant() {
-
-    }
     public void run() {
 
     }

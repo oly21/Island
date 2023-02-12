@@ -9,7 +9,26 @@ public class Buffalo  extends Omnivores {
     public static volatile int numberAnimalsOfParticularSpecies = 0;
     public static volatile int numberDeadAnimalsOfParticularSpecies = 0;
 
+    public Buffalo(int age) {
+        super();
+        weight = BoxCharacteristicsObject.WEIGHT_BUFFALO;
+        this.age = age;
+    }
 
+
+    public Buffalo(int weight, int age) {
+        super();
+        this.weight = weight;
+        this.age = age;
+        initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES,
+                BoxCharacteristicsObject.TYPE_STRING_GRASS, BoxCharacteristicsObject.TYPE_STRING_CATERPILLAR);
+        step = BoxCharacteristicsObject.SPEED_BUFFALO;
+        progenyLimit = 5;
+        neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_BUFFALO;
+        typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_BUFFALO;
+        typeString = BoxCharacteristicsObject.TYPE_STRING_BUFFALO;
+        foodStuffs = new CopyOnWriteArrayList<>(initialList);
+    }
     @Override
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {
         return numberBornAnimalsOfParticularSpecies;
@@ -40,25 +59,6 @@ public class Buffalo  extends Omnivores {
         Buffalo.numberDeadAnimalsOfParticularSpecies = numberDeadAnimalsOfParticularSpecies;
     }
 
-    public Buffalo(int age) {
-        super();
-        weight = BoxCharacteristicsObject.WEIGHT_BUFFALO;
-        this.age = age;
-    }
 
-
-    public Buffalo(int weight, int age) {
-        super();
-        this.weight = weight;
-        this.age = age;
-        initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES,
-                BoxCharacteristicsObject.TYPE_STRING_GRASS, BoxCharacteristicsObject.TYPE_STRING_CATERPILLAR);
-        step = BoxCharacteristicsObject.SPEED_BUFFALO;
-        progenyLimit = 5;
-        neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_BUFFALO;
-        typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_BUFFALO;
-        typeString = BoxCharacteristicsObject.TYPE_STRING_BUFFALO;
-        foodStuffs = new CopyOnWriteArrayList<>(initialList);
-    }
 
 }

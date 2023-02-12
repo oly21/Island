@@ -27,7 +27,7 @@ public class Caterpillar extends Herbivores {
     public Caterpillar(int age) {
         super();
         this.age = age;
-        weight = BoxCharacteristicsObject.WEIGHT_DEER;
+        weight = BoxCharacteristicsObject.WEIGHT_CATERPILLAR;
     }
 
     @Override

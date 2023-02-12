@@ -11,14 +11,6 @@ public class Eagle extends Predators {
     public  static volatile int numberAnimalsOfParticularSpecies = 0;
     public  static volatile int numberDeadAnimalsOfParticularSpecies = 0;
 
-    @Override
-    protected synchronized void initializationMapChanceToEat() {
-        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_FOX, BoxCharacteristicsObject.PROBABILITY_EAGLE__EAT_FOX);
-        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_RABBIT, BoxCharacteristicsObject.PROBABILITY_EAGLE_EAT_RABBIT);
-        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_MOUSE, BoxCharacteristicsObject.PROBABILITY_EAGLE_EAT_MOUSE);
-
-
-    }
 
 
     public Eagle(int weight, int age) {
@@ -38,6 +30,15 @@ public class Eagle extends Predators {
         super();
         this.age = age;
         weight = BoxCharacteristicsObject.WEIGHT_EAGLE;
+    }
+
+    @Override
+    protected synchronized void initializationMapChanceToEat() {
+        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_FOX, BoxCharacteristicsObject.PROBABILITY_EAGLE__EAT_FOX);
+        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_RABBIT, BoxCharacteristicsObject.PROBABILITY_EAGLE_EAT_RABBIT);
+        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_MOUSE, BoxCharacteristicsObject.PROBABILITY_EAGLE_EAT_MOUSE);
+
+
     }
     @Override
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {

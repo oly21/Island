@@ -20,6 +20,16 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
     public static volatile CopyOnWriteArrayList<Coordinate> freeCells = IslandSimulation.getListFreeCells();
     public static volatile CopyOnWriteArrayList<Animal> animals = Island.getAnimalList();
     public static volatile CopyOnWriteArrayList<Plant> plants = Island.getPlantList();
+
+    protected List<String> initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_FRUIT,
+            BoxCharacteristicsObject.TYPE_STRING_BERRIES, BoxCharacteristicsObject.TYPE_STRING_VEGETABLES,
+            BoxCharacteristicsObject.TYPE_STRING_FRUIT, BoxCharacteristicsObject.TYPE_STRING_CATERPILLAR);
+
+    public static CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = Island.islandSimulationObjects;
+    private ArrayList<Coordinate> neighboringCells = new ArrayList<>();
+    protected CopyOnWriteArrayList<String> foodStuffs = new CopyOnWriteArrayList<>(initialList);
+    public ConcurrentHashMap<String, Double> chanceToEatMap = new ConcurrentHashMap<>();
+
     public static Island island = Island.getIsland();
     public static volatile IslandSimulationObject[][] islandArray;
     public static CreationIslandSimulationObject creationIslandSimulationObject = CreationIslandSimulationObject.getCreationIslandSimulationObject();
@@ -30,18 +40,13 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
 
     }
 
-    protected List<String> initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_FRUIT,
-            BoxCharacteristicsObject.TYPE_STRING_BERRIES, BoxCharacteristicsObject.TYPE_STRING_VEGETABLES,
-            BoxCharacteristicsObject.TYPE_STRING_FRUIT, BoxCharacteristicsObject.TYPE_STRING_CATERPILLAR);
 
-    public static CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = Island.islandSimulationObjects;
-    private ArrayList<Coordinate> neighboringCells = new ArrayList<>();
-    protected CopyOnWriteArrayList<String> foodStuffs = new CopyOnWriteArrayList<>(initialList);
-    public ConcurrentHashMap<String, Double> chanceToEatMap = new ConcurrentHashMap<>();
     protected String typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_RABBIT;
     protected String typeString = BoxCharacteristicsObject.TYPE_STRING_RABBIT;
+
     protected volatile int x;
     protected volatile int y;
+
     protected volatile int age;
     protected volatile int progeny = 0;
     protected int progenyLimit = 20;
@@ -53,11 +58,12 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
     protected volatile int daysWithoutFood = 0;
     protected volatile int countDays = 0;
     protected volatile int dailyMealCounter = 0;
-
+    private volatile int hungryDaysCounter = 0;
 
     protected volatile boolean isHunger = true;
     protected volatile boolean eat = false;
     protected volatile boolean stop = false;
+
     public static int numberBornAnimalsOfParticularSpecies = 0;
     public static int numberAnimalsOfParticularSpecies = 0;
     public static int numberDeadAnimalsOfParticularSpecies = 0;
@@ -66,6 +72,7 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
     public static volatile int limitLeftY = 0;
     public static volatile int LimitUpX = 0;
     public static volatile int limitDownX = Island.x - 1;
+
     public static volatile AtomicInteger numberAnimals = new AtomicInteger(0);
     public static volatile AtomicInteger numberDeadAnimals = new AtomicInteger(0);
     public static volatile AtomicInteger numberBornAnimals = new AtomicInteger(0);
@@ -76,7 +83,6 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
 
     public static volatile AtomicInteger runStart = new AtomicInteger(0);
     public static volatile AtomicInteger runFinish = new AtomicInteger(0);
-
     public static volatile AtomicInteger startHavingVitality = new AtomicInteger(0);
     public static volatile AtomicInteger finishHavingVitality = new AtomicInteger(0);
     public static volatile AtomicInteger finishDeathFromOldAge = new AtomicInteger(0);
@@ -89,7 +95,6 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
     public static volatile AtomicInteger startMove = new AtomicInteger(0);
     public static volatile AtomicInteger finishMove = new AtomicInteger(0);
 
-
     public static volatile AtomicInteger startSwapPlacesWithNeighbor = new AtomicInteger(0);
     public static volatile AtomicInteger finishSwapPlacesWithNeighbor = new AtomicInteger(0);
     public static volatile AtomicInteger startSetPositionForNewbornAnimal = new AtomicInteger(0);
@@ -98,9 +103,9 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
     public static volatile AtomicInteger finishDecreaseTheNumberOfOneTypeOfAnimal = new AtomicInteger(0);
     public static volatile AtomicInteger startChoiceDirectionForMoveAndCallMove = new AtomicInteger(0);
     public static volatile AtomicInteger finishChoiceDirectionForMoveAndCallMove = new AtomicInteger(0);
+
     public static volatile AtomicInteger startR = new AtomicInteger(0);
     public static volatile AtomicInteger finishR = new AtomicInteger(0);
-
     public static volatile AtomicInteger startFor = new AtomicInteger(0);
     public static volatile AtomicInteger finishFor = new AtomicInteger(0);
     public static volatile AtomicInteger deathFromStarvation = new AtomicInteger(0);
@@ -246,7 +251,6 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
         this.dailyMealCounter = dailyMealCounter;
     }
 
-    private volatile int hungryDaysCounter = 0;
 
 
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {
@@ -293,6 +297,9 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
     public synchronized void setAttemptsFindPartnerCounter(int attemptsFindPartnerCounter) {
         this.attemptsFindPartnerCounter = attemptsFindPartnerCounter;
     }
+
+
+
 
 
     public Void call() {
@@ -526,8 +533,9 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
 
     public void decreaseTheNumberOfOneTypeOfAnimal(Animal animal) {
         startDecreaseTheNumberOfOneTypeOfAnimal.incrementAndGet();
+
         IslandSimulationObject islandSimulationObject = creationIslandSimulationObject.createObject(animal, animal.getTypeString());
-        islandSimulationObject.setNumberAnimalsOfParticularSpecies(islandSimulationObject.getNumberAnimalsOfParticularSpecies() + 1);
+        islandSimulationObject.setNumberAnimalsOfParticularSpecies(islandSimulationObject.getNumberAnimalsOfParticularSpecies() - 1);
         islandSimulationObject.setNumberDeadAnimalsOfParticularSpecies(islandSimulationObject.getNumberDeadAnimalsOfParticularSpecies() + 1);
 
         finishDecreaseTheNumberOfOneTypeOfAnimal.incrementAndGet();
@@ -753,7 +761,7 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
     public boolean deathFromOldAge() {
         startDeathFromOldAge.incrementAndGet();
         if (!this.getStop()) {
-            if (this.getAge() >= 15) {
+            if (this.getAge() >= 10) {
                 if (!this.getStop()) {
                     synchronized (islandArray) {
 

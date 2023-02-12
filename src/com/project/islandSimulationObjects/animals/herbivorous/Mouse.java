@@ -1,8 +1,6 @@
 package com.project.islandSimulationObjects.animals.herbivorous;
 
 import com.project.island.BoxCharacteristicsObject;
-//import javafx.scene.control.Label;
-
 import java.util.Arrays;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -11,6 +9,27 @@ public class Mouse extends Herbivores {
     public  static volatile int numberBornAnimalsOfParticularSpecies = 0;
     public  static volatile int numberAnimalsOfParticularSpecies = 0;
     public  static volatile int numberDeadAnimalsOfParticularSpecies = 0;
+
+    public Mouse(int weight, int age) {
+        super();
+        this.weight = weight;
+        this.age = age;
+        initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_FRUIT,
+                BoxCharacteristicsObject.TYPE_STRING_BERRIES, BoxCharacteristicsObject.TYPE_STRING_VEGETABLES,
+                BoxCharacteristicsObject.TYPE_STRING_GRASS, BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES);
+        step = BoxCharacteristicsObject.SPEED_MOUSE;
+        progenyLimit = 5;
+        neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_MOUSE;
+        typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_MOUSE;
+        typeString = BoxCharacteristicsObject.TYPE_STRING_MOUSE;
+        foodStuffs = new CopyOnWriteArrayList<>(initialList);
+    }
+
+    public Mouse(int age) {
+        super();
+        weight = BoxCharacteristicsObject.WEIGHT_MOUSE;
+        this.age = age;
+    }
     @Override
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {
         return numberBornAnimalsOfParticularSpecies;
@@ -39,26 +58,7 @@ public class Mouse extends Herbivores {
         Mouse.numberDeadAnimalsOfParticularSpecies = numberDeadAnimalsOfParticularSpecies;
     }
 
-    public Mouse(int weight, int age) {
-        super();
-        this.weight = weight;
-        this.age = age;
-        initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_FRUIT,
-                BoxCharacteristicsObject.TYPE_STRING_BERRIES, BoxCharacteristicsObject.TYPE_STRING_VEGETABLES,
-                BoxCharacteristicsObject.TYPE_STRING_GRASS, BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES);
-        step = BoxCharacteristicsObject.SPEED_MOUSE;
-        progenyLimit = 5;
-        neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_MOUSE;
-        typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_MOUSE;
-        typeString = BoxCharacteristicsObject.TYPE_STRING_MOUSE;
-        foodStuffs = new CopyOnWriteArrayList<>(initialList);
-    }
 
-    public Mouse(int age) {
-        super();
-        weight = BoxCharacteristicsObject.WEIGHT_MOUSE;
-        this.age = age;
-    }
 
 
     @Override

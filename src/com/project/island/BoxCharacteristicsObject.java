@@ -20,10 +20,11 @@ public   class BoxCharacteristicsObject {
 
     //GIRAFFE
     //giraffe
-    //🦒
-     //🐘
     //ELEPHANT
     // Elephant
+    //🦒
+    //🐘
+
 
     public static final int WEIGHT_1 = 50;
     public static final String TYPE_STRING_1 =   "Wolf";;

@@ -6,10 +6,18 @@ import com.project.islandSimulationObjects.IslandSimulationObject;
 import com.project.islandSimulationObjects.plants.PlantGrowth;
 
 public class PrintingIslandSimulationStatistics implements Runnable {
-
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
     private static PrintingIslandSimulationStatistics instance;
     public static volatile IslandSimulationObject[][] islandArray;
-    IslandSimulationObject islandSimulationObject;
+
 
     static {
 
@@ -35,15 +43,15 @@ public class PrintingIslandSimulationStatistics implements Runnable {
 
     public synchronized void run() {
         synchronized (System.out) {
-            System.out.println("numberAnimals:" + " " + Animal.numberAnimals.get()
-                    + " " + "numberBornAnimals:" + " " + Animal.numberBornAnimals.get() + " " +
-                    "numberDeadAnimals:" + " " + Animal.numberDeadAnimals.get() + " " +
-                    "numberAnimalMoves:" + " " + Animal.numberAnimalMoves.get() + " " +
-                    "numbersPlantsGrew:" + " " + PlantGrowth.numbersPlantsGrew.get() + " " +
-                    "numberPlants:" + " " + Animal.numberPlants.get() + " " +
-                    "numberEatenPlants:" + " " + Animal.numberEatenPlants.get() + " " +
-                    "\ndeathFromStarvation:" + " " + Animal.deathFromStarvation.get() + " " +
-                    "deathFromOldAge:" + " " + Animal.deathFromOldAge.get() + " " +
+            System.out.println(ANSI_GREEN + "numberAnimals:" + ANSI_RESET+  " " + ANSI_GREEN + Animal.numberAnimals.get()+ ANSI_RESET
+                    + " " + ANSI_GREEN + "numberBornAnimals:" + ANSI_RESET+  " " +ANSI_GREEN  + Animal.numberBornAnimals.get() + ANSI_RESET+   " " +
+                    ANSI_GREEN + "numberDeadAnimals:"+ ANSI_RESET  + " " + ANSI_GREEN + Animal.numberDeadAnimals.get() + ANSI_RESET  + " " +
+                    ANSI_GREEN +   "numberAnimalMoves:" + ANSI_RESET + " " + ANSI_GREEN +  Animal.numberAnimalMoves.get()+ ANSI_RESET + " " +
+                    ANSI_GREEN + "numbersPlantsGrew:" + ANSI_RESET+ " " + ANSI_GREEN +  PlantGrowth.numbersPlantsGrew.get()+ ANSI_RESET + " " +
+                    ANSI_GREEN + "numberPlants:"+ ANSI_RESET + " " + ANSI_GREEN +  Animal.numberPlants.get()+ ANSI_RESET + " " +
+                    ANSI_GREEN +  "numberEatenPlants:"+ ANSI_RESET + " " + ANSI_GREEN +  Animal.numberEatenPlants.get()+ ANSI_RESET + " " +
+                    ANSI_GREEN +  "\ndeathFromStarvation:"+ ANSI_RESET + " " + ANSI_GREEN + Animal.deathFromStarvation.get()+ ANSI_RESET + " " +
+                    ANSI_GREEN +  "deathFromOldAge:"+ ANSI_RESET + " " +ANSI_GREEN +  Animal.deathFromOldAge.get()+ ANSI_RESET + " " +
 
                     "numberDeadGiraffe:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_GIRAFFE))).getNumberDeadAnimalsOfParticularSpecies()) + " " +
                     "numberGiraffe" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_GIRAFFE))).getNumberAnimalsOfParticularSpecies()) + " " +
@@ -100,12 +108,11 @@ public class PrintingIslandSimulationStatistics implements Runnable {
                     "numberDeadFox:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_FOX))).getNumberDeadAnimalsOfParticularSpecies()) + " " +
                     "numberDeadWolf:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_WOLF))).getNumberDeadAnimalsOfParticularSpecies()) + " " +
                     "numberDeadEagle:" + " " + (((creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_EAGLE))).getNumberDeadAnimalsOfParticularSpecies()) + " " +
-
+                    ANSI_GREEN + "\n\nstartRun(StartThreads):"+ ANSI_RESET + " " + ANSI_GREEN +  Animal.runStart+ ANSI_RESET + " " + ANSI_GREEN + " finishRun(FinishThreads)"+ ANSI_RESET + " " + ANSI_GREEN +  Animal.runFinish+ ANSI_RESET + " " +
 
                     "startM " + " " + Animal.startMove + " " + "finishM: " + " " + Animal.finishMove + " "
                     + " startR:" + " " + Animal.startR + " " + "finishR " + " " + Animal.finishR + " " +
                     "startGet: " + " " + Animal.startGet + " " + " finishGet" + " " + Animal.finishGet + " " +
-                    " startRun:" + " " + Animal.runStart + " " + " finishRun" + " " + Animal.runFinish + " " +
                     "startSwapPlacesWithNeighbor: " + " " + Animal.startSwapPlacesWithNeighbor + " " +
                     "finishSwapPlacesWithNeighbor: " + " " + Animal.finishSwapPlacesWithNeighbor + " " +
                     "startSetPositionForNewbornAnima: " + " " + Animal.startSetPositionForNewbornAnimal + " "

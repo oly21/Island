@@ -8,6 +8,15 @@ import com.project.islandSimulationObjects.plants.Plant;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CheckingStopConditionOfIslandSimulation implements Runnable {
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
     public volatile static CopyOnWriteArrayList<Animal> animals = Island.getAnimalList();
     public volatile static CopyOnWriteArrayList<Plant> plants = Island.getPlantList();
     public static volatile IslandSimulationObject[][] islandArray;
@@ -19,7 +28,7 @@ public class CheckingStopConditionOfIslandSimulation implements Runnable {
     }
 
     private static CheckingStopConditionOfIslandSimulation instance;
-    int conditionOfIslandSimulationInt = Island.conditionNumberStopSimulation;
+    private int conditionOfIslandSimulationInt = Island.conditionNumberStopSimulation;
     static boolean ConditionOfIslandSimulation;
 
     private CheckingStopConditionOfIslandSimulation() {
@@ -29,7 +38,6 @@ public class CheckingStopConditionOfIslandSimulation implements Runnable {
 
 
     public static CheckingStopConditionOfIslandSimulation getCheckingStopConditionOfIslandSimulation() {
-
 
         if (instance == null) {
             instance = new CheckingStopConditionOfIslandSimulation();
@@ -68,9 +76,11 @@ public class CheckingStopConditionOfIslandSimulation implements Runnable {
                 if (ConditionOfIslandSimulation) {
 
                     IslandSimulationDisplay islandSimulationDisplay = IslandSimulationDisplay.getIslandSimulation();
-                    islandSimulationDisplay.run();
                     PrintingIslandSimulationStatistics printingIslandSimulationStatistics = PrintingIslandSimulationStatistics.getPrintingIslandSimulationStatistics();
+
+                    islandSimulationDisplay.run();
                     printingIslandSimulationStatistics.run();
+
                     IslandSimulation.executorScheduledServiceDisplay.shutdown();
                     IslandSimulation.executorScheduledServiceAnimalLifeCycle.shutdown();
                     IslandSimulation.executorScheduledServicePlantGrowth.shutdown();
@@ -78,13 +88,13 @@ public class CheckingStopConditionOfIslandSimulation implements Runnable {
                     IslandSimulation.executorScheduledServiceDisplay.shutdown();
 
                     if (conditionOfIslandSimulationInt == 1) {
-                        System.out.println("\nСимуляция закончилась, на острове остались одни хищники или   травоядных, на которых могут напасть хищники осталось не больше 5");
+                        System.out.println(ANSI_GREEN +"\nСимуляция закончилась, на острове остались одни хищники или   травоядных, на которых могут напасть хищники осталось не больше 5"+ANSI_RESET);
                         IslandSimulation.executorScheduledCheckStopConditionOfIslandSimulation.shutdown();
                     } else if (conditionOfIslandSimulationInt == 2) {
-                        System.out.println("\nСимуляция закончилась, на острове закончились растения или их осталось меньше 10 ");
+                        System.out.println(ANSI_GREEN +"\nСимуляция закончилась, на острове закончились растения или их осталось меньше 10 " +ANSI_RESET);
                         IslandSimulation.executorScheduledCheckStopConditionOfIslandSimulation.shutdown();
                     } else if (conditionOfIslandSimulationInt == 3) {
-                        System.out.println("\nСимуляция закончилась, к сожелению все погибли  ");
+                        System.out.println(ANSI_GREEN +"\nСимуляция закончилась, к сожелению все погибли  "+ANSI_RESET);
                         IslandSimulation.executorScheduledCheckStopConditionOfIslandSimulation.shutdown();
                     }
                 }

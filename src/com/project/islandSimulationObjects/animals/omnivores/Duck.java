@@ -8,6 +8,26 @@ public class Duck  extends Omnivores {
     public static volatile int numberBornAnimalsOfParticularSpecies = 0;
     public static volatile int numberAnimalsOfParticularSpecies = 0;
     public static volatile int numberDeadAnimalsOfParticularSpecies = 0;
+    public Duck(int weight, int age) {
+        super();
+        initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES,
+                BoxCharacteristicsObject.TYPE_STRING_GRASS, BoxCharacteristicsObject.TYPE_STRING_CATERPILLAR);
+        step = BoxCharacteristicsObject.SPEED_DUCK;
+        progenyLimit = 5;
+        neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_DUCK;
+        typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_DUCK;
+        typeString = BoxCharacteristicsObject.TYPE_STRING_DUCK;
+        foodStuffs = new CopyOnWriteArrayList<>(initialList);
+        this.weight = weight;
+        this.age = age;
+    }
+
+
+    public Duck(int age) {
+        super();
+        this.age = age;
+        weight = BoxCharacteristicsObject.WEIGHT_DUCK;
+    }
 
     @Override
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {
@@ -39,26 +59,6 @@ public class Duck  extends Omnivores {
         Duck.numberDeadAnimalsOfParticularSpecies = numberDeadAnimalsOfParticularSpecies;
     }
 
-    public Duck(int weight, int age) {
-        super();
-        initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES,
-                BoxCharacteristicsObject.TYPE_STRING_GRASS, BoxCharacteristicsObject.TYPE_STRING_CATERPILLAR);
-        step = BoxCharacteristicsObject.SPEED_DUCK;
-        progenyLimit = 5;
-        neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_DUCK;
-        typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_DUCK;
-        typeString = BoxCharacteristicsObject.TYPE_STRING_DUCK;
-        foodStuffs = new CopyOnWriteArrayList<>(initialList);
-        this.weight = weight;
-        this.age = age;
-    }
-
-
-    public Duck(int age) {
-        super();
-        this.age = age;
-        weight = BoxCharacteristicsObject.WEIGHT_DUCK;
-    }
 
 
     @Override

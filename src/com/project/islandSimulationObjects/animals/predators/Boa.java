@@ -11,14 +11,7 @@ public class Boa extends Predators {
     public  static volatile int numberAnimalsOfParticularSpecies = 0;
     public  static volatile int numberDeadAnimalsOfParticularSpecies = 0;
 
-    @Override
-    protected synchronized void initializationMapChanceToEat() {
-        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_FOX, BoxCharacteristicsObject.PROBABILITY_BOA_EAT_FOX);
-        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_RABBIT, BoxCharacteristicsObject.PROBABILITY_BOA_EAT_RABBIT);
-        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_MOUSE, BoxCharacteristicsObject.PROBABILITY_BOA_EAT_MOUSE);
 
-
-    }
 
 
     public Boa(int weight, int age) {
@@ -43,6 +36,15 @@ public class Boa extends Predators {
         this.age = age;
     }
 
+
+    @Override
+    protected synchronized void initializationMapChanceToEat() {
+        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_FOX, BoxCharacteristicsObject.PROBABILITY_BOA_EAT_FOX);
+        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_RABBIT, BoxCharacteristicsObject.PROBABILITY_BOA_EAT_RABBIT);
+        chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_MOUSE, BoxCharacteristicsObject.PROBABILITY_BOA_EAT_MOUSE);
+
+
+    }
     @Override
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {
         return numberBornAnimalsOfParticularSpecies;
