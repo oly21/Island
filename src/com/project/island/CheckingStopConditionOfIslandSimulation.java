@@ -88,7 +88,7 @@ public class CheckingStopConditionOfIslandSimulation implements Runnable {
                     IslandSimulation.executorScheduledServiceDisplay.shutdown();
 
                     if (conditionOfIslandSimulationInt == 1) {
-                        System.out.println(ANSI_GREEN +"\nСимуляция закончилась, на острове остались одни хищники или   травоядных, на которых могут напасть хищники осталось не больше 5"+ANSI_RESET);
+                        System.out.println(ANSI_GREEN +"\nСимуляция закончилась, на острове остались одни хищники или травоядных, на которых могут напасть хищники осталось не больше 5"+ANSI_RESET);
                         IslandSimulation.executorScheduledCheckStopConditionOfIslandSimulation.shutdown();
                     } else if (conditionOfIslandSimulationInt == 2) {
                         System.out.println(ANSI_GREEN +"\nСимуляция закончилась, на острове закончились растения или их осталось меньше 10 " +ANSI_RESET);

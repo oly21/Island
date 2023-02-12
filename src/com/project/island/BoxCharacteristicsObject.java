@@ -168,18 +168,18 @@ public   class BoxCharacteristicsObject {
     public static final double PROBABILITY_BOAR_EAT_MOUSE = 0.5;
 
     public static final String MESSAGE_ENTER_NUMBER_OF_ANIMALS =
-                      "Вам также нужно ввести начальное количество Predators каждого вида  "
-                    + "\nнапример если вы введете 10, то создастся 10 лис, 10, волков и тд "+
+                      "Вам также нужно ввести начальное количество Predators каждого вида,  "
+                    + "\nнапример, если вы введете 10, то создастся 10 лис, 10, волков и тд "+
                        "\nначальное количество Predators каждого вида  не должно" + " быть больше";
 
-    public static final String MESSAGE_ENTER_X = "Здравствуйте вы запустили islandSimulation, " +
+    public static final String MESSAGE_ENTER_X = "Здравствуйте, вы запустили islandSimulation, " +
                                                  "для продолжения работы введите " + "размеры острова,\nдля начала" +
                                                 " пожалуйста введите y(целое число, не меньше 10 и не больше 50))";
 
 
     public static final String MESSAGE_ENTER_Y =  "теперь введите x(целое число, не меньше 10 и не больше 50)";
 
-    public static final String MESSAGE_STOPPING_CONDITION=  "Выберите условие остановки симуляции" + " " +
+    public static final String MESSAGE_STOPPING_CONDITION=  "Выберите условие остановки симуляции," + " " +
                                                   " введите цыфру выброного вами условия:" +
                                               "\n1)На острове остались только predators(хишники) "+
                                                "\n2) сьели все растения "+ "3) все погибли ";
@@ -187,7 +187,7 @@ public   class BoxCharacteristicsObject {
     public static final String MESSAGE_THANKS_KEEP_WORKING =   "Спасибо,islandSimulation продолжит свою работу ";
     public static final String MESSAGE_INPUT_INCORRECT =   "Ввод не верен ";
 
-    public static final String MESSAGE_TOO_MANY_ANIMALS =   " Начальное количество Predators каждого видадолжно быть меньше  " + " " ;
+    public static final String MESSAGE_TOO_MANY_ANIMALS =   " Начальное количество Predators каждого вида должно быть меньше  " + " " ;
 
     public static final String MESSAGE_WRONG_COMMAND_NUMBER =    "Вы вели не верный номер команды";
 

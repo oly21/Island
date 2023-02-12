@@ -28,7 +28,7 @@ public class CreationIslandSimulationObject {
 
     public IslandSimulationObject createObject(IslandSimulationObject islandSimulationObject, String stringType) {
 
-        if (islandSimulationObject instanceof Fox || Objects.equals(stringType, BoxCharacteristicsObject.TYPE_STRING_FOX)) {
+       if (islandSimulationObject instanceof Fox || Objects.equals(stringType, BoxCharacteristicsObject.TYPE_STRING_FOX)) {
 
             return new Fox(1, 1);
 
