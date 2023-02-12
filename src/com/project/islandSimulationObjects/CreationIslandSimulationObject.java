@@ -114,20 +114,13 @@ public class CreationIslandSimulationObject {
             return new Vegetables(1, 1);
 
 
-        }
-    else if (islandSimulationObject instanceof Giraffe || Objects.equals(stringType, BoxCharacteristicsObject.TYPE_STRING_GIRAFFE)) {
+        } else if (islandSimulationObject instanceof Giraffe || Objects.equals(stringType, BoxCharacteristicsObject.TYPE_STRING_GIRAFFE)) {
 
-        return new Giraffe(1, 1);
+            return new Giraffe(1, 1);
+        } else if (islandSimulationObject instanceof Elephant || Objects.equals(stringType, BoxCharacteristicsObject.TYPE_STRING_ELEPHANT)) {
+           return new Elephant(1, 1);
 
-
-    }
-        else if (islandSimulationObject instanceof Elephant || Objects.equals(stringType, BoxCharacteristicsObject.TYPE_STRING_ELEPHANT)) {
-
-            return new Elephant(1, 1);
-
-
-        }
-    else {
+        } else {
             return new Rabbit(5, 0);
         }
 
