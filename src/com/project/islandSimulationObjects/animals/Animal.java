@@ -412,7 +412,7 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
                         if (!this.getStop() && islandArray[x][y] != null) {
                             boolean sameType = islandArray[x][y].getIslandSimulationObject(this.typeString);
 
-                            if (islandArray[x][y].getAnimalsInCellSize() != 0 && sameType && !this.getStop()) {
+                            if (islandArray[x][y].getIslandSimulationObjectInCellSize() != 0 && sameType && !this.getStop()) {
 
                                 if (freeCells.size() > 0) {
 
@@ -587,7 +587,7 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
                 if (!this.getStop()) {
                     for (Coordinate coordinate : neighboringCells) {
                         if (!this.getStop()) {
-                            if (!this.getStop() && (islandArray[coordinate.getX()][coordinate.getY()].getAnimalsInCellSize()) > 0) {
+                            if (!this.getStop() && (islandArray[coordinate.getX()][coordinate.getY()].getIslandSimulationObjectInCellSize()) > 0) {
                                 int x = this.getX();
                                 int y = this.getY();
                                 IslandSimulationObject islandSimulationObject = islandArray[coordinate.getX()][coordinate.getY()].getRandomIslandSimulationObject();
