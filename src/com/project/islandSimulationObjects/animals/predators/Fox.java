@@ -6,9 +6,9 @@ import java.util.Arrays;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Fox extends Predators {
-    public  static volatile int numberBornAnimalsOfParticularSpecies = 0;
-    public  static volatile int numberAnimalsOfParticularSpecies = 0;
-    public  static volatile int numberDeadAnimalsOfParticularSpecies = 0;
+    public static volatile int numberBornAnimalsOfParticularSpecies = 0;
+    public static volatile int numberAnimalsOfParticularSpecies = 0;
+    public static volatile int numberDeadAnimalsOfParticularSpecies = 0;
 
     public Fox(int weight, int age) {
         super();
@@ -28,11 +28,7 @@ public class Fox extends Predators {
         foodStuffs = new CopyOnWriteArrayList<>(initialList);
     }
 
-    public Fox(int age) {
-        super();
-        this.age = age;
-        weight = BoxCharacteristicsObject.WEIGHT_FOX;
-    }
+
 
     @Override
     protected synchronized void initializationMapChanceToEat() {
@@ -42,6 +38,7 @@ public class Fox extends Predators {
         chanceToEat.put(BoxCharacteristicsObject.TYPE_STRING_SHEEP, BoxCharacteristicsObject.PROBABILITY_FOX_EAT_HORSE);
 
     }
+
     @Override
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {
         return numberBornAnimalsOfParticularSpecies;
@@ -51,6 +48,7 @@ public class Fox extends Predators {
     public synchronized void setNumberBornAnimalsOfParticularSpecies(int numberBornAnimalsOfParticularSpecies) {
         Fox.numberBornAnimalsOfParticularSpecies = numberBornAnimalsOfParticularSpecies;
     }
+
     @Override
     public synchronized int getNumberAnimalsOfParticularSpecies() {
         return numberAnimalsOfParticularSpecies;
@@ -60,6 +58,7 @@ public class Fox extends Predators {
     public synchronized void setNumberAnimalsOfParticularSpecies(int numberAnimalsOfParticularSpecies) {
         Fox.numberAnimalsOfParticularSpecies = numberAnimalsOfParticularSpecies;
     }
+
     @Override
     public synchronized int getNumberDeadAnimalsOfParticularSpecies() {
         return numberDeadAnimalsOfParticularSpecies;
@@ -69,5 +68,4 @@ public class Fox extends Predators {
     public synchronized void setNumberDeadAnimalsOfParticularSpecies(int numberDeadAnimalsOfParticularSpecies) {
         Fox.numberDeadAnimalsOfParticularSpecies = numberDeadAnimalsOfParticularSpecies;
     }
-
-    }
+}

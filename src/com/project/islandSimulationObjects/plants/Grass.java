@@ -14,11 +14,4 @@ public class Grass extends Plant {
     }
 
 
-    public Grass(int age) {
-        this.age = age;
-        weight = BoxCharacteristicsObject.WEIGHT_PLANT;
-    }
-
-
-
 }

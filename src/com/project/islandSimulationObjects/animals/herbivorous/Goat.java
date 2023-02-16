@@ -26,11 +26,7 @@ public class Goat extends Herbivores {
         foodStuffs = new CopyOnWriteArrayList<>(initialList);
     }
 
-    public Goat(int age) {
-        super();
-        this.age = age;
-        weight = BoxCharacteristicsObject.WEIGHT_GOAT;
-    }
+
 
     @Override
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {

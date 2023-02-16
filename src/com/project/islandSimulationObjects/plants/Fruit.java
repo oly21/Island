@@ -16,12 +16,5 @@ public class Fruit extends Plant {
     }
 
 
-    public Fruit(int age) {
-        this.age = age;
-        weight = BoxCharacteristicsObject.WEIGHT_PLANT;
-    }
-
-
-
 
 }

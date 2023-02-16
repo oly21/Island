@@ -24,7 +24,6 @@ public interface IslandSimulationObject extends Callable<Void> {
 
     void setNumberDeadAnimalsOfParticularSpecies(int numberDeadAnimalsOfParticularSpecies);
 
-
     String getTypePicture();
 
     String getTypeString();
@@ -33,17 +32,11 @@ public interface IslandSimulationObject extends Callable<Void> {
 
     int getX();
 
-
     int getY();
-
 
     int getWeight();
 
-
     int getAge();
 
-
     void setAge(int age);
-
-
 }

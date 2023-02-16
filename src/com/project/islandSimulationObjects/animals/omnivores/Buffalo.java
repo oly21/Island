@@ -1,19 +1,15 @@
 package com.project.islandSimulationObjects.animals.omnivores;
 
 import com.project.island.BoxCharacteristicsObject;
+
 import java.util.Arrays;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class Buffalo  extends Omnivores {
+public class Buffalo extends Omnivores {
     public static volatile int numberBornAnimalsOfParticularSpecies = 0;
     public static volatile int numberAnimalsOfParticularSpecies = 0;
     public static volatile int numberDeadAnimalsOfParticularSpecies = 0;
 
-    public Buffalo(int age) {
-        super();
-        weight = BoxCharacteristicsObject.WEIGHT_BUFFALO;
-        this.age = age;
-    }
 
 
     public Buffalo(int weight, int age) {
@@ -29,6 +25,7 @@ public class Buffalo  extends Omnivores {
         typeString = BoxCharacteristicsObject.TYPE_STRING_BUFFALO;
         foodStuffs = new CopyOnWriteArrayList<>(initialList);
     }
+
     @Override
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {
         return numberBornAnimalsOfParticularSpecies;
@@ -58,7 +55,4 @@ public class Buffalo  extends Omnivores {
     public synchronized void setNumberDeadAnimalsOfParticularSpecies(int numberDeadAnimalsOfParticularSpecies) {
         Buffalo.numberDeadAnimalsOfParticularSpecies = numberDeadAnimalsOfParticularSpecies;
     }
-
-
-
 }

@@ -25,11 +25,7 @@ public class Deer extends Herbivores {
         foodStuffs = new CopyOnWriteArrayList<>(initialList);
     }
 
-    public Deer(int age) {
-        super();
-        this.age = age;
-        weight = BoxCharacteristicsObject.WEIGHT_DEER;
-    }
+
 
     @Override
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {
@@ -60,8 +56,6 @@ public class Deer extends Herbivores {
     public synchronized void setNumberDeadAnimalsOfParticularSpecies(int numberDeadAnimalsOfParticularSpecies) {
         Deer.numberDeadAnimalsOfParticularSpecies = numberDeadAnimalsOfParticularSpecies;
     }
-
-
 
 
 }

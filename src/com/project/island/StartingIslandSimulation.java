@@ -10,10 +10,10 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.*;
 
 
-public class IslandSimulation {
-    public static volatile IslandSimulationObject[][] islandArray = Island.getIslandArray();
-    public volatile static CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = Island.getIslandSimulationObjectList();
-    public static Island island = Island.getIsland();
+public class StartingIslandSimulation {
+    public static volatile Cell[][] islandArray = IslandMap.getIslandArray();
+    public volatile static CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = IslandMap.getIslandSimulationObjectList();
+    public static IslandMap island = IslandMap.getIsland();
     public static CopyOnWriteArrayList<IslandSimulationObject> tasks = islandSimulationObjects;
     public static CopyOnWriteArrayList<IslandSimulationObject> tasksCopy = new CopyOnWriteArrayList<>();
     public static CopyOnWriteArrayList<Coordinate> freeCells = new CopyOnWriteArrayList<>();
@@ -21,9 +21,8 @@ public class IslandSimulation {
     public static AnimalLifeCycle animalLifeCycle = AnimalLifeCycle.getAnimalLifeCycle();
     public static PlantGrowth plantGrowth = PlantGrowth.getPlantGrowth();
 
-
     public static PrintingIslandSimulationStatistics printingIslandSimulationStatistics = PrintingIslandSimulationStatistics.getPrintingIslandSimulationStatistics();
-    private static IslandSimulation instance;
+    private static StartingIslandSimulation instance;
     public static ScheduledExecutorService executorScheduledServicePlantGrowth = Executors.newScheduledThreadPool(1);
     public static ScheduledExecutorService executorScheduledServiceDisplay = Executors.newScheduledThreadPool(1);
     public static ScheduledExecutorService executorScheduledServiceAnimalLifeCycle = Executors.newScheduledThreadPool(1);
@@ -31,13 +30,13 @@ public class IslandSimulation {
     public static ScheduledExecutorService executorScheduledCheckStopConditionOfIslandSimulation = Executors.newScheduledThreadPool(1);
     public static CheckingStopConditionOfIslandSimulation checkingStopConditionOfIslandSimulation = CheckingStopConditionOfIslandSimulation.getCheckingStopConditionOfIslandSimulation();
 
-    private IslandSimulation() {
+    private StartingIslandSimulation() {
 
     }
 
-    public static IslandSimulation getIslandSimulation() {
+    public static StartingIslandSimulation getIslandSimulation() {
         if (instance == null) {
-            instance = new IslandSimulation();
+            instance = new StartingIslandSimulation();
         }
         return instance;
     }
@@ -47,13 +46,11 @@ public class IslandSimulation {
         creatListFreeCells();
         setInitialPositionsSimulationObjects();
 
-
         executorScheduledServiceAnimalLifeCycle.scheduleAtFixedRate(animalLifeCycle, 2, 5, TimeUnit.SECONDS);
         executorScheduledServicePrintingIslandSimulationStatistics.scheduleAtFixedRate(printingIslandSimulationStatistics, 1, 7, TimeUnit.SECONDS);
         executorScheduledServiceDisplay.scheduleAtFixedRate(islandSimulationDisplay, 0, 6, TimeUnit.SECONDS);
-        executorScheduledServicePlantGrowth.scheduleAtFixedRate(plantGrowth, 0, 5, TimeUnit.SECONDS);
+        executorScheduledServicePlantGrowth.scheduleAtFixedRate(plantGrowth, 0, 7, TimeUnit.SECONDS);
         executorScheduledCheckStopConditionOfIslandSimulation.scheduleAtFixedRate(checkingStopConditionOfIslandSimulation, 3, 8, TimeUnit.SECONDS);
-
     }
 
     public void setInitialPositionsSimulationObjects() {
@@ -67,15 +64,10 @@ public class IslandSimulation {
             int x = coordinate1.getX();
             int y = coordinate1.getY();
 
-
             islandSimulationObject.setXY(x, y);
-            islandArray[x][y] = islandSimulationObject;
+            islandArray[x][y].addIslandSimulationObject(islandSimulationObject);
             freeCells.remove(coordinate1);
-
-
-
         }
-
     }
 
 
@@ -83,19 +75,12 @@ public class IslandSimulation {
 
         for (int i = 0; i < islandArray.length - 1; i++) {
             for (int j = 0; j < islandArray[i].length - 1; j++) {
-
-                if (islandArray[i][j] == null) {
+                for(int k = 0; k<=5; k++ ) {
                     freeCells.add(new Coordinate(i, j));
                 }
-
-
-
             }
         }
-
-
     }
-
 
     public static CopyOnWriteArrayList<Coordinate> getListFreeCells() {
 

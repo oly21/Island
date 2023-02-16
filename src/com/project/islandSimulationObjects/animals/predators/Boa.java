@@ -2,17 +2,14 @@ package com.project.islandSimulationObjects.animals.predators;
 
 import com.project.island.BoxCharacteristicsObject;
 
-//import javafx.scene.control.Label;
+
 import java.util.Arrays;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Boa extends Predators {
-    public  static volatile int numberBornAnimalsOfParticularSpecies = 0;
-    public  static volatile int numberAnimalsOfParticularSpecies = 0;
-    public  static volatile int numberDeadAnimalsOfParticularSpecies = 0;
-
-
-
+    public static volatile int numberBornAnimalsOfParticularSpecies = 0;
+    public static volatile int numberAnimalsOfParticularSpecies = 0;
+    public static volatile int numberDeadAnimalsOfParticularSpecies = 0;
 
     public Boa(int weight, int age) {
         super();
@@ -29,12 +26,6 @@ public class Boa extends Predators {
 
     }
 
-    public Boa(int age) {
-        super();
-
-        weight = BoxCharacteristicsObject.WEIGHT_BOA;
-        this.age = age;
-    }
 
 
     @Override
@@ -45,6 +36,7 @@ public class Boa extends Predators {
 
 
     }
+
     @Override
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {
         return numberBornAnimalsOfParticularSpecies;
@@ -54,6 +46,7 @@ public class Boa extends Predators {
     public synchronized void setNumberBornAnimalsOfParticularSpecies(int numberBornAnimalsOfParticularSpecies) {
         Boa.numberBornAnimalsOfParticularSpecies = numberBornAnimalsOfParticularSpecies;
     }
+
     @Override
     public synchronized int getNumberAnimalsOfParticularSpecies() {
         return numberAnimalsOfParticularSpecies;
@@ -63,6 +56,7 @@ public class Boa extends Predators {
     public synchronized void setNumberAnimalsOfParticularSpecies(int numberAnimalsOfParticularSpecies) {
         Boa.numberAnimalsOfParticularSpecies = numberAnimalsOfParticularSpecies;
     }
+
     @Override
     public synchronized int getNumberDeadAnimalsOfParticularSpecies() {
         return numberDeadAnimalsOfParticularSpecies;
@@ -72,6 +66,5 @@ public class Boa extends Predators {
     public synchronized void setNumberDeadAnimalsOfParticularSpecies(int numberDeadAnimalsOfParticularSpecies) {
         Boa.numberDeadAnimalsOfParticularSpecies = numberDeadAnimalsOfParticularSpecies;
     }
-
 }
 

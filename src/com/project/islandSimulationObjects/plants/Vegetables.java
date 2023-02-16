@@ -13,11 +13,6 @@ public class Vegetables extends Plant {
         typeString = BoxCharacteristicsObject.TYPE_STRING_VEGETABLES;
     }
 
-    public Vegetables(int age) {
-        this.age = age;
-        int weight = BoxCharacteristicsObject.WEIGHT_PLANT;
-    }
-
 }
 
 

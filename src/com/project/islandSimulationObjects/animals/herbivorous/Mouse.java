@@ -1,14 +1,15 @@
 package com.project.islandSimulationObjects.animals.herbivorous;
 
 import com.project.island.BoxCharacteristicsObject;
+
 import java.util.Arrays;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Mouse extends Herbivores {
 
-    public  static volatile int numberBornAnimalsOfParticularSpecies = 0;
-    public  static volatile int numberAnimalsOfParticularSpecies = 0;
-    public  static volatile int numberDeadAnimalsOfParticularSpecies = 0;
+    public static volatile int numberBornAnimalsOfParticularSpecies = 0;
+    public static volatile int numberAnimalsOfParticularSpecies = 0;
+    public static volatile int numberDeadAnimalsOfParticularSpecies = 0;
 
     public Mouse(int weight, int age) {
         super();
@@ -25,11 +26,8 @@ public class Mouse extends Herbivores {
         foodStuffs = new CopyOnWriteArrayList<>(initialList);
     }
 
-    public Mouse(int age) {
-        super();
-        weight = BoxCharacteristicsObject.WEIGHT_MOUSE;
-        this.age = age;
-    }
+
+
     @Override
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {
         return numberBornAnimalsOfParticularSpecies;
@@ -39,6 +37,7 @@ public class Mouse extends Herbivores {
     public synchronized void setNumberBornAnimalsOfParticularSpecies(int numberBornAnimalsOfParticularSpecies) {
         Mouse.numberBornAnimalsOfParticularSpecies = numberBornAnimalsOfParticularSpecies;
     }
+
     @Override
     public synchronized int getNumberAnimalsOfParticularSpecies() {
         return numberAnimalsOfParticularSpecies;
@@ -48,6 +47,7 @@ public class Mouse extends Herbivores {
     public synchronized void setNumberAnimalsOfParticularSpecies(int numberAnimalsOfParticularSpecies) {
         Mouse.numberAnimalsOfParticularSpecies = numberAnimalsOfParticularSpecies;
     }
+
     @Override
     public synchronized int getNumberDeadAnimalsOfParticularSpecies() {
         return numberDeadAnimalsOfParticularSpecies;
@@ -58,15 +58,10 @@ public class Mouse extends Herbivores {
         Mouse.numberDeadAnimalsOfParticularSpecies = numberDeadAnimalsOfParticularSpecies;
     }
 
-
-
-
     @Override
     public void reproduce() {
         for (int i = 0; i <= 2; i++) {
             super.reproduce();
         }
     }
-
-
 }

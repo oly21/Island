@@ -8,23 +8,19 @@ import com.project.islandSimulationObjects.CreationIslandSimulationObject;
 import com.project.islandSimulationObjects.IslandSimulationObject;
 import com.project.islandSimulationObjects.plants.*;
 
-public class Island {
-
+public class IslandMap {
     CreationIslandSimulationObject creationIslandSimulationObject = CreationIslandSimulationObject.getCreationIslandSimulationObject();
-
 
     public volatile static CopyOnWriteArrayList<Animal> animals = new CopyOnWriteArrayList<>();
     public volatile static CopyOnWriteArrayList<Plant> plants = new CopyOnWriteArrayList<>();
     public volatile static CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = new CopyOnWriteArrayList<>();
-    public static Island instance = null;
-
+    public static IslandMap instance = null;
     public static volatile int x;
     public static volatile int y;
-
     public static int predatorsNumber;
     public static int herbivoresNumber;
     public static int conditionNumberStopSimulation;
-    private static volatile IslandSimulationObject[][] islandArray;
+    private static volatile Cell[][] islandArray;
 
     protected List<String> initialList = Arrays.asList(
             BoxCharacteristicsObject.TYPE_STRING_WOLF,
@@ -52,28 +48,32 @@ public class Island {
     );
 
     public volatile CopyOnWriteArrayList<String> typeString = new CopyOnWriteArrayList<>(initialList);
-    private Island(int x, int y, int predatorsNumber, int herbivoresNumber, int conditionNumberStopSimulation) {
+    private IslandMap(int x, int y, int predatorsNumber, int herbivoresNumber, int conditionNumberStopSimulation) {
 
-        Island.x = x;
-        Island.y = y;
-        Island.predatorsNumber = predatorsNumber;
-        Island.herbivoresNumber = herbivoresNumber;
-        Island.conditionNumberStopSimulation = conditionNumberStopSimulation;
-        islandArray = new IslandSimulationObject[Island.x][Island.y];
+        IslandMap.x = x;
+        IslandMap.y = y;
+        IslandMap.predatorsNumber = predatorsNumber;
+        IslandMap.herbivoresNumber = herbivoresNumber;
+        IslandMap.conditionNumberStopSimulation = conditionNumberStopSimulation;
+        islandArray = new Cell[IslandMap.x][IslandMap.y];
+     for(int i = 0; i<=islandArray.length-1; i++ ){
+         for(int j = 0; j<=islandArray[i].length-1; j++ ){
+             islandArray[i][j] = new Cell();
+         }
+     }
     }
 
 
-    public static Island getIsland() {
-        if (instance == null && Island.x > 0) {
+    public static IslandMap getIsland() {
+        if (instance == null && IslandMap.x > 0 && IslandMap.y>0) {
 
-            instance = new Island(x, y, predatorsNumber, herbivoresNumber, conditionNumberStopSimulation);
+            instance = new IslandMap(x, y, predatorsNumber, herbivoresNumber, conditionNumberStopSimulation);
         }
         return instance;
     }
 
 
     public void listInitialization() {
-
 
         for (int i = 0; i <= predatorsNumber * 2; i++) {
             for (String typeString : typeString) {
@@ -86,17 +86,15 @@ public class Island {
                 } else if (islandSimulationObject instanceof Plant) {
                     plants.add((Plant) islandSimulationObject);
                     Animal.numberPlants.incrementAndGet();
-
                 }
             }
         }
-
         islandSimulationObjects.addAll(animals);
         islandSimulationObjects.addAll(plants);
         Animal.numberAnimals.addAndGet(animals.size());
     }
 
-    public static synchronized IslandSimulationObject[][] getIslandArray() {
+    public static synchronized Cell[][] getIslandArray() {
 
         return islandArray;
     }
@@ -105,13 +103,11 @@ public class Island {
     public static CopyOnWriteArrayList<Animal> getAnimalList() {
 
         return animals;
-
     }
 
     public static CopyOnWriteArrayList<Plant> getPlantList() {
 
         return plants;
-
     }
 
     public static CopyOnWriteArrayList<IslandSimulationObject> getIslandSimulationObjectList() {

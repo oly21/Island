@@ -1,7 +1,7 @@
 package com.project.islandSimulationObjects;
 
 import com.project.island.BoxCharacteristicsObject;
-import com.project.island.Island;
+import com.project.island.IslandMap;
 
 import com.project.islandSimulationObjects.animals.omnivores.*;
 import com.project.islandSimulationObjects.animals.herbivorous.*;
@@ -19,7 +19,7 @@ public class CreationIslandSimulationObject {
     }
 
     public static CreationIslandSimulationObject getCreationIslandSimulationObject() {
-        if (instance == null && Island.x > 0) {
+        if (instance == null && IslandMap.x > 0) {
 
             instance = new CreationIslandSimulationObject();
         }
@@ -28,7 +28,7 @@ public class CreationIslandSimulationObject {
 
     public IslandSimulationObject createObject(IslandSimulationObject islandSimulationObject, String stringType) {
 
-       if (islandSimulationObject instanceof Fox || Objects.equals(stringType, BoxCharacteristicsObject.TYPE_STRING_FOX)) {
+        if (islandSimulationObject instanceof Fox || Objects.equals(stringType, BoxCharacteristicsObject.TYPE_STRING_FOX)) {
 
             return new Fox(1, 1);
 
@@ -88,41 +88,37 @@ public class CreationIslandSimulationObject {
 
             return new Sheep(1, 1);
 
-
         } else if (islandSimulationObject instanceof Berries || Objects.equals(stringType, BoxCharacteristicsObject.TYPE_STRING_BERRIES)) {
 
             return new Berries(1, 1);
-
 
         } else if (islandSimulationObject instanceof Fruit || Objects.equals(stringType, BoxCharacteristicsObject.TYPE_STRING_FRUIT)) {
 
             return new Fruit(1, 1);
 
-
         } else if (islandSimulationObject instanceof Grass || Objects.equals(stringType, BoxCharacteristicsObject.TYPE_STRING_GRASS)) {
 
             return new Grass(1, 1);
-
 
         } else if (islandSimulationObject instanceof PlantLeaves || Objects.equals(stringType, BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES)) {
 
             return new PlantLeaves(1, 1);
 
-
         } else if (islandSimulationObject instanceof Vegetables || Objects.equals(stringType, BoxCharacteristicsObject.TYPE_STRING_VEGETABLES)) {
 
             return new Vegetables(1, 1);
 
-
         } else if (islandSimulationObject instanceof Giraffe || Objects.equals(stringType, BoxCharacteristicsObject.TYPE_STRING_GIRAFFE)) {
 
             return new Giraffe(1, 1);
+
         } else if (islandSimulationObject instanceof Elephant || Objects.equals(stringType, BoxCharacteristicsObject.TYPE_STRING_ELEPHANT)) {
-           return new Elephant(1, 1);
+
+            return new Elephant(1, 1);
 
         } else {
+
             return new Rabbit(5, 0);
         }
-
     }
 }

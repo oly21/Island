@@ -1,28 +1,25 @@
 package com.project.islandSimulationObjects.animals;
 
-import com.project.island.Island;
-import com.project.islandSimulationObjects.IslandSimulationObject;
-
+import com.project.island.Cell;
+import com.project.island.IslandMap;
 import java.util.concurrent.*;
 
 public class AnimalLifeCycle implements Runnable {
-    public Island island = Island.getIsland();
+    public IslandMap island = IslandMap.getIsland();
 
-    public static CopyOnWriteArrayList<Animal> animals = Island.getAnimalList();
+    public static CopyOnWriteArrayList<Animal> animals = IslandMap.getAnimalList();
     public static CopyOnWriteArrayList<Callable<Void>> animalsCopy = new CopyOnWriteArrayList<>();
     public static CopyOnWriteArrayList<Callable<Void>> animalsCopy1 = new CopyOnWriteArrayList<>();
-    public static volatile IslandSimulationObject[][] islandArray;
+    public static volatile Cell[][] islandArray;
 
     static {
 
-        islandArray = Island.getIslandArray();
+        islandArray = IslandMap.getIslandArray();
 
     }
 
     public int age;
-
     private static AnimalLifeCycle instance;
-
 
     private AnimalLifeCycle() {
 
@@ -70,6 +67,5 @@ public class AnimalLifeCycle implements Runnable {
         }
         executorService.shutdown();
     }
-
 }
 

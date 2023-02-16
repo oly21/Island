@@ -78,7 +78,6 @@ public abstract class Plant implements IslandSimulationObject  {
     }
 
 
-
     public synchronized Coordinate getXY() {
 
         return new Coordinate(x, y);
@@ -88,17 +87,9 @@ public abstract class Plant implements IslandSimulationObject  {
         return  this.typePicture;
     }
 
-
-
     public  String getTypeString(){
         return this.typeString;
     }
-
-
-    public void run() {
-
-    }
-
     @Override
     public Void call() throws Exception {
         return null;

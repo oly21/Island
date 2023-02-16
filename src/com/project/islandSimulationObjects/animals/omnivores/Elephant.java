@@ -6,9 +6,10 @@ import java.util.Arrays;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Elephant extends Omnivores {
-    public  static volatile int numberBornAnimalsOfParticularSpecies = 0;
-    public  static volatile int numberAnimalsOfParticularSpecies = 0;
-    public  static volatile int numberDeadAnimalsOfParticularSpecies = 0;
+    public static volatile int numberBornAnimalsOfParticularSpecies = 0;
+    public static volatile int numberAnimalsOfParticularSpecies = 0;
+    public static volatile int numberDeadAnimalsOfParticularSpecies = 0;
+
     public Elephant(int weight, int age) {
         super();
         this.weight = weight;
@@ -26,11 +27,7 @@ public class Elephant extends Omnivores {
     }
 
 
-    public Elephant(int age) {
-        super();
-        this.age = age;
-        weight = BoxCharacteristicsObject.WEIGHT_ELEPHANT;
-    }
+
 
     @Override
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {
@@ -41,6 +38,7 @@ public class Elephant extends Omnivores {
     public synchronized void setNumberBornAnimalsOfParticularSpecies(int numberBornAnimalsOfParticularSpecies) {
         Elephant.numberBornAnimalsOfParticularSpecies = numberBornAnimalsOfParticularSpecies;
     }
+
     @Override
     public synchronized int getNumberAnimalsOfParticularSpecies() {
         return numberAnimalsOfParticularSpecies;
@@ -50,6 +48,7 @@ public class Elephant extends Omnivores {
     public synchronized void setNumberAnimalsOfParticularSpecies(int numberAnimalsOfParticularSpecies) {
         Elephant.numberAnimalsOfParticularSpecies = numberAnimalsOfParticularSpecies;
     }
+
     @Override
     public synchronized int getNumberDeadAnimalsOfParticularSpecies() {
         return numberDeadAnimalsOfParticularSpecies;
@@ -59,12 +58,6 @@ public class Elephant extends Omnivores {
     public synchronized void setNumberDeadAnimalsOfParticularSpecies(int numberDeadAnimalsOfParticularSpecies) {
         Elephant.numberDeadAnimalsOfParticularSpecies = numberDeadAnimalsOfParticularSpecies;
     }
-
-
-
-
-
-
 }
 
 

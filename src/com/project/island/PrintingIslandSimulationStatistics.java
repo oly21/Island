@@ -2,7 +2,6 @@ package com.project.island;
 
 import com.project.islandSimulationObjects.animals.Animal;
 import com.project.islandSimulationObjects.CreationIslandSimulationObject;
-import com.project.islandSimulationObjects.IslandSimulationObject;
 import com.project.islandSimulationObjects.plants.PlantGrowth;
 
 public class PrintingIslandSimulationStatistics implements Runnable {
@@ -16,22 +15,17 @@ public class PrintingIslandSimulationStatistics implements Runnable {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
     private static PrintingIslandSimulationStatistics instance;
-    public static volatile IslandSimulationObject[][] islandArray;
-
+    public static volatile Cell[][] islandArray;
 
     static {
 
-        islandArray = Island.getIslandArray();
-
+        islandArray = IslandMap.getIslandArray();
     }
 
     CreationIslandSimulationObject creationIslandSimulationObject = CreationIslandSimulationObject.getCreationIslandSimulationObject();
-
     private PrintingIslandSimulationStatistics() {
 
     }
-
-
     public static PrintingIslandSimulationStatistics getPrintingIslandSimulationStatistics() {
 
         if (instance == null) {
@@ -39,7 +33,6 @@ public class PrintingIslandSimulationStatistics implements Runnable {
         }
         return instance;
     }
-
 
     public synchronized void run() {
         synchronized (System.out) {

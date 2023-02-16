@@ -26,11 +26,8 @@ public class Boar extends Omnivores {
 
     }
 
-    public Boar(int age) {
-        super();
-        this.age = age;
-        weight = BoxCharacteristicsObject.WEIGHT_BOAR;
-    }
+
+
 
     @Override
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {
@@ -47,7 +44,6 @@ public class Boar extends Omnivores {
         return numberAnimalsOfParticularSpecies;
     }
 
-
     @Override
     public synchronized void setNumberAnimalsOfParticularSpecies(int numberAnimalsOfParticularSpecies) {
         Boar.numberAnimalsOfParticularSpecies = numberAnimalsOfParticularSpecies;
@@ -62,6 +58,4 @@ public class Boar extends Omnivores {
     public synchronized void setNumberDeadAnimalsOfParticularSpecies(int numberDeadAnimalsOfParticularSpecies) {
         Boar.numberDeadAnimalsOfParticularSpecies = numberDeadAnimalsOfParticularSpecies;
     }
-
-
 }

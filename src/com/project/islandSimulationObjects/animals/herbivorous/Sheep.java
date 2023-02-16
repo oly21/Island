@@ -13,12 +13,6 @@ public class Sheep extends Herbivores {
     public static volatile int numberAnimalsOfParticularSpecies = 0;
     public static volatile int numberDeadAnimalsOfParticularSpecies = 0;
 
-    public Sheep(int age) {
-        super();
-        this.age = age;
-        weight = BoxCharacteristicsObject.WEIGHT_SHEEP;
-    }
-
 
     public Sheep(int weight, int age) {
         super();
@@ -36,14 +30,12 @@ public class Sheep extends Herbivores {
         this.age = age;
     }
 
-
     @Override
     public void reproduce() {
         for (int i = 0; i <= 2; i++) {
             super.reproduce();
         }
     }
-
 
     @Override
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {
@@ -74,6 +66,4 @@ public class Sheep extends Herbivores {
     public synchronized void setNumberDeadAnimalsOfParticularSpecies(int numberDeadAnimalsOfParticularSpecies) {
         Sheep.numberDeadAnimalsOfParticularSpecies = numberDeadAnimalsOfParticularSpecies;
     }
-
-
 }

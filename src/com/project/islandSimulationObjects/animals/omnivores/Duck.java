@@ -1,13 +1,15 @@
 package com.project.islandSimulationObjects.animals.omnivores;
 
 import com.project.island.BoxCharacteristicsObject;
+
 import java.util.Arrays;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class Duck  extends Omnivores {
+public class Duck extends Omnivores {
     public static volatile int numberBornAnimalsOfParticularSpecies = 0;
     public static volatile int numberAnimalsOfParticularSpecies = 0;
     public static volatile int numberDeadAnimalsOfParticularSpecies = 0;
+
     public Duck(int weight, int age) {
         super();
         initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES,
@@ -23,11 +25,7 @@ public class Duck  extends Omnivores {
     }
 
 
-    public Duck(int age) {
-        super();
-        this.age = age;
-        weight = BoxCharacteristicsObject.WEIGHT_DUCK;
-    }
+
 
     @Override
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {
@@ -59,16 +57,12 @@ public class Duck  extends Omnivores {
         Duck.numberDeadAnimalsOfParticularSpecies = numberDeadAnimalsOfParticularSpecies;
     }
 
-
-
     @Override
     public void reproduce() {
         for (int i = 0; i <= 2; i++) {
             super.reproduce();
         }
     }
-
-
 }
 
 

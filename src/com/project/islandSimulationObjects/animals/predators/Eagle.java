@@ -7,11 +7,9 @@ import java.util.Arrays;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Eagle extends Predators {
-    public  static volatile int numberBornAnimalsOfParticularSpecies = 0;
-    public  static volatile int numberAnimalsOfParticularSpecies = 0;
-    public  static volatile int numberDeadAnimalsOfParticularSpecies = 0;
-
-
+    public static volatile int numberBornAnimalsOfParticularSpecies = 0;
+    public static volatile int numberAnimalsOfParticularSpecies = 0;
+    public static volatile int numberDeadAnimalsOfParticularSpecies = 0;
 
     public Eagle(int weight, int age) {
         super();
@@ -26,11 +24,6 @@ public class Eagle extends Predators {
         foodStuffs = new CopyOnWriteArrayList<>(initialList);
     }
 
-    public Eagle(int age) {
-        super();
-        this.age = age;
-        weight = BoxCharacteristicsObject.WEIGHT_EAGLE;
-    }
 
     @Override
     protected synchronized void initializationMapChanceToEat() {
@@ -40,6 +33,7 @@ public class Eagle extends Predators {
 
 
     }
+
     @Override
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {
         return numberBornAnimalsOfParticularSpecies;
@@ -49,6 +43,7 @@ public class Eagle extends Predators {
     public synchronized void setNumberBornAnimalsOfParticularSpecies(int numberBornAnimalsOfParticularSpecies) {
         Eagle.numberBornAnimalsOfParticularSpecies = numberBornAnimalsOfParticularSpecies;
     }
+
     @Override
     public synchronized int getNumberAnimalsOfParticularSpecies() {
         return numberAnimalsOfParticularSpecies;
@@ -58,6 +53,7 @@ public class Eagle extends Predators {
     public synchronized void setNumberAnimalsOfParticularSpecies(int numberAnimalsOfParticularSpecies) {
         Eagle.numberAnimalsOfParticularSpecies = numberAnimalsOfParticularSpecies;
     }
+
     @Override
     public synchronized int getNumberDeadAnimalsOfParticularSpecies() {
         return numberDeadAnimalsOfParticularSpecies;
@@ -67,5 +63,4 @@ public class Eagle extends Predators {
     public synchronized void setNumberDeadAnimalsOfParticularSpecies(int numberDeadAnimalsOfParticularSpecies) {
         Eagle.numberDeadAnimalsOfParticularSpecies = numberDeadAnimalsOfParticularSpecies;
     }
-
 }

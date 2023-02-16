@@ -28,11 +28,6 @@ public class Rabbit extends Herbivores {
         foodStuffs = new CopyOnWriteArrayList<>(initialList);
     }
 
-    public Rabbit(int age) {
-        super();
-        weight = BoxCharacteristicsObject.WEIGHT_RABBIT;
-        this.age = age;
-    }
 
 
     @Override
@@ -71,5 +66,4 @@ public class Rabbit extends Herbivores {
     public synchronized void setNumberDeadAnimalsOfParticularSpecies(int numberDeadAnimalsOfParticularSpecies) {
         Rabbit.numberDeadAnimalsOfParticularSpecies = numberDeadAnimalsOfParticularSpecies;
     }
-
 }

@@ -7,9 +7,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Bear extends Predators {
 
-    public  static volatile int numberBornAnimalsOfParticularSpecies = 0;
-    public  static volatile int numberAnimalsOfParticularSpecies = 0;
-    public  static volatile int numberDeadAnimalsOfParticularSpecies = 0;
+    public static volatile int numberBornAnimalsOfParticularSpecies = 0;
+    public static volatile int numberAnimalsOfParticularSpecies = 0;
+    public static volatile int numberDeadAnimalsOfParticularSpecies = 0;
+
     public Bear(int weight, int age) {
         super();
         typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_BEAR;
@@ -31,11 +32,7 @@ public class Bear extends Predators {
         foodStuffs = new CopyOnWriteArrayList<>(initialList);
     }
 
-    public Bear(int age) {
-        super();
-        weight = BoxCharacteristicsObject.WEIGHT_BEAR;
-        this.age = age;
-    }
+
 
     @Override
     protected synchronized void initializationMapChanceToEat() {
@@ -48,6 +45,7 @@ public class Bear extends Predators {
 
 
     }
+
     @Override
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {
         return numberBornAnimalsOfParticularSpecies;
@@ -57,6 +55,7 @@ public class Bear extends Predators {
     public synchronized void setNumberBornAnimalsOfParticularSpecies(int numberBornAnimalsOfParticularSpecies) {
         Bear.numberBornAnimalsOfParticularSpecies = numberBornAnimalsOfParticularSpecies;
     }
+
     @Override
     public synchronized int getNumberAnimalsOfParticularSpecies() {
         return numberAnimalsOfParticularSpecies;
@@ -66,6 +65,7 @@ public class Bear extends Predators {
     public synchronized void setNumberAnimalsOfParticularSpecies(int numberAnimalsOfParticularSpecies) {
         Bear.numberAnimalsOfParticularSpecies = numberAnimalsOfParticularSpecies;
     }
+
     @Override
     public synchronized int getNumberDeadAnimalsOfParticularSpecies() {
         return numberDeadAnimalsOfParticularSpecies;
@@ -75,6 +75,5 @@ public class Bear extends Predators {
     public synchronized void setNumberDeadAnimalsOfParticularSpecies(int numberDeadAnimalsOfParticularSpecies) {
         Bear.numberDeadAnimalsOfParticularSpecies = numberDeadAnimalsOfParticularSpecies;
     }
-
 }
 

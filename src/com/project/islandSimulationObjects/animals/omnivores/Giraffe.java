@@ -5,10 +5,11 @@ import com.project.island.BoxCharacteristicsObject;
 import java.util.Arrays;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class Giraffe extends  Omnivores{
-    public  static volatile int numberBornAnimalsOfParticularSpecies = 0;
-    public  static volatile int numberAnimalsOfParticularSpecies = 0;
-    public  static volatile int numberDeadAnimalsOfParticularSpecies = 0;
+public class Giraffe extends Omnivores {
+    public static volatile int numberBornAnimalsOfParticularSpecies = 0;
+    public static volatile int numberAnimalsOfParticularSpecies = 0;
+    public static volatile int numberDeadAnimalsOfParticularSpecies = 0;
+
     public Giraffe(int weight, int age) {
         super();
         this.weight = weight;
@@ -27,11 +28,7 @@ public class Giraffe extends  Omnivores{
     }
 
 
-    public Giraffe(int age) {
-        super();
-        this.age = age;
-        weight = BoxCharacteristicsObject.WEIGHT_GIRAFFE;
-    }
+
 
     @Override
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {
@@ -42,6 +39,7 @@ public class Giraffe extends  Omnivores{
     public synchronized void setNumberBornAnimalsOfParticularSpecies(int numberBornAnimalsOfParticularSpecies) {
         Giraffe.numberBornAnimalsOfParticularSpecies = numberBornAnimalsOfParticularSpecies;
     }
+
     @Override
     public synchronized int getNumberAnimalsOfParticularSpecies() {
         return numberAnimalsOfParticularSpecies;
@@ -51,6 +49,7 @@ public class Giraffe extends  Omnivores{
     public synchronized void setNumberAnimalsOfParticularSpecies(int numberAnimalsOfParticularSpecies) {
         Giraffe.numberAnimalsOfParticularSpecies = numberAnimalsOfParticularSpecies;
     }
+
     @Override
     public synchronized int getNumberDeadAnimalsOfParticularSpecies() {
         return numberDeadAnimalsOfParticularSpecies;
@@ -60,12 +59,6 @@ public class Giraffe extends  Omnivores{
     public synchronized void setNumberDeadAnimalsOfParticularSpecies(int numberDeadAnimalsOfParticularSpecies) {
         Giraffe.numberDeadAnimalsOfParticularSpecies = numberDeadAnimalsOfParticularSpecies;
     }
-
-
-
-
-
-
 }
 
 

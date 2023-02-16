@@ -24,11 +24,7 @@ public class Caterpillar extends Herbivores {
 
     }
 
-    public Caterpillar(int age) {
-        super();
-        this.age = age;
-        weight = BoxCharacteristicsObject.WEIGHT_CATERPILLAR;
-    }
+
 
     @Override
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {
@@ -59,6 +55,4 @@ public class Caterpillar extends Herbivores {
     public synchronized void setNumberDeadAnimalsOfParticularSpecies(int numberDeadAnimalsOfParticularSpecies) {
         Caterpillar.numberDeadAnimalsOfParticularSpecies = numberDeadAnimalsOfParticularSpecies;
     }
-
-
 }

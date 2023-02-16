@@ -6,12 +6,9 @@ import java.util.Arrays;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Wolf extends Predators {
-    public  static volatile int numberBornAnimalsOfParticularSpecies = 0;
-    public  static volatile int numberAnimalsOfParticularSpecies = 0;
-    public  static volatile int numberDeadAnimalsOfParticularSpecies = 0;
-
-
-
+    public static volatile int numberBornAnimalsOfParticularSpecies = 0;
+    public static volatile int numberAnimalsOfParticularSpecies = 0;
+    public static volatile int numberDeadAnimalsOfParticularSpecies = 0;
 
     public Wolf(int weight, int age) {
         super();
@@ -28,15 +25,11 @@ public class Wolf extends Predators {
                 BoxCharacteristicsObject.TYPE_STRING_DUCK, BoxCharacteristicsObject.TYPE_STRING_CATERPILLAR,
                 BoxCharacteristicsObject.TYPE_STRING_BERRIES, BoxCharacteristicsObject.TYPE_STRING_FRUIT,
                 BoxCharacteristicsObject.TYPE_STRING_VEGETABLES);
-                 foodStuffs = new CopyOnWriteArrayList<>(initialList);
+        foodStuffs = new CopyOnWriteArrayList<>(initialList);
     }
 
-    public Wolf(int age) {
-        super();
-        this.age = age;
-        weight = BoxCharacteristicsObject.WEIGHT_WOLF;
 
-    }
+
     @Override
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {
         return numberBornAnimalsOfParticularSpecies;
@@ -46,6 +39,7 @@ public class Wolf extends Predators {
     public synchronized void setNumberBornAnimalsOfParticularSpecies(int numberBornAnimalsOfParticularSpecies) {
         Wolf.numberBornAnimalsOfParticularSpecies = numberBornAnimalsOfParticularSpecies;
     }
+
     @Override
     public synchronized int getNumberAnimalsOfParticularSpecies() {
         return numberAnimalsOfParticularSpecies;
@@ -55,6 +49,7 @@ public class Wolf extends Predators {
     public synchronized void setNumberAnimalsOfParticularSpecies(int numberAnimalsOfParticularSpecies) {
         Wolf.numberAnimalsOfParticularSpecies = numberAnimalsOfParticularSpecies;
     }
+
     @Override
     public synchronized int getNumberDeadAnimalsOfParticularSpecies() {
         return numberDeadAnimalsOfParticularSpecies;
@@ -64,6 +59,7 @@ public class Wolf extends Predators {
     public synchronized void setNumberDeadAnimalsOfParticularSpecies(int numberDeadAnimalsOfParticularSpecies) {
         Wolf.numberDeadAnimalsOfParticularSpecies = numberDeadAnimalsOfParticularSpecies;
     }
+
     @Override
     protected synchronized void initializationMapChanceToEat() {
 

@@ -16,16 +16,6 @@ public   class BoxCharacteristicsObject {
     public static final int SPEED_ELEPHANT = 5;
     public static final int MEAL_REQUIRED_KG_ELEPHANT = 5;
 
-
-
-    //GIRAFFE
-    //giraffe
-    //ELEPHANT
-    // Elephant
-    //🦒
-    //🐘
-
-
     public static final int WEIGHT_1 = 50;
     public static final String TYPE_STRING_1 =   "Wolf";;
     public static final String STRING_TYPE_PICTURE_1 = "🐺" ;
@@ -93,9 +83,6 @@ public   class BoxCharacteristicsObject {
     public static final String STRING_TYPE_PICTURE_LEAVES =  "🥬";
     public static final String STRING_TYPE_PICTURE_VEGETABLES =  "🥕";
 
-
-
-
     public static final int SPEED_WOLF = 5;
     public static final int SPEED_BOA = 3;
     public static final int SPEED_FOX =5;
@@ -111,8 +98,6 @@ public   class BoxCharacteristicsObject {
     public static final int SPEED_BUFFALO = 3;
     public static final int SPEED_DUCK = 3;
     public static final int SPEED_CATERPILLAR = 2;
-
-
 
     public static final int MEAL_REQUIRED_KG_WOLF = 5;
     public static final int MEAL_REQUIRED_KG_BOA = 2;
@@ -131,8 +116,6 @@ public   class BoxCharacteristicsObject {
     public static final int MEAL_REQUIRED_KG_CATERPILLAR = 1;
 
 
-
-
     public static final double PROBABILITY_WOLF_EAT_HORSE = 0.1;
     public static final double PROBABILITY_WOLF_EAT_DEER = 0.15;
     public static final double PROBABILITY_WOLF_EAT_RABBIT = 0.7;
@@ -146,13 +129,10 @@ public   class BoxCharacteristicsObject {
     public static final double PROBABILITY_BOA_EAT_RABBIT = 0.2;
     public static final double PROBABILITY_BOA_EAT_MOUSE = 0.4;
 
-
-
     public static final double PROBABILITY_FOX_EAT_HORSE = 0.1;
     public static final double PROBABILITY_FOX_EAT_DEER = 0.15;
     public static final double PROBABILITY_FOX_EAT_RABBIT = 0.7;
     public static final double PROBABILITY_FOX_EAT_MOUSE = 0.7;
-
 
     public static final double PROBABILITY_BEAR_EAT_BOA = 0.8;
     public static final double PROBABILITY_BEAR_EAT_DEER = 0.8;
@@ -190,9 +170,5 @@ public   class BoxCharacteristicsObject {
     public static final String MESSAGE_TOO_MANY_ANIMALS =   " Начальное количество Predators каждого вида должно быть меньше  " + " " ;
 
     public static final String MESSAGE_WRONG_COMMAND_NUMBER =    "Вы вели не верный номер команды";
-
-
-
-
 
 }
