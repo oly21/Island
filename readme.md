@@ -7,7 +7,8 @@ displays statistics(**PrintingIslandSimulationStatistics**),
 checks the simulation termination condition and terminates
 it when the condition is met (**CheckingStopConditionOfIslandSimulation**) and starts
 the life cycle of all animals(**AnimalLifeCycle**).
-
+#### to remove an animal or plant from the simulation, it is enough to comment 2 lines related to this animal or plant in CreationIslandSimulationObject
+#### 3 minutes is enough to add a new animal or plant to the simulation (create a new class, etc.)
 #### 5 Scheduled threads run at StartingIslandSimulation and 1 FixedThreadPool at AnimalLifeCycle
 #### in AnimalLifeCycle 1 animal is a threads and run in FixedThreadPool at random using ThreadLocalRandom .
 #### Every animal has such methods: 
