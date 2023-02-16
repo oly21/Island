@@ -18,7 +18,7 @@ Predators of other animals and sometimes plants,
 Omnivores can also eat plants, fruits and small insects.
 Animals look for food in neighboring cells, 
 to search for neighboring cells use method ***getListNeighboringCells***
-
+***predators eat their prey with a certain probability using ThreadLocalRandom***
 #### reproduce() -
 An animal can reproduce  with an animal of its own species,
 each species of animal has its own  ***ProgenyLimit*** and some herbivores
