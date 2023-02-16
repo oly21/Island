@@ -8,22 +8,22 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Cell {
-    private volatile CopyOnWriteArrayList<IslandSimulationObject> animalsInCell = new CopyOnWriteArrayList<>();
+    private volatile CopyOnWriteArrayList<IslandSimulationObject> IslandSimulationObjecInCell = new CopyOnWriteArrayList<>();
 
-    public synchronized int getAnimalsInCellSize() {
-        return animalsInCell.size();
+    public synchronized int getIslandSimulationObjecInCellSize() {
+        return IslandSimulationObjecInCell.size();
     }
 
     public synchronized void addIslandSimulationObject(IslandSimulationObject islandSimulationObject) {
-        if (animalsInCell.size() <= 5 && islandSimulationObject instanceof Animal) {
-            animalsInCell.add(islandSimulationObject);
-        } else if (animalsInCell.size() <= 5 && islandSimulationObject instanceof Plant) {
-            animalsInCell.add(islandSimulationObject);
+        if (IslandSimulationObjecInCell.size() <= 5 && islandSimulationObject instanceof Animal) {
+            IslandSimulationObjecInCell.add(islandSimulationObject);
+        } else if (IslandSimulationObjecInCell.size() <= 5 && islandSimulationObject instanceof Plant) {
+            IslandSimulationObjecInCell.add(islandSimulationObject);
         }
     }
 
     public synchronized boolean getIslandSimulationObject(String typeString) {
-        for (IslandSimulationObject islandSimulationObject : animalsInCell) {
+        for (IslandSimulationObject islandSimulationObject : IslandSimulationObjecInCell) {
             if (islandSimulationObject.getTypeString().equals(typeString)) {
                 return true;
             }
@@ -34,11 +34,11 @@ public class Cell {
 
     public synchronized void removeIslandSimulationObject(IslandSimulationObject islandSimulationObject) {
 
-        animalsInCell.remove(islandSimulationObject);
+        IslandSimulationObjecInCell.remove(islandSimulationObject);
     }
 
     public synchronized IslandSimulationObject getIslandSimulationObjectIfContains(CopyOnWriteArrayList<String> foodStaffs) {
-        for (IslandSimulationObject islandSimulationObject : animalsInCell) {
+        for (IslandSimulationObject islandSimulationObject : IslandSimulationObjecInCell) {
             if (foodStaffs.contains(islandSimulationObject.getTypeString())) {
                 return islandSimulationObject;
             }
@@ -47,9 +47,9 @@ public class Cell {
     }
 
     public synchronized IslandSimulationObject getRandomIslandSimulationObject() {
-        int coordinateIndex = ThreadLocalRandom.current().nextInt(animalsInCell.size()) % animalsInCell.size();
+        int coordinateIndex = ThreadLocalRandom.current().nextInt(IslandSimulationObjecInCell.size()) % IslandSimulationObjecInCell.size();
 
-        return animalsInCell.get(coordinateIndex);
+        return IslandSimulationObjecInCell.get(coordinateIndex);
 
     }
 }

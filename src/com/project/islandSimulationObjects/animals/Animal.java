@@ -47,11 +47,11 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
     protected int step = BoxCharacteristicsObject.SPEED_RABBIT;
     protected volatile int weight = BoxCharacteristicsObject.WEIGHT_RABBIT;
     protected int neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_RABBIT;
-    protected volatile int attemptsFindPartnerCounter = 0;
+
     protected volatile int eatenKg = 0;
     protected volatile int daysWithoutFood = 0;
     protected volatile int countDays = 0;
-    protected volatile int dailyMealCounter = 0;
+
     private volatile int hungryDaysCounter = 0;
     protected volatile boolean isHunger = true;
     protected volatile boolean eat = false;

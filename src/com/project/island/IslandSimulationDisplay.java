@@ -33,7 +33,7 @@ public class IslandSimulationDisplay implements Runnable {
                     System.out.println();
 
                     for (int j = 0; j < islandArray[i].length; j++) {
-                        if (islandArray[i][j]!=null && islandArray[i][j].getAnimalsInCellSize()>0 ) {
+                        if (islandArray[i][j]!=null && islandArray[i][j].getIslandSimulationObjecInCellSize()>0 ) {
                             System.out.print(islandArray[i][j].getRandomIslandSimulationObject().getTypePicture() + " ");
 
                         } else {
