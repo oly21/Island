@@ -3,21 +3,24 @@
 package com.project.islandSimulationObjects.animals;
 
 import com.project.island.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.*;
+
 import com.project.islandSimulationObjects.*;
 import com.project.islandSimulationObjects.animals.predators.*;
 import com.project.islandSimulationObjects.plants.Plant;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class Animal implements IslandSimulationObject, Callable<Void> {
-    public  IslandMap islandMap = IslandMap.getIslandMap();
+    public IslandMap islandMap = IslandMap.getIslandMap();
     StartingIslandSimulation startingIslandSimulation = StartingIslandSimulation.getIslandSimulation();
-    public  volatile CopyOnWriteArrayList<Coordinate> freeCells = startingIslandSimulation.getListFreeCells();
-    public  volatile CopyOnWriteArrayList<Animal> animals = islandMap.getAnimalList();
-    public  volatile CopyOnWriteArrayList<Plant> plants = islandMap.getPlantList();
+    public volatile CopyOnWriteArrayList<Coordinate> freeCells = startingIslandSimulation.getListFreeCells();
+    public volatile CopyOnWriteArrayList<Animal> animals = islandMap.getAnimalList();
+    public volatile CopyOnWriteArrayList<Plant> plants = islandMap.getPlantList();
 
     protected List<String> initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_FRUIT,
             BoxCharacteristicsObject.TYPE_STRING_BERRIES, BoxCharacteristicsObject.TYPE_STRING_VEGETABLES,
@@ -29,14 +32,10 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
     public ConcurrentHashMap<String, Double> chanceToEatMap = new ConcurrentHashMap<>();
 
 
-    public  volatile Cell[][] islandArray = islandMap.getIslandArray();;
+    public volatile Cell[][] islandArray = islandMap.getIslandArray();
+    ;
     CreationIslandSimulationObject creationIslandSimulationObject = CreationIslandSimulationObject.getCreationIslandSimulationObject();
-    public  CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = islandMap.getIslandSimulationObjectList();
-
-
-
-
-
+    public CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = islandMap.getIslandSimulationObjectList();
 
     protected String typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_RABBIT;
     protected String typeString = BoxCharacteristicsObject.TYPE_STRING_RABBIT;
@@ -63,10 +62,10 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
     public static int numberAnimalsOfParticularSpecies = 0;
     public static int numberDeadAnimalsOfParticularSpecies = 0;
 
-    public  volatile int limitRightY =  islandMap.getY() - 1;
-    public  volatile int limitLeftY = 0;
-    public  volatile int LimitUpX = 0;
-    public   int limitDownX =  islandMap.getX() - 1;
+    public volatile int limitRightY = islandMap.getY() - 1;
+    public volatile int limitLeftY = 0;
+    public volatile int LimitUpX = 0;
+    public int limitDownX = islandMap.getX() - 1;
 
     public static volatile AtomicInteger numberAnimals = new AtomicInteger(0);
     public static volatile AtomicInteger numberDeadAnimals = new AtomicInteger(0);
@@ -255,20 +254,15 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
     }
 
 
-
-
     public Void call() {
         runStart.incrementAndGet();
-
         this.setCountDays(this.getCountDays() + 1);
-        if (this.getCountDays() % 2 == 0) {
 
+        if (this.getCountDays() % 2 == 0) {
             this.setProgeny(0);
         }
 
-
         if (!this.getStop() && !deathFromOldAge() && this.getIsHunger()) {
-
             this.eat();
 
             if (!this.getEat()) {
@@ -280,23 +274,23 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
             }
         }
 
-
+        boolean CanProgeny = this.getProgeny() < this.getProgenyLimit();
+        boolean plantLimitPredators = numberPlants.get() > 50;
+        boolean suitableAge = this.getAge() >= 2;
+        boolean animalLimitPredators = checkNumberAnimalsOfAParticularSpecies(this) < islandMap.getX() + 10;
+        boolean animalLimit = checkNumberAnimalsOfAParticularSpecies(this) < islandMap.getX() + 20;
+        boolean plantLimit = numberPlants.get() > 10;
         if ((!this.getStop() && havingVitality() && !deathFromOldAge())) {
             if (this instanceof Predators) {
-                if (!this.getStop() && (this.getProgeny() < this.getProgenyLimit()) && numberPlants.get() > 50 && this.getAge() >= 2 && (checkNumberAnimalsOfAParticularSpecies(this)) < islandMap.getX() + 10) {
-                    if (!this.getStop()) {
-                        if (this.getEat() || !this.getIsHunger()) {
-                            this.reproduce();
-                        }
+                if (!this.getStop() && CanProgeny && plantLimitPredators && suitableAge && animalLimitPredators) {
+                    if (this.getEat() || !this.getIsHunger()) {
+                        this.reproduce();
                     }
                 }
 
             } else {
-                if (!this.getStop() && this.getProgeny() < this.getProgenyLimit() && numberPlants.get() > 10 && this.getAge() >= 2 && (checkNumberAnimalsOfAParticularSpecies(this)) < (islandMap.getX() + 20)) {
-                    if (!this.getStop()) {
-
-                        this.reproduce();
-                    }
+                if (!this.getStop() && CanProgeny && plantLimit && suitableAge && animalLimit) {
+                    this.reproduce();
                 }
             }
 
@@ -316,12 +310,11 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
 
     public void eat() {
         startEat.incrementAndGet();
-
         this.setEat(false);
         Double chanceToEat = 1.0;
         neighboringCells = getListNeighboringCells();
-
         startFor.incrementAndGet();
+
         if (!this.getStop()) {
             synchronized (islandArray) {
                 for (Coordinate coordinate1 : neighboringCells) {
@@ -333,31 +326,19 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
                         if (!this.getStop() && islandArray[x][y] != null) {
                             IslandSimulationObject islandSimulationObject = islandArray[x][y].getIslandSimulationObjectIfContains(this.getFoodStuffs());
                             if (islandSimulationObject != null) {
-                                if (islandSimulationObject instanceof Animal) {
-                                    if (!((Animal) islandSimulationObject).getStop()) {
-                                    } else {
-                                        continue;
-                                    }
+                                if (islandSimulationObject instanceof Animal && ((Animal) islandSimulationObject).getStop()) {
+                                    continue;
                                 }
+
                                 if (this instanceof Predators) {
                                     chanceToEatMap = (((Predators) this).getMapChanceToEat());
                                     if (chanceToEatMap.containsKey(islandSimulationObject.getTypeString())) {
-
                                         chanceToEat = chanceToEatMap.get(islandSimulationObject.getTypeString());
                                     }
                                 }
                                 if (ThreadLocalRandom.current().nextDouble(0, 1) < chanceToEat) {
-
                                     this.setEatenKg(this.getEatenKg() + islandSimulationObject.getWeight());
-
-                                    if (this.getEatenKg() < (this.getNeededFoodKg() / 2)) {
-                                        this.setIsHunger(true);
-
-                                    } else {
-                                        this.setIsHunger(false);
-                                    }
-
-
+                                    this.setIsHunger(this.getEatenKg() < (this.getNeededFoodKg() / 2));
                                     this.setEat(true);
                                     islandSimulationObjects.remove(islandSimulationObject);
                                     islandArray[x][y].removeIslandSimulationObject(islandSimulationObject);
@@ -400,7 +381,6 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
         neighboringCells = getListNeighboringCells();
         if (!this.getStop()) {
             synchronized (islandArray) {
-
                 startFor.incrementAndGet();
                 for (Coordinate coordinate1 : neighboringCells) {
 
@@ -408,9 +388,7 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
                     int y = coordinate1.getY();
 
                     if (!this.getStop()) {
-                        if (islandArray[x][y] == null) {
-                            System.out.println(0);
-                        }
+
                         if (!this.getStop() && islandArray[x][y] != null) {
                             boolean sameType = islandArray[x][y].getIslandSimulationObject(this.typeString);
 
@@ -425,7 +403,6 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
 
                                     numberAnimals.incrementAndGet();
                                     numberBornAnimals.incrementAndGet();
-
                                     islandSimulationObjects.add(islandSimulationObjectCopy);
 
                                     for (Coordinate freeCell : freeCells) {
@@ -440,7 +417,6 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
                                 } else {
                                     break;
                                 }
-
                                 break;
                             }
 
@@ -462,16 +438,10 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
 
         if (!this.getStop()) {
             for (Coordinate coordinate : neighboringCells) {
-                if (!this.getStop()) {
-                    if (freeCells.size() > 0) {
-                        if (freeCells.contains(coordinate)) {
-
-                            move(coordinate, this);
-                            freeCells.remove(coordinate);
-                            break;
-                        }
-
-                    } else {
+                if (!this.getStop() && freeCells.size() > 0) {
+                    if (freeCells.contains(coordinate)) {
+                        move(coordinate, this);
+                        freeCells.remove(coordinate);
                         break;
                     }
                 } else {
@@ -498,7 +468,7 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
         return islandSimulationObject.getNumberAnimalsOfParticularSpecies();
     }
 
-    public void  AddNeighboringCells(int x,int y) {
+    public void AddNeighboringCells(int x, int y) {
         boolean coordinateHave = false;
         if (neighboringCells.size() == 0) {
             neighboringCells.add(new Coordinate(x, y));
@@ -615,11 +585,9 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
     public boolean havingVitality() {
         startHavingVitality.incrementAndGet();
         if (this.getCountDays() % 4 == 0 && this.getCountDays() != 0 || this.getCountDays() % 5 == 0 && this.getCountDays() != 0) {
-
             if (this.getDaysWithoutFood() >= 4 || this.getHungryDaysCounter() >= 5) {
 
                 synchronized (islandArray) {
-
                     islandSimulationObjects.remove(this);
                     animals.remove(this);
                     islandArray[this.getX()][this.getY()].removeIslandSimulationObject(this);

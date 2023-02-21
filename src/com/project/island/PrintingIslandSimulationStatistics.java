@@ -14,7 +14,7 @@ public class PrintingIslandSimulationStatistics implements Runnable {
     private static PrintingIslandSimulationStatistics instance;
     public IslandMap islandMap = getIslandMap();
     public volatile Cell[][] islandArray = islandMap.getIslandArray();
-    ;
+
 
 
     CreationIslandSimulationObject creationIslandSimulationObject = CreationIslandSimulationObject.getCreationIslandSimulationObject();
@@ -59,13 +59,12 @@ public class PrintingIslandSimulationStatistics implements Runnable {
 
             for (int i = -1; i < typeString.size() - 1; i++) {
                 stringBuilder.append(String.format("%s%s %s ", "numberDead", typeString.get(i + 1), (creationIslandSimulationObject.createObject(null, typeString.get(i + 1))).getNumberDeadAnimalsOfParticularSpecies()));
-                stringBuilder.append(String.format("%s%s %s ", "number", typeString.get(i + 1), (creationIslandSimulationObject.createObject(null, typeString.get(i + 1))).getNumberDeadAnimalsOfParticularSpecies()));
-                stringBuilder.append(String.format("%s%s %s ", "numberBorn", typeString.get(i + 1), (creationIslandSimulationObject.createObject(null, typeString.get(i + 1))).getNumberDeadAnimalsOfParticularSpecies()));
+                stringBuilder.append(String.format("%s%s %s ", "number", typeString.get(i + 1), (creationIslandSimulationObject.createObject(null, typeString.get(i + 1))).getNumberAnimalsOfParticularSpecies()));
+                stringBuilder.append(String.format("%s%s %s ", "numberBorn", typeString.get(i + 1), (creationIslandSimulationObject.createObject(null, typeString.get(i + 1))).getNumberBornAnimalsOfParticularSpecies()));
                 if (i % 3 == 0) {
                     stringBuilder.append("\n");
                 }
             }
-
 
             stringBuilder.append(String.format("%s %s %s", ANSI_GREEN, "\n\nstartRun(StartThreads):", ANSI_RESET));
             stringBuilder.append(String.format("%s %s %s", ANSI_GREEN, Animal.runStart, ANSI_RESET));
@@ -75,9 +74,6 @@ public class PrintingIslandSimulationStatistics implements Runnable {
             String message = stringBuilder.toString();
             System.out.println(message);
         }
-
-
     }
-
 }
 
