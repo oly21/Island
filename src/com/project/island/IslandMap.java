@@ -3,6 +3,7 @@ package com.project.island;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+
 import com.project.islandSimulationObjects.animals.Animal;
 import com.project.islandSimulationObjects.CreationIslandSimulationObject;
 import com.project.islandSimulationObjects.IslandSimulationObject;
@@ -11,16 +12,18 @@ import com.project.islandSimulationObjects.plants.*;
 public class IslandMap {
     CreationIslandSimulationObject creationIslandSimulationObject = CreationIslandSimulationObject.getCreationIslandSimulationObject();
 
-    public volatile static CopyOnWriteArrayList<Animal> animals = new CopyOnWriteArrayList<>();
-    public volatile static CopyOnWriteArrayList<Plant> plants = new CopyOnWriteArrayList<>();
-    public volatile static CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = new CopyOnWriteArrayList<>();
+    public CopyOnWriteArrayList<Animal> animals = new CopyOnWriteArrayList<>();
+    public CopyOnWriteArrayList<Plant> plants = new CopyOnWriteArrayList<>();
+    public CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = new CopyOnWriteArrayList<>();
     public static IslandMap instance = null;
-    public static volatile int x;
-    public static volatile int y;
-    public static int predatorsNumber;
-    public static int herbivoresNumber;
-    public static int conditionNumberStopSimulation;
-    private static volatile Cell[][] islandArray;
+
+
+    public int x;
+    public int y;
+    public int predatorsNumber;
+    public int herbivoresNumber;
+    public int conditionNumberStopSimulation;
+    private volatile Cell[][] islandArray;
 
     protected List<String> initialList = Arrays.asList(
             BoxCharacteristicsObject.TYPE_STRING_WOLF,
@@ -48,30 +51,32 @@ public class IslandMap {
     );
 
     public volatile CopyOnWriteArrayList<String> typeString = new CopyOnWriteArrayList<>(initialList);
+
     private IslandMap(int x, int y, int predatorsNumber, int herbivoresNumber, int conditionNumberStopSimulation) {
 
-        IslandMap.x = x;
-        IslandMap.y = y;
-        IslandMap.predatorsNumber = predatorsNumber;
-        IslandMap.herbivoresNumber = herbivoresNumber;
-        IslandMap.conditionNumberStopSimulation = conditionNumberStopSimulation;
-        islandArray = new Cell[IslandMap.x][IslandMap.y];
-     for(int i = 0; i<=islandArray.length-1; i++ ){
-         for(int j = 0; j<=islandArray[i].length-1; j++ ){
-             islandArray[i][j] = new Cell();
-         }
-     }
+        this.x = x;
+        this.y = y;
+        this.predatorsNumber = predatorsNumber;
+        this.herbivoresNumber = herbivoresNumber;
+        this.conditionNumberStopSimulation = conditionNumberStopSimulation;
+        islandArray = new Cell[x][y];
+        for (int i = 0; i <= islandArray.length - 1; i++) {
+            for (int j = 0; j <= islandArray[i].length - 1; j++) {
+                islandArray[i][j] = new Cell();
+            }
+        }
     }
 
 
-    public static IslandMap getIsland() {
-        if (instance == null && IslandMap.x > 0 && IslandMap.y>0) {
-
-            instance = new IslandMap(x, y, predatorsNumber, herbivoresNumber, conditionNumberStopSimulation);
-        }
+    public static IslandMap getIslandMap() {
         return instance;
     }
 
+    public static void createIsland(int x, int y, int predatorsNumber, int herbivoresNumber, int conditionNumberStopSimulation) {
+        if (instance == null) {
+            instance = new IslandMap(x, y, predatorsNumber, herbivoresNumber, conditionNumberStopSimulation);
+        }
+    }
 
     public void listInitialization() {
 
@@ -94,24 +99,34 @@ public class IslandMap {
         Animal.numberAnimals.addAndGet(animals.size());
     }
 
-    public static synchronized Cell[][] getIslandArray() {
+    public synchronized Cell[][] getIslandArray() {
 
         return islandArray;
     }
 
 
-    public static CopyOnWriteArrayList<Animal> getAnimalList() {
+    public CopyOnWriteArrayList<Animal> getAnimalList() {
 
         return animals;
     }
 
-    public static CopyOnWriteArrayList<Plant> getPlantList() {
+    public CopyOnWriteArrayList<Plant> getPlantList() {
 
         return plants;
     }
 
-    public static CopyOnWriteArrayList<IslandSimulationObject> getIslandSimulationObjectList() {
+    public CopyOnWriteArrayList<IslandSimulationObject> getIslandSimulationObjectList() {
         return islandSimulationObjects;
+
+    }
+
+    public int getX() {
+        return x;
+
+    }
+
+    public int getY() {
+        return y;
 
     }
 }

@@ -5,18 +5,16 @@ import com.project.island.IslandMap;
 import java.util.concurrent.*;
 
 public class AnimalLifeCycle implements Runnable {
-    public IslandMap island = IslandMap.getIsland();
+    public IslandMap islandMap = IslandMap.getIslandMap();
 
-    public static CopyOnWriteArrayList<Animal> animals = IslandMap.getAnimalList();
+    public  CopyOnWriteArrayList<Animal> animals = islandMap.getAnimalList();
     public static CopyOnWriteArrayList<Callable<Void>> animalsCopy = new CopyOnWriteArrayList<>();
     public static CopyOnWriteArrayList<Callable<Void>> animalsCopy1 = new CopyOnWriteArrayList<>();
-    public static volatile Cell[][] islandArray;
+    public  volatile Cell[][] islandArray = islandMap.getIslandArray();;
 
-    static {
 
-        islandArray = IslandMap.getIslandArray();
 
-    }
+
 
     public int age;
     private static AnimalLifeCycle instance;

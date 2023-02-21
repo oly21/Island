@@ -10,17 +10,22 @@ import com.project.islandSimulationObjects.plants.*;
 
 import java.util.Objects;
 
+import static com.project.island.IslandMap.getIslandMap;
+
 public class CreationIslandSimulationObject {
-    public static CreationIslandSimulationObject instance = null;
+    public static    IslandMap islandMap = getIslandMap();
+
+    public   static CreationIslandSimulationObject instance = null;
 
     private CreationIslandSimulationObject() {
 
 
     }
 
-    public static CreationIslandSimulationObject getCreationIslandSimulationObject() {
-        if (instance == null && IslandMap.x > 0) {
 
+
+    public static  CreationIslandSimulationObject getCreationIslandSimulationObject() {
+        if (instance == null ) {
             instance = new CreationIslandSimulationObject();
         }
         return instance;

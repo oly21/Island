@@ -3,23 +3,27 @@ package com.project.island;
 import com.project.islandSimulationObjects.animals.Animal;
 import com.project.islandSimulationObjects.animals.herbivorous.Herbivores;
 import com.project.islandSimulationObjects.plants.Plant;
+
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import static com.project.island.IslandMap.getIslandMap;
+
 public class CheckingStopConditionOfIslandSimulation implements Runnable {
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public volatile static CopyOnWriteArrayList<Animal> animals = IslandMap.getAnimalList();
-    public volatile static CopyOnWriteArrayList<Plant> plants = IslandMap.getPlantList();
-    public static volatile Cell[][] islandArray;
 
-    static {
 
-        islandArray = IslandMap.getIslandArray();
-    }
+    public final String ANSI_RESET = "\u001B[0m";
+    public IslandMap islandMap = getIslandMap();
+
+    public final String ANSI_GREEN = "\u001B[32m";
+    public volatile CopyOnWriteArrayList<Animal> animals = islandMap.getAnimalList();
+    public volatile CopyOnWriteArrayList<Plant> plants = islandMap.getPlantList();
+    public volatile Cell[][] islandArray = islandMap.getIslandArray();
+
 
     private static CheckingStopConditionOfIslandSimulation instance;
-    private int conditionOfIslandSimulationInt = IslandMap.conditionNumberStopSimulation;
+    private int conditionOfIslandSimulationInt = islandMap.conditionNumberStopSimulation;
     static boolean ConditionOfIslandSimulation;
+
     private CheckingStopConditionOfIslandSimulation() {
 
     }

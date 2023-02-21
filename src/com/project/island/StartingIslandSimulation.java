@@ -5,30 +5,33 @@ import com.project.islandSimulationObjects.animals.AnimalLifeCycle;
 import com.project.islandSimulationObjects.Coordinate;
 import com.project.islandSimulationObjects.IslandSimulationObject;
 import com.project.islandSimulationObjects.plants.PlantGrowth;
+
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.*;
 
 
 public class StartingIslandSimulation {
-    public static volatile Cell[][] islandArray = IslandMap.getIslandArray();
-    public volatile static CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = IslandMap.getIslandSimulationObjectList();
-    public static IslandMap island = IslandMap.getIsland();
-    public static CopyOnWriteArrayList<IslandSimulationObject> tasks = islandSimulationObjects;
-    public static CopyOnWriteArrayList<IslandSimulationObject> tasksCopy = new CopyOnWriteArrayList<>();
-    public static CopyOnWriteArrayList<Coordinate> freeCells = new CopyOnWriteArrayList<>();
-    public static IslandSimulationDisplay islandSimulationDisplay = IslandSimulationDisplay.getIslandSimulation();
-    public static AnimalLifeCycle animalLifeCycle = AnimalLifeCycle.getAnimalLifeCycle();
-    public static PlantGrowth plantGrowth = PlantGrowth.getPlantGrowth();
+    public IslandMap islandMap = IslandMap.getIslandMap();
+    public volatile Cell[][] islandArray = islandMap.getIslandArray();
+    public volatile CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = islandMap.getIslandSimulationObjectList();
 
-    public static PrintingIslandSimulationStatistics printingIslandSimulationStatistics = PrintingIslandSimulationStatistics.getPrintingIslandSimulationStatistics();
+    public CopyOnWriteArrayList<IslandSimulationObject> tasks = islandSimulationObjects;
+    public CopyOnWriteArrayList<IslandSimulationObject> tasksCopy = new CopyOnWriteArrayList<>();
+    public static CopyOnWriteArrayList<Coordinate> freeCells = new CopyOnWriteArrayList<>();
+    public IslandSimulationDisplay islandSimulationDisplay = IslandSimulationDisplay.getIslandSimulation();
+    public AnimalLifeCycle animalLifeCycle = AnimalLifeCycle.getAnimalLifeCycle();
+    public PlantGrowth plantGrowth = PlantGrowth.getPlantGrowth();
+
+    public PrintingIslandSimulationStatistics printingIslandSimulationStatistics = PrintingIslandSimulationStatistics.getPrintingIslandSimulationStatistics();
     private static StartingIslandSimulation instance;
     public static ScheduledExecutorService executorScheduledServicePlantGrowth = Executors.newScheduledThreadPool(1);
     public static ScheduledExecutorService executorScheduledServiceDisplay = Executors.newScheduledThreadPool(1);
     public static ScheduledExecutorService executorScheduledServiceAnimalLifeCycle = Executors.newScheduledThreadPool(1);
     public static ScheduledExecutorService executorScheduledServicePrintingIslandSimulationStatistics = Executors.newScheduledThreadPool(1);
     public static ScheduledExecutorService executorScheduledCheckStopConditionOfIslandSimulation = Executors.newScheduledThreadPool(1);
-    public static CheckingStopConditionOfIslandSimulation checkingStopConditionOfIslandSimulation = CheckingStopConditionOfIslandSimulation.getCheckingStopConditionOfIslandSimulation();
+    public CheckingStopConditionOfIslandSimulation checkingStopConditionOfIslandSimulation = CheckingStopConditionOfIslandSimulation.getCheckingStopConditionOfIslandSimulation();
+
 
     private StartingIslandSimulation() {
 
@@ -41,8 +44,8 @@ public class StartingIslandSimulation {
         return instance;
     }
 
-    public void startSimulation()  {
-        island.listInitialization();
+    public void startSimulation() {
+        islandMap.listInitialization();
         creatListFreeCells();
         setInitialPositionsSimulationObjects();
 
@@ -71,11 +74,11 @@ public class StartingIslandSimulation {
     }
 
 
-    public static void creatListFreeCells() {
+    public void creatListFreeCells() {
 
         for (int i = 0; i < islandArray.length - 1; i++) {
             for (int j = 0; j < islandArray[i].length - 1; j++) {
-                for(int k = 0; k<=5; k++ ) {
+                for (int k = 0; k <= 5; k++) {
                     freeCells.add(new Coordinate(i, j));
                 }
             }

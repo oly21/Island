@@ -15,15 +15,19 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static com.project.island.IslandMap.getIslandMap;
+
 
 public class PlantGrowth implements Runnable {
-    public volatile static CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = IslandMap.getIslandSimulationObjectList();
+    public IslandMap islandMap = getIslandMap();
+    public volatile  CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = islandMap.getIslandSimulationObjectList();
+
     public static PlantGrowth instance = null;
-    public IslandMap island = IslandMap.getIsland();
-    public Cell[][] islandArray = island.getIslandArray();
+
+    public Cell[][] islandArray = islandMap.getIslandArray();
     public static final CopyOnWriteArrayList<Coordinate> freeCells = StartingIslandSimulation.getListFreeCells();
 
-    public List<Plant> plants = IslandMap.getPlantList();
+    public List<Plant> plants = islandMap.getPlantList();
     private int weight = BoxCharacteristicsObject.WEIGHT_PLANT;
     private int age;
     public static volatile AtomicInteger numbersPlantsGrew = new AtomicInteger(100);
@@ -87,7 +91,7 @@ public class PlantGrowth implements Runnable {
 
         if (freeCells.size() > 0) {
 
-            for (int i = 0; i <= IslandMap.x; i++) {
+            for (int i = 0; i <= islandMap.getX(); i++) {
 
                 if (freeCells.size() > 0) {
 

@@ -4,16 +4,20 @@ import com.project.islandSimulationObjects.animals.Animal;
 import com.project.islandSimulationObjects.CreationIslandSimulationObject;
 import com.project.islandSimulationObjects.plants.PlantGrowth;
 
+import static com.project.island.IslandMap.getIslandMap;
+
 public class PrintingIslandSimulationStatistics implements Runnable {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_GREEN = "\u001B[32m";
     private static PrintingIslandSimulationStatistics instance;
-    public static volatile Cell[][] islandArray;
+    public IslandMap islandMap = getIslandMap();
+    public  volatile Cell[][] islandArray = islandMap.getIslandArray();;
 
-    static {
 
-        islandArray = IslandMap.getIslandArray();
-    }
+
+
+
+
 
     CreationIslandSimulationObject creationIslandSimulationObject = CreationIslandSimulationObject.getCreationIslandSimulationObject();
     private PrintingIslandSimulationStatistics() {
@@ -29,6 +33,10 @@ public class PrintingIslandSimulationStatistics implements Runnable {
 
     public synchronized void run() {
         synchronized (System.out) {
+
+
+
+
             System.out.println(ANSI_GREEN + "numberAnimals:" + ANSI_RESET+  " " + ANSI_GREEN + Animal.numberAnimals.get()+ ANSI_RESET
                     + " " + ANSI_GREEN + "numberBornAnimals:" + ANSI_RESET+  " " +ANSI_GREEN  + Animal.numberBornAnimals.get() + ANSI_RESET+   " " +
                     ANSI_GREEN + "numberDeadAnimals:"+ ANSI_RESET  + " " + ANSI_GREEN + Animal.numberDeadAnimals.get() + ANSI_RESET  + " " +
