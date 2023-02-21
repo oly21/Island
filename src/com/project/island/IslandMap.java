@@ -68,6 +68,10 @@ public class IslandMap {
     }
 
 
+    public CopyOnWriteArrayList<String> getTypeString() {
+        return typeString;
+    }
+
     public static IslandMap getIslandMap() {
         return instance;
     }
