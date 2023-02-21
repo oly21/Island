@@ -340,26 +340,8 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
                                     this.setEatenKg(this.getEatenKg() + islandSimulationObject.getWeight());
                                     this.setIsHunger(this.getEatenKg() < (this.getNeededFoodKg() / 2));
                                     this.setEat(true);
-                                    islandSimulationObjects.remove(islandSimulationObject);
-                                    islandArray[x][y].removeIslandSimulationObject(islandSimulationObject);
 
-                                    if (islandSimulationObject instanceof Animal) {
-                                        decreaseTheNumberOfOneTypeOfAnimal(((Animal) islandSimulationObject));
-
-                                        numberAnimals.decrementAndGet();
-                                        numberDeadAnimals.incrementAndGet();
-
-                                        animals.remove(islandSimulationObject);
-                                        ((Animal) islandSimulationObject).setStop(true);
-                                    } else {
-                                        numberPlants.decrementAndGet();
-                                        numberEatenPlants.incrementAndGet();
-
-                                        plants.remove(islandSimulationObject);
-
-                                    }
-
-                                    islandSimulationObject.setXY(-1, -1);
+                                    deathIslandSimulationObject(islandSimulationObject, x, y);
                                     this.move(coordinate1, this);
                                     break;
                                 }
@@ -376,6 +358,7 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
         finishEat.incrementAndGet();
     }
 
+
     public void reproduce() {
         startR.incrementAndGet();
         neighboringCells = getListNeighboringCells();
@@ -388,14 +371,10 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
                     int y = coordinate1.getY();
 
                     if (!this.getStop()) {
-
                         if (!this.getStop() && islandArray[x][y] != null) {
                             boolean sameType = islandArray[x][y].getIslandSimulationObject(this.typeString);
-
                             if (islandArray[x][y].getIslandSimulationObjectInCellSize() != 0 && sameType && !this.getStop()) {
-
                                 if (freeCells.size() > 0) {
-
                                     IslandSimulationObject islandSimulationObjectCopy = creationIslandSimulationObject.createObject(this, this.typeString);
                                     animals.add((Animal) islandSimulationObjectCopy);
                                     islandSimulationObjectCopy.setNumberBornAnimalsOfParticularSpecies((islandSimulationObjectCopy).getNumberBornAnimalsOfParticularSpecies() + 1);
@@ -413,13 +392,11 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
                                         freeCells.remove(coordinate2);
                                         break;
                                     }
-
                                 } else {
                                     break;
                                 }
                                 break;
                             }
-
                         } else {
                             break;
                         }
@@ -488,7 +465,6 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
     public ArrayList<Coordinate> getListNeighboringCells() {
         neighboringCells.clear();
         startGet.incrementAndGet();
-
         int xUp = this.getX();
         int yUp = this.getY();
         int xD = this.getX();
@@ -542,10 +518,8 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
 
     public void setPositionForNewbornAnimal(Coordinate coordinate, Animal animal) {
         startSetPositionForNewbornAnimal.incrementAndGet();
-
         animal.setXY(coordinate.getX(), coordinate.getY());
         islandArray[coordinate.getX()][coordinate.getY()].addIslandSimulationObject(animal);
-
         finishSetPositionForNewbornAnimal.incrementAndGet();
     }
 
@@ -554,7 +528,6 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
 
         if (!this.getStop()) {
             synchronized (islandArray) {
-
                 neighboringCells = getListNeighboringCells();
                 if (!this.getStop()) {
                     for (Coordinate coordinate : neighboringCells) {
@@ -582,34 +555,23 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
         finishSwapPlacesWithNeighbor.incrementAndGet();
     }
 
+
     public boolean havingVitality() {
         startHavingVitality.incrementAndGet();
         if (this.getCountDays() % 4 == 0 && this.getCountDays() != 0 || this.getCountDays() % 5 == 0 && this.getCountDays() != 0) {
             if (this.getDaysWithoutFood() >= 4 || this.getHungryDaysCounter() >= 5) {
-
                 synchronized (islandArray) {
-                    islandSimulationObjects.remove(this);
-                    animals.remove(this);
-                    islandArray[this.getX()][this.getY()].removeIslandSimulationObject(this);
-                    this.setStop(true);
-                    freeCells.add(new Coordinate(this.getX(), this.getY()));
-                    this.setXY(-1, -1);
-
-                    numberDeadAnimals.incrementAndGet();
+                    deathIslandSimulationObject(this, this.getX(), this.getY());
                     deathFromStarvation.incrementAndGet();
-                    numberAnimals.decrementAndGet();
-                    decreaseTheNumberOfOneTypeOfAnimal(this);
                 }
                 finishHavingVitality.incrementAndGet();
                 return false;
             } else {
-
                 if (this.getCountDays() % 4 == 0 && this.getCountDays() != 0) {
                     this.setDaysWithoutFood(0);
                     this.setIsHunger(true);
                     this.setEatenKg(0);
                 } else if (this.getCountDays() % 5 == 0 & this.getCountDays() != 0) {
-
                     this.setHungryDaysCounter(0);
                     this.setIsHunger(true);
                     this.setEatenKg(0);
@@ -623,38 +585,38 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
         }
     }
 
+
+    public void deathIslandSimulationObject(IslandSimulationObject islandSimulationObject, int x, int y) {
+        islandSimulationObjects.remove(islandSimulationObject);
+        islandArray[x][y].removeIslandSimulationObject(islandSimulationObject);
+        islandSimulationObject.setXY(-1, -1);
+        freeCells.add(new Coordinate(x, y));
+        if (islandSimulationObject instanceof Animal) {
+            decreaseTheNumberOfOneTypeOfAnimal(((Animal) islandSimulationObject));
+            numberAnimals.decrementAndGet();
+            numberDeadAnimals.incrementAndGet();
+            animals.remove(islandSimulationObject);
+            ((Animal) islandSimulationObject).setStop(true);
+        } else {
+            numberPlants.decrementAndGet();
+            numberEatenPlants.incrementAndGet();
+            plants.remove(islandSimulationObject);
+        }
+    }
+
     public boolean deathFromOldAge() {
         startDeathFromOldAge.incrementAndGet();
-        if (!this.getStop()) {
-            if (this.getAge() >= 10) {
-                if (!this.getStop()) {
-                    synchronized (islandArray) {
-
-                        animals.remove(this);
-                        islandArray[this.getX()][this.getY()].removeIslandSimulationObject(this);
-
-                        this.setStop(true);
-                        freeCells.add(new Coordinate(this.getX(), this.getY()));
-                        this.setXY(-1, -1);
-
-                        numberDeadAnimals.incrementAndGet();
-                        deathFromOldAge.incrementAndGet();
-                        numberAnimals.decrementAndGet();
-                        decreaseTheNumberOfOneTypeOfAnimal(this);
-                        islandSimulationObjects.remove(this);
-
-                        finishDeathFromOldAge.incrementAndGet();
-                        return true;
-                    }
-                } else {
-                    finishDeathFromOldAge.incrementAndGet();
-                    return false;
-                }
-            } else {
+        if (this.getAge() >= 10 && !this.getStop()) {
+            synchronized (islandArray) {
+                deathIslandSimulationObject(this, this.getX(), this.getY());
+                deathFromOldAge.incrementAndGet();
+                islandSimulationObjects.remove(this);
                 finishDeathFromOldAge.incrementAndGet();
-                return false;
+                return true;
             }
+        } else {
+            finishDeathFromOldAge.incrementAndGet();
+            return false;
         }
-        return true;
     }
 }
