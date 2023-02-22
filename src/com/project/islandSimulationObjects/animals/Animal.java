@@ -3,14 +3,18 @@
 package com.project.islandSimulationObjects.animals;
 
 import com.project.island.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.*;
+
 import com.project.islandSimulationObjects.*;
 import com.project.islandSimulationObjects.animals.predators.*;
 import com.project.islandSimulationObjects.plants.Plant;
+
 import java.util.concurrent.atomic.AtomicInteger;
+
 public abstract class Animal implements IslandSimulationObject, Callable<Void> {
     public IslandMap islandMap = IslandMap.getIslandMap();
     StartingIslandSimulation startingIslandSimulation = StartingIslandSimulation.getIslandSimulation();
@@ -117,6 +121,7 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
         this.x = x;
         this.y = y;
     }
+
     public synchronized int getWeight() {
         return this.weight;
     }
@@ -317,7 +322,6 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
                                     animals.add((Animal) islandSimulationObjectCopy);
                                     islandSimulationObjectCopy.setNumberBornAnimalsOfParticularSpecies((islandSimulationObjectCopy).getNumberBornAnimalsOfParticularSpecies() + 1);
                                     islandSimulationObjectCopy.setNumberAnimalsOfParticularSpecies((islandSimulationObjectCopy).getNumberAnimalsOfParticularSpecies() + 1);
-
                                     numberAnimals.incrementAndGet();
                                     numberBornAnimals.incrementAndGet();
                                     islandSimulationObjects.add(islandSimulationObjectCopy);
@@ -334,8 +338,7 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
                                 break;
                             }
                         }
-                    }
-                    else {
+                    } else {
                         break;
                     }
                 }
@@ -355,8 +358,7 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
                             break;
                         }
                     }
-                }
-                else {
+                } else {
                     break;
                 }
             }
@@ -474,7 +476,8 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
 
 
     public boolean havingVitality() {
-        if (this.getCountDays() % 4 == 0 && this.getCountDays() != 0 || this.getCountDays() % 5 == 0 && this.getCountDays() != 0) {
+       boolean countDaysIsNull =  this.getCountDays() != 0;
+        if (this.getCountDays() % 4 == 0 && countDaysIsNull || this.getCountDays() % 5 == 0 && countDaysIsNull) {
             if (this.getDaysWithoutFood() >= 4 || this.getHungryDaysCounter() >= 5) {
                 synchronized (islandArray) {
                     deathIslandSimulationObject(this, this.getX(), this.getY());
@@ -482,51 +485,49 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
                 }
                 return false;
             } else {
-                if (this.getCountDays() % 4 == 0 && this.getCountDays() != 0) {
+                if (this.getCountDays() % 4 == 0 && countDaysIsNull) {
                     this.setDaysWithoutFood(0);
-                    this.setIsHunger(true);
-                    this.setEatenKg(0);
-                } else if (this.getCountDays() % 5 == 0 & this.getCountDays() != 0) {
-                    this.setHungryDaysCounter(0);
-                    this.setIsHunger(true);
-                    this.setEatenKg(0);
                 }
+                 else if (this.getCountDays() % 5 == 0 && countDaysIsNull) {
+                        this.setHungryDaysCounter(0);
+                    }
+                    this.setIsHunger(true);
+                    this.setEatenKg(0);
+                    return true;
+                }
+            } else{
                 return true;
             }
-        } else {
-            return true;
         }
-    }
 
 
-    public void deathIslandSimulationObject(IslandSimulationObject islandSimulationObject, int x, int y) {
-        islandSimulationObjects.remove(islandSimulationObject);
-        islandArray[x][y].removeIslandSimulationObject(islandSimulationObject);
-        islandSimulationObject.setXY(-1, -1);
-        freeCells.add(new Coordinate(x, y));
-        if (islandSimulationObject instanceof Animal) {
-            decreaseTheNumberOfOneTypeOfAnimal(((Animal) islandSimulationObject));
-            numberAnimals.decrementAndGet();
-            numberDeadAnimals.incrementAndGet();
-            animals.remove(islandSimulationObject);
-            ((Animal) islandSimulationObject).setStop(true);
-        } else {
-            numberPlants.decrementAndGet();
-            numberEatenPlants.incrementAndGet();
-            plants.remove(islandSimulationObject);
-        }
-    }
-
-    public boolean deathFromOldAge() {
-        if (this.getAge() >= 10 && !this.getStop()) {
-            synchronized (islandArray) {
-                deathIslandSimulationObject(this, this.getX(), this.getY());
-                deathFromOldAge.incrementAndGet();
-                islandSimulationObjects.remove(this);
-                return true;
+        public void deathIslandSimulationObject (IslandSimulationObject islandSimulationObject,int x, int y){
+            islandSimulationObjects.remove(islandSimulationObject);
+            islandArray[x][y].removeIslandSimulationObject(islandSimulationObject);
+            islandSimulationObject.setXY(-1, -1);
+            freeCells.add(new Coordinate(x, y));
+            if (islandSimulationObject instanceof Animal) {
+                decreaseTheNumberOfOneTypeOfAnimal(((Animal) islandSimulationObject));
+                numberAnimals.decrementAndGet();
+                numberDeadAnimals.incrementAndGet();
+                animals.remove(islandSimulationObject);
+                ((Animal) islandSimulationObject).setStop(true);
+            } else {
+                numberPlants.decrementAndGet();
+                numberEatenPlants.incrementAndGet();
+                plants.remove(islandSimulationObject);
             }
-        } else {
-            return false;
+        }
+
+        public boolean deathFromOldAge () {
+            if (this.getAge() >= 10 && !this.getStop()) {
+                synchronized (islandArray) {
+                    deathIslandSimulationObject(this, this.getX(), this.getY());
+                    deathFromOldAge.incrementAndGet();
+                    return true;
+                }
+            } else {
+                return false;
+            }
         }
     }
-}

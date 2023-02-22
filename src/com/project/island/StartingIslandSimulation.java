@@ -7,6 +7,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.*;
 
 public class StartingIslandSimulation {
+
     public IslandMap islandMap = IslandMap.getIslandMap();
     public volatile CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = islandMap.getIslandSimulationObjectList();
     public IslandSimulationDisplay islandSimulationDisplay = IslandSimulationDisplay.getIslandSimulation();

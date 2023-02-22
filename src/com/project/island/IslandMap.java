@@ -84,11 +84,9 @@ public class IslandMap {
         for (int i = 0; i <= predatorsNumber * 2; i++) {
             for (String typeString : typeString) {
                 IslandSimulationObject islandSimulationObject = creationIslandSimulationObject.createObject(null, typeString);
-
                 if (islandSimulationObject instanceof Animal) {
                     animals.add((Animal) islandSimulationObject);
                     islandSimulationObject.setNumberAnimalsOfParticularSpecies((islandSimulationObject).getNumberAnimalsOfParticularSpecies() + 1);
-
                 } else if (islandSimulationObject instanceof Plant) {
                     plants.add((Plant) islandSimulationObject);
                     Animal.numberPlants.incrementAndGet();
@@ -103,12 +101,9 @@ public class IslandMap {
     public synchronized Cell[][] getIslandArray() {
         return islandArray;
     }
-
-
     public CopyOnWriteArrayList<Animal> getAnimalList() {
         return animals;
     }
-
     public CopyOnWriteArrayList<Plant> getPlantList() {
         return plants;
     }
@@ -121,7 +116,6 @@ public class IslandMap {
     public int getX() {
         return x;
     }
-
     public int getY() {
         return y;
     }
