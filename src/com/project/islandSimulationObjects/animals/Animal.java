@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public abstract class Animal implements IslandSimulationObject, Callable<Void> {
     public IslandMap islandMap = IslandMap.getIslandMap();
     StartingIslandSimulation startingIslandSimulation = StartingIslandSimulation.getIslandSimulation();
-    public volatile CopyOnWriteArrayList<Coordinate> freeCells = startingIslandSimulation.getListFreeCells();
+    public volatile CopyOnWriteArrayList<Coordinate> freeCells = islandMap.getListFreeCells();
     public volatile CopyOnWriteArrayList<Animal> animals = islandMap.getAnimalList();
     public volatile CopyOnWriteArrayList<Plant> plants = islandMap.getPlantList();
 

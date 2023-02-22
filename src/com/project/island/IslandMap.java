@@ -3,14 +3,19 @@ package com.project.island;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ThreadLocalRandom;
+
+import com.project.islandSimulationObjects.Coordinate;
 import com.project.islandSimulationObjects.animals.Animal;
 import com.project.islandSimulationObjects.CreationIslandSimulationObject;
 import com.project.islandSimulationObjects.IslandSimulationObject;
 import com.project.islandSimulationObjects.plants.*;
 
 public class IslandMap {
-    CreationIslandSimulationObject creationIslandSimulationObject = CreationIslandSimulationObject.getCreationIslandSimulationObject();
 
+    CreationIslandSimulationObject creationIslandSimulationObject = CreationIslandSimulationObject.getCreationIslandSimulationObject();
+    public CopyOnWriteArrayList<IslandSimulationObject> tasksCopy = new CopyOnWriteArrayList<>();
+    public  CopyOnWriteArrayList<Coordinate> freeCells = new CopyOnWriteArrayList<>();
     public CopyOnWriteArrayList<Animal> animals = new CopyOnWriteArrayList<>();
     public CopyOnWriteArrayList<Plant> plants = new CopyOnWriteArrayList<>();
     public CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = new CopyOnWriteArrayList<>();
@@ -122,4 +127,33 @@ public class IslandMap {
     public int getY() {
         return y;
     }
+    public void setInitialPositionsSimulationObjects() {
+        tasksCopy.addAll(islandSimulationObjects);
+
+        for (IslandSimulationObject islandSimulationObject : tasksCopy) {
+            int coordinate = ThreadLocalRandom.current().nextInt(freeCells.size()) % freeCells.size();
+            Coordinate coordinate1 = freeCells.get(coordinate);
+            int x = coordinate1.getX();
+            int y = coordinate1.getY();
+            islandSimulationObject.setXY(x, y);
+            islandArray[x][y].addIslandSimulationObject(islandSimulationObject);
+            freeCells.remove(coordinate1);
+        }
+    }
+
+
+    public void creatListFreeCells() {
+        for (int i = 0; i < islandArray.length - 1; i++) {
+            for (int j = 0; j < islandArray[i].length - 1; j++) {
+                for (int k = 0; k <= 5; k++) {
+                    freeCells.add(new Coordinate(i, j));
+                }
+            }
+        }
+    }
+
+    public  CopyOnWriteArrayList<Coordinate> getListFreeCells() {
+        return freeCells;
+    }
+
 }

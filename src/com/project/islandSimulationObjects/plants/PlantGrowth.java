@@ -21,7 +21,7 @@ public class PlantGrowth implements Runnable {
     public volatile CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = islandMap.getIslandSimulationObjectList();
     public static PlantGrowth instance = null;
     public Cell[][] islandArray = islandMap.getIslandArray();
-    public static final CopyOnWriteArrayList<Coordinate> freeCells = StartingIslandSimulation.getListFreeCells();
+    public  final CopyOnWriteArrayList<Coordinate> freeCells = islandMap.getListFreeCells();
     public List<Plant> plants = islandMap.getPlantList();
     private int weight = BoxCharacteristicsObject.WEIGHT_PLANT;
     private int age;
