@@ -2,26 +2,19 @@ package com.project.islandSimulationObjects;
 
 import com.project.island.BoxCharacteristicsObject;
 import com.project.island.IslandMap;
-
 import com.project.islandSimulationObjects.animals.omnivores.*;
 import com.project.islandSimulationObjects.animals.herbivorous.*;
 import com.project.islandSimulationObjects.animals.predators.*;
 import com.project.islandSimulationObjects.plants.*;
-
 import java.util.Objects;
-
 import static com.project.island.IslandMap.getIslandMap;
 
 public class CreationIslandSimulationObject {
     public static IslandMap islandMap = getIslandMap();
-
     public static CreationIslandSimulationObject instance = null;
-
     private CreationIslandSimulationObject() {
 
     }
-
-
     public static CreationIslandSimulationObject getCreationIslandSimulationObject() {
         if (instance == null) {
             instance = new CreationIslandSimulationObject();

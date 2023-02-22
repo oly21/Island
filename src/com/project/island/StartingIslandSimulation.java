@@ -57,10 +57,8 @@ public class StartingIslandSimulation {
         for (IslandSimulationObject islandSimulationObject : tasksCopy) {
             int coordinate = ThreadLocalRandom.current().nextInt(freeCells.size()) % freeCells.size();
             Coordinate coordinate1 = freeCells.get(coordinate);
-
             int x = coordinate1.getX();
             int y = coordinate1.getY();
-
             islandSimulationObject.setXY(x, y);
             islandArray[x][y].addIslandSimulationObject(islandSimulationObject);
             freeCells.remove(coordinate1);

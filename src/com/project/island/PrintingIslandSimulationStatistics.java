@@ -7,18 +7,16 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import static com.project.island.IslandMap.getIslandMap;
 
 public class PrintingIslandSimulationStatistics implements Runnable {
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_GREEN = "\u001B[32m";
+    public  final String ANSI_RESET = "\u001B[0m";
+    public  final String ANSI_GREEN = "\u001B[32m";
     private static PrintingIslandSimulationStatistics instance;
     public IslandMap islandMap = getIslandMap();
     public volatile Cell[][] islandArray = islandMap.getIslandArray();
     CreationIslandSimulationObject creationIslandSimulationObject = CreationIslandSimulationObject.getCreationIslandSimulationObject();
-
+    public volatile CopyOnWriteArrayList<String> typeString = islandMap.getTypeString();
     private PrintingIslandSimulationStatistics() {
 
     }
-
-    public volatile CopyOnWriteArrayList<String> typeString = islandMap.getTypeString();
 
     public static PrintingIslandSimulationStatistics getPrintingIslandSimulationStatistics() {
 
