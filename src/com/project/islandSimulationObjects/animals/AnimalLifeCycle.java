@@ -2,17 +2,16 @@ package com.project.islandSimulationObjects.animals;
 
 import com.project.island.Cell;
 import com.project.island.IslandMap;
+
 import java.util.concurrent.*;
 
 public class AnimalLifeCycle implements Runnable {
     public IslandMap islandMap = IslandMap.getIslandMap();
 
-    public  CopyOnWriteArrayList<Animal> animals = islandMap.getAnimalList();
-    public static CopyOnWriteArrayList<Callable<Void>> animalsCopy = new CopyOnWriteArrayList<>();
-    public static CopyOnWriteArrayList<Callable<Void>> animalsCopy1 = new CopyOnWriteArrayList<>();
-    public  volatile Cell[][] islandArray = islandMap.getIslandArray();;
-
-
+    public CopyOnWriteArrayList<Animal> animals = islandMap.getAnimalList();
+    public  CopyOnWriteArrayList<Callable<Void>> animalsCopy = new CopyOnWriteArrayList<>();
+    public  CopyOnWriteArrayList<Callable<Void>> animalsCopy1 = new CopyOnWriteArrayList<>();
+    public volatile Cell[][] islandArray = islandMap.getIslandArray();
 
 
 

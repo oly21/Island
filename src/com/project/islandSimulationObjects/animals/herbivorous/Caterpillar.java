@@ -25,7 +25,6 @@ public class Caterpillar extends Herbivores {
     }
 
 
-
     @Override
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {
         return numberBornAnimalsOfParticularSpecies;

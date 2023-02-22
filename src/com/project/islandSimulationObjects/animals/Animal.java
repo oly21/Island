@@ -3,18 +3,14 @@
 package com.project.islandSimulationObjects.animals;
 
 import com.project.island.*;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.*;
-
 import com.project.islandSimulationObjects.*;
 import com.project.islandSimulationObjects.animals.predators.*;
 import com.project.islandSimulationObjects.plants.Plant;
-
 import java.util.concurrent.atomic.AtomicInteger;
-
 public abstract class Animal implements IslandSimulationObject, Callable<Void> {
     public IslandMap islandMap = IslandMap.getIslandMap();
     StartingIslandSimulation startingIslandSimulation = StartingIslandSimulation.getIslandSimulation();
@@ -25,21 +21,14 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
     protected List<String> initialList = Arrays.asList(BoxCharacteristicsObject.TYPE_STRING_FRUIT,
             BoxCharacteristicsObject.TYPE_STRING_BERRIES, BoxCharacteristicsObject.TYPE_STRING_VEGETABLES,
             BoxCharacteristicsObject.TYPE_STRING_FRUIT, BoxCharacteristicsObject.TYPE_STRING_CATERPILLAR);
-
-
     private ArrayList<Coordinate> neighboringCells = new ArrayList<>();
     protected CopyOnWriteArrayList<String> foodStuffs = new CopyOnWriteArrayList<>(initialList);
     public ConcurrentHashMap<String, Double> chanceToEatMap = new ConcurrentHashMap<>();
-
-
     public volatile Cell[][] islandArray = islandMap.getIslandArray();
-    ;
     CreationIslandSimulationObject creationIslandSimulationObject = CreationIslandSimulationObject.getCreationIslandSimulationObject();
     public CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = islandMap.getIslandSimulationObjectList();
-
     protected String typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_RABBIT;
     protected String typeString = BoxCharacteristicsObject.TYPE_STRING_RABBIT;
-
     protected volatile int x;
     protected volatile int y;
     protected volatile int age;
@@ -48,11 +37,9 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
     protected int step = BoxCharacteristicsObject.SPEED_RABBIT;
     protected volatile int weight = BoxCharacteristicsObject.WEIGHT_RABBIT;
     protected int neededFoodKg = BoxCharacteristicsObject.MEAL_REQUIRED_KG_RABBIT;
-
     protected volatile int eatenKg = 0;
     protected volatile int daysWithoutFood = 0;
     protected volatile int countDays = 0;
-
     private volatile int hungryDaysCounter = 0;
     protected volatile boolean isHunger = true;
     protected volatile boolean eat = false;
@@ -73,35 +60,8 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
     public static volatile AtomicInteger numberAnimalMoves = new AtomicInteger(0);
     public static volatile AtomicInteger numberEatenPlants = new AtomicInteger(0);
     public static volatile AtomicInteger numberPlants = new AtomicInteger(0);
-
-
     public static volatile AtomicInteger runStart = new AtomicInteger(0);
     public static volatile AtomicInteger runFinish = new AtomicInteger(0);
-    public static volatile AtomicInteger startHavingVitality = new AtomicInteger(0);
-    public static volatile AtomicInteger finishHavingVitality = new AtomicInteger(0);
-    public static volatile AtomicInteger finishDeathFromOldAge = new AtomicInteger(0);
-    public static volatile AtomicInteger startDeathFromOldAge = new AtomicInteger(0);
-
-    public static volatile AtomicInteger startGet = new AtomicInteger(0);
-    public static volatile AtomicInteger finishGet = new AtomicInteger(0);
-    public static volatile AtomicInteger startEat = new AtomicInteger(0);
-    public static volatile AtomicInteger finishEat = new AtomicInteger(0);
-    public static volatile AtomicInteger startMove = new AtomicInteger(0);
-    public static volatile AtomicInteger finishMove = new AtomicInteger(0);
-
-    public static volatile AtomicInteger startSwapPlacesWithNeighbor = new AtomicInteger(0);
-    public static volatile AtomicInteger finishSwapPlacesWithNeighbor = new AtomicInteger(0);
-    public static volatile AtomicInteger startSetPositionForNewbornAnimal = new AtomicInteger(0);
-    public static volatile AtomicInteger finishSetPositionForNewbornAnimal = new AtomicInteger(0);
-    public static volatile AtomicInteger startDecreaseTheNumberOfOneTypeOfAnimal = new AtomicInteger(0);
-    public static volatile AtomicInteger finishDecreaseTheNumberOfOneTypeOfAnimal = new AtomicInteger(0);
-    public static volatile AtomicInteger startChoiceDirectionForMoveAndCallMove = new AtomicInteger(0);
-    public static volatile AtomicInteger finishChoiceDirectionForMoveAndCallMove = new AtomicInteger(0);
-
-    public static volatile AtomicInteger startR = new AtomicInteger(0);
-    public static volatile AtomicInteger finishR = new AtomicInteger(0);
-    public static volatile AtomicInteger startFor = new AtomicInteger(0);
-    public static volatile AtomicInteger finishFor = new AtomicInteger(0);
     public static volatile AtomicInteger deathFromStarvation = new AtomicInteger(0);
     public static volatile AtomicInteger deathFromOldAge = new AtomicInteger(0);
 
@@ -157,11 +117,9 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
         this.x = x;
         this.y = y;
     }
-
     public synchronized int getWeight() {
         return this.weight;
     }
-
 
     public synchronized int getAge() {
         return this.age;
@@ -170,7 +128,6 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
     public synchronized void setAge(int age) {
         this.age = age;
     }
-
 
     public synchronized Coordinate getXY() {
 
@@ -218,7 +175,6 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
         this.countDays = countDays;
 
     }
-
 
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {
         return numberBornAnimalsOfParticularSpecies;
@@ -287,7 +243,6 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
                         this.reproduce();
                     }
                 }
-
             } else {
                 if (!this.getStop() && CanProgeny && plantLimit && suitableAge && animalLimit) {
                     this.reproduce();
@@ -304,24 +259,18 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
             }
         }
         runFinish.incrementAndGet();
-
         return null;
     }
 
     public void eat() {
-        startEat.incrementAndGet();
         this.setEat(false);
         Double chanceToEat = 1.0;
         neighboringCells = getListNeighboringCells();
-        startFor.incrementAndGet();
-
         if (!this.getStop()) {
             synchronized (islandArray) {
                 for (Coordinate coordinate1 : neighboringCells) {
-
                     int x = coordinate1.getX();
                     int y = coordinate1.getY();
-
                     if (!this.getStop()) {
                         if (!this.getStop() && islandArray[x][y] != null) {
                             IslandSimulationObject islandSimulationObject = islandArray[x][y].getIslandSimulationObjectIfContains(this.getFoodStuffs());
@@ -329,7 +278,6 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
                                 if (islandSimulationObject instanceof Animal && ((Animal) islandSimulationObject).getStop()) {
                                     continue;
                                 }
-
                                 if (this instanceof Predators) {
                                     chanceToEatMap = (((Predators) this).getMapChanceToEat());
                                     if (chanceToEatMap.containsKey(islandSimulationObject.getTypeString())) {
@@ -347,29 +295,22 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
                                 }
                             }
                         }
-
                     } else {
                         break;
                     }
                 }
             }
         }
-        finishFor.incrementAndGet();
-        finishEat.incrementAndGet();
     }
 
 
     public void reproduce() {
-        startR.incrementAndGet();
         neighboringCells = getListNeighboringCells();
         if (!this.getStop()) {
             synchronized (islandArray) {
-                startFor.incrementAndGet();
                 for (Coordinate coordinate1 : neighboringCells) {
-
                     int x = coordinate1.getX();
                     int y = coordinate1.getY();
-
                     if (!this.getStop()) {
                         if (!this.getStop() && islandArray[x][y] != null) {
                             boolean sameType = islandArray[x][y].getIslandSimulationObject(this.typeString);
@@ -388,7 +329,6 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
                                         int coordinate = ThreadLocalRandom.current().nextInt(freeCells.size()) % freeCells.size();
                                         Coordinate coordinate2 = freeCells.get(coordinate);
                                         setPositionForNewbornAnimal(coordinate2, (Animal) islandSimulationObjectCopy);
-
                                         freeCells.remove(coordinate2);
                                         break;
                                     }
@@ -397,47 +337,41 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
                                 }
                                 break;
                             }
-                        } else {
+                        }
+                    }
+                    else {
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    public void choiceDirectionForMoveAndCallMove() {
+        neighboringCells = getListNeighboringCells();
+        if (!this.getStop()) {
+            for (Coordinate coordinate : neighboringCells) {
+                if (!this.getStop()) {
+                    if (!this.getStop() && freeCells.size() > 0) {
+                        if (freeCells.contains(coordinate)) {
+                            move(coordinate, this);
+                            freeCells.remove(coordinate);
                             break;
                         }
                     }
                 }
-            }
-        }
-        finishFor.incrementAndGet();
-        finishR.incrementAndGet();
-    }
-
-    public void choiceDirectionForMoveAndCallMove() {
-
-        startChoiceDirectionForMoveAndCallMove.incrementAndGet();
-        neighboringCells = getListNeighboringCells();
-
-        if (!this.getStop()) {
-            for (Coordinate coordinate : neighboringCells) {
-                if (!this.getStop() && freeCells.size() > 0) {
-                    if (freeCells.contains(coordinate)) {
-                        move(coordinate, this);
-                        freeCells.remove(coordinate);
-                        break;
-                    }
-                } else {
+                else {
                     break;
                 }
             }
         }
-        finishChoiceDirectionForMoveAndCallMove.incrementAndGet();
     }
 
 
     public void decreaseTheNumberOfOneTypeOfAnimal(Animal animal) {
-        startDecreaseTheNumberOfOneTypeOfAnimal.incrementAndGet();
-
         IslandSimulationObject islandSimulationObject = creationIslandSimulationObject.createObject(animal, animal.getTypeString());
         islandSimulationObject.setNumberAnimalsOfParticularSpecies(islandSimulationObject.getNumberAnimalsOfParticularSpecies() - 1);
         islandSimulationObject.setNumberDeadAnimalsOfParticularSpecies(islandSimulationObject.getNumberDeadAnimalsOfParticularSpecies() + 1);
-
-        finishDecreaseTheNumberOfOneTypeOfAnimal.incrementAndGet();
     }
 
     public int checkNumberAnimalsOfAParticularSpecies(Animal animal) {
@@ -464,7 +398,6 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
 
     public ArrayList<Coordinate> getListNeighboringCells() {
         neighboringCells.clear();
-        startGet.incrementAndGet();
         int xUp = this.getX();
         int yUp = this.getY();
         int xD = this.getX();
@@ -496,14 +429,11 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
                 AddNeighboringCells(xL, yL);
             }
         }
-        finishGet.incrementAndGet();
         return neighboringCells;
     }
 
     public void move(Coordinate coordinate, Animal animal) {
-        startMove.incrementAndGet();
         if (!this.getStop()) {
-
             int x = this.getX();
             int y = this.getY();
             this.setXY(coordinate.getX(), coordinate.getY());
@@ -513,19 +443,14 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
                 freeCells.add(new Coordinate(x, y));
             }
         }
-        finishMove.incrementAndGet();
     }
 
     public void setPositionForNewbornAnimal(Coordinate coordinate, Animal animal) {
-        startSetPositionForNewbornAnimal.incrementAndGet();
         animal.setXY(coordinate.getX(), coordinate.getY());
         islandArray[coordinate.getX()][coordinate.getY()].addIslandSimulationObject(animal);
-        finishSetPositionForNewbornAnimal.incrementAndGet();
     }
 
     public void swapPlacesWithNeighbor() {
-        startSwapPlacesWithNeighbor.incrementAndGet();
-
         if (!this.getStop()) {
             synchronized (islandArray) {
                 neighboringCells = getListNeighboringCells();
@@ -541,10 +466,7 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
                                 islandArray[coordinate.getX()][coordinate.getY()].addIslandSimulationObject(this);
                                 this.setXY(coordinate.getX(), coordinate.getY());
                                 break;
-                            } else {
-                                break;
                             }
-
                         } else {
                             break;
                         }
@@ -552,19 +474,16 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
                 }
             }
         }
-        finishSwapPlacesWithNeighbor.incrementAndGet();
     }
 
 
     public boolean havingVitality() {
-        startHavingVitality.incrementAndGet();
         if (this.getCountDays() % 4 == 0 && this.getCountDays() != 0 || this.getCountDays() % 5 == 0 && this.getCountDays() != 0) {
             if (this.getDaysWithoutFood() >= 4 || this.getHungryDaysCounter() >= 5) {
                 synchronized (islandArray) {
                     deathIslandSimulationObject(this, this.getX(), this.getY());
                     deathFromStarvation.incrementAndGet();
                 }
-                finishHavingVitality.incrementAndGet();
                 return false;
             } else {
                 if (this.getCountDays() % 4 == 0 && this.getCountDays() != 0) {
@@ -576,11 +495,9 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
                     this.setIsHunger(true);
                     this.setEatenKg(0);
                 }
-                finishHavingVitality.incrementAndGet();
                 return true;
             }
         } else {
-            finishHavingVitality.incrementAndGet();
             return true;
         }
     }
@@ -605,17 +522,14 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
     }
 
     public boolean deathFromOldAge() {
-        startDeathFromOldAge.incrementAndGet();
         if (this.getAge() >= 10 && !this.getStop()) {
             synchronized (islandArray) {
                 deathIslandSimulationObject(this, this.getX(), this.getY());
                 deathFromOldAge.incrementAndGet();
                 islandSimulationObjects.remove(this);
-                finishDeathFromOldAge.incrementAndGet();
                 return true;
             }
         } else {
-            finishDeathFromOldAge.incrementAndGet();
             return false;
         }
     }

@@ -14,9 +14,6 @@ public class PrintingIslandSimulationStatistics implements Runnable {
     private static PrintingIslandSimulationStatistics instance;
     public IslandMap islandMap = getIslandMap();
     public volatile Cell[][] islandArray = islandMap.getIslandArray();
-
-
-
     CreationIslandSimulationObject creationIslandSimulationObject = CreationIslandSimulationObject.getCreationIslandSimulationObject();
 
     private PrintingIslandSimulationStatistics() {
@@ -34,7 +31,6 @@ public class PrintingIslandSimulationStatistics implements Runnable {
     }
 
     public synchronized void run() {
-
         synchronized (System.out) {
             StringBuilder stringBuilder = new StringBuilder();
 

@@ -20,7 +20,7 @@ import static com.project.island.IslandMap.getIslandMap;
 
 public class PlantGrowth implements Runnable {
     public IslandMap islandMap = getIslandMap();
-    public volatile  CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = islandMap.getIslandSimulationObjectList();
+    public volatile CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = islandMap.getIslandSimulationObjectList();
 
     public static PlantGrowth instance = null;
 
@@ -32,10 +32,12 @@ public class PlantGrowth implements Runnable {
     private int age;
     public static volatile AtomicInteger numbersPlantsGrew = new AtomicInteger(100);
     CreationIslandSimulationObject creationIslandSimulationObject = CreationIslandSimulationObject.getCreationIslandSimulationObject();
+
     private PlantGrowth() {
 
 
     }
+
     public static PlantGrowth getPlantGrowth() {
         if (instance == null) {
 
@@ -59,25 +61,25 @@ public class PlantGrowth implements Runnable {
         for (int i = 0; i <= 2; i++) {
             if (freeCells.size() > 0) {
                 synchronized (islandArray) {
-                    plants.add((Plant)creationIslandSimulationObject.createObject(null,BoxCharacteristicsObject.TYPE_STRING_VEGETABLES));
+                    plants.add((Plant) creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_VEGETABLES));
                     if (freeCells.size() > 0) {
-                        plants.add((Plant)creationIslandSimulationObject.createObject(null,BoxCharacteristicsObject.TYPE_STRING_BERRIES));
+                        plants.add((Plant) creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_BERRIES));
 
                     }
                     if (freeCells.size() > 0) {
-                        plants.add((Plant)creationIslandSimulationObject.createObject(null,BoxCharacteristicsObject.TYPE_STRING_FRUIT));
+                        plants.add((Plant) creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_FRUIT));
 
                     }
                     if (freeCells.size() > 0) {
-                        plants.add((Plant)creationIslandSimulationObject.createObject(null,BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES));
+                        plants.add((Plant) creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES));
 
                     }
                     if (freeCells.size() > 0) {
-                        plants.add((Plant)creationIslandSimulationObject.createObject(null,BoxCharacteristicsObject.TYPE_STRING_GRASS));
+                        plants.add((Plant) creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_GRASS));
 
                     }
                     if (freeCells.size() > 0) {
-                        plants.add((Plant)creationIslandSimulationObject.createObject(null,BoxCharacteristicsObject.TYPE_STRING_VEGETABLES));
+                        plants.add((Plant) creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_VEGETABLES));
 
                     }
 

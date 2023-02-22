@@ -26,7 +26,6 @@ public class Deer extends Herbivores {
     }
 
 
-
     @Override
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {
         return numberBornAnimalsOfParticularSpecies;

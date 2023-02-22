@@ -5,7 +5,6 @@ import com.project.islandSimulationObjects.animals.AnimalLifeCycle;
 import com.project.islandSimulationObjects.Coordinate;
 import com.project.islandSimulationObjects.IslandSimulationObject;
 import com.project.islandSimulationObjects.plants.PlantGrowth;
-
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.*;
@@ -15,7 +14,6 @@ public class StartingIslandSimulation {
     public IslandMap islandMap = IslandMap.getIslandMap();
     public volatile Cell[][] islandArray = islandMap.getIslandArray();
     public volatile CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = islandMap.getIslandSimulationObjectList();
-
     public CopyOnWriteArrayList<IslandSimulationObject> tasks = islandSimulationObjects;
     public CopyOnWriteArrayList<IslandSimulationObject> tasksCopy = new CopyOnWriteArrayList<>();
     public static CopyOnWriteArrayList<Coordinate> freeCells = new CopyOnWriteArrayList<>();
@@ -75,7 +73,6 @@ public class StartingIslandSimulation {
 
 
     public void creatListFreeCells() {
-
         for (int i = 0; i < islandArray.length - 1; i++) {
             for (int j = 0; j < islandArray[i].length - 1; j++) {
                 for (int k = 0; k <= 5; k++) {
@@ -86,7 +83,6 @@ public class StartingIslandSimulation {
     }
 
     public static CopyOnWriteArrayList<Coordinate> getListFreeCells() {
-
         return freeCells;
     }
 }

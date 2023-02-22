@@ -16,8 +16,6 @@ public class IslandMap {
     public CopyOnWriteArrayList<Plant> plants = new CopyOnWriteArrayList<>();
     public CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = new CopyOnWriteArrayList<>();
     public static IslandMap instance = null;
-
-
     public int x;
     public int y;
     public int predatorsNumber;
@@ -53,7 +51,6 @@ public class IslandMap {
     public volatile CopyOnWriteArrayList<String> typeString = new CopyOnWriteArrayList<>(initialList);
 
     private IslandMap(int x, int y, int predatorsNumber, int herbivoresNumber, int conditionNumberStopSimulation) {
-
         this.x = x;
         this.y = y;
         this.predatorsNumber = predatorsNumber;
@@ -83,7 +80,6 @@ public class IslandMap {
     }
 
     public void listInitialization() {
-
         for (int i = 0; i <= predatorsNumber * 2; i++) {
             for (String typeString : typeString) {
                 IslandSimulationObject islandSimulationObject = creationIslandSimulationObject.createObject(null, typeString);

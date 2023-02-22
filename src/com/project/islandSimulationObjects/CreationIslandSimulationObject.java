@@ -13,9 +13,9 @@ import java.util.Objects;
 import static com.project.island.IslandMap.getIslandMap;
 
 public class CreationIslandSimulationObject {
-    public static    IslandMap islandMap = getIslandMap();
+    public static IslandMap islandMap = getIslandMap();
 
-    public   static CreationIslandSimulationObject instance = null;
+    public static CreationIslandSimulationObject instance = null;
 
     private CreationIslandSimulationObject() {
 
@@ -23,9 +23,8 @@ public class CreationIslandSimulationObject {
     }
 
 
-
-    public static  CreationIslandSimulationObject getCreationIslandSimulationObject() {
-        if (instance == null ) {
+    public static CreationIslandSimulationObject getCreationIslandSimulationObject() {
+        if (instance == null) {
             instance = new CreationIslandSimulationObject();
         }
         return instance;

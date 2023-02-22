@@ -27,7 +27,6 @@ public class Goat extends Herbivores {
     }
 
 
-
     @Override
     public synchronized int getNumberBornAnimalsOfParticularSpecies() {
         return numberBornAnimalsOfParticularSpecies;

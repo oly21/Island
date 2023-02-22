@@ -21,7 +21,6 @@ public class ProcessingInput {
         return instance;
     }
 
-
     public void processInput() {
         int x;
         int y;
@@ -60,7 +59,6 @@ public class ProcessingInput {
         int numberOfSimulationItems = ((x * y) - ((x * y) / 4)) / 41;
         //(predatorsNumber*9) +(herbivoresNumber*6)+(herbivoresNumber*10)
 
-
         try {
             System.out.println(BoxCharacteristicsObject.MESSAGE_ENTER_NUMBER_OF_ANIMALS +
                     " " + numberOfSimulationItems);
@@ -77,7 +75,6 @@ public class ProcessingInput {
 
         herbivoresNumber = predatorsNumber * 2;
 
-
         try {
             System.out.println(BoxCharacteristicsObject.MESSAGE_STOPPING_CONDITION);
             conditionNumberStopSimulation = scanner.nextInt();
@@ -93,7 +90,5 @@ public class ProcessingInput {
         System.out.println(BoxCharacteristicsObject.MESSAGE_THANKS_KEEP_WORKING);
 
         IslandMap.createIsland(x, y, predatorsNumber, herbivoresNumber, conditionNumberStopSimulation);
-
-
     }
 }
