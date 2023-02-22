@@ -9,7 +9,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.*;
 
-
 public class StartingIslandSimulation {
     public IslandMap islandMap = IslandMap.getIslandMap();
     public volatile Cell[][] islandArray = islandMap.getIslandArray();
@@ -20,7 +19,6 @@ public class StartingIslandSimulation {
     public IslandSimulationDisplay islandSimulationDisplay = IslandSimulationDisplay.getIslandSimulation();
     public AnimalLifeCycle animalLifeCycle = AnimalLifeCycle.getAnimalLifeCycle();
     public PlantGrowth plantGrowth = PlantGrowth.getPlantGrowth();
-
     public PrintingIslandSimulationStatistics printingIslandSimulationStatistics = PrintingIslandSimulationStatistics.getPrintingIslandSimulationStatistics();
     private static StartingIslandSimulation instance;
     public static ScheduledExecutorService executorScheduledServicePlantGrowth = Executors.newScheduledThreadPool(1);
@@ -29,7 +27,6 @@ public class StartingIslandSimulation {
     public static ScheduledExecutorService executorScheduledServicePrintingIslandSimulationStatistics = Executors.newScheduledThreadPool(1);
     public static ScheduledExecutorService executorScheduledCheckStopConditionOfIslandSimulation = Executors.newScheduledThreadPool(1);
     public CheckingStopConditionOfIslandSimulation checkingStopConditionOfIslandSimulation = CheckingStopConditionOfIslandSimulation.getCheckingStopConditionOfIslandSimulation();
-
 
     private StartingIslandSimulation() {
 
@@ -55,7 +52,6 @@ public class StartingIslandSimulation {
     }
 
     public void setInitialPositionsSimulationObjects() {
-
         tasksCopy.addAll(tasks);
 
         for (IslandSimulationObject islandSimulationObject : tasksCopy) {

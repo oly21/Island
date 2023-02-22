@@ -3,7 +3,6 @@ package com.project.island;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-
 import com.project.islandSimulationObjects.animals.Animal;
 import com.project.islandSimulationObjects.CreationIslandSimulationObject;
 import com.project.islandSimulationObjects.IslandSimulationObject;
@@ -68,7 +67,6 @@ public class IslandMap {
     public CopyOnWriteArrayList<String> getTypeString() {
         return typeString;
     }
-
     public static IslandMap getIslandMap() {
         return instance;
     }
@@ -100,18 +98,15 @@ public class IslandMap {
     }
 
     public synchronized Cell[][] getIslandArray() {
-
         return islandArray;
     }
 
 
     public CopyOnWriteArrayList<Animal> getAnimalList() {
-
         return animals;
     }
 
     public CopyOnWriteArrayList<Plant> getPlantList() {
-
         return plants;
     }
 
@@ -122,11 +117,9 @@ public class IslandMap {
 
     public int getX() {
         return x;
-
     }
 
     public int getY() {
         return y;
-
     }
 }

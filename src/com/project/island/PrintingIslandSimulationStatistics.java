@@ -3,9 +3,7 @@ package com.project.island;
 import com.project.islandSimulationObjects.animals.Animal;
 import com.project.islandSimulationObjects.CreationIslandSimulationObject;
 import com.project.islandSimulationObjects.plants.PlantGrowth;
-
 import java.util.concurrent.CopyOnWriteArrayList;
-
 import static com.project.island.IslandMap.getIslandMap;
 
 public class PrintingIslandSimulationStatistics implements Runnable {

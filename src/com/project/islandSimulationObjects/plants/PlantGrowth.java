@@ -8,8 +8,6 @@ import com.project.islandSimulationObjects.animals.Animal;
 import com.project.islandSimulationObjects.Coordinate;
 import com.project.islandSimulationObjects.CreationIslandSimulationObject;
 import com.project.islandSimulationObjects.IslandSimulationObject;
-
-
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -21,12 +19,9 @@ import static com.project.island.IslandMap.getIslandMap;
 public class PlantGrowth implements Runnable {
     public IslandMap islandMap = getIslandMap();
     public volatile CopyOnWriteArrayList<IslandSimulationObject> islandSimulationObjects = islandMap.getIslandSimulationObjectList();
-
     public static PlantGrowth instance = null;
-
     public Cell[][] islandArray = islandMap.getIslandArray();
     public static final CopyOnWriteArrayList<Coordinate> freeCells = StartingIslandSimulation.getListFreeCells();
-
     public List<Plant> plants = islandMap.getPlantList();
     private int weight = BoxCharacteristicsObject.WEIGHT_PLANT;
     private int age;
@@ -34,13 +29,10 @@ public class PlantGrowth implements Runnable {
     CreationIslandSimulationObject creationIslandSimulationObject = CreationIslandSimulationObject.getCreationIslandSimulationObject();
 
     private PlantGrowth() {
-
-
     }
 
     public static PlantGrowth getPlantGrowth() {
         if (instance == null) {
-
             instance = new PlantGrowth();
         }
         return instance;
@@ -92,11 +84,8 @@ public class PlantGrowth implements Runnable {
     public void setInitialPositionsGrowPlants() {
 
         if (freeCells.size() > 0) {
-
             for (int i = 0; i <= islandMap.getX(); i++) {
-
                 if (freeCells.size() > 0) {
-
                     int coordinate = ThreadLocalRandom.current().nextInt(freeCells.size()) % freeCells.size();
 
                     Coordinate coordinate1 = freeCells.get(coordinate);

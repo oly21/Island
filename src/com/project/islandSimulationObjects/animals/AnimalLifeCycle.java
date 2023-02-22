@@ -2,18 +2,14 @@ package com.project.islandSimulationObjects.animals;
 
 import com.project.island.Cell;
 import com.project.island.IslandMap;
-
 import java.util.concurrent.*;
 
 public class AnimalLifeCycle implements Runnable {
     public IslandMap islandMap = IslandMap.getIslandMap();
-
     public CopyOnWriteArrayList<Animal> animals = islandMap.getAnimalList();
     public  CopyOnWriteArrayList<Callable<Void>> animalsCopy = new CopyOnWriteArrayList<>();
     public  CopyOnWriteArrayList<Callable<Void>> animalsCopy1 = new CopyOnWriteArrayList<>();
     public volatile Cell[][] islandArray = islandMap.getIslandArray();
-
-
 
     public int age;
     private static AnimalLifeCycle instance;
@@ -22,7 +18,6 @@ public class AnimalLifeCycle implements Runnable {
 
 
     }
-
 
     public static AnimalLifeCycle getAnimalLifeCycle() {
 
@@ -47,12 +42,10 @@ public class AnimalLifeCycle implements Runnable {
         }
         ExecutorService executorService = Executors.newFixedThreadPool(animalsCopy.size());
 
-
         for (Animal animal : animals) {
             age = animal.getAge() + 1;
             animal.setAge(age);
         }
-
 
         for (Callable task : animalsCopy1) {
             int IndexAnimalTask = ThreadLocalRandom.current().nextInt(animalsCopy.size()) % animalsCopy.size();

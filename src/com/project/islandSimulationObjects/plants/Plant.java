@@ -8,12 +8,10 @@ import com.project.islandSimulationObjects.IslandSimulationObject;
 public abstract class Plant implements IslandSimulationObject  {
     protected String typePicture = BoxCharacteristicsObject.STRING_TYPE_PICTURE_BERRIES;
     protected   String typeString = BoxCharacteristicsObject.TYPE_STRING_BERRIES;;
-
     protected int weight = BoxCharacteristicsObject.WEIGHT_PLANT;
     protected int age;
     protected volatile int x;
     protected volatile int y;
-
     public int numberBornAnimalsOfParticularSpecies = 0;
     public int numberAnimalsOfParticularSpecies = 0;
     public int numberDeadAnimalsOfParticularSpecies = 0;

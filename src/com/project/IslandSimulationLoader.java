@@ -3,10 +3,8 @@ import com.project.island.StartingIslandSimulation;
 
 
 public class IslandSimulationLoader {
-
     ProcessingInput processingInput = ProcessingInput.getProcessingInput();
     public static IslandSimulationLoader instance = null;
-
     private IslandSimulationLoader() {
 
     }

@@ -8,9 +8,7 @@ import static com.project.island.IslandMap.getIslandMap;
 
 
 public class IslandSimulationDisplay implements Runnable {
-
     private volatile Cell[][] islandArray = getIslandMap().getIslandArray();
-
     private static IslandSimulationDisplay instance;
     public IslandMap island = getIslandMap();
     public static CopyOnWriteArrayList<Animal> animals = getIslandMap().getAnimalList();

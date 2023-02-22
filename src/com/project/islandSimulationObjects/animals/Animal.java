@@ -134,7 +134,6 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
         return new Coordinate(x, y);
     }
 
-
     public String getTypePicture() {
         return this.typePicture;
     }
@@ -220,11 +219,9 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
 
         if (!this.getStop() && !deathFromOldAge() && this.getIsHunger()) {
             this.eat();
-
             if (!this.getEat()) {
                 this.setDaysWithoutFood(this.getDaysWithoutFood() + 1);
             }
-
             if (this.getIsHunger()) {
                 this.setHungryDaysCounter(this.getHungryDaysCounter() + 1);
             }
@@ -324,7 +321,6 @@ public abstract class Animal implements IslandSimulationObject, Callable<Void> {
                                     numberAnimals.incrementAndGet();
                                     numberBornAnimals.incrementAndGet();
                                     islandSimulationObjects.add(islandSimulationObjectCopy);
-
                                     for (Coordinate freeCell : freeCells) {
                                         int coordinate = ThreadLocalRandom.current().nextInt(freeCells.size()) % freeCells.size();
                                         Coordinate coordinate2 = freeCells.get(coordinate);

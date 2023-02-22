@@ -2,7 +2,6 @@ package com.project;
 
 import com.project.island.BoxCharacteristicsObject;
 import com.project.island.IslandMap;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -87,7 +86,6 @@ public class ProcessingInput {
         }
 
         System.out.println(BoxCharacteristicsObject.MESSAGE_THANKS_KEEP_WORKING);
-
         IslandMap.createIsland(x, y, predatorsNumber, herbivoresNumber, conditionNumberStopSimulation);
     }
 }
