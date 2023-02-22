@@ -3,7 +3,6 @@ package com.project.island;
 import com.project.islandSimulationObjects.IslandSimulationObject;
 import com.project.islandSimulationObjects.animals.Animal;
 import com.project.islandSimulationObjects.plants.Plant;
-
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 

@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
-
 import com.project.islandSimulationObjects.Coordinate;
 import com.project.islandSimulationObjects.animals.Animal;
 import com.project.islandSimulationObjects.CreationIslandSimulationObject;
@@ -12,7 +11,6 @@ import com.project.islandSimulationObjects.IslandSimulationObject;
 import com.project.islandSimulationObjects.plants.*;
 
 public class IslandMap {
-
     CreationIslandSimulationObject creationIslandSimulationObject = CreationIslandSimulationObject.getCreationIslandSimulationObject();
     public CopyOnWriteArrayList<IslandSimulationObject> tasksCopy = new CopyOnWriteArrayList<>();
     public  CopyOnWriteArrayList<Coordinate> freeCells = new CopyOnWriteArrayList<>();
@@ -129,7 +127,6 @@ public class IslandMap {
     }
     public void setInitialPositionsSimulationObjects() {
         tasksCopy.addAll(islandSimulationObjects);
-
         for (IslandSimulationObject islandSimulationObject : tasksCopy) {
             int coordinate = ThreadLocalRandom.current().nextInt(freeCells.size()) % freeCells.size();
             Coordinate coordinate1 = freeCells.get(coordinate);
@@ -155,5 +152,4 @@ public class IslandMap {
     public  CopyOnWriteArrayList<Coordinate> getListFreeCells() {
         return freeCells;
     }
-
 }

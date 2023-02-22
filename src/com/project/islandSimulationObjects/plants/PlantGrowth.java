@@ -56,25 +56,19 @@ public class PlantGrowth implements Runnable {
                     plants.add((Plant) creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_VEGETABLES));
                     if (freeCells.size() > 0) {
                         plants.add((Plant) creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_BERRIES));
-
                     }
                     if (freeCells.size() > 0) {
                         plants.add((Plant) creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_FRUIT));
-
                     }
                     if (freeCells.size() > 0) {
                         plants.add((Plant) creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_PLANT_LEAVES));
-
                     }
                     if (freeCells.size() > 0) {
                         plants.add((Plant) creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_GRASS));
-
                     }
                     if (freeCells.size() > 0) {
                         plants.add((Plant) creationIslandSimulationObject.createObject(null, BoxCharacteristicsObject.TYPE_STRING_VEGETABLES));
-
                     }
-
                     setInitialPositionsGrowPlants();
                 }
             }
@@ -87,11 +81,9 @@ public class PlantGrowth implements Runnable {
             for (int i = 0; i <= islandMap.getX(); i++) {
                 if (freeCells.size() > 0) {
                     int coordinate = ThreadLocalRandom.current().nextInt(freeCells.size()) % freeCells.size();
-
                     Coordinate coordinate1 = freeCells.get(coordinate);
                     int x = coordinate1.getX();
                     int y = coordinate1.getY();
-
                     plants.get(i).setXY(x, y);
                     islandArray[x][y].addIslandSimulationObject(plants.get(i));
                     Animal.numberPlants.incrementAndGet();

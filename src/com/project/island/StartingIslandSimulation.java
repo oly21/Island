@@ -43,5 +43,4 @@ public class StartingIslandSimulation {
         executorScheduledServicePlantGrowth.scheduleAtFixedRate(plantGrowth, 0, 7, TimeUnit.SECONDS);
         executorScheduledCheckStopConditionOfIslandSimulation.scheduleAtFixedRate(checkingStopConditionOfIslandSimulation, 3, 8, TimeUnit.SECONDS);
     }
-
 }

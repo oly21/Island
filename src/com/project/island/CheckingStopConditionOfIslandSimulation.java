@@ -9,17 +9,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import static com.project.island.IslandMap.getIslandMap;
 
 public class CheckingStopConditionOfIslandSimulation implements Runnable {
-
-
     public final String ANSI_RESET = "\u001B[0m";
     public IslandMap islandMap = getIslandMap();
-
     public final String ANSI_GREEN = "\u001B[32m";
     public volatile CopyOnWriteArrayList<Animal> animals = islandMap.getAnimalList();
     public volatile CopyOnWriteArrayList<Plant> plants = islandMap.getPlantList();
     public volatile Cell[][] islandArray = islandMap.getIslandArray();
-
-
     private static CheckingStopConditionOfIslandSimulation instance;
     private int conditionOfIslandSimulationInt = islandMap.conditionNumberStopSimulation;
     static boolean ConditionOfIslandSimulation;
