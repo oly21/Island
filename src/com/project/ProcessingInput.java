@@ -1,7 +1,6 @@
 package com.project;
 
 import com.project.island.BoxCharacteristicsObject;
-import com.project.island.Cell;
 import com.project.island.IslandMap;
 
 import java.util.InputMismatchException;
