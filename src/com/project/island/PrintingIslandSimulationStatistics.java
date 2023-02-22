@@ -1,5 +1,6 @@
 package com.project.island;
 
+import com.project.islandSimulationObjects.IslandSimulationObject;
 import com.project.islandSimulationObjects.animals.Animal;
 import com.project.islandSimulationObjects.CreationIslandSimulationObject;
 import com.project.islandSimulationObjects.plants.PlantGrowth;
@@ -13,13 +14,12 @@ public class PrintingIslandSimulationStatistics implements Runnable {
     public IslandMap islandMap = getIslandMap();
     public volatile Cell[][] islandArray = islandMap.getIslandArray();
     CreationIslandSimulationObject creationIslandSimulationObject = CreationIslandSimulationObject.getCreationIslandSimulationObject();
-    public volatile CopyOnWriteArrayList<String> typeString = islandMap.getTypeString();
+    public volatile CopyOnWriteArrayList<String> typeStringList = islandMap.getTypeString();
     private PrintingIslandSimulationStatistics() {
 
     }
 
     public static PrintingIslandSimulationStatistics getPrintingIslandSimulationStatistics() {
-
         if (instance == null) {
             instance = new PrintingIslandSimulationStatistics();
         }
@@ -49,10 +49,12 @@ public class PrintingIslandSimulationStatistics implements Runnable {
             stringBuilder.append(String.format("%s %s %s", ANSI_GREEN, "deathFromOldAge:", ANSI_RESET));
             stringBuilder.append(String.format("%s %s %s", ANSI_GREEN, Animal.deathFromOldAge.get(), ANSI_RESET));
 
-            for (int i = -1; i < typeString.size() - 1; i++) {
-                stringBuilder.append(String.format("%s%s %s ", "numberDead", typeString.get(i + 1), (creationIslandSimulationObject.createObject(null, typeString.get(i + 1))).getNumberDeadAnimalsOfParticularSpecies()));
-                stringBuilder.append(String.format("%s%s %s ", "number", typeString.get(i + 1), (creationIslandSimulationObject.createObject(null, typeString.get(i + 1))).getNumberAnimalsOfParticularSpecies()));
-                stringBuilder.append(String.format("%s%s %s ", "numberBorn", typeString.get(i + 1), (creationIslandSimulationObject.createObject(null, typeString.get(i + 1))).getNumberBornAnimalsOfParticularSpecies()));
+            for (int i = -1; i < typeStringList.size() - 1; i++) {
+                String typeString =  typeStringList.get(i + 1);
+                IslandSimulationObject islandSimulationObject = creationIslandSimulationObject.createObject(null, typeString);
+                stringBuilder.append(String.format("%s%s %s ", "numberDead", typeString, islandSimulationObject.getNumberDeadAnimalsOfParticularSpecies()));
+                stringBuilder.append(String.format("%s%s %s ", "number", typeString, islandSimulationObject.getNumberAnimalsOfParticularSpecies()));
+                stringBuilder.append(String.format("%s%s %s ", "numberBorn", typeString, islandSimulationObject.getNumberBornAnimalsOfParticularSpecies()));
                 if (i % 3 == 0) {
                     stringBuilder.append("\n");
                 }
